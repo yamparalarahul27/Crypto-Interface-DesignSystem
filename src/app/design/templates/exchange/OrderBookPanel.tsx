@@ -9,10 +9,15 @@ import { useEffect, useState } from "react";
 
 type BookRow = { px: number; qty: number };
 
+const seededQty = (base: number, dir: 1 | -1, index: number) => {
+  const seed = Math.sin(base * 100 + dir * 97 + index * 43) * 10_000;
+  return Math.round(40 + (seed - Math.floor(seed)) * 400);
+};
+
 const mkSide = (base: number, dir: 1 | -1): BookRow[] =>
   Array.from({ length: 7 }, (_, i) => ({
     px: +(base + dir * (i + 1) * 0.02).toFixed(2),
-    qty: Math.round(40 + Math.random() * 400),
+    qty: seededQty(base, dir, i),
   }));
 
 function BookSide({

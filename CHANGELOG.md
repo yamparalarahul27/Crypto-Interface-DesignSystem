@@ -40,6 +40,18 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Added
 
+- **Trading interface imports from DeFi-Triangle-Learn** — five new
+  portable CIDS components, all entering as `draft @ 0.9.0`:
+  **OrderBook** (bid/ask depth with tick aggregation, view modes,
+  cumulative depth, stale/error/loading states), **OrderTypeTabs**
+  (scrollable market/limit/advanced order selector), **SizeSlider**
+  (percent-of-balance slider with stops and keyboard support),
+  **MarketTabs** (browser-like open-market tabs with price/change,
+  close, add), and **MarginHealth** (margin-ratio meter with tiered
+  risk copy). The source patterns came from the private
+  `yamparalarahul27/DeFi-Triangle-Learn` trading interface, but the
+  CIDS versions are store-free and registry-portable.
+
 - **PriceChart** — the interactive price chart (component-gaps tracker,
   the CDS-signature surface): line + hover/touch crosshair + tooltip
   from the vendored **EvilCharts** (`EvilLineChart`), composed with a

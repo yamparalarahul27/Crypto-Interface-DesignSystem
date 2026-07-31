@@ -2,7 +2,6 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { PATTERN_DEMOS } from "./patternDemos";
-import { OrderBookPanel } from "../templates/exchange/OrderBookPanel";
 import { PriceChart, type PricePoint } from "@/components/PriceChart/PriceChart";
 import {
   Avatar,
@@ -67,6 +66,14 @@ import {
   GasFee,
   WalletButton,
   type WalletStatus,
+  OrderBook,
+  type OrderBookLevel,
+  OrderTypeTabs,
+  type OrderType,
+  SizeSlider,
+  MarketTabs,
+  type MarketTabItem,
+  MarginHealth,
 } from "@/design-system";
 
 const SURFACES = [
@@ -521,6 +528,92 @@ function AmountDemo() {
   );
 }
 
+const BOOK_ASKS: OrderBookLevel[] = [
+  { price: 184.42, size: 182.4 },
+  { price: 184.38, size: 94.1 },
+  { price: 184.34, size: 64.8 },
+  { price: 184.31, size: 128.9 },
+  { price: 184.28, size: 71.3 },
+  { price: 184.25, size: 45.4 },
+  { price: 184.22, size: 104.8 },
+  { price: 184.19, size: 58.7 },
+];
+const BOOK_BIDS: OrderBookLevel[] = [
+  { price: 184.12, size: 118.6 },
+  { price: 184.09, size: 88.2 },
+  { price: 184.05, size: 164.4 },
+  { price: 184.01, size: 57.9 },
+  { price: 183.98, size: 96.8 },
+  { price: 183.94, size: 44.2 },
+  { price: 183.91, size: 139.1 },
+  { price: 183.87, size: 63.4 },
+];
+
+function OrderBookDemo() {
+  const [picked, setPicked] = useState("184.12");
+  return (
+    <div className="space-y-2">
+      <OrderBook
+        asks={BOOK_ASKS}
+        bids={BOOK_BIDS}
+        midPrice={184.15}
+        baseLabel="SOL"
+        quoteLabel="USDT"
+        rowsPerSide={6}
+        onPriceSelect={(price) => setPicked(price.toFixed(2))}
+      />
+      <p className="font-mono text-[10px] text-fg-subtle">selected limit price: {picked}</p>
+    </div>
+  );
+}
+
+function OrderTypeTabsDemo() {
+  const [type, setType] = useState<OrderType>("limit");
+  return <OrderTypeTabs value={type} onValueChange={setType} />;
+}
+
+function SizeSliderDemo() {
+  const [value, setValue] = useState(38);
+  return <SizeSlider value={value} onValueChange={setValue} />;
+}
+
+const MARKET_TABS: MarketTabItem[] = [
+  { symbol: "SOL-PERP", label: "SOL", price: "$184.26", changePct: 3.64 },
+  { symbol: "BTC-PERP", label: "BTC", price: "$73,420", changePct: -0.42 },
+  { symbol: "JUP-PERP", label: "JUP", price: "$0.8123", changePct: 4.2 },
+];
+
+function MarketTabsDemo() {
+  const [active, setActive] = useState("SOL-PERP");
+  const [markets, setMarkets] = useState(MARKET_TABS);
+  return (
+    <MarketTabs
+      markets={markets}
+      activeSymbol={active}
+      onActiveChange={setActive}
+      onClose={(symbol) => setMarkets((rows) => rows.filter((row) => row.symbol !== symbol))}
+      onAdd={() => setMarkets(MARKET_TABS)}
+      addDisabled={markets.length === MARKET_TABS.length}
+    />
+  );
+}
+
+function MarginHealthDemo() {
+  const [value, setValue] = useState(37);
+  return (
+    <div className="space-y-3">
+      <MarginHealth value={value} />
+      <SizeSlider
+        value={value}
+        onValueChange={setValue}
+        label="Demo margin ratio"
+        stops={[0, 50, 80, 90, 100]}
+        showSubTicks={false}
+      />
+    </div>
+  );
+}
+
 export const DEMOS: Record<string, () => ReactNode> = {
   ...PATTERN_DEMOS,
   surfaces: () => (
@@ -656,7 +749,12 @@ export const DEMOS: Record<string, () => ReactNode> = {
   ),
   TxStatus: TxStatusDemo,
   AmountInput: AmountDemo,
-  OrderBook: () => <OrderBookPanel />,
+  ExchangeOrderBook: OrderBookDemo,
+  OrderBook: OrderBookDemo,
+  OrderTypeTabs: OrderTypeTabsDemo,
+  SizeSlider: SizeSliderDemo,
+  MarketTabs: MarketTabsDemo,
+  MarginHealth: MarginHealthDemo,
   RollingNumber: RollingDemo,
   PriceChange: () => (
     <div className="flex items-center gap-4">

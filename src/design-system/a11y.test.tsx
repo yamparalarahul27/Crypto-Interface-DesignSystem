@@ -67,6 +67,11 @@ import {
   ChainSwitcher,
   GasFee,
   WalletButton,
+  OrderBook,
+  OrderTypeTabs,
+  SizeSlider,
+  MarketTabs,
+  MarginHealth,
 } from "./index";
 
 const THEMES = ["dark", "mono", "light", "violet"] as const;
@@ -222,6 +227,35 @@ const CASES: Record<string, () => React.ReactElement> = {
       onClick={() => {}}
     />
   ),
+  OrderBook: () => (
+    <OrderBook
+      asks={[
+        { price: 184.4, size: 80 },
+        { price: 184.3, size: 40 },
+      ]}
+      bids={[
+        { price: 184.1, size: 90 },
+        { price: 184, size: 64 },
+      ]}
+      midPrice={184.2}
+      onPriceSelect={() => {}}
+    />
+  ),
+  OrderTypeTabs: () => <OrderTypeTabs value="limit" onValueChange={() => {}} />,
+  SizeSlider: () => <SizeSlider value={38} onValueChange={() => {}} />,
+  MarketTabs: () => (
+    <MarketTabs
+      markets={[
+        { symbol: "SOL-PERP", label: "SOL", price: "$184.26", changePct: 3.64 },
+        { symbol: "BTC-PERP", label: "BTC", price: "$73,420", changePct: -0.42 },
+      ]}
+      activeSymbol="SOL-PERP"
+      onActiveChange={() => {}}
+      onClose={() => {}}
+      onAdd={() => {}}
+    />
+  ),
+  MarginHealth: () => <MarginHealth value={37.42} />,
   Popover: () => (
     <Popover trigger={<Button variant="secondary" size="sm">Filters</Button>}>
       <p>panel content</p>

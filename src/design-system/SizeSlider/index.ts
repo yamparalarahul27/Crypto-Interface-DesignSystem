@@ -1,0 +1,1 @@
+export { SizeSlider } from "./SizeSlider";

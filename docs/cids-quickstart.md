@@ -40,6 +40,7 @@ import "./cids-tokens.css";
 npx shadcn add @cids/button
 npx shadcn add @cids/data-table @cids/price-change
 npx shadcn add @cids/tx-status @cids/amount-input   # the crypto layer
+npx shadcn add @cids/order-book @cids/order-type-tabs @cids/size-slider
 ```
 
 Cross-dependencies resolve automatically (`@cids/post-card` pulls

@@ -179,6 +179,51 @@ const checks = [
       [/aria-label=\{`Wallet \$\{address\}/, "full address in the accessible name (truncation is visual only)"],
     ],
   },
+  {
+    file: "src/design-system/OrderBook/OrderBook.tsx",
+    expect: [
+      [/aria-busy=\{loading \|\| undefined\}/, "loading state exposed through aria-busy"],
+      [/role="tab"/, "view toggle uses real tab buttons"],
+      [/transition-\[filter,opacity\]/, "stale-feed mask uses targeted transition"],
+      [/onPriceSelect/, "price rows only become buttons when there is a price-select callback"],
+    ],
+  },
+  {
+    file: "src/design-system/OrderTypeTabs/OrderTypeTabs.tsx",
+    expect: [
+      [/scrollIntoView/, "active order type scrolls into view"],
+      [/ArrowRight/, "keyboard roving supports ArrowRight"],
+      [/active:scale-\[0\.98\]/, "press scale(.98)"],
+      [/focus-visible:ring-2/, "visible focus ring"],
+    ],
+  },
+  {
+    file: "src/design-system/SizeSlider/SizeSlider.tsx",
+    expect: [
+      [/role="slider"/, "custom slider exposes slider semantics"],
+      [/aria-valuetext=\{`\$\{actual\}%`\}/, "screen reader gets percent value text"],
+      [/event\.key === "Home"/, "Home key jumps to 0"],
+      [/transition-\[left\]/, "thumb movement uses targeted transition"],
+    ],
+  },
+  {
+    file: "src/design-system/MarketTabs/MarketTabs.tsx",
+    expect: [
+      [/role="list"/, "closable market tabs use list semantics"],
+      [/aria-current=\{active \? "page" : undefined\}/, "active market is exposed with aria-current"],
+      [/scrollIntoView/, "active market scrolls into view"],
+      [/aria-label=\{`Close \$\{market\.symbol\}`\}/, "close button has explicit market label"],
+      [/focus-visible:ring-2/, "visible focus ring"],
+    ],
+  },
+  {
+    file: "src/design-system/MarginHealth/MarginHealth.tsx",
+    expect: [
+      [/role="meter"/, "risk meter exposes meter semantics"],
+      [/aria-valuetext/, "risk tier is not color-only"],
+      [/transition-\[width\]/, "bar width uses targeted transition"],
+    ],
+  },
 ];
 
 for (const c of checks) {

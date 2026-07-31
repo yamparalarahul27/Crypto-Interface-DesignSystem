@@ -78,7 +78,7 @@ export default function Home() {
         </div>
 
         <p className="mt-8 font-mono text-[10px] text-fg-subtle">
-          themes: dark · mono — 11 components, every one ships its .doc.md
+          themes: dark · mono · light · violet — 59 components, every one ships its .doc.md
         </p>
       </div>
     </main>

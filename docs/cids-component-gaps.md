@@ -66,6 +66,26 @@ Same argument as Phase 5b: the whitespace no generic system covers.
 - [ ] QRCode — receive-address display (needs a dependency decision)
 - [ ] SeedPhrase — reveal/confirm grid (only if onboarding flows land)
 
+## Batch 4 — trading interface imports from DeFi-Triangle-Learn
+
+The private DeFi-Triangle-Learn repo has a richer paper-trading terminal.
+This batch extracts the pieces that are reusable as CIDS primitives
+without carrying over product state, Zustand stores, Supabase, or chart
+engines.
+
+- [x] **OrderBook** — bid/ask depth table with tick aggregation,
+      asks/mixed/bids views, cumulative bars, row price-pick callbacks,
+      and explicit loading/empty/error/stale states.
+- [x] **OrderTypeTabs** — swipeable order-type strip for Market,
+      Limit, Stop-Market, Stop-Limit, Iceberg, TWAP, OCO, and
+      Trailing-Stop; unsupported types can stay visible-disabled.
+- [x] **SizeSlider** — percent-of-balance slider with 0/25/50/75/100
+      stops, sub-ticks, keyboard support, and fixed value readout.
+- [x] **MarketTabs** — browser-like open-market tabs with token icon,
+      symbol, live price, signed change, close, and add affordance.
+- [x] **MarginHealth** — margin-ratio meter with Healthy/Caution/High/
+      Critical tiers, semantic tones, and `role="meter"`.
+
 > **Note — the portable core vs. compositions.** PriceChart is the first
 > intentional resident of a second tier: *compositions* that build on
 > non-portable deps (here, recharts via vendored EvilCharts). They're real
@@ -90,3 +110,4 @@ Same argument as Phase 5b: the whitespace no generic system covers.
 | 2026-07-15 | Batch 2 shipped as `feat/components-batch-2` (PR #98, merged; ContextMenu deferred). |
 | 2026-07-15 | Batch 3 shipped as `feat/components-batch-3` (PR #99, merged; PriceChart split to its own PR). |
 | 2026-07-15 | PriceChart shipped as `feat/price-chart` — EvilCharts-backed composition, outside the portable core. |
+| 2026-07-31 | Batch 4 started from DeFi-Triangle-Learn trading-interface patterns: OrderBook, OrderTypeTabs, SizeSlider, MarketTabs, MarginHealth. |

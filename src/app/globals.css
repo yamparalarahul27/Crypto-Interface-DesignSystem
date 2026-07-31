@@ -108,8 +108,8 @@
   --row-h: 44px;
   --cell-px: 12px;
 
-  /* Z-index scale — one ladder for the whole system; consume via
-     z-[var(--z-*)] (numeric z-10/20/… utilities are guard-banned in the
+  /* Z-index scale — one ladder for the whole system; consume via concrete
+     token utilities like z-[var(--z-raised)] (numeric z-10/20/… are guard-banned in the
      DS). base < raised (popovers, HUD) < sticky (headers, bars) <
      overlay (FABs, floating layers) < modal (sheets, dialogs) < toast. */
   --z-base: 0;

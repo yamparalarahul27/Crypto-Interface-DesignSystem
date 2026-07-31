@@ -54,4 +54,22 @@ export { Amount, type AmountSize } from "./Amount";
 export { ChainSwitcher, type Network } from "./ChainSwitcher";
 export { GasFee, type FeeLevel } from "./GasFee";
 export { WalletButton, type WalletStatus } from "./WalletButton";
+export {
+  OrderBook,
+  aggregateLevels,
+  defaultTickOptions,
+  type OrderBookLevel,
+  type OrderBookSide,
+  type OrderBookStaleState,
+  type OrderBookView,
+} from "./OrderBook";
+export {
+  DEFAULT_ORDER_TYPE_OPTIONS,
+  OrderTypeTabs,
+  type OrderType,
+  type OrderTypeOption,
+} from "./OrderTypeTabs";
+export { SizeSlider } from "./SizeSlider";
+export { MarketTabs, type MarketTabItem } from "./MarketTabs";
+export { MarginHealth, marginHealthLevel, type MarginHealthLevel } from "./MarginHealth";
 export { ID_HUES, hueFor, hueGradient, type IdHue } from "./identity";

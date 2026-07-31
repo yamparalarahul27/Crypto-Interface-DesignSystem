@@ -74,7 +74,7 @@ export const CANVAS_ITEMS: CanvasItemDef[] = [
   { kind: "demo", id: "NetworkBadge", title: "NetworkBadge", x: CX + COL * 2, y: CY + 2960, w: 300 },
   { kind: "demo", id: "TxStatus", title: "TxStatus", x: CX + COL * 3, y: CY + 2960, w: 340 },
   { kind: "demo", id: "AmountInput", title: "AmountInput", x: CX, y: CY + 3200, w: 340 },
-  { kind: "demo", id: "OrderBook", title: "Order book — exchange density (demo)", x: CX + COL, y: CY + 3200, w: 460 },
+  { kind: "demo", id: "ExchangeOrderBook", title: "Order book — exchange density (demo)", x: CX + COL, y: CY + 3200, w: 460 },
 
   // ── Zone: Patterns (PATTERNS.md — composition recipes, live) ─
   { kind: "label", id: "z-patterns", title: "Patterns — composition recipes", x: CX, y: CY + 3560 },
@@ -113,6 +113,14 @@ export const CANVAS_ITEMS: CanvasItemDef[] = [
   { kind: "demo", id: "Amount", title: "Amount", x: CX + COL * 2, y: CY + 6360, w: 300 },
   { kind: "demo", id: "GasFee", title: "GasFee", x: CX + COL * 3, y: CY + 6360, w: 380 },
   { kind: "demo", id: "PriceChart", title: "PriceChart — via EvilCharts", x: CX, y: CY + 6660, w: 520 },
+
+  // ── Zone: Trading interface imports (DeFi-Triangle-Learn) ───
+  { kind: "label", id: "z-trading-learn", title: "Trading interface — Learn imports", x: CX, y: CY + 7040 },
+  { kind: "demo", id: "OrderBook", title: "OrderBook", x: CX, y: CY + 7100, w: 520 },
+  { kind: "demo", id: "OrderTypeTabs", title: "OrderTypeTabs", x: CX + COL + 160, y: CY + 7100, w: 460 },
+  { kind: "demo", id: "SizeSlider", title: "SizeSlider", x: CX + COL * 2 + 240, y: CY + 7100, w: 420 },
+  { kind: "demo", id: "MarketTabs", title: "MarketTabs", x: CX + COL + 160, y: CY + 7360, w: 560 },
+  { kind: "demo", id: "MarginHealth", title: "MarginHealth", x: CX + COL * 2 + 320, y: CY + 7360, w: 460 },
 
   // ── Zone: Screens (live build vs HTML mock, side by side) ────
   { kind: "label", id: "z-screens", title: "Screens — mock vs build", x: 1780, y: 60 },

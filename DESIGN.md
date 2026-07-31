@@ -373,7 +373,8 @@ Shadows are tokens — components never write literal `box-shadow` values
 
 ### Z-index scale
 
-One stacking ladder for the whole system, consumed via `z-[var(--z-*)]`
+One stacking ladder for the whole system, consumed via concrete token classes
+such as `z-[var(--z-raised)]`
 (numeric `z-10/20/…` utilities are guard-banned in the DS + design app):
 
 | Token | Value | Use |

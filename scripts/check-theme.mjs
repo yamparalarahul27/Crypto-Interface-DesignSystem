@@ -88,7 +88,8 @@ for (const tok of REQUIRED) {
 // Rule T4 (Phase-1 gate): inside the design system and the design app,
 // elevation and stacking must flow through tokens — no Tailwind default
 // shadow utilities, no numeric z-index utilities, no literal box-shadow
-// values. Use shadow-card/raised/overlay/glow-brand* and z-[var(--z-*)].
+// values. Use shadow-card/raised/overlay/glow-brand* and concrete z token
+// utilities such as z-[var(--z-raised)].
 const TOKENED_DIRS = [join(SRC, "design-system"), join(SRC, "app/design")];
 const RAW_SHADOW = /\bshadow-(sm|md|lg|xl|2xl)\b/;
 const RAW_Z = /\bz-(10|20|30|40|50)\b/;
@@ -101,7 +102,7 @@ for (const dir of TOKENED_DIRS) {
     if ((m = src.match(RAW_SHADOW)))
       fail(f, `raw Tailwind shadow "${m[0]}" — use shadow-card/raised/overlay (elevation tokens)`);
     if ((m = src.match(RAW_Z)))
-      fail(f, `raw z-index "${m[0]}" — use z-[var(--z-*)] (stacking tokens)`);
+      fail(f, `raw z-index "${m[0]}" — use z-[var(--z-raised)] or another stacking token`);
     if ((m = src.match(RAW_BOXSHADOW)))
       fail(f, `literal boxShadow value — use an elevation/glow token`);
   }

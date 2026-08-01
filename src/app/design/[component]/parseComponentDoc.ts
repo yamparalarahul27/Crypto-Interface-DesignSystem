@@ -1,6 +1,6 @@
 // Pure parser for the CONVENTIONS.md doc shape — used by the
 // per-component page chrome so it can surface purpose / install /
-// best-for without duplicating content out of the .doc.md.
+// best-for / tokens / states without duplicating content out of .doc.md.
 
 export type DocSection = { id: string; title: string };
 
@@ -15,15 +15,60 @@ export function slugify(title: string): string {
     .replace(/^-|-$/g, "");
 }
 
+/** Collect `--token` names from a section's raw lines (order preserved, unique). */
+export function extractTokenNames(sectionLines: string[]): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const l of sectionLines) {
+    for (const m of l.matchAll(/--([a-z][a-z0-9-]*)/g)) {
+      const name = m[1];
+      if (name.endsWith("-") || name.includes("(")) continue;
+      if (seen.has(name)) continue;
+      seen.add(name);
+      out.push(name);
+    }
+  }
+  return out;
+}
+
+/** Split a States section into short labels (· / bullets / commas). */
+export function extractStateLabels(sectionLines: string[]): string[] {
+  const raw = sectionLines
+    .map((l) => l.replace(/^[-*]\s+/, "").trim())
+    .filter((l) => l && !l.startsWith("#") && !l.startsWith("|") && !l.startsWith("```"))
+    .join(" · ");
+  if (!raw) return [];
+  return raw
+    .split(/\s*[·•|,]\s*|\s{2,}/)
+    .map((s) => s.replace(/\s*\([^)]*\)\s*/g, " ").replace(/\s+/g, " ").trim())
+    .filter((s) => s.length > 0 && s.length < 48);
+}
+
+function sectionLines(stripped: string[], title: string): string[] {
+  const want = title.toLowerCase();
+  const out: string[] = [];
+  let inSection = false;
+  for (const l of stripped) {
+    if (l.startsWith("## ")) {
+      inSection = l.slice(3).trim().toLowerCase() === want;
+      continue;
+    }
+    if (inSection) out.push(l);
+  }
+  return out;
+}
+
 /**
  * Strip Status/Version/H1 chrome lines the page header already shows,
- * then pull purpose, Best for, first Usage fence, and ## TOC entries.
+ * then pull purpose, Best for, first Usage fence, tokens, states, TOC.
  */
 export function parseComponentDoc(doc: string): {
   body: string;
   purpose: string;
   bestFor: string | null;
   usageCode: string | null;
+  tokens: string[];
+  states: string[];
   sections: DocSection[];
 } {
   const lines = doc.split("\n");
@@ -75,26 +120,31 @@ export function parseComponentDoc(doc: string): {
     }
   }
 
+  const tokens = extractTokenNames(sectionLines(stripped, "Tokens"));
+  const states = extractStateLabels(sectionLines(stripped, "States"));
+
   const sections: DocSection[] = [];
+  if (tokens.length) sections.push({ id: "token-swatches", title: "Tokens" });
+  if (states.length) sections.push({ id: "states-live", title: "States" });
+
   for (const l of stripped) {
     if (l.startsWith("## ")) {
       const title = l.slice(3).trim();
-      // Usage is promoted into page chrome — keep it out of the TOC body.
-      if (title.toLowerCase() === "usage") continue;
+      const lower = title.toLowerCase();
+      if (lower === "usage" || lower === "tokens" || lower === "states") continue;
       sections.push({ id: slugify(title), title });
     }
   }
 
-  // Drop the ## Usage block from the rendered body (snippet already shown
-  // above). Best-for is extracted separately; other sections keep order.
+  const skip = new Set(["usage", "tokens", "states"]);
   const bodyLines: string[] = [];
-  let skipUsage = false;
+  let skipping = false;
   for (const l of stripped) {
     if (l.startsWith("## ")) {
-      skipUsage = l.slice(3).trim().toLowerCase() === "usage";
-      if (skipUsage) continue;
+      skipping = skip.has(l.slice(3).trim().toLowerCase());
+      if (skipping) continue;
     }
-    if (skipUsage) continue;
+    if (skipping) continue;
     bodyLines.push(l);
   }
 
@@ -103,6 +153,8 @@ export function parseComponentDoc(doc: string): {
     purpose,
     bestFor,
     usageCode,
+    tokens,
+    states,
     sections,
   };
 }

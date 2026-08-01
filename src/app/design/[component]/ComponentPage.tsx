@@ -13,6 +13,8 @@ import { DEMOS } from "../canvas/demos";
 import { CopyButton, renderDoc } from "../docRenderer";
 import { ThemeToggle } from "../ThemeToggle";
 import { kebabCase, parseComponentDoc } from "./parseComponentDoc";
+import { StateMatrix } from "./StateMatrix";
+import { TokenSwatches } from "./TokenSwatches";
 
 type Density = "comfortable" | "compact";
 
@@ -71,7 +73,8 @@ export function ComponentPage({
   next: string;
 }) {
   const Demo = DEMOS[name];
-  const { body, purpose, bestFor, usageCode, sections } = parseComponentDoc(doc);
+  const { body, purpose, bestFor, usageCode, tokens, states, sections } =
+    parseComponentDoc(doc);
   const [showCode, setShowCode] = useState(false);
   const [showUsage, setShowUsage] = useState(true);
   const [density, setDensity] = useState<Density>("comfortable");
@@ -202,6 +205,10 @@ export function ComponentPage({
           ))}
         </nav>
       )}
+
+      {/* ── live tokens + states ─────────────────────────────── */}
+      <TokenSwatches tokens={tokens} />
+      <StateMatrix name={name} states={states} />
 
       {/* ── doc from disk ────────────────────────────────────── */}
       <article className="space-y-2">{renderDoc(body)}</article>

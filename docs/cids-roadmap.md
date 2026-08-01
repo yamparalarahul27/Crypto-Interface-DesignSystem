@@ -383,7 +383,7 @@ phases rather than a phase of its own):
 |---|---|---|
 | Canvas | pan/zoom, layers, doc+code inspector, Theme Studio | + search (⌘K), **URL permalinks** per item, **state switcher** (default/hover/loading/empty/error per demo) |
 | `/design` gallery | index linking into per-component pages | category grouping, "open in canvas" deep links |
-| **`/design/<component>` pages** | live demo + density toggle · install strip · when-to-use · TOC · doc from disk · source | + live **state matrix** · motion tap-to-replay · token swatch panel |
+| **`/design/<component>` pages** | live demo + density · install · when-to-use · **live token swatches** · **state matrix** (curated primitives) · TOC · doc from disk · source | + motion tap-to-replay · expand state matrices to more components · “when not to use” |
 | Docs shape | 7 sections + `Version:` | + **"When not to use"** where a sibling exists · Do/Don't where a pattern exists |
 | Landing | 3 CTAs | + the range story: one hero composition per end (simple dApp / exchange), maturity scorecard badge |
 

@@ -47,6 +47,44 @@ bullets under the release's buckets, prefixed with the component name.
   dep). `aria-busy` while pending; polite live region on settle.
   Canvas demo under Primitives.
 
+- **Batch 5 crypto ticket atoms** — four `draft @ 0.9.0` components for
+  the swap/send/account surface: **TokenSelect** (searchable token
+  picker), **SlippageControl** (presets + custom % in bps, risk tone
+  bands), **AccountMenu** (WalletButton's connected sibling — copy /
+  explorer / disconnect), **ActivityRow** (tx history atom — icon ·
+  title · time · status word · amount). SeedPhrase remains deferred.
+
+- **QRCode** — receive-address composition (Batch 3 deferred). Uses the
+  `qrcode` npm package and lives in `src/components/QRCode/` (same
+  composition-tier pattern as PriceChart — not portable-registry).
+  Theme-aware SVG (CSS vars) + CIDS AddressChip for copy/explorer.
+  Enters as `draft @ 0.9.0`. SeedPhrase remains deferred.
+
+- **ContextMenu** — right-click / long-press menu (Batch 2 deferred).
+  Same `MenuItem` data shape as Menu; Radix ContextMenu for pointer
+  positioning + keyboard. Enters as `draft @ 0.9.0`. SeedPhrase remains
+  conditional.
+
+- **Canvas search + permalinks** — ⌘K / Ctrl+K (and a HUD "search"
+  button) opens a filterable jump list of demos and iframe frames;
+  selecting zooms to the item. Selection syncs to `?item=<id>` so
+  links are shareable; component pages' "open in canvas" now deep-links
+  the same way.
+
+- **Motion tap-to-replay on component pages** — `/design/<Component>`
+  gains a Motion panel that remounts fast / settle / spring previews on
+  tap (token-driven CSS), highlights tokens named in the component's
+  `.doc.md`, and surfaces the doc's reduced-motion note.
+
+- **Component pages upgrade (roadmap §6)** — `/design/<Component>` now
+  surfaces purpose, install (`npx shadcn add @cids/…` + copy), When to
+  use (from doc "Best for:"), a density-toggleable live demo, usage
+  snippet, on-this-page TOC with heading anchors, **live token swatches**
+  (theme-aware), and a **states panel** (doc chips + curated live
+  matrices for Button/Badge/Input/Switch/Checkbox/Alert/TxStatus/
+  PegBadge/PriceChange), then the same `.doc.md` + source as the canvas
+  Inspector. Gallery blurb updated.
+
 - **Interior.dev as a standing reference** —
   [`docs/references/interior.md`](docs/references/interior.md) maps
   ~54 micro-interactions to CIDS (covered / high-value Web3 /

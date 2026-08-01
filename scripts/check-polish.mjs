@@ -236,6 +236,41 @@ const checks = [
       [/transition-\[width\]/, "bar width uses targeted transition"],
     ],
   },
+  {
+    file: "src/design-system/TokenSelect/TokenSelect.tsx",
+    expect: [
+      [/aria-haspopup="dialog"/, "trigger announces dialog popup"],
+      [/aria-activedescendant/, "search drives listbox via aria-activedescendant"],
+      [/active:scale-\[0\.96\]/, "control-grade press (.96)"],
+      [/focus-visible:ring-2/, "visible focus ring"],
+    ],
+  },
+  {
+    file: "src/design-system/SlippageControl/SlippageControl.tsx",
+    expect: [
+      [/aria-pressed=\{active\}/, "preset chips expose pressed state"],
+      [/slippageLevel/, "risk band derived from bps magnitude"],
+      [/active:scale-\[0\.96\]/, "control-grade press (.96)"],
+      [/focus-visible:ring-2/, "visible focus ring"],
+    ],
+  },
+  {
+    file: "src/design-system/AccountMenu/AccountMenu.tsx",
+    expect: [
+      [/aria-label=\{`Wallet \$\{address\}/, "full address in the accessible name"],
+      [/Disconnect/, "disconnect lives in the menu, not the connect button"],
+      [/active:scale-\[0\.96\]/, "control-grade press (.96)"],
+      [/focus-visible:ring-2/, "visible focus ring"],
+    ],
+  },
+  {
+    file: "src/design-system/ActivityRow/ActivityRow.tsx",
+    expect: [
+      [/STATUS\[status\]/, "status word + tint (never color alone)"],
+      [/onClick &&/, "row is interactive only when onClick is provided"],
+      [/active:scale-\[0\.98\]/, "card-grade press (.98) when clickable"],
+    ],
+  },
 ];
 
 for (const c of checks) {
@@ -264,6 +299,7 @@ const NO_SPECIFIC_RULES = new Set([
   "Input", // border transition only; focus ring is the global :focus-visible
   "Dialog", // behavior + motion via Radix data-[state] presets
   "Menu", // behavior via Radix DropdownMenu; instant highlight by design
+  "ContextMenu", // behavior via Radix ContextMenu; same panel grammar as Menu
   "Switch", // track/thumb 150ms targeted; behavior via Radix
   "Checkbox", // fill/border 150ms targeted; behavior via Radix
   "Select", // Radix Select; panel fade via presets

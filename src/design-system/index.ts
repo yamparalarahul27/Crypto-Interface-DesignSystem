@@ -29,6 +29,7 @@ export { Badge, type BadgeTone } from "./Badge";
 export { Input } from "./Input";
 export { Dialog } from "./Dialog";
 export { Menu, type MenuItem } from "./Menu";
+export { ContextMenu } from "./ContextMenu";
 export { Switch } from "./Switch";
 export { Checkbox } from "./Checkbox";
 export { Select, type SelectOption } from "./Select";
@@ -83,4 +84,13 @@ export {
 export { SizeSlider } from "./SizeSlider";
 export { MarketTabs, type MarketTabItem } from "./MarketTabs";
 export { MarginHealth, marginHealthLevel, type MarginHealthLevel } from "./MarginHealth";
+export { TokenSelect, type TokenOption } from "./TokenSelect";
+export {
+  SlippageControl,
+  slippageLevel,
+  DEFAULT_SLIPPAGE_PRESETS,
+  type SlippageLevel,
+} from "./SlippageControl";
+export { AccountMenu } from "./AccountMenu";
+export { ActivityRow, type ActivityStatus } from "./ActivityRow";
 export { ID_HUES, hueFor, hueGradient, type IdHue } from "./identity";

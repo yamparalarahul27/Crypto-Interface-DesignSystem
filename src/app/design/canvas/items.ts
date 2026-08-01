@@ -106,6 +106,7 @@ export const CANVAS_ITEMS: CanvasItemDef[] = [
   { kind: "demo", id: "Popover", title: "Popover", x: CX + COL, y: CY + 5760, w: 340 },
   { kind: "demo", id: "Drawer", title: "Drawer", x: CX + COL * 2, y: CY + 5760, w: 340 },
   { kind: "demo", id: "Pagination", title: "Pagination", x: CX, y: CY + 6000, w: 420 },
+  { kind: "demo", id: "ContextMenu", title: "ContextMenu", x: CX + COL + 80, y: CY + 6000, w: 340 },
 
   // ── Zone: Crypto round 2 (component-gaps batch 3) ────────────
   { kind: "label", id: "z-crypto-2", title: "Crypto — round 2", x: CX, y: CY + 6300 },
@@ -114,6 +115,7 @@ export const CANVAS_ITEMS: CanvasItemDef[] = [
   { kind: "demo", id: "Amount", title: "Amount", x: CX + COL * 2, y: CY + 6360, w: 300 },
   { kind: "demo", id: "GasFee", title: "GasFee", x: CX + COL * 3, y: CY + 6360, w: 380 },
   { kind: "demo", id: "PriceChart", title: "PriceChart — via EvilCharts", x: CX, y: CY + 6660, w: 520 },
+  { kind: "demo", id: "QRCode", title: "QRCode — via qrcode", x: CX + COL + 160, y: CY + 6660, w: 300 },
 
   // ── Zone: Trading interface imports (DeFi-Triangle-Learn) ───
   { kind: "label", id: "z-trading-learn", title: "Trading interface — Learn imports", x: CX, y: CY + 7040 },
@@ -122,6 +124,13 @@ export const CANVAS_ITEMS: CanvasItemDef[] = [
   { kind: "demo", id: "SizeSlider", title: "SizeSlider", x: CX + COL * 2 + 240, y: CY + 7100, w: 420 },
   { kind: "demo", id: "MarketTabs", title: "MarketTabs", x: CX + COL + 160, y: CY + 7360, w: 560 },
   { kind: "demo", id: "MarginHealth", title: "MarginHealth", x: CX + COL * 2 + 320, y: CY + 7360, w: 460 },
+
+  // ── Zone: Crypto round 3 (component-gaps Batch 5) ────────────
+  { kind: "label", id: "z-crypto-3", title: "Crypto — round 3", x: CX, y: CY + 7740 },
+  { kind: "demo", id: "TokenSelect", title: "TokenSelect", x: CX, y: CY + 7800, w: 340 },
+  { kind: "demo", id: "SlippageControl", title: "SlippageControl", x: CX + COL, y: CY + 7800, w: 380 },
+  { kind: "demo", id: "AccountMenu", title: "AccountMenu", x: CX + COL * 2, y: CY + 7800, w: 340 },
+  { kind: "demo", id: "ActivityRow", title: "ActivityRow", x: CX, y: CY + 8100, w: 420 },
 
   // ── Zone: Screens (live build vs HTML mock, side by side) ────
   { kind: "label", id: "z-screens", title: "Screens — mock vs build", x: 1780, y: 60 },

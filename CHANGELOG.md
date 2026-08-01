@@ -51,6 +51,15 @@ bullets under the release's buckets, prefixed with the component name.
   tap (token-driven CSS), highlights tokens named in the component's
   `.doc.md`, and surfaces the doc's reduced-motion note.
 
+- **Component pages upgrade (roadmap §6)** — `/design/<Component>` now
+  surfaces purpose, install (`npx shadcn add @cids/…` + copy), When to
+  use (from doc "Best for:"), a density-toggleable live demo, usage
+  snippet, on-this-page TOC with heading anchors, **live token swatches**
+  (theme-aware), and a **states panel** (doc chips + curated live
+  matrices for Button/Badge/Input/Switch/Checkbox/Alert/TxStatus/
+  PegBadge/PriceChange), then the same `.doc.md` + source as the canvas
+  Inspector. Gallery blurb updated.
+
 - **Interior.dev as a standing reference** —
   [`docs/references/interior.md`](docs/references/interior.md) maps
   ~54 micro-interactions to CIDS (covered / high-value Web3 /

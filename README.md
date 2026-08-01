@@ -22,7 +22,7 @@ human and an AI agent both build from, and flip themes live.
 
 ## The system
 
-- **59 components** under [`src/design-system/`](src/design-system/) —
+- **60 components** under [`src/design-system/`](src/design-system/) —
   Avatar, AvatarGroup, TokenIcon, TokenChip, ReactionBar, FollowButton,
   Lane, SocialProofChip, PostCard, Sheet, CommentThread, Onboarding,
   Skeleton, Tooltip, and the Phase-4 atoms — Button, IconButton, Badge,
@@ -33,10 +33,10 @@ human and an AI agent both build from, and flip themes live.
   TxStatus, AmountInput — the containment & forms batch: Accordion,
   Alert, Card, Progress, RadioGroup, Textarea — the navigation &
   overlays batch: AppBar, BottomNav, Breadcrumbs, Combobox, Drawer,
-  Pagination, Popover — crypto round 2: Amount, ChainSwitcher,
-  GasFee, WalletButton — and trading-interface imports from
+  Pagination, Popover, ContextMenu — crypto round 2: Amount,
+  ChainSwitcher, GasFee, WalletButton — and trading-interface imports from
   DeFi-Triangle-Learn: OrderBook, OrderTypeTabs, SizeSlider,
-  MarketTabs, MarginHealth (**35 stable · 24 draft**,
+  MarketTabs, MarginHealth (**35 stable · 25 draft**,
   per each doc's `Status:` header; gap tracker in
   [`docs/cids-component-gaps.md`](docs/cids-component-gaps.md)). Every one
   ships a colocated `.doc.md` in the fixed shape defined by

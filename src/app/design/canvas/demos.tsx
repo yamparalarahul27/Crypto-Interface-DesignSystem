@@ -62,6 +62,7 @@ import {
   Drawer,
   Pagination,
   Popover,
+  ContextMenu,
   Amount,
   ChainSwitcher,
   GasFee,
@@ -824,6 +825,20 @@ export const DEMOS: Record<string, () => ReactNode> = {
         { label: "Delete", onSelect: () => {}, destructive: true },
       ]}
     />
+  ),
+  ContextMenu: () => (
+    <ContextMenu
+      items={[
+        { label: "Copy address", onSelect: () => {} },
+        { label: "View on explorer", onSelect: () => {} },
+        { kind: "separator" },
+        { label: "Remove", onSelect: () => {}, destructive: true },
+      ]}
+    >
+      <div className="flex h-24 w-full cursor-context-menu items-center justify-center rounded-card border border-dashed border-outline-variant bg-surface-dim text-xs text-fg-muted">
+        Right-click this surface
+      </div>
+    </ContextMenu>
   ),
   Skeleton: () => (
     <div className="space-y-3">

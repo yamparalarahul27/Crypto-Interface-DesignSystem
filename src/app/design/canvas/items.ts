@@ -105,6 +105,7 @@ export const CANVAS_ITEMS: CanvasItemDef[] = [
   { kind: "demo", id: "Popover", title: "Popover", x: CX + COL, y: CY + 5760, w: 340 },
   { kind: "demo", id: "Drawer", title: "Drawer", x: CX + COL * 2, y: CY + 5760, w: 340 },
   { kind: "demo", id: "Pagination", title: "Pagination", x: CX, y: CY + 6000, w: 420 },
+  { kind: "demo", id: "ContextMenu", title: "ContextMenu", x: CX + COL + 80, y: CY + 6000, w: 340 },
 
   // ── Zone: Crypto round 2 (component-gaps batch 3) ────────────
   { kind: "label", id: "z-crypto-2", title: "Crypto — round 2", x: CX, y: CY + 6300 },

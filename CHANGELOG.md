@@ -40,6 +40,11 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Added
 
+- **ContextMenu** — right-click / long-press menu (Batch 2 deferred).
+  Same `MenuItem` data shape as Menu; Radix ContextMenu for pointer
+  positioning + keyboard. Enters as `draft @ 0.9.0`. QRCode still
+  needs a dependency decision; SeedPhrase remains conditional.
+
 - **Trading interface imports from DeFi-Triangle-Learn** — five new
   portable CIDS components, all entering as `draft @ 0.9.0`:
   **OrderBook** (bid/ask depth with tick aggregation, view modes,

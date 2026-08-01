@@ -74,6 +74,8 @@ import {
   MarketTabs,
   type MarketTabItem,
   MarginHealth,
+  TokenSelect,
+  type TokenOption,
 } from "@/design-system";
 
 const SURFACES = [
@@ -614,6 +616,25 @@ function MarginHealthDemo() {
   );
 }
 
+const DEMO_TOKENS: TokenOption[] = [
+  { id: "sol", symbol: "SOL", name: "Solana", balance: "12.40" },
+  { id: "usdc", symbol: "USDC", name: "USD Coin", balance: "1,204.00" },
+  { id: "jup", symbol: "JUP", name: "Jupiter", balance: "840.2" },
+  { id: "bonk", symbol: "BONK", name: "Bonk", balance: "12,400,000" },
+];
+
+function TokenSelectDemo() {
+  const [token, setToken] = useState<string | undefined>("sol");
+  return (
+    <div className="flex flex-col items-start gap-3">
+      <TokenSelect tokens={DEMO_TOKENS} value={token} onValueChange={setToken} />
+      <p className="text-[11px] text-fg-subtle">
+        {token ? `selected · ${token}` : "none selected — click to pick"}
+      </p>
+    </div>
+  );
+}
+
 export const DEMOS: Record<string, () => ReactNode> = {
   ...PATTERN_DEMOS,
   surfaces: () => (
@@ -755,6 +776,7 @@ export const DEMOS: Record<string, () => ReactNode> = {
   SizeSlider: SizeSliderDemo,
   MarketTabs: MarketTabsDemo,
   MarginHealth: MarginHealthDemo,
+  TokenSelect: TokenSelectDemo,
   RollingNumber: RollingDemo,
   PriceChange: () => (
     <div className="flex items-center gap-4">

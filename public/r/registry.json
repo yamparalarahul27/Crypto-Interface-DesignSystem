@@ -352,6 +352,12 @@
       "description": "CIDS TokenIcon v1.0.0 (stable) — docs ship with the code (TokenIcon.doc.md)."
     },
     {
+      "name": "token-select",
+      "type": "registry:ui",
+      "title": "TokenSelect",
+      "description": "CIDS TokenSelect v0.9.0 (draft) — docs ship with the code (TokenSelect.doc.md)."
+    },
+    {
       "name": "tooltip",
       "type": "registry:ui",
       "title": "Tooltip",

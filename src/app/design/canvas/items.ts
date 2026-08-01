@@ -122,6 +122,10 @@ export const CANVAS_ITEMS: CanvasItemDef[] = [
   { kind: "demo", id: "MarketTabs", title: "MarketTabs", x: CX + COL + 160, y: CY + 7360, w: 560 },
   { kind: "demo", id: "MarginHealth", title: "MarginHealth", x: CX + COL * 2 + 320, y: CY + 7360, w: 460 },
 
+  // ── Zone: Crypto round 3 (component-gaps Batch 5) ────────────
+  { kind: "label", id: "z-crypto-3", title: "Crypto — round 3", x: CX, y: CY + 7740 },
+  { kind: "demo", id: "TokenSelect", title: "TokenSelect", x: CX, y: CY + 7800, w: 340 },
+
   // ── Zone: Screens (live build vs HTML mock, side by side) ────
   { kind: "label", id: "z-screens", title: "Screens — mock vs build", x: 1780, y: 60 },
   {

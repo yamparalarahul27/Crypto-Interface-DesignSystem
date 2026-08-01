@@ -72,6 +72,7 @@ import {
   SizeSlider,
   MarketTabs,
   MarginHealth,
+  TokenSelect,
 } from "./index";
 
 const THEMES = ["dark", "mono", "light", "violet"] as const;
@@ -256,6 +257,16 @@ const CASES: Record<string, () => React.ReactElement> = {
     />
   ),
   MarginHealth: () => <MarginHealth value={37.42} />,
+  TokenSelect: () => (
+    <TokenSelect
+      tokens={[
+        { id: "sol", symbol: "SOL", name: "Solana", balance: "12.40" },
+        { id: "usdc", symbol: "USDC", name: "USD Coin", balance: "1,204.00" },
+      ]}
+      value="sol"
+      onValueChange={() => {}}
+    />
+  ),
   Popover: () => (
     <Popover trigger={<Button variant="secondary" size="sm">Filters</Button>}>
       <p>panel content</p>

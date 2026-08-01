@@ -40,6 +40,12 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Added
 
+- **TokenSelect** (component-gaps Batch 5) — searchable token picker
+  for swap/send/trade tickets: icon + symbol trigger opens a Dialog
+  with filter-as-you-type list and optional balances. Enters as
+  `draft @ 0.9.0`. SlippageControl, AccountMenu, and ActivityRow are
+  queued next in the same batch.
+
 - **Trading interface imports from DeFi-Triangle-Learn** — five new
   portable CIDS components, all entering as `draft @ 0.9.0`:
   **OrderBook** (bid/ask depth with tick aggregation, view modes,

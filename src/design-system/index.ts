@@ -72,4 +72,5 @@ export {
 export { SizeSlider } from "./SizeSlider";
 export { MarketTabs, type MarketTabItem } from "./MarketTabs";
 export { MarginHealth, marginHealthLevel, type MarginHealthLevel } from "./MarginHealth";
+export { TokenSelect, type TokenOption } from "./TokenSelect";
 export { ID_HUES, hueFor, hueGradient, type IdHue } from "./identity";

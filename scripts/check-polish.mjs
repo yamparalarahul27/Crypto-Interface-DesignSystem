@@ -224,6 +224,15 @@ const checks = [
       [/transition-\[width\]/, "bar width uses targeted transition"],
     ],
   },
+  {
+    file: "src/design-system/TokenSelect/TokenSelect.tsx",
+    expect: [
+      [/aria-haspopup="dialog"/, "trigger announces dialog popup"],
+      [/aria-activedescendant/, "search drives listbox via aria-activedescendant"],
+      [/active:scale-\[0\.96\]/, "control-grade press (.96)"],
+      [/focus-visible:ring-2/, "visible focus ring"],
+    ],
+  },
 ];
 
 for (const c of checks) {

@@ -93,6 +93,7 @@ from each.
 ├ Product systems Polaris ·     ┤
 │  Carbon · Primer · CDS        │ ← what
 ├ Behavior        Radix · BaseUI┤ ← how
+├ Micro-motion    interior.dev  ┤ ← half-second after click
 └ Distribution    shadcn · Reown┘ ← ship
 ```
 
@@ -108,6 +109,7 @@ from each.
 | **Coinbase CDS** | **141 components · 11 categories** | The crypto corporate bar: React+RN shared source; theme = spectrum+semantic tokens, 8px base, CSS vars for no-re-render theme switch, **nested themes**; 3 starter templates; explicit visual-versioning policy; **16 chart components + Scrubber + RollingNumber** (streaming price numerals) |
 | **Reown / AppKit** | 5 wallet atoms · 11 framework quickstarts | White-labeling with ~8 variables — incl. **two master knobs** (`--apkt-border-radius-master`, `--apkt-font-size-master`) that rescale the whole kit; the canonical wallet-UX atom inventory (connect/account/network buttons) |
 | **ethereum.org D&UX** | heuristics layer | **7 web3 heuristics**: tx status always visible; design the UI↔wallet seam; always show chain + switcher; accelerators (batch flows); vocabulary control. The patterns layer CIDS should encode as components |
+| **interior.dev** | ~54 micro-interactions | The **half-second after a click**: no layout jump · interruptible springs · reduced-motion still informs. Copy-in + headless hooks, but **requires `motion`** — CIDS steals contracts into Radix/CSS (or composition-tier with approval). Mapping: [`docs/references/interior.md`](./references/interior.md) |
 
 ### The 10 traits of a well-maintained system <sub>(ranked for the CIDS north star)</sub>
 

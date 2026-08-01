@@ -3,6 +3,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { PATTERN_DEMOS } from "./patternDemos";
 import { PriceChart, type PricePoint } from "@/components/PriceChart/PriceChart";
+import { QRCode } from "@/components/QRCode/QRCode";
 import {
   Avatar,
   TokenIcon,
@@ -61,6 +62,7 @@ import {
   Drawer,
   Pagination,
   Popover,
+  ContextMenu,
   Amount,
   ChainSwitcher,
   GasFee,
@@ -417,6 +419,16 @@ function PriceChartDemo() {
       ranges={Object.keys(PRICE_RANGES)}
       onRangeChange={setRange}
       aria-label="SOL / USDC price chart"
+    />
+  );
+}
+
+function QRCodeDemo() {
+  return (
+    <QRCode
+      value="7xKtF2mPqR8vN3wLbJd5cYhT6gAeS4uZ1oXnE9fQ2rM"
+      explorerHref="https://solscan.io/account/7xKtF2mPqR8vN3wLbJd5cYhT6gAeS4uZ1oXnE9fQ2rM"
+      label="Scan to send SOL"
     />
   );
 }
@@ -895,6 +907,20 @@ export const DEMOS: Record<string, () => ReactNode> = {
       ]}
     />
   ),
+  ContextMenu: () => (
+    <ContextMenu
+      items={[
+        { label: "Copy address", onSelect: () => {} },
+        { label: "View on explorer", onSelect: () => {} },
+        { kind: "separator" },
+        { label: "Remove", onSelect: () => {}, destructive: true },
+      ]}
+    >
+      <div className="flex h-24 w-full cursor-context-menu items-center justify-center rounded-card border border-dashed border-outline-variant bg-surface-dim text-xs text-fg-muted">
+        Right-click this surface
+      </div>
+    </ContextMenu>
+  ),
   Skeleton: () => (
     <div className="space-y-3">
       <div className="flex items-center gap-3">
@@ -979,6 +1005,7 @@ export const DEMOS: Record<string, () => ReactNode> = {
   ),
   ChainSwitcher: ChainSwitcherDemo,
   PriceChart: PriceChartDemo,
+  QRCode: QRCodeDemo,
   GasFee: () => (
     <div className="space-y-2">
       <GasFee amount="0.000005 SOL" usd="≈ $0.0009" level="low" />

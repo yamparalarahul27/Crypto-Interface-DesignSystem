@@ -45,7 +45,7 @@ repeated composition begging to be components.
 - [x] **Drawer** — side sheet, right/left (Sheet stays bottom-only)
 - [x] **Breadcrumbs** — path navigation for docs/console surfaces
 - [x] **Pagination** — page controls for long tables
-- [ ] ContextMenu — right-click menu (Radix; low urgency)
+- [x] ContextMenu — right-click menu (Radix; was deferred)
 
 ## Batch 3 — crypto vertical, round 2 (PR in flight)
 
@@ -68,7 +68,10 @@ Same argument as Phase 5b: the whitespace no generic system covers.
       registry). Composes EvilLineChart (line · crosshair · tooltip) +
       CIDS Lane (range switch) + PriceChange (header). Credited to
       [legions-developer/evilcharts](https://github.com/legions-developer/evilcharts).
-- [ ] QRCode — receive-address display (needs a dependency decision)
+- [x] **QRCode** — receive-address display. Decision 2026-08-01: composition
+      tier + `qrcode` npm (same pattern as PriceChart). Lives in
+      `src/components/QRCode/`; composes CIDS AddressChip; theme-aware SVG
+      via CSS variables. Not in the portable registry.
 - [ ] SeedPhrase — reveal/confirm grid (only if onboarding flows land)
 
 ## Batch 4 — trading interface imports from DeFi-Triangle-Learn
@@ -91,9 +94,9 @@ engines.
 - [x] **MarginHealth** — margin-ratio meter with Healthy/Caution/High/
       Critical tiers, semantic tones, and `role="meter"`.
 
-> **Note — the portable core vs. compositions.** PriceChart is the first
-> intentional resident of a second tier: *compositions* that build on
-> non-portable deps (here, recharts via vendored EvilCharts). They're real
+> **Note — the portable core vs. compositions.** PriceChart and QRCode are
+> intentional residents of a second tier: *compositions* that build on
+> non-portable deps (recharts via vendored EvilCharts; `qrcode` npm). They're real
 > and shown on the canvas, but they're not copy-in registry primitives and
 > don't carry the `check:portable` guarantee. Keep them under
 > `src/components/`, credit upstream, and never let them import back into
@@ -135,5 +138,6 @@ Uniswap/Jupiter/CDS ticket completeness.
 | 2026-07-15 | Batch 3 shipped as `feat/components-batch-3` (PR #99, merged; PriceChart split to its own PR). |
 | 2026-07-15 | PriceChart shipped as `feat/price-chart` — EvilCharts-backed composition, outside the portable core. |
 | 2026-07-31 | Batch 4 started from DeFi-Triangle-Learn trading-interface patterns: OrderBook, OrderTypeTabs, SizeSlider, MarketTabs, MarginHealth. |
-| 2026-08-01 | Batch 5 opened — crypto ticket atoms: TokenSelect shipped first; SlippageControl, AccountMenu, ActivityRow queued. |
-| 2026-08-01 | Batch 5 completed core ticket atoms: SlippageControl, AccountMenu, ActivityRow. ContextMenu / QRCode / SeedPhrase remain deferred. |
+| 2026-08-01 | ContextMenu shipped (Batch 2 deferred item). |
+| 2026-08-01 | QRCode shipped as composition tier + `qrcode` npm (PriceChart pattern). SeedPhrase still deferred. |
+| 2026-08-01 | Batch 5 crypto ticket atoms: TokenSelect, SlippageControl, AccountMenu, ActivityRow. SeedPhrase remains deferred. |

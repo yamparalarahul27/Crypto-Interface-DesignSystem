@@ -18,6 +18,7 @@ export { Badge, type BadgeTone } from "./Badge";
 export { Input } from "./Input";
 export { Dialog } from "./Dialog";
 export { Menu, type MenuItem } from "./Menu";
+export { ContextMenu } from "./ContextMenu";
 export { Switch } from "./Switch";
 export { Checkbox } from "./Checkbox";
 export { Select, type SelectOption } from "./Select";

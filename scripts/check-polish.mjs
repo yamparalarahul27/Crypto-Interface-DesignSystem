@@ -287,6 +287,7 @@ const NO_SPECIFIC_RULES = new Set([
   "Input", // border transition only; focus ring is the global :focus-visible
   "Dialog", // behavior + motion via Radix data-[state] presets
   "Menu", // behavior via Radix DropdownMenu; instant highlight by design
+  "ContextMenu", // behavior via Radix ContextMenu; same panel grammar as Menu
   "Switch", // track/thumb 150ms targeted; behavior via Radix
   "Checkbox", // fill/border 150ms targeted; behavior via Radix
   "Select", // Radix Select; panel fade via presets

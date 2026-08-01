@@ -199,8 +199,8 @@ export default function DesignGalleryPage() {
             ))}
           </div>
           <p className="mt-2 text-[11px] text-fg-subtle">
-            one page per component — live demo · doc · source, rendered
-            from the same files as the canvas inspector
+            one page per component — live demo · density · install · when-to-use ·
+            doc · source, rendered from the same files as the canvas inspector
           </p>
         </section>
       </div>

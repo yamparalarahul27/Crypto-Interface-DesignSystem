@@ -22,7 +22,7 @@ human and an AI agent both build from, and flip themes live.
 
 ## The system
 
-- **63 components** under [`src/design-system/`](src/design-system/) —
+- **64 components** under [`src/design-system/`](src/design-system/) —
   Avatar, AvatarGroup, TokenIcon, TokenChip, ReactionBar, FollowButton,
   Lane, SocialProofChip, PostCard, Sheet, CommentThread, Onboarding,
   Skeleton, Tooltip, and the Phase-4 atoms — Button, IconButton, Badge,
@@ -33,12 +33,12 @@ human and an AI agent both build from, and flip themes live.
   TxStatus, AmountInput — the containment & forms batch: Accordion,
   Alert, Card, Progress, RadioGroup, Textarea — the navigation &
   overlays batch: AppBar, BottomNav, Breadcrumbs, Combobox, Drawer,
-  Pagination, Popover — crypto round 2: Amount, ChainSwitcher,
-  GasFee, WalletButton — trading-interface imports from
+  Pagination, Popover, ContextMenu — crypto round 2: Amount,
+  ChainSwitcher, GasFee, WalletButton — trading-interface imports from
   DeFi-Triangle-Learn: OrderBook, OrderTypeTabs, SizeSlider,
-  MarketTabs, MarginHealth — and crypto round 3: TokenSelect,
+  MarketTabs, MarginHealth — and crypto round 3 / Batch 5: TokenSelect,
   SlippageControl, AccountMenu, ActivityRow
-  (**35 stable · 28 draft**,
+  (**35 stable · 29 draft**,
   per each doc's `Status:` header; gap tracker in
   [`docs/cids-component-gaps.md`](docs/cids-component-gaps.md)). Every one
   ships a colocated `.doc.md` in the fixed shape defined by
@@ -107,7 +107,9 @@ npm run dev              # http://localhost:3000
   charting engine behind **PriceChart** (`src/components/PriceChart/`).
   PriceChart is a *composition* on recharts, deliberately outside the
   portable design-system core (see
-  [docs/cids-component-gaps.md](docs/cids-component-gaps.md)).
+  [`docs/cids-component-gaps.md`](docs/cids-component-gaps.md)).
+- **`qrcode`** — engine behind **QRCode** (`src/components/QRCode/`),
+  the receive-address composition (same non-portable tier as PriceChart).
 
 ## Repo history
 

@@ -491,6 +491,35 @@ html {
   animation: pop var(--motion-spring);
 }
 
+/* Component-page motion replay chips (tap remounts). Token-driven
+   durations so Theme Studio / reduced-motion stay honest. */
+@keyframes motion-replay-fast {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.35);
+  }
+}
+.motion-replay-fast {
+  animation: motion-replay-fast var(--motion-fast);
+}
+
+@keyframes motion-replay-settle {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.motion-replay-settle {
+  animation: motion-replay-settle var(--motion-settle);
+}
+
 /* Accordion open/close — Radix measures the panel into
    --radix-accordion-content-height; animating height needs the padding
    on an inner element. Neutralized by the reduced-motion reset below. */

@@ -130,6 +130,12 @@
       "description": "CIDS CommentThread v0.9.0 (draft) — docs ship with the code (CommentThread.doc.md)."
     },
     {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "title": "ContextMenu",
+      "description": "CIDS ContextMenu v0.9.0 (draft) — docs ship with the code (ContextMenu.doc.md)."
+    },
+    {
       "name": "data-table",
       "type": "registry:ui",
       "title": "DataTable",

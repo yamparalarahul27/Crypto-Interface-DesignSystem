@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { DEMOS } from "../canvas/demos";
 import { CopyButton, renderDoc } from "../docRenderer";
 import { ThemeToggle } from "../ThemeToggle";
+import { MotionReplay } from "./MotionReplay";
 import { kebabCase, parseComponentDoc } from "./parseComponentDoc";
 import { StateMatrix } from "./StateMatrix";
 import { TokenSwatches } from "./TokenSwatches";
@@ -81,6 +82,7 @@ export function ComponentPage({
 
   const registryName = kebabCase(name);
   const installCmd = `npx shadcn add @cids/${registryName}`;
+  const canvasHref = `/design/canvas?item=${encodeURIComponent(name)}`;
 
   return (
     <div className="mx-auto min-h-dvh w-full max-w-2xl bg-surface-page px-5 py-8 text-fg">
@@ -109,7 +111,7 @@ export function ComponentPage({
             </span>
             <span className="font-mono text-[10px] text-fg-subtle">·</span>
             <Link
-              href="/design/canvas"
+              href={canvasHref}
               className="font-mono text-[11px] text-fg-muted underline-offset-2 hover:underline"
             >
               open in canvas
@@ -168,6 +170,9 @@ export function ComponentPage({
           </div>
         </section>
       )}
+
+      {/* ── motion tap-to-replay ─────────────────────────────── */}
+      <MotionReplay doc={doc} />
 
       {/* ── usage snippet ────────────────────────────────────── */}
       {usageCode && (
@@ -243,8 +248,8 @@ export function ComponentPage({
         <Link href={`/design/${prev}`} className="text-fg-muted underline-offset-2 hover:underline">
           ‹ {prev}
         </Link>
-        <Link href="/design" className="text-fg-muted underline-offset-2 hover:underline">
-          all components
+        <Link href={canvasHref} className="text-fg-muted underline-offset-2 hover:underline">
+          open in canvas
         </Link>
         <Link href={`/design/${next}`} className="text-fg-muted underline-offset-2 hover:underline">
           {next} ›

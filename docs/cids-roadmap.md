@@ -383,9 +383,9 @@ phases rather than a phase of its own):
 
 | Surface | Now | Target |
 |---|---|---|
-| Canvas | pan/zoom, layers, doc+code inspector, Theme Studio | + search (⌘K), **URL permalinks** per item, **state switcher** (default/hover/loading/empty/error per demo) |
+| Canvas | pan/zoom, layers, doc+code inspector, Theme Studio, **⌘K search**, **`?item=` permalinks** | + state switcher (default/hover/loading/empty/error per demo); mobile gesture polish |
 | `/design` gallery | index linking into per-component pages | category grouping, "open in canvas" deep links |
-| **`/design/<component>` pages** | live demo + density · install · when-to-use · **live token swatches** · **state matrix** (curated primitives) · TOC · doc from disk · source | + motion tap-to-replay · expand state matrices to more components · “when not to use” |
+| **`/design/<component>` pages** | live demo + density · install · when-to-use · **live token swatches** · **state matrix** · TOC · doc · source · **motion tap-to-replay** · canvas permalink | + expand state matrices · “when not to use” |
 | Docs shape | 7 sections + `Version:` | + **"When not to use"** where a sibling exists · Do/Don't where a pattern exists |
 | Landing | 3 CTAs | + the range story: one hero composition per end (simple dApp / exchange), maturity scorecard badge |
 

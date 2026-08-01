@@ -40,6 +40,17 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Added
 
+- **Canvas search + permalinks** — ⌘K / Ctrl+K (and a HUD "search"
+  button) opens a filterable jump list of demos and iframe frames;
+  selecting zooms to the item. Selection syncs to `?item=<id>` so
+  links are shareable; component pages' "open in canvas" now deep-links
+  the same way.
+
+- **Motion tap-to-replay on component pages** — `/design/<Component>`
+  gains a Motion panel that remounts fast / settle / spring previews on
+  tap (token-driven CSS), highlights tokens named in the component's
+  `.doc.md`, and surfaces the doc's reduced-motion note.
+
 - **Component pages upgrade (roadmap §6)** — `/design/<Component>` now
   surfaces purpose, install (`npx shadcn add @cids/…` + copy), When to
   use (from doc "Best for:"), a density-toggleable live demo, usage

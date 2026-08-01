@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { readdirSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { CanvasApp } from "./CanvasApp";
@@ -27,5 +28,16 @@ function readComponentFiles() {
 
 export default function CanvasPage() {
   const { docs, sources } = readComponentFiles();
-  return <CanvasApp docs={docs} sources={sources} />;
+  // useSearchParams (permalinks) requires a Suspense boundary.
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-dvh items-center justify-center bg-surface-dim font-mono text-xs text-fg-muted">
+          loading canvas…
+        </div>
+      }
+    >
+      <CanvasApp docs={docs} sources={sources} />
+    </Suspense>
+  );
 }

@@ -102,10 +102,24 @@ engines.
   pairing) instead of a component.
 - **RTL / i18n** — boundary documented in CONVENTIONS.md.
 
+## Interior-inspired interactions
+
+Standing reference: [Interior.dev](https://www.interior.dev/docs) (see
+also PR docs when merged). Steal contracts; reimplement CIDS-native
+(no `motion` in portable core).
+
+- [x] **LoadingButton** — width-stable async faces (Sign → Signing… →
+      Signed | Retry). First Interior-inspired portable atom.
+- [ ] HoldToConfirm / LongPress — irreversible actions
+- [ ] InlineValidation — amount / address field errors
+- [ ] OTPInput — connect codes / 2FA-ish
+- [ ] WizardSteps — multi-step send / onboarding
+
 ## History
 
 | Date | Change |
 |---|---|
+| 2026-08-01 | LoadingButton shipped (Interior loading-button contract, CSS-only). |
 | 2026-07-15 | File created; Batch 1 shipped as `feat/components-batch-1` (PR #97, merged). |
 | 2026-07-15 | Batch 2 shipped as `feat/components-batch-2` (PR #98, merged; ContextMenu deferred). |
 | 2026-07-15 | Batch 3 shipped as `feat/components-batch-3` (PR #99, merged; PriceChart split to its own PR). |

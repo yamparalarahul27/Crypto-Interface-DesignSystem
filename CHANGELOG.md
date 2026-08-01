@@ -40,6 +40,13 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Added
 
+- **LoadingButton** (`draft @ 0.9.0`) — async action button with
+  width-stable idle → pending → success|error → idle faces (Interior
+  [loading-button](https://www.interior.dev/docs/loading-button)
+  contract, reimplemented with Button tokens + CSS grid — no `motion`
+  dep). `aria-busy` while pending; polite live region on settle.
+  Canvas demo under Primitives.
+
 - **Trading interface imports from DeFi-Triangle-Learn** — five new
   portable CIDS components, all entering as `draft @ 0.9.0`:
   **OrderBook** (bid/ask depth with tick aggregation, view modes,

@@ -178,6 +178,12 @@
       "description": "CIDS Lane v1.0.0 (stable) — docs ship with the code (Lane.doc.md)."
     },
     {
+      "name": "loading-button",
+      "type": "registry:ui",
+      "title": "LoadingButton",
+      "description": "CIDS LoadingButton v0.9.0 (draft) — docs ship with the code (LoadingButton.doc.md)."
+    },
+    {
       "name": "margin-health",
       "type": "registry:ui",
       "title": "MarginHealth",

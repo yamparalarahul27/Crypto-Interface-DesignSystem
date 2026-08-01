@@ -23,6 +23,7 @@ import {
   SectionSkeleton,
   Tooltip,
   Button,
+  LoadingButton,
   IconButton,
   Badge,
   Input,
@@ -115,6 +116,32 @@ function ReactionDemo() {
 function FollowDemo() {
   const [f, setF] = useState(false);
   return <FollowButton following={f} onToggle={() => setF((v) => !v)} />;
+}
+
+function LoadingButtonDemo() {
+  const wait = (ms: number, ok = true) =>
+    new Promise<void>((resolve, reject) => {
+      setTimeout(() => (ok ? resolve() : reject(new Error("failed"))), ms);
+    });
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      <LoadingButton
+        onAction={() => wait(900)}
+        pendingLabel="Signing…"
+        successLabel="Signed"
+      >
+        Sign
+      </LoadingButton>
+      <LoadingButton
+        variant="secondary"
+        onAction={() => wait(700, false)}
+        pendingLabel="Publishing…"
+        errorLabel="Retry"
+      >
+        Publish
+      </LoadingButton>
+    </div>
+  );
 }
 
 function LaneDemo() {
@@ -704,6 +731,7 @@ export const DEMOS: Record<string, () => ReactNode> = {
       <Button disabled>Disabled</Button>
     </div>
   ),
+  LoadingButton: LoadingButtonDemo,
   IconButton: () => (
     <div className="flex items-center gap-2">
       <IconButton aria-label="Settings" variant="secondary">⚙</IconButton>

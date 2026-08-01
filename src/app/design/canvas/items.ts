@@ -46,8 +46,9 @@ export const CANVAS_ITEMS: CanvasItemDef[] = [
   // ── Zone: Primitives (Phase 4 core atoms) ────────────────────
   { kind: "label", id: "z-primitives", title: "Primitives — core atoms", x: CX, y: CY + 1240 },
   { kind: "demo", id: "Button", title: "Button", x: CX, y: CY + 1300, w: 380 },
-  { kind: "demo", id: "IconButton", title: "IconButton", x: CX + COL + 40, y: CY + 1300, w: 300 },
-  { kind: "demo", id: "Badge", title: "Badge", x: CX + COL * 2 + 40, y: CY + 1300, w: 340 },
+  { kind: "demo", id: "LoadingButton", title: "LoadingButton", x: CX + COL + 40, y: CY + 1300, w: 340 },
+  { kind: "demo", id: "IconButton", title: "IconButton", x: CX + COL * 2 + 40, y: CY + 1300, w: 300 },
+  { kind: "demo", id: "Badge", title: "Badge", x: CX + COL * 3 + 40, y: CY + 1300, w: 340 },
   { kind: "demo", id: "Input", title: "Input", x: CX, y: CY + 1520, w: 340 },
   { kind: "demo", id: "Dialog", title: "Dialog", x: CX + COL, y: CY + 1520, w: 340 },
   { kind: "demo", id: "Menu", title: "Menu", x: CX + COL * 2 + 40, y: CY + 1520, w: 300 },

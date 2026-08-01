@@ -67,9 +67,6 @@ function useOTPInput({
     completed.current = onComplete;
   });
 
-  // length is fixed after mount — remount with a new key to resize.
-  refs.current.length = length;
-
   const commit = useCallback((next: string[]) => {
     charsRef.current = next;
     setChars(next);

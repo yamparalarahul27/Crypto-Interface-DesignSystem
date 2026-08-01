@@ -30,6 +30,7 @@ import {
   Divider,
   EmptyState,
   Button,
+  LoadingButton,
   IconButton,
   Badge,
   Input,
@@ -294,6 +295,9 @@ const CASES: Record<string, () => React.ReactElement> = {
     </Popover>
   ),
   Button: () => <Button variant="primary">Confirm</Button>,
+  LoadingButton: () => (
+    <LoadingButton onAction={() => Promise.resolve()}>Sign</LoadingButton>
+  ),
   IconButton: () => <IconButton aria-label="Settings">⚙</IconButton>,
   Badge: () => <Badge tone="buy">on peg</Badge>,
   Input: () => <Input aria-label="Handle" placeholder="@handle" />,

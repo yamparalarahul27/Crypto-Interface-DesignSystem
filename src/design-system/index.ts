@@ -12,7 +12,18 @@ export { PostCard, type PostKind } from "./PostCard";
 export { Sheet } from "./Sheet";
 export { CommentThread, type Comment } from "./CommentThread";
 export { Onboarding, type HandleAvailability } from "./Onboarding";
-export { Button, type ButtonVariant, type ButtonSize } from "./Button";
+export {
+  Button,
+  BUTTON_SIZE,
+  BUTTON_VARIANT,
+  type ButtonVariant,
+  type ButtonSize,
+} from "./Button";
+export {
+  LoadingButton,
+  type AsyncActionStatus,
+  type LoadingButtonProps,
+} from "./LoadingButton";
 export { IconButton } from "./IconButton";
 export { Badge, type BadgeTone } from "./Badge";
 export { Input } from "./Input";

@@ -297,7 +297,7 @@ Current inventory (37):
 | StatCell | stable | | Sparkline | stable |
 | AddressChip | stable | | PegBadge | stable |
 | NetworkBadge | stable | | TxStatus | stable |
-| AmountInput | stable | | | |
+| AmountInput | stable | | LoadingButton | draft |
 
 Components consume tokens from this file's foundations — they never
 define color/spacing/motion values of their own (`check:theme`).

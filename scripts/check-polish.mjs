@@ -91,6 +91,18 @@ const checks = [
     ],
   },
   {
+    file: "src/design-system/LoadingButton/LoadingButton.tsx",
+    expect: [
+      [/active:scale-\[0\.96\]/, "press scale(.96) when not pending"],
+      [/inline-grid/, "stacked faces reserve max width (no layout jump)"],
+      [/aria-busy=\{pending/, "busy state exposed to AT"],
+      [/transition-\[background-color,color,box-shadow,transform\]/, "targeted transition (never transition-all)"],
+    ],
+    refute: [
+      [/from ["']motion/, "portable core — no motion import"],
+    ],
+  },
+  {
     file: "src/design-system/IconButton/IconButton.tsx",
     expect: [
       [/active:scale-\[0\.96\]/, "press scale(.96)"],

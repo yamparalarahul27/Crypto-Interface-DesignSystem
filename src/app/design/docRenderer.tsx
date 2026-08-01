@@ -137,10 +137,19 @@ export function renderDoc(md: string): ReactNode[] {
     }
 
     if (line.startsWith("## ")) {
-      inTokens = line.slice(3).trim().toLowerCase() === "tokens";
+      const title = line.slice(3).trim();
+      inTokens = title.toLowerCase() === "tokens";
+      const id = title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
       out.push(
-        <h3 key={key++} className="mt-4 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
-          {line.slice(3)}
+        <h3
+          key={key++}
+          id={id}
+          className="mt-4 scroll-mt-6 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle"
+        >
+          {title}
         </h3>,
       );
       i++;

@@ -8,9 +8,50 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 import { DEMOS } from "../canvas/demos";
 import { CopyButton, renderDoc } from "../docRenderer";
 import { ThemeToggle } from "../ThemeToggle";
+import { kebabCase, parseComponentDoc } from "./parseComponentDoc";
+
+type Density = "comfortable" | "compact";
+
+function Segmented<T extends string>({
+  label,
+  value,
+  options,
+  onChange,
+}: {
+  label: string;
+  value: T;
+  options: readonly T[];
+  onChange: (v: T) => void;
+}) {
+  return (
+    <div
+      role="radiogroup"
+      aria-label={label}
+      className="inline-flex gap-0.5 rounded-sm border border-outline-variant bg-surface-page p-0.5"
+    >
+      {options.map((opt) => (
+        <button
+          key={opt}
+          type="button"
+          role="radio"
+          aria-checked={value === opt}
+          onClick={() => onChange(opt)}
+          className={cn(
+            "inline-flex h-7 items-center rounded-sm px-2.5 font-mono text-[11px]",
+            "transition-[background-color,color] duration-150",
+            value === opt ? "bg-brand text-on-brand" : "text-fg-muted hover:text-fg",
+          )}
+        >
+          {opt}
+        </button>
+      ))}
+    </div>
+  );
+}
 
 export function ComponentPage({
   name,
@@ -30,29 +71,27 @@ export function ComponentPage({
   next: string;
 }) {
   const Demo = DEMOS[name];
+  const { body, purpose, bestFor, usageCode, sections } = parseComponentDoc(doc);
   const [showCode, setShowCode] = useState(false);
-  // Drop the doc's own H1/headers — the page chrome renders them.
-  const body = doc
-    .split("\n")
-    .filter(
-      (l, i) =>
-        !(i < 6 && (l.startsWith("# ") || l.startsWith("Status:") || l.startsWith("Version:"))),
-    )
-    .join("\n");
+  const [showUsage, setShowUsage] = useState(true);
+  const [density, setDensity] = useState<Density>("comfortable");
+
+  const registryName = kebabCase(name);
+  const installCmd = `npx shadcn add @cids/${registryName}`;
 
   return (
     <div className="mx-auto min-h-dvh w-full max-w-2xl bg-surface-page px-5 py-8 text-fg">
-      {/* header */}
-      <header className="mb-6 flex items-start justify-between gap-4">
-        <div>
+      {/* ── header ───────────────────────────────────────────── */}
+      <header className="mb-5 flex items-start justify-between gap-4">
+        <div className="min-w-0">
           <Link
             href="/design"
             className="font-mono text-[11px] text-fg-muted underline-offset-2 hover:underline"
           >
             ‹ components
           </Link>
-          <h1 className="mt-1 font-mono text-xl font-bold">{name}</h1>
-          <div className="mt-1 flex items-center gap-2">
+          <h1 className="mt-1 text-wrap text-balance font-mono text-xl font-bold">{name}</h1>
+          <div className="mt-1.5 flex flex-wrap items-center gap-2">
             <span
               className={
                 status === "stable"
@@ -65,22 +104,109 @@ export function ComponentPage({
             <span className="font-mono text-[11px] tabular-nums text-fg-subtle">
               v{version}
             </span>
+            <span className="font-mono text-[10px] text-fg-subtle">·</span>
+            <Link
+              href="/design/canvas"
+              className="font-mono text-[11px] text-fg-muted underline-offset-2 hover:underline"
+            >
+              open in canvas
+            </Link>
           </div>
+          {purpose && (
+            <p className="mt-3 text-pretty text-sm leading-relaxed text-fg-muted">{purpose}</p>
+          )}
         </div>
-        <ThemeToggle />
+        <ThemeToggle className="flex-none" />
       </header>
 
-      {/* hero — the live demo */}
+      {/* ── install ──────────────────────────────────────────── */}
+      <section
+        aria-label="Install"
+        className="mb-5 flex items-center gap-2 rounded-card border border-outline-variant bg-surface-dim px-3 py-2"
+      >
+        <span className="flex-none font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+          Install
+        </span>
+        <code className="min-w-0 flex-1 truncate font-mono text-[11px] text-brand">
+          {installCmd}
+        </code>
+        <CopyButton text={installCmd} />
+      </section>
+
+      {/* ── when to use ──────────────────────────────────────── */}
+      {bestFor && (
+        <aside className="mb-5 rounded-card border border-outline-variant bg-surface-container px-3.5 py-3">
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+            When to use
+          </p>
+          <p className="mt-1.5 text-pretty text-xs leading-relaxed text-fg-muted">{bestFor}</p>
+        </aside>
+      )}
+
+      {/* ── hero ─────────────────────────────────────────────── */}
       {Demo && (
-        <section className="mb-6 rounded-card border border-outline-variant bg-surface-container p-5">
-          <Demo />
+        <section className="mb-6 overflow-hidden rounded-card border border-outline-variant bg-surface-container">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-outline-variant px-3 py-2">
+            <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+              Live demo
+            </span>
+            <Segmented
+              label="Density"
+              value={density}
+              options={["comfortable", "compact"] as const}
+              onChange={setDensity}
+            />
+          </div>
+          <div
+            data-density={density === "compact" ? "compact" : undefined}
+            className="p-5"
+          >
+            <Demo />
+          </div>
         </section>
       )}
 
-      {/* the doc, rendered from disk */}
+      {/* ── usage snippet ────────────────────────────────────── */}
+      {usageCode && (
+        <section className="mb-6">
+          <div className="flex items-center justify-between">
+            <button
+              type="button"
+              onClick={() => setShowUsage((v) => !v)}
+              aria-expanded={showUsage}
+              className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle hover:text-fg"
+            >
+              {showUsage ? "▾" : "▸"} usage
+            </button>
+            <CopyButton text={usageCode} />
+          </div>
+          {showUsage && (
+            <pre className="mt-2 overflow-x-auto rounded-sm border border-outline-variant bg-surface-dim p-3 font-mono text-[10px] leading-snug text-fg-muted">
+              {usageCode}
+            </pre>
+          )}
+        </section>
+      )}
+
+      {/* ── TOC ──────────────────────────────────────────────── */}
+      {sections.length > 0 && (
+        <nav aria-label="On this page" className="mb-4 flex flex-wrap gap-x-3 gap-y-1">
+          {sections.map((s) => (
+            <a
+              key={s.id}
+              href={`#${s.id}`}
+              className="font-mono text-[11px] text-fg-muted underline-offset-2 hover:text-fg hover:underline"
+            >
+              {s.title}
+            </a>
+          ))}
+        </nav>
+      )}
+
+      {/* ── doc from disk ────────────────────────────────────── */}
       <article className="space-y-2">{renderDoc(body)}</article>
 
-      {/* code */}
+      {/* ── source ───────────────────────────────────────────── */}
       <section className="mt-8">
         <div className="flex items-center justify-between">
           <button
@@ -98,20 +224,20 @@ export function ComponentPage({
             {source}
           </pre>
         )}
-        <p className="mt-2 text-[10px] leading-relaxed text-fg-subtle">
-          Self-contained: copy the folder into any Tailwind+React app, or{" "}
-          <code className="text-brand">npx shadcn add @cids/…</code> — see the
-          quickstart. Docs and page render the same file on disk.
+        <p className="mt-2 text-pretty text-[10px] leading-relaxed text-fg-subtle">
+          Self-contained: copy the folder into any Tailwind+React app, or use the
+          install command above. Docs and this page render the same file on disk —
+          they cannot drift.
         </p>
       </section>
 
-      {/* footer nav */}
+      {/* ── footer ───────────────────────────────────────────── */}
       <footer className="mt-10 flex items-center justify-between border-t border-outline-variant pt-4 font-mono text-[11px]">
         <Link href={`/design/${prev}`} className="text-fg-muted underline-offset-2 hover:underline">
           ‹ {prev}
         </Link>
-        <Link href="/design/canvas" className="text-fg-muted underline-offset-2 hover:underline">
-          open in canvas
+        <Link href="/design" className="text-fg-muted underline-offset-2 hover:underline">
+          all components
         </Link>
         <Link href={`/design/${next}`} className="text-fg-muted underline-offset-2 hover:underline">
           {next} ›

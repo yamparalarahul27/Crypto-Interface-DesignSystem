@@ -40,6 +40,12 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Added
 
+- **Component pages upgrade (roadmap §6)** — `/design/<Component>` now
+  surfaces purpose, install (`npx shadcn add @cids/…` + copy), When to
+  use (from doc "Best for:"), a density-toggleable live demo, usage
+  snippet, on-this-page TOC with heading anchors, then the same
+  `.doc.md` + source as the canvas Inspector. Gallery blurb updated.
+
 - **Trading interface imports from DeFi-Triangle-Learn** — five new
   portable CIDS components, all entering as `draft @ 0.9.0`:
   **OrderBook** (bid/ask depth with tick aggregation, view modes,

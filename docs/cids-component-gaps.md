@@ -3,8 +3,13 @@
 > Created 2026-07-15. The roadmap's original inventory (Tiers 1–3 +
 > crypto whitespace) shipped in full by M4 — this file tracks the
 > **next ring**: what reference systems (Material ~36, shadcn ~79,
-> Carbon ~67, Coinbase CDS ~141) have that CIDS still lacks, so gaps
+> Carbon ~67, Coinbase CDS ~141, **[interior.dev](https://www.interior.dev/docs)**
+> ~54 micro-interactions) have that CIDS still lacks, so gaps
 > stay recorded instead of rediscovered per session.
+>
+> Interior mapping (what to steal vs skip, `motion` constraint):
+> [`references/interior.md`](./references/interior.md). Agents must
+> check that file before proposing feedback / async / gesture components.
 >
 > Rules: one PR per batch; every component follows
 > [cids-contributing.md](./cids-contributing.md) (7-section doc, tests,

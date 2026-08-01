@@ -102,6 +102,25 @@ engines.
 > `src/components/`, credit upstream, and never let them import back into
 > the design-system barrel.
 
+## Batch 5 — crypto vertical, round 3
+
+The DeFi ticket atoms still missing after rounds 2–4. Swap/send/trade
+UIs hand-roll these every time; shipping them closes the gap to
+Uniswap/Jupiter/CDS ticket completeness.
+
+- [x] **TokenSelect** — searchable token picker (icon + symbol trigger,
+      Dialog list with optional balances). Combobox stays for generic
+      lists; this is the crypto-shaped sibling.
+- [x] **SlippageControl** — tolerance presets + custom bps (≤0.5 /
+      ≤1.0 / custom); tone bands for risk; lives above confirm.
+- [x] **AccountMenu** — WalletButton's connected sibling: address,
+      copy, explorer link, disconnect (never on the connect button).
+- [x] **ActivityRow** — tx history atom (icon · title · time · status
+      · amount); composes TxStatus + Amount + AddressChip patterns.
+- [ ] ContextMenu — finish Batch 2 deferred (Radix; low urgency)
+- [ ] QRCode — receive-address display (needs a dependency decision)
+- [ ] SeedPhrase — reveal/confirm grid (only if onboarding flows land)
+
 ## Deliberate non-goals (recorded, not forgotten)
 
 - **FAB / SplitButton** — no surface in the crypto vertical wants them.
@@ -121,3 +140,4 @@ engines.
 | 2026-07-31 | Batch 4 started from DeFi-Triangle-Learn trading-interface patterns: OrderBook, OrderTypeTabs, SizeSlider, MarketTabs, MarginHealth. |
 | 2026-08-01 | ContextMenu shipped (Batch 2 deferred item). |
 | 2026-08-01 | QRCode shipped as composition tier + `qrcode` npm (PriceChart pattern). SeedPhrase still deferred. |
+| 2026-08-01 | Batch 5 crypto ticket atoms: TokenSelect, SlippageControl, AccountMenu, ActivityRow. SeedPhrase remains deferred. |

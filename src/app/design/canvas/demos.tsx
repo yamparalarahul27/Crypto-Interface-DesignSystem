@@ -76,6 +76,11 @@ import {
   MarketTabs,
   type MarketTabItem,
   MarginHealth,
+  TokenSelect,
+  type TokenOption,
+  SlippageControl,
+  AccountMenu,
+  ActivityRow,
 } from "@/design-system";
 
 const SURFACES = [
@@ -626,6 +631,78 @@ function MarginHealthDemo() {
   );
 }
 
+const DEMO_TOKENS: TokenOption[] = [
+  { id: "sol", symbol: "SOL", name: "Solana", balance: "12.40" },
+  { id: "usdc", symbol: "USDC", name: "USD Coin", balance: "1,204.00" },
+  { id: "jup", symbol: "JUP", name: "Jupiter", balance: "840.2" },
+  { id: "bonk", symbol: "BONK", name: "Bonk", balance: "12,400,000" },
+];
+
+function TokenSelectDemo() {
+  const [token, setToken] = useState<string | undefined>("sol");
+  return (
+    <div className="flex flex-col items-start gap-3">
+      <TokenSelect tokens={DEMO_TOKENS} value={token} onValueChange={setToken} />
+      <p className="text-[11px] text-fg-subtle">
+        {token ? `selected · ${token}` : "none selected — click to pick"}
+      </p>
+    </div>
+  );
+}
+
+function SlippageControlDemo() {
+  const [bps, setBps] = useState(50);
+  return <SlippageControl value={bps} onValueChange={setBps} />;
+}
+
+function AccountMenuDemo() {
+  const [connected, setConnected] = useState(true);
+  if (!connected) {
+    return (
+      <Button variant="primary" onClick={() => setConnected(true)}>
+        Reconnect demo
+      </Button>
+    );
+  }
+  return (
+    <AccountMenu
+      address="7xKtF2mPqR8vN3wLbJd5cYhT6gAeS4uZ1oXnE9fQ2rM"
+      balance="12.4 SOL"
+      explorerHref="https://solscan.io"
+      onDisconnect={() => setConnected(false)}
+    />
+  );
+}
+
+function ActivityRowDemo() {
+  return (
+    <div className="w-full space-y-1">
+      <ActivityRow
+        title="Swapped SOL → USDC"
+        time="2m ago"
+        status="confirmed"
+        amount="+12.40 USDC"
+        tokenSymbol="USDC"
+      />
+      <ActivityRow
+        title="Pending send"
+        time="just now"
+        status="pending"
+        amount="−0.50 SOL"
+        tokenSymbol="SOL"
+      />
+      <ActivityRow
+        title="Swap failed"
+        time="1h ago"
+        status="failed"
+        amount="−2.00 SOL"
+        tokenSymbol="SOL"
+        onClick={() => {}}
+      />
+    </div>
+  );
+}
+
 export const DEMOS: Record<string, () => ReactNode> = {
   ...PATTERN_DEMOS,
   surfaces: () => (
@@ -767,6 +844,10 @@ export const DEMOS: Record<string, () => ReactNode> = {
   SizeSlider: SizeSliderDemo,
   MarketTabs: MarketTabsDemo,
   MarginHealth: MarginHealthDemo,
+  TokenSelect: TokenSelectDemo,
+  SlippageControl: SlippageControlDemo,
+  AccountMenu: AccountMenuDemo,
+  ActivityRow: ActivityRowDemo,
   RollingNumber: RollingDemo,
   PriceChange: () => (
     <div className="flex items-center gap-4">

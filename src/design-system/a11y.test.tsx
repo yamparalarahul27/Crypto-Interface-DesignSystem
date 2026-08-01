@@ -73,6 +73,10 @@ import {
   SizeSlider,
   MarketTabs,
   MarginHealth,
+  TokenSelect,
+  SlippageControl,
+  AccountMenu,
+  ActivityRow,
 } from "./index";
 
 const THEMES = ["dark", "mono", "light", "violet"] as const;
@@ -257,6 +261,33 @@ const CASES: Record<string, () => React.ReactElement> = {
     />
   ),
   MarginHealth: () => <MarginHealth value={37.42} />,
+  TokenSelect: () => (
+    <TokenSelect
+      tokens={[
+        { id: "sol", symbol: "SOL", name: "Solana", balance: "12.40" },
+        { id: "usdc", symbol: "USDC", name: "USD Coin", balance: "1,204.00" },
+      ]}
+      value="sol"
+      onValueChange={() => {}}
+    />
+  ),
+  SlippageControl: () => <SlippageControl value={50} onValueChange={() => {}} />,
+  AccountMenu: () => (
+    <AccountMenu
+      address="7xKtF2mPqR8vN3wLbJd5cYhT6gAeS4uZ1oXnE9fQ2rM"
+      balance="12.4 SOL"
+      onDisconnect={() => {}}
+    />
+  ),
+  ActivityRow: () => (
+    <ActivityRow
+      title="Swapped SOL → USDC"
+      time="2m ago"
+      status="confirmed"
+      amount="+12.40 USDC"
+      tokenSymbol="USDC"
+    />
+  ),
   Popover: () => (
     <Popover trigger={<Button variant="secondary" size="sm">Filters</Button>}>
       <p>panel content</p>

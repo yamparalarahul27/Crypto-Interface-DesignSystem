@@ -40,6 +40,13 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Added
 
+- **Batch 5 crypto ticket atoms** — four `draft @ 0.9.0` components for
+  the swap/send/account surface: **TokenSelect** (searchable token
+  picker), **SlippageControl** (presets + custom % in bps, risk tone
+  bands), **AccountMenu** (WalletButton's connected sibling — copy /
+  explorer / disconnect), **ActivityRow** (tx history atom — icon ·
+  title · time · status word · amount). SeedPhrase remains deferred.
+
 - **QRCode** — receive-address composition (Batch 3 deferred). Uses the
   `qrcode` npm package and lives in `src/components/QRCode/` (same
   composition-tier pattern as PriceChart — not portable-registry).

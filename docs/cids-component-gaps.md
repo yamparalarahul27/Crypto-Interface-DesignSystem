@@ -45,7 +45,7 @@ repeated composition begging to be components.
 - [x] **Drawer** — side sheet, right/left (Sheet stays bottom-only)
 - [x] **Breadcrumbs** — path navigation for docs/console surfaces
 - [x] **Pagination** — page controls for long tables
-- [ ] ContextMenu — right-click menu (Radix; low urgency)
+- [x] ContextMenu — right-click menu (Radix; was deferred)
 
 ## Batch 3 — crypto vertical, round 2 (PR in flight)
 
@@ -116,3 +116,4 @@ engines.
 | 2026-07-15 | Batch 3 shipped as `feat/components-batch-3` (PR #99, merged; PriceChart split to its own PR). |
 | 2026-07-15 | PriceChart shipped as `feat/price-chart` — EvilCharts-backed composition, outside the portable core. |
 | 2026-07-31 | Batch 4 started from DeFi-Triangle-Learn trading-interface patterns: OrderBook, OrderTypeTabs, SizeSlider, MarketTabs, MarginHealth. |
+| 2026-08-01 | ContextMenu shipped (Batch 2 deferred item). QRCode / SeedPhrase still open. |

@@ -40,6 +40,11 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Added
 
+- **ContextMenu** — right-click / long-press menu (Batch 2 deferred).
+  Same `MenuItem` data shape as Menu; Radix ContextMenu for pointer
+  positioning + keyboard. Enters as `draft @ 0.9.0`. QRCode still
+  needs a dependency decision; SeedPhrase remains conditional.
+
 - **Canvas search + permalinks** — ⌘K / Ctrl+K (and a HUD "search"
   button) opens a filterable jump list of demos and iframe frames;
   selecting zooms to the item. Selection syncs to `?item=<id>` so

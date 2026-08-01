@@ -63,6 +63,7 @@ import {
   Drawer,
   Pagination,
   Popover,
+  ContextMenu,
   Amount,
   ChainSwitcher,
   GasFee,
@@ -348,6 +349,11 @@ const CASES: Record<string, () => React.ReactElement> = {
       trigger={<IconButton aria-label="Actions">⋯</IconButton>}
       items={[{ label: "Copy link", onSelect: () => {} }]}
     />
+  ),
+  ContextMenu: () => (
+    <ContextMenu items={[{ label: "Copy address", onSelect: () => {} }]}>
+      <div>Right-click surface</div>
+    </ContextMenu>
   ),
   Sheet: () => (
     <Sheet open onOpenChange={() => {}} title="Sheet title">

@@ -40,6 +40,12 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Added
 
+- **QRCode** — receive-address composition (Batch 3 deferred). Uses the
+  `qrcode` npm package and lives in `src/components/QRCode/` (same
+  composition-tier pattern as PriceChart — not portable-registry).
+  Theme-aware SVG (CSS vars) + CIDS AddressChip for copy/explorer.
+  Enters as `draft @ 0.9.0`. SeedPhrase remains deferred.
+
 - **Trading interface imports from DeFi-Triangle-Learn** — five new
   portable CIDS components, all entering as `draft @ 0.9.0`:
   **OrderBook** (bid/ask depth with tick aggregation, view modes,

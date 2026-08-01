@@ -105,7 +105,9 @@ npm run dev              # http://localhost:3000
   charting engine behind **PriceChart** (`src/components/PriceChart/`).
   PriceChart is a *composition* on recharts, deliberately outside the
   portable design-system core (see
-  [docs/cids-component-gaps.md](docs/cids-component-gaps.md)).
+  [`docs/cids-component-gaps.md`](docs/cids-component-gaps.md)).
+- **`qrcode`** — engine behind **QRCode** (`src/components/QRCode/`),
+  the receive-address composition (same non-portable tier as PriceChart).
 
 ## Repo history
 

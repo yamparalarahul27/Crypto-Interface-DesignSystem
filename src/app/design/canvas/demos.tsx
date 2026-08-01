@@ -3,6 +3,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { PATTERN_DEMOS } from "./patternDemos";
 import { PriceChart, type PricePoint } from "@/components/PriceChart/PriceChart";
+import { QRCode } from "@/components/QRCode/QRCode";
 import {
   Avatar,
   TokenIcon,
@@ -412,6 +413,16 @@ function PriceChartDemo() {
       ranges={Object.keys(PRICE_RANGES)}
       onRangeChange={setRange}
       aria-label="SOL / USDC price chart"
+    />
+  );
+}
+
+function QRCodeDemo() {
+  return (
+    <QRCode
+      value="7xKtF2mPqR8vN3wLbJd5cYhT6gAeS4uZ1oXnE9fQ2rM"
+      explorerHref="https://solscan.io/account/7xKtF2mPqR8vN3wLbJd5cYhT6gAeS4uZ1oXnE9fQ2rM"
+      label="Scan to send SOL"
     />
   );
 }
@@ -898,6 +909,7 @@ export const DEMOS: Record<string, () => ReactNode> = {
   ),
   ChainSwitcher: ChainSwitcherDemo,
   PriceChart: PriceChartDemo,
+  QRCode: QRCodeDemo,
   GasFee: () => (
     <div className="space-y-2">
       <GasFee amount="0.000005 SOL" usd="≈ $0.0009" level="low" />

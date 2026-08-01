@@ -117,8 +117,8 @@ Uniswap/Jupiter/CDS ticket completeness.
       copy, explorer link, disconnect (never on the connect button).
 - [x] **ActivityRow** — tx history atom (icon · title · time · status
       · amount); composes TxStatus + Amount + AddressChip patterns.
-- [ ] ContextMenu — finish Batch 2 deferred (Radix; low urgency)
-- [ ] QRCode — receive-address display (needs a dependency decision)
+- [x] ContextMenu — right-click menu (Radix; was deferred)
+- [x] **QRCode** — receive-address display (composition tier + `qrcode`)
 - [ ] SeedPhrase — reveal/confirm grid (only if onboarding flows land)
 
 ## Deliberate non-goals (recorded, not forgotten)
@@ -137,15 +137,16 @@ also PR docs when merged). Steal contracts; reimplement CIDS-native
 
 - [x] **LoadingButton** — width-stable async faces (Sign → Signing… →
       Signed | Retry). First Interior-inspired portable atom.
-- [ ] HoldToConfirm / LongPress — irreversible actions
-- [ ] InlineValidation — amount / address field errors
-- [ ] OTPInput — connect codes / 2FA-ish
-- [ ] WizardSteps — multi-step send / onboarding
+- [x] **HoldToConfirm** — irreversible hold-to-commit (revoke / disconnect)
+- [x] **InlineValidation** — reserved-height hint ↔ error on Input
+- [x] **OTPInput** — connect / verify code cells
+- [x] **WizardSteps** — multi-step send / onboarding rail + panel
 
 ## History
 
 | Date | Change |
 |---|---|
+| 2026-08-01 | Interior-inspired batch: HoldToConfirm, InlineValidation, OTPInput, WizardSteps (CSS-only). |
 | 2026-08-01 | LoadingButton shipped (Interior loading-button contract, CSS-only). |
 | 2026-07-15 | File created; Batch 1 shipped as `feat/components-batch-1` (PR #97, merged). |
 | 2026-07-15 | Batch 2 shipped as `feat/components-batch-2` (PR #98, merged; ContextMenu deferred). |

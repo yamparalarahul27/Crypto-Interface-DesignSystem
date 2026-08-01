@@ -103,6 +103,47 @@ const checks = [
     ],
   },
   {
+    file: "src/design-system/HoldToConfirm/HoldToConfirm.tsx",
+    expect: [
+      [/requestAnimationFrame/, "hold progress via rAF"],
+      [/aria-describedby=\{hintId\}/, "hold hint for AT"],
+      [/Press and hold/, "sr-only hold instructions"],
+    ],
+    refute: [
+      [/from ["']motion/, "portable core — no motion import"],
+    ],
+  },
+  {
+    file: "src/design-system/OTPInput/OTPInput.tsx",
+    expect: [
+      [/one-time-code/, "SMS autocomplete on first cell"],
+      [/role="group"/, "cells grouped for AT"],
+    ],
+    refute: [
+      [/from ["']motion/, "portable core — no motion import"],
+    ],
+  },
+  {
+    file: "src/design-system/InlineValidation/InlineValidation.tsx",
+    expect: [
+      [/aria-live="polite"/, "error announced politely"],
+      [/h-4/, "reserved message height (no layout jump)"],
+    ],
+    refute: [
+      [/from ["']motion/, "portable core — no motion import"],
+    ],
+  },
+  {
+    file: "src/design-system/WizardSteps/WizardSteps.tsx",
+    expect: [
+      [/aria-current=\{here \? "step"/, "current step exposed"],
+      [/inline-grid/, "Next/Finish width-stable"],
+    ],
+    refute: [
+      [/from ["']motion/, "portable core — no motion import"],
+    ],
+  },
+  {
     file: "src/design-system/IconButton/IconButton.tsx",
     expect: [
       [/active:scale-\[0\.96\]/, "press scale(.96)"],

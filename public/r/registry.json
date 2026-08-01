@@ -178,10 +178,22 @@
       "description": "CIDS GasFee v0.9.0 (draft) — docs ship with the code (GasFee.doc.md)."
     },
     {
+      "name": "hold-to-confirm",
+      "type": "registry:ui",
+      "title": "HoldToConfirm",
+      "description": "CIDS HoldToConfirm v0.9.0 (draft) — docs ship with the code (HoldToConfirm.doc.md)."
+    },
+    {
       "name": "icon-button",
       "type": "registry:ui",
       "title": "IconButton",
       "description": "CIDS IconButton v1.0.0 (stable) — docs ship with the code (IconButton.doc.md)."
+    },
+    {
+      "name": "inline-validation",
+      "type": "registry:ui",
+      "title": "InlineValidation",
+      "description": "CIDS InlineValidation v0.9.0 (draft) — docs ship with the code (InlineValidation.doc.md)."
     },
     {
       "name": "input",
@@ -224,6 +236,12 @@
       "type": "registry:ui",
       "title": "NetworkBadge",
       "description": "CIDS NetworkBadge v1.0.0 (stable) — docs ship with the code (NetworkBadge.doc.md)."
+    },
+    {
+      "name": "otpinput",
+      "type": "registry:ui",
+      "title": "OTPInput",
+      "description": "CIDS OTPInput v0.9.0 (draft) — docs ship with the code (OTPInput.doc.md)."
     },
     {
       "name": "onboarding",
@@ -404,6 +422,12 @@
       "type": "registry:ui",
       "title": "WalletButton",
       "description": "CIDS WalletButton v0.9.0 (draft) — docs ship with the code (WalletButton.doc.md)."
+    },
+    {
+      "name": "wizard-steps",
+      "type": "registry:ui",
+      "title": "WizardSteps",
+      "description": "CIDS WizardSteps v0.9.0 (draft) — docs ship with the code (WizardSteps.doc.md)."
     }
   ]
 }

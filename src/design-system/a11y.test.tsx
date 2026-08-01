@@ -78,6 +78,10 @@ import {
   SlippageControl,
   AccountMenu,
   ActivityRow,
+  HoldToConfirm,
+  OTPInput,
+  InlineValidation,
+  WizardSteps,
 } from "./index";
 
 const THEMES = ["dark", "mono", "light", "violet"] as const;
@@ -297,6 +301,27 @@ const CASES: Record<string, () => React.ReactElement> = {
   Button: () => <Button variant="primary">Confirm</Button>,
   LoadingButton: () => (
     <LoadingButton onAction={() => Promise.resolve()}>Sign</LoadingButton>
+  ),
+  HoldToConfirm: () => (
+    <HoldToConfirm onConfirm={() => {}}>Hold to disconnect</HoldToConfirm>
+  ),
+  OTPInput: () => <OTPInput length={4} label="Code" />,
+  InlineValidation: () => (
+    <InlineValidation
+      label="Recipient"
+      value=""
+      onChange={() => {}}
+      validate={() => null}
+      hint="Paste an address"
+    />
+  ),
+  WizardSteps: () => (
+    <WizardSteps
+      steps={[
+        { id: "a", label: "Amount", content: <p>one</p> },
+        { id: "b", label: "Review", content: <p>two</p> },
+      ]}
+    />
   ),
   IconButton: () => <IconButton aria-label="Settings">⚙</IconButton>,
   Badge: () => <Badge tone="buy">on peg</Badge>,

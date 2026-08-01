@@ -132,6 +132,13 @@ export const CANVAS_ITEMS: CanvasItemDef[] = [
   { kind: "demo", id: "AccountMenu", title: "AccountMenu", x: CX + COL * 2, y: CY + 7800, w: 340 },
   { kind: "demo", id: "ActivityRow", title: "ActivityRow", x: CX, y: CY + 8100, w: 420 },
 
+  // ── Zone: Interior-inspired interactions ─────────────────────
+  { kind: "label", id: "z-interior", title: "Interior-inspired interactions", x: CX, y: CY + 8460 },
+  { kind: "demo", id: "HoldToConfirm", title: "HoldToConfirm", x: CX, y: CY + 8520, w: 360 },
+  { kind: "demo", id: "OTPInput", title: "OTPInput", x: CX + COL, y: CY + 8520, w: 380 },
+  { kind: "demo", id: "InlineValidation", title: "InlineValidation", x: CX + COL * 2, y: CY + 8520, w: 360 },
+  { kind: "demo", id: "WizardSteps", title: "WizardSteps", x: CX, y: CY + 8840, w: 440 },
+
   // ── Zone: Screens (live build vs HTML mock, side by side) ────
   { kind: "label", id: "z-screens", title: "Screens — mock vs build", x: 1780, y: 60 },
   {

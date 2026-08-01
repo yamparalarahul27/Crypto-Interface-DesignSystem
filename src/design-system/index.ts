@@ -24,6 +24,28 @@ export {
   type AsyncActionStatus,
   type LoadingButtonProps,
 } from "./LoadingButton";
+export {
+  HoldToConfirm,
+  type HoldPhase,
+  type HoldToConfirmProps,
+} from "./HoldToConfirm";
+export {
+  OTPInput,
+  type OTPMode,
+  type OTPInputProps,
+} from "./OTPInput";
+export {
+  InlineValidation,
+  type ValidationStatus,
+  type Validator,
+  type InlineValidationProps,
+} from "./InlineValidation";
+export {
+  WizardSteps,
+  type WizardStep,
+  type WizardDirection,
+  type WizardStepsProps,
+} from "./WizardSteps";
 export { IconButton } from "./IconButton";
 export { Badge, type BadgeTone } from "./Badge";
 export { Input } from "./Input";

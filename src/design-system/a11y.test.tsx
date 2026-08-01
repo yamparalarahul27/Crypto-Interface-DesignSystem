@@ -73,6 +73,9 @@ import {
   MarketTabs,
   MarginHealth,
   TokenSelect,
+  SlippageControl,
+  AccountMenu,
+  ActivityRow,
 } from "./index";
 
 const THEMES = ["dark", "mono", "light", "violet"] as const;
@@ -265,6 +268,23 @@ const CASES: Record<string, () => React.ReactElement> = {
       ]}
       value="sol"
       onValueChange={() => {}}
+    />
+  ),
+  SlippageControl: () => <SlippageControl value={50} onValueChange={() => {}} />,
+  AccountMenu: () => (
+    <AccountMenu
+      address="7xKtF2mPqR8vN3wLbJd5cYhT6gAeS4uZ1oXnE9fQ2rM"
+      balance="12.4 SOL"
+      onDisconnect={() => {}}
+    />
+  ),
+  ActivityRow: () => (
+    <ActivityRow
+      title="Swapped SOL → USDC"
+      time="2m ago"
+      status="confirmed"
+      amount="+12.40 USDC"
+      tokenSymbol="USDC"
     />
   ),
   Popover: () => (

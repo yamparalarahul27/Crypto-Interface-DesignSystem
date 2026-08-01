@@ -40,6 +40,14 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Added
 
+- **Batch 5 crypto ticket atoms** — three more `draft @ 0.9.0`
+  components completing the swap/send/account surface next to
+  TokenSelect: **SlippageControl** (presets + custom % in bps, risk
+  tone bands), **AccountMenu** (WalletButton's connected sibling —
+  copy / explorer / disconnect), **ActivityRow** (tx history atom —
+  icon · title · time · status word · amount). ContextMenu, QRCode,
+  and SeedPhrase remain deferred.
+
 - **TokenSelect** (component-gaps Batch 5) — searchable token picker
   for swap/send/trade tickets: icon + symbol trigger opens a Dialog
   with filter-as-you-type list and optional balances. Enters as

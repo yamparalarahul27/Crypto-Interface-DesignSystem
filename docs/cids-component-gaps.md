@@ -103,11 +103,11 @@ Uniswap/Jupiter/CDS ticket completeness.
 - [x] **TokenSelect** — searchable token picker (icon + symbol trigger,
       Dialog list with optional balances). Combobox stays for generic
       lists; this is the crypto-shaped sibling.
-- [ ] **SlippageControl** — tolerance presets + custom bps (≤0.5 /
+- [x] **SlippageControl** — tolerance presets + custom bps (≤0.5 /
       ≤1.0 / custom); tone bands for risk; lives above confirm.
-- [ ] **AccountMenu** — WalletButton's connected sibling: address,
+- [x] **AccountMenu** — WalletButton's connected sibling: address,
       copy, explorer link, disconnect (never on the connect button).
-- [ ] **ActivityRow** — tx history atom (icon · title · time · status
+- [x] **ActivityRow** — tx history atom (icon · title · time · status
       · amount); composes TxStatus + Amount + AddressChip patterns.
 - [ ] ContextMenu — finish Batch 2 deferred (Radix; low urgency)
 - [ ] QRCode — receive-address display (needs a dependency decision)
@@ -131,3 +131,4 @@ Uniswap/Jupiter/CDS ticket completeness.
 | 2026-07-15 | PriceChart shipped as `feat/price-chart` — EvilCharts-backed composition, outside the portable core. |
 | 2026-07-31 | Batch 4 started from DeFi-Triangle-Learn trading-interface patterns: OrderBook, OrderTypeTabs, SizeSlider, MarketTabs, MarginHealth. |
 | 2026-08-01 | Batch 5 opened — crypto ticket atoms: TokenSelect shipped first; SlippageControl, AccountMenu, ActivityRow queued. |
+| 2026-08-01 | Batch 5 completed core ticket atoms: SlippageControl, AccountMenu, ActivityRow. ContextMenu / QRCode / SeedPhrase remain deferred. |

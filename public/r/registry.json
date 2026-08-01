@@ -22,6 +22,18 @@
       "description": "CIDS Accordion v0.9.0 (draft) — docs ship with the code (Accordion.doc.md)."
     },
     {
+      "name": "account-menu",
+      "type": "registry:ui",
+      "title": "AccountMenu",
+      "description": "CIDS AccountMenu v0.9.0 (draft) — docs ship with the code (AccountMenu.doc.md)."
+    },
+    {
+      "name": "activity-row",
+      "type": "registry:ui",
+      "title": "ActivityRow",
+      "description": "CIDS ActivityRow v0.9.0 (draft) — docs ship with the code (ActivityRow.doc.md)."
+    },
+    {
       "name": "address-chip",
       "type": "registry:ui",
       "title": "AddressChip",
@@ -296,6 +308,12 @@
       "type": "registry:ui",
       "title": "Skeleton",
       "description": "CIDS Skeleton v1.0.0 (stable) — docs ship with the code (Skeleton.doc.md)."
+    },
+    {
+      "name": "slippage-control",
+      "type": "registry:ui",
+      "title": "SlippageControl",
+      "description": "CIDS SlippageControl v0.9.0 (draft) — docs ship with the code (SlippageControl.doc.md)."
     },
     {
       "name": "social-proof-chip",

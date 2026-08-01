@@ -6,6 +6,23 @@
 > together. Everything below is guard-enforced — CI is the reviewer of
 > record.
 
+## Before you invent anything
+
+Check these sources **in order** so we don’t rediscover solved UX or
+duplicate inventory:
+
+1. **CIDS itself** — `src/design-system/`, canvas, [`cids-component-gaps.md`](./cids-component-gaps.md).
+2. **Crypto vertical** — Coinbase CDS · Reown/AppKit · ethereum.org D&UX heuristics.
+3. **Generic systems** — Radix / Base UI · shadcn · Carbon (behavior & density).
+4. **Motion / micro-interaction** — **[interior.dev](https://www.interior.dev/docs)**
+   ([mapping](./references/interior.md)). Steal *contracts* (no jump ·
+   interruptible · reduced-motion destination), not files — Interior
+   needs `motion`, which is **not** in the portable allowlist.
+
+If Interior (or another lib) is the only honest path and needs a new
+dependency, **stop and propose** (composition tier vs portable core)
+before writing code.
+
 ## The checklist
 
 1. **Folder** — `src/design-system/<Name>/` with `<Name>.tsx`,
@@ -26,9 +43,11 @@
    it runs automatically × 4 themes.
 6. **Polish** — either add assertions to `scripts/check-polish.mjs` or
    list the component in `NO_SPECIFIC_RULES` with a reason (G2 fails
-   otherwise — coverage can't be skipped silently).
+   otherwise — coverage can't be skipped silently). Also verify
+   Interior’s three failures don’t apply: **no layout jump**,
+   **interruptible motion**, **reduced-motion still informs**.
 7. **Canvas** — register a demo (`canvas/demos.tsx` + `items.ts`);
-   a component that isn't on the canvas doesn't exist.
+   a component that isn’t on the canvas doesn’t exist.
 8. **Registry** — `npm run build:registry` and commit `public/r/`
    (`check:registry` fails CI on drift).
 9. **Counts** — README + DESIGN.md inventory tables.

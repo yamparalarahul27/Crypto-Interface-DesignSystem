@@ -11,6 +11,7 @@ export default defineConfig({
     include: [
       "src/design-system/**/*.test.{ts,tsx}",
       "src/components/**/*.test.{ts,tsx}", // PriceChart (evilcharts-backed, outside the portable core)
+      "src/app/design/**/*.test.{ts,tsx}", // canvas search / component-page helpers
     ],
     setupFiles: ["./vitest.setup.ts"],
   },

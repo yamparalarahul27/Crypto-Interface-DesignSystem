@@ -381,9 +381,9 @@ phases rather than a phase of its own):
 
 | Surface | Now | Target |
 |---|---|---|
-| Canvas | pan/zoom, layers, doc+code inspector | + search (⌘K), **URL permalinks** per item, **state switcher** (default/hover/loading/empty/error per demo), density toggle, Theme Studio panel |
-| `/design` gallery | subset, static | index that links into the per-component pages below, "open in canvas" cross-links |
-| **`/design/<component>` pages** | — none | **one page per component** (see anatomy below) — the primary read surface for designers & developers |
+| Canvas | pan/zoom, layers, doc+code inspector, Theme Studio, **⌘K search**, **`?item=` permalinks** | + state switcher (default/hover/loading/empty/error per demo); mobile gesture polish |
+| `/design` gallery | index linking into per-component pages | category grouping |
+| **`/design/<component>` pages** | live demo · doc · source · **motion tap-to-replay** · canvas permalink | + density/state switchers · token swatches (see open PRs) · “when not to use” |
 | Docs shape | 7 sections | + `Version:` header, + **"When to use / when not"** line, + Do/Don't where a pattern exists |
 | Landing | 3 CTAs | + the range story: one hero composition per end (simple dApp / exchange), maturity scorecard badge |
 

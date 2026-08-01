@@ -11,6 +11,7 @@ import { useState } from "react";
 import { DEMOS } from "../canvas/demos";
 import { CopyButton, renderDoc } from "../docRenderer";
 import { ThemeToggle } from "../ThemeToggle";
+import { MotionReplay } from "./MotionReplay";
 
 export function ComponentPage({
   name,
@@ -42,7 +43,6 @@ export function ComponentPage({
 
   return (
     <div className="mx-auto min-h-dvh w-full max-w-2xl bg-surface-page px-5 py-8 text-fg">
-      {/* header */}
       <header className="mb-6 flex items-start justify-between gap-4">
         <div>
           <Link
@@ -52,7 +52,7 @@ export function ComponentPage({
             ‹ components
           </Link>
           <h1 className="mt-1 font-mono text-xl font-bold">{name}</h1>
-          <div className="mt-1 flex items-center gap-2">
+          <div className="mt-1 flex flex-wrap items-center gap-2">
             <span
               className={
                 status === "stable"
@@ -65,22 +65,28 @@ export function ComponentPage({
             <span className="font-mono text-[11px] tabular-nums text-fg-subtle">
               v{version}
             </span>
+            <span className="font-mono text-[10px] text-fg-subtle">·</span>
+            <Link
+              href={`/design/canvas?item=${encodeURIComponent(name)}`}
+              className="font-mono text-[11px] text-fg-muted underline-offset-2 hover:underline"
+            >
+              open in canvas
+            </Link>
           </div>
         </div>
         <ThemeToggle />
       </header>
 
-      {/* hero — the live demo */}
       {Demo && (
         <section className="mb-6 rounded-card border border-outline-variant bg-surface-container p-5">
           <Demo />
         </section>
       )}
 
-      {/* the doc, rendered from disk */}
+      <MotionReplay doc={doc} />
+
       <article className="space-y-2">{renderDoc(body)}</article>
 
-      {/* code */}
       <section className="mt-8">
         <div className="flex items-center justify-between">
           <button
@@ -105,12 +111,14 @@ export function ComponentPage({
         </p>
       </section>
 
-      {/* footer nav */}
       <footer className="mt-10 flex items-center justify-between border-t border-outline-variant pt-4 font-mono text-[11px]">
         <Link href={`/design/${prev}`} className="text-fg-muted underline-offset-2 hover:underline">
           ‹ {prev}
         </Link>
-        <Link href="/design/canvas" className="text-fg-muted underline-offset-2 hover:underline">
+        <Link
+          href={`/design/canvas?item=${encodeURIComponent(name)}`}
+          className="text-fg-muted underline-offset-2 hover:underline"
+        >
           open in canvas
         </Link>
         <Link href={`/design/${next}`} className="text-fg-muted underline-offset-2 hover:underline">

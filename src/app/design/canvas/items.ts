@@ -114,6 +114,7 @@ export const CANVAS_ITEMS: CanvasItemDef[] = [
   { kind: "demo", id: "Amount", title: "Amount", x: CX + COL * 2, y: CY + 6360, w: 300 },
   { kind: "demo", id: "GasFee", title: "GasFee", x: CX + COL * 3, y: CY + 6360, w: 380 },
   { kind: "demo", id: "PriceChart", title: "PriceChart — via EvilCharts", x: CX, y: CY + 6660, w: 520 },
+  { kind: "demo", id: "QRCode", title: "QRCode — via qrcode", x: CX + COL + 160, y: CY + 6660, w: 300 },
 
   // ── Zone: Trading interface imports (DeFi-Triangle-Learn) ───
   { kind: "label", id: "z-trading-learn", title: "Trading interface — Learn imports", x: CX, y: CY + 7040 },

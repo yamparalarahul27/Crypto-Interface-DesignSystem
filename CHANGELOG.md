@@ -40,10 +40,16 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Added
 
+- **QRCode** — receive-address composition (Batch 3 deferred). Uses the
+  `qrcode` npm package and lives in `src/components/QRCode/` (same
+  composition-tier pattern as PriceChart — not portable-registry).
+  Theme-aware SVG (CSS vars) + CIDS AddressChip for copy/explorer.
+  Enters as `draft @ 0.9.0`. SeedPhrase remains deferred.
+
 - **ContextMenu** — right-click / long-press menu (Batch 2 deferred).
   Same `MenuItem` data shape as Menu; Radix ContextMenu for pointer
-  positioning + keyboard. Enters as `draft @ 0.9.0`. QRCode still
-  needs a dependency decision; SeedPhrase remains conditional.
+  positioning + keyboard. Enters as `draft @ 0.9.0`. SeedPhrase remains
+  conditional.
 
 - **Canvas search + permalinks** — ⌘K / Ctrl+K (and a HUD "search"
   button) opens a filterable jump list of demos and iframe frames;

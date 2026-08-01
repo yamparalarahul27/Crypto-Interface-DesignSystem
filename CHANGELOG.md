@@ -51,6 +51,17 @@ bullets under the release's buckets, prefixed with the component name.
   tap (token-driven CSS), highlights tokens named in the component's
   `.doc.md`, and surfaces the doc's reduced-motion note.
 
+- **Interior.dev as a standing reference** —
+  [`docs/references/interior.md`](docs/references/interior.md) maps
+  ~54 micro-interactions to CIDS (covered / high-value Web3 /
+  skip), records the `motion` portability constraint, and encodes
+  Interior’s three failures (no jump · interruptible · reduced-motion
+  destination). Wired into
+  [`cids-contributing.md`](docs/cids-contributing.md) “Before you invent”,
+  the gap tracker, and the roadmap reference bar so agents check it
+  before proposing feedback/async/gesture components.
+
+
 - **Trading interface imports from DeFi-Triangle-Learn** — five new
   portable CIDS components, all entering as `draft @ 0.9.0`:
   **OrderBook** (bid/ask depth with tick aggregation, view modes,

@@ -61,11 +61,11 @@ component (polish / a11y / tests):
 
 | Interior | Why it fits crypto / CIDS | Suggested home |
 |---|---|---|
-| `hold-to-confirm` / `long-press` | Destructive / irreversible (revoke, disconnect forever) | DS primitive |
-| `loading-button` | Width-stable Connect → Signing → … | Button enhancement or atom |
-| `inline-validation` | Amount / address / handle errors next to the field | Pattern + Input affordance |
-| `otp-input` | Wallet connect codes, 2FA-ish flows | DS primitive |
-| `wizard-steps` / `task-steps` | Onboarding, multi-step send | Pattern or DS |
+| `hold-to-confirm` / `long-press` | **HoldToConfirm** (shipped) | — |
+| `loading-button` | **LoadingButton** (shipped) | — |
+| `inline-validation` | **InlineValidation** (shipped) | — |
+| `otp-input` | **OTPInput** (shipped) | — |
+| `wizard-steps` / `task-steps` | **WizardSteps** (shipped) | — |
 | `live-activity` | Tx lifecycle strip ideas next to TxStatus | Pattern / TxStatus polish |
 | `streaming-text` | Agent / status copy that arrives over time | Composition if motion needed |
 | `new-items-pill` | Feed / activity “N new” | DS or feed pattern |

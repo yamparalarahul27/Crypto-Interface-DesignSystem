@@ -40,6 +40,14 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Added
 
+- **Interior-inspired interaction batch** (`draft @ 0.9.0`) — four
+  portable atoms from the Interior checklist, reimplemented CSS-only
+  (no `motion`): **HoldToConfirm** (press-and-hold for irreversible
+  actions), **InlineValidation** (reserved-height hint ↔ error on
+  Input), **OTPInput** (verify / connect code cells with paste),
+  **WizardSteps** (rail + fixed panel for send / onboarding). Completes
+  the Interior-inspired gaps row alongside LoadingButton.
+
 - **LoadingButton** (`draft @ 0.9.0`) — async action button with
   width-stable idle → pending → success|error → idle faces (Interior
   [loading-button](https://www.interior.dev/docs/loading-button)

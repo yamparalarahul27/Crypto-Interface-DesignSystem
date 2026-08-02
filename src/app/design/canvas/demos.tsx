@@ -25,6 +25,10 @@ import {
   Tooltip,
   Button,
   LoadingButton,
+  HoldToConfirm,
+  OTPInput,
+  InlineValidation,
+  WizardSteps,
   IconButton,
   Badge,
   Input,
@@ -148,6 +152,60 @@ function LoadingButtonDemo() {
         Publish
       </LoadingButton>
     </div>
+  );
+}
+
+function HoldToConfirmDemo() {
+  return (
+    <HoldToConfirm
+      duration={1200}
+      confirmLabel="Disconnected"
+      onConfirm={() => {}}
+    >
+      Hold to disconnect
+    </HoldToConfirm>
+  );
+}
+
+function OTPInputDemo() {
+  const [err, setErr] = useState(false);
+  return (
+    <OTPInput
+      length={6}
+      hint="Paste the whole code into any cell."
+      error={err}
+      errorMessage="That code is wrong."
+      onComplete={(code) => setErr(code !== "123456")}
+      onChange={() => setErr(false)}
+    />
+  );
+}
+
+function InlineValidationDemo() {
+  const [addr, setAddr] = useState("");
+  return (
+    <InlineValidation
+      label="Recipient"
+      value={addr}
+      onChange={setAddr}
+      validate={(v) => (v.trim().length >= 8 ? null : "Enter a wallet address")}
+      hint="Paste a Solana address."
+      debounce={200}
+    />
+  );
+}
+
+function WizardStepsDemo() {
+  return (
+    <WizardSteps
+      height={120}
+      finishLabel="Send"
+      onComplete={() => {}}
+      steps={[
+        { id: "amount", label: "Amount", content: <p className="text-fg-muted">Enter how much to send.</p> },
+        { id: "review", label: "Review", content: <p className="text-fg-muted">Confirm recipient + fee.</p> },
+      ]}
+    />
   );
 }
 
@@ -821,6 +879,10 @@ export const DEMOS: Record<string, () => ReactNode> = {
     </div>
   ),
   LoadingButton: LoadingButtonDemo,
+  HoldToConfirm: HoldToConfirmDemo,
+  OTPInput: OTPInputDemo,
+  InlineValidation: InlineValidationDemo,
+  WizardSteps: WizardStepsDemo,
   IconButton: () => (
     <div className="flex items-center gap-2">
       <IconButton aria-label="Settings" variant="secondary">⚙</IconButton>

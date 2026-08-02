@@ -83,10 +83,11 @@ export const CANVAS_ITEMS: CanvasItemDef[] = [
   { kind: "demo", id: "PatternTxFlow", title: "P2 · Transaction flow", x: CX + COL + 80, y: CY + 3620, w: 420 },
   { kind: "demo", id: "PatternFormRow", title: "P3 · Form row", x: CX + COL * 2 + 160, y: CY + 3620, w: 380 },
   { kind: "demo", id: "PatternMarketList", title: "P4 · Market list", x: CX, y: CY + 4040, w: 520 },
+  { kind: "demo", id: "PatternSwapReceive", title: "P5 · Swap / receive ticket", x: CX + COL + 80, y: CY + 4040, w: 440 },
 
   // Templates (Phase 6b) — the range claim, framed live
-  { kind: "iframe", id: "tpl-dapp", title: "Template — simple dApp", x: CX + COL * 2 + 160, y: CY + 4040, w: 400, h: 640, src: "/design/templates/simple-dapp" },
-  { kind: "iframe", id: "tpl-exchange", title: "Template — exchange (compact)", x: CX + COL * 3 + 240, y: CY + 4040, w: 560, h: 640, src: "/design/templates/exchange" },
+  { kind: "iframe", id: "tpl-dapp", title: "Template — simple dApp", x: CX + COL * 2 + 200, y: CY + 4040, w: 400, h: 640, src: "/design/templates/simple-dapp" },
+  { kind: "iframe", id: "tpl-exchange", title: "Template — exchange (compact)", x: CX + COL * 3 + 280, y: CY + 4040, w: 560, h: 640, src: "/design/templates/exchange" },
 
   // ── Zone: Primitives batch 2 (component-gaps pass) ───────────
   { kind: "label", id: "z-primitives-2", title: "Primitives — containment & forms", x: CX, y: CY + 4760 },

@@ -13,16 +13,22 @@ import {
   DataTable,
   Dialog,
   EmptyState,
+  GasFee,
   Input,
+  Lane,
+  LoadingButton,
   NetworkBadge,
   PriceChange,
   SectionSkeleton,
+  SlippageControl,
   Sparkline,
   ToastProvider,
   TokenIcon,
+  TokenSelect,
   TxStatus,
   useToast,
   type Column,
+  type TokenOption,
   type TxState,
 } from "@/design-system";
 
@@ -247,9 +253,153 @@ function MarketListDemo() {
   );
 }
 
+// ── P5 · Swap / receive ticket ───────────────────────────────────────
+const TICKET_TOKENS: TokenOption[] = [
+  { id: "sol", symbol: "SOL", name: "Solana", balance: "12.40" },
+  { id: "usdc", symbol: "USDC", name: "USD Coin", balance: "240.00" },
+  { id: "jup", symbol: "JUP", name: "Jupiter", balance: "880.2" },
+];
+
+function SwapReceiveInner() {
+  const toast = useToast();
+  const [mode, setMode] = useState<"swap" | "receive">("swap");
+  const [from, setFrom] = useState<string | undefined>("sol");
+  const [to, setTo] = useState<string | undefined>("usdc");
+  const [amt, setAmt] = useState("1.25");
+  const [bps, setBps] = useState(50);
+  const [tx, setTx] = useState<TxState>("idle");
+  const [review, setReview] = useState(false);
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+  useEffect(() => () => timers.current.forEach(clearTimeout), []);
+
+  const submit = async () => {
+    setReview(false);
+    setTx("signing");
+    await new Promise<void>((r) => {
+      timers.current.push(setTimeout(r, 900));
+    });
+    setTx("pending");
+    await new Promise<void>((r) => {
+      timers.current.push(setTimeout(r, 1200));
+    });
+    setTx("confirmed");
+    toast({
+      title: "Swap confirmed",
+      description: `${amt} ${from?.toUpperCase() ?? ""} → ${to?.toUpperCase() ?? ""}`,
+      tone: "buy",
+    });
+  };
+
+  return (
+    <div>
+      <Lane
+        options={[
+          { value: "swap", label: "Swap" },
+          { value: "receive", label: "Receive" },
+        ]}
+        value={mode}
+        onChange={setMode}
+      />
+      {mode === "swap" ? (
+        <div className="mt-3 space-y-3">
+          <div className="flex flex-wrap items-center gap-2">
+            <TokenSelect
+              tokens={TICKET_TOKENS}
+              value={from}
+              onValueChange={setFrom}
+              aria-label="You pay"
+              className="min-w-[7.5rem]"
+            />
+            <span className="text-xs text-fg-subtle">→</span>
+            <TokenSelect
+              tokens={TICKET_TOKENS}
+              value={to}
+              onValueChange={setTo}
+              aria-label="You receive"
+              className="min-w-[7.5rem]"
+            />
+          </div>
+          <AmountInput symbol="SOL" value={amt} onValueChange={setAmt} />
+          <SlippageControl value={bps} onValueChange={setBps} />
+          <GasFee amount="0.000005 SOL" usd="≈ $0.0009" />
+          <div className="flex flex-wrap items-center gap-2">
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => setReview(true)}
+              disabled={!from || !to || !amt}
+            >
+              Review
+            </Button>
+            <LoadingButton
+              onAction={submit}
+              pendingLabel="Signing…"
+              successLabel="Submitted"
+              disabled={!from || !to || !amt || tx === "signing" || tx === "pending"}
+            >
+              Swap
+            </LoadingButton>
+          </div>
+          <TxStatus state={tx} detail={tx === "idle" ? undefined : "5D3k…Wq"} />
+          <Dialog
+            open={review}
+            onOpenChange={setReview}
+            title="Review swap"
+            description="Confirm in your wallet after this step."
+            footer={
+              <>
+                <Button onClick={() => setReview(false)}>Cancel</Button>
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    setReview(false);
+                    void submit();
+                  }}
+                >
+                  Confirm
+                </Button>
+              </>
+            }
+          >
+            <div className="space-y-2 text-xs text-fg-muted">
+              <p>
+                {amt} {from?.toUpperCase()} → {to?.toUpperCase()}
+              </p>
+              <p>Slippage {bps / 100}%</p>
+              <NetworkBadge name="Solana" />
+            </div>
+          </Dialog>
+        </div>
+      ) : (
+        <div className="mt-3 space-y-3">
+          <NetworkBadge name="Solana" />
+          <AddressChip address="7xKtF2mPqR8vN3wLbJd5cYhT6gAeS4uZ1oXnE9fQ2rM" />
+          <p className="text-[11px] text-fg-muted">
+            Copy the address to receive. Pair with the QRCode composition in product
+            UIs — it stays outside this portable pattern.
+          </p>
+        </div>
+      )}
+      <DoDont
+        dos={["one ticket, two modes (Lane)", "Slippage above confirm; LoadingButton for async"]}
+        donts={["QR inside the portable pattern", "call it Swapped before TxStatus confirmed"]}
+      />
+    </div>
+  );
+}
+
+function SwapReceiveDemo() {
+  return (
+    <ToastProvider>
+      <SwapReceiveInner />
+    </ToastProvider>
+  );
+}
+
 export const PATTERN_DEMOS: Record<string, () => ReactNode> = {
   PatternStates: StatesCatalogDemo,
   PatternTxFlow: TxFlowDemo,
   PatternFormRow: FormRowDemo,
   PatternMarketList: MarketListDemo,
+  PatternSwapReceive: SwapReceiveDemo,
 };

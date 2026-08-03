@@ -320,9 +320,10 @@ is guard-pinned; all five verticals pass the axe×4-themes matrix
 ### Phase 6 — Patterns & templates <sub>(W3/W4/R4 · composition)</sub>
 
 - [x] **Patterns shipped** — `src/design-system/PATTERNS.md` (contract:
-      Problem·Composition·States·Do/Don't·Code) with four entries:
+      Problem·Composition·States·Do/Don't·Code) with five entries:
       states catalog, tx flow (heuristics #1/#2 encoded), form row,
-      market list — each a live canvas frame in the Patterns zone.
+      market list, **swap/receive ticket** (Batch 5 + LoadingButton
+      composed) — each a live canvas frame in the Patterns zone.
 - [x] **Do/Don't pairs** rendered inside every pattern frame
       (✓ buy / ✗ sell, glyph + word — never color alone).
 - [x] **Content guidelines** in PATTERNS.md: the action-verb table

@@ -40,6 +40,13 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Added
 
+- **P5 · Swap / receive ticket pattern** — live canvas frame composing
+  Lane (Swap | Receive) with TokenSelect, AmountInput, SlippageControl,
+  GasFee, LoadingButton, Dialog review, TxStatus, NetworkBadge, and
+  AddressChip. Documented in `PATTERNS.md`. QRCode stays composition-tier
+  (called out as an optional product companion, not in the portable
+  pattern).
+
 - **Interior-inspired interaction batch** (`draft @ 0.9.0`) — four
   portable atoms from the Interior checklist, reimplemented CSS-only
   (no `motion`): **HoldToConfirm** (press-and-hold for irreversible

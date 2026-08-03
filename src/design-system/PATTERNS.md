@@ -152,6 +152,62 @@ const cols: Column<Row>[] = [
 <DataTable columns={cols} rows={rows} rowKey={(r) => r.sym} caption="Markets" />
 ```
 
+## P5 · Swap / receive ticket
+
+**Problem.** Every DeFi UI rebuilds the same ticket: pick tokens, set
+amount + slippage, confirm async, or show an address to fund a wallet.
+Hand-rolled tickets drift on verb choice, skip review, or jump layout
+when status changes.
+
+**Composition.** `Lane` (Swap | Receive) · **Swap:** `TokenSelect` ×2 ·
+`AmountInput` · `SlippageControl` · `LoadingButton` (or `Button` →
+`Dialog` review) · `TxStatus` · `GasFee` · **Receive:** `NetworkBadge` ·
+`AddressChip` (copy). Optional companion outside this pattern:
+`QRCode` composition (`src/components/`) — not portable-registry, so it
+stays off the Patterns zone contract.
+
+**States.**
+- Swap: idle → reviewing → signing → pending → confirmed | failed
+- Receive: idle (address visible) · copied (AddressChip confirmation)
+
+**Do / Don't.**
+- ✓ Do keep Swap and Receive as one ticket with a mode switch — users
+  learn one surface.
+- ✗ Don't put QR in the portable pattern — pair QRCode only in
+  product/composition layers.
+- ✓ Do put Slippage above the confirm control; use LoadingButton for
+  the async face (Sign → Signing… → Signed).
+- ✗ Don't declare "Swapped" before `TxStatus` reaches confirmed.
+- ✓ Do use exact verbs: **Swap** / **Receive** on the mode; **Confirm**
+  in the wallet step (see action verbs below).
+
+**Code.**
+
+```tsx
+<Lane
+  options={[{ value: "swap", label: "Swap" }, { value: "receive", label: "Receive" }]}
+  value={mode}
+  onChange={setMode}
+/>
+{mode === "swap" ? (
+  <>
+    <TokenSelect tokens={list} value={from} onValueChange={setFrom} aria-label="You pay" />
+    <TokenSelect tokens={list} value={to} onValueChange={setTo} aria-label="You receive" />
+    <AmountInput symbol="SOL" value={amt} onValueChange={setAmt} />
+    <SlippageControl value={bps} onValueChange={setBps} />
+    <LoadingButton onAction={submit} pendingLabel="Signing…" successLabel="Submitted">
+      Swap
+    </LoadingButton>
+    <TxStatus state={tx} />
+  </>
+) : (
+  <>
+    <NetworkBadge name="Solana" />
+    <AddressChip address={wallet} />
+  </>
+)}
+```
+
 ---
 
 ## Content guidelines — the action verbs

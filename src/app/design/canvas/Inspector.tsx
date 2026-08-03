@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { CANVAS_ITEMS } from "./items";
 import { CopyButton, renderDoc } from "../docRenderer";
+import { DEMO_STATE_OPTIONS } from "./demoStates";
 
 // ── panel ─────────────────────────────────────────────────────────────
 
@@ -10,17 +11,22 @@ export function Inspector({
   selected,
   docs,
   sources,
+  demoState,
+  onDemoStateChange,
   onClose,
 }: {
   selected: string;
   docs: Record<string, string>;
   sources: Record<string, string>;
+  demoState?: string;
+  onDemoStateChange?: (state: string) => void;
   onClose: () => void;
 }) {
   const item = CANVAS_ITEMS.find((x) => x.id === selected);
   const doc = docs[selected];
   const source = sources[selected];
   const [tab, setTab] = useState<"doc" | "code">("doc");
+  const states = DEMO_STATE_OPTIONS[selected];
 
   return (
     <div className="pointer-events-auto flex max-h-[calc(100dvh-96px)] w-80 flex-col rounded-sm border border-outline bg-surface-page/95">
@@ -58,6 +64,28 @@ export function Inspector({
           ×
         </button>
       </div>
+      {states && onDemoStateChange && (
+        <div className="flex flex-none flex-wrap gap-1 border-b border-outline-variant px-3 py-2">
+          <span className="mr-1 self-center font-mono text-[9px] uppercase tracking-wider text-fg-subtle">
+            State
+          </span>
+          {states.map((s) => (
+            <button
+              key={s}
+              type="button"
+              aria-pressed={demoState === s}
+              onClick={() => onDemoStateChange(s)}
+              className={
+                demoState === s
+                  ? "rounded-chip bg-brand px-2 py-0.5 font-mono text-[10px] text-on-brand"
+                  : "rounded-chip border border-outline-variant bg-surface-dim px-2 py-0.5 font-mono text-[10px] text-fg-muted hover:text-fg"
+              }
+            >
+              {s}
+            </button>
+          ))}
+        </div>
+      )}
       <div className="min-h-0 flex-1 space-y-2 overflow-y-auto p-3">
         {doc && source && tab === "code" ? (
           <>

@@ -40,6 +40,11 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Added
 
+- **Canvas state switcher** — selecting a demo that opts into
+  `DEMO_STATE_OPTIONS` shows Inspector chips (default / disabled /
+  loading / empty / error / …). Hover stays live CSS; compositional
+  states are switched. Unselected frames keep their multi-pose showcase.
+
 - **P5 · Swap / receive ticket pattern** — live canvas frame composing
   Lane (Swap | Receive) with TokenSelect, AmountInput, SlippageControl,
   GasFee, LoadingButton, Dialog review, TxStatus, NetworkBadge, and

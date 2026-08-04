@@ -68,7 +68,7 @@ PR that added this doc; file:line refs preserved where load-bearing.
 | 9 | Tests don't verify the promises (no axe, keyboard, theme-render, reduced-motion) | vs `CONVENTIONS.md:95-98` |
 | 10 | Theme Studio 1/N — radius tokens only, no editor | `CHANGELOG.md:35-40` |
 | 11 | `check:polish` path-brittle — new components silently escape | `check-polish.mjs:56-93` |
-| 12 | Canvas: no search, no permalinks, no state switcher, desktop-only | `CanvasApp.tsx:77,237` |
+| 12 | Canvas: desktop-only (search + permalinks + state switcher shipped) | mobile gesture polish deferred |
 | 13 | No per-component versioning / unused deprecation bucket | `CONVENTIONS.md:52,100`, `CHANGELOG.md:20` |
 | 14 | Orphans muddy the boundary: `ui/{Skeleton,Tooltip}`, `agent-elements/` (dup `cn`), guard-exempt `evilcharts` | `src/components/*` |
 | 15 | README says 11 components; there are 12 (TokenIcon omitted, still draft) | `README.md:23-24` |
@@ -384,7 +384,7 @@ phases rather than a phase of its own):
 
 | Surface | Now | Target |
 |---|---|---|
-| Canvas | pan/zoom, layers, doc+code inspector, Theme Studio, **⌘K search**, **`?item=` permalinks** | + state switcher (default/hover/loading/empty/error per demo); mobile gesture polish |
+| Canvas | pan/zoom, layers, doc+code inspector, Theme Studio, **⌘K search**, **`?item=` permalinks**, **state switcher** (opt-in chips) | mobile gesture polish |
 | `/design` gallery | index linking into per-component pages | category grouping, "open in canvas" deep links |
 | **`/design/<component>` pages** | live demo + density · install · when-to-use · **live token swatches** · **state matrix** · TOC · doc · source · **motion tap-to-replay** · canvas permalink | + expand state matrices · “when not to use” |
 | Docs shape | 7 sections + `Version:` | + **"When not to use"** where a sibling exists · Do/Don't where a pattern exists |

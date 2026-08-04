@@ -4,7 +4,8 @@
 // design-system exports (the pattern contract). Registered into DEMOS
 // via the spread in demos.tsx; kept separate for the 700-LOC cap.
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { DemoFn, DemoOpts } from "./demoStates";
 import {
   AddressChip,
   AmountInput,
@@ -57,17 +58,29 @@ function DoDont({ dos, donts }: { dos: string[]; donts: string[] }) {
 // ── P1 · States catalog ──────────────────────────────────────────────
 type SurfaceState = "loading" | "loaded" | "empty" | "error" | "offline";
 
-function StatesCatalogDemo() {
-  const [state, setState] = useState<SurfaceState>("loading");
+function StatesCatalogDemo({ state: external }: DemoOpts = {}) {
+  const [internal, setInternal] = useState<SurfaceState>("loading");
+  const controlled =
+    external === "loading" ||
+    external === "loaded" ||
+    external === "empty" ||
+    external === "error" ||
+    external === "offline"
+      ? external
+      : null;
+  const state = controlled ?? internal;
+  const setState = setInternal;
   return (
     <div>
-      <div className="mb-3 flex flex-wrap gap-1">
-        {(["loading", "loaded", "empty", "error", "offline"] as const).map((s) => (
-          <Button key={s} size="sm" variant={state === s ? "primary" : "ghost"} onClick={() => setState(s)}>
-            {s}
-          </Button>
-        ))}
-      </div>
+      {!controlled && (
+        <div className="mb-3 flex flex-wrap gap-1">
+          {(["loading", "loaded", "empty", "error", "offline"] as const).map((s) => (
+            <Button key={s} size="sm" variant={state === s ? "primary" : "ghost"} onClick={() => setState(s)}>
+              {s}
+            </Button>
+          ))}
+        </div>
+      )}
       {state === "offline" && (
         <div className="mb-2 flex items-center gap-2 rounded-chip bg-warning-surface px-2 py-1 text-[11px] text-warning">
           <Badge tone="warning">offline</Badge> Reconnecting — showing last-good data.
@@ -396,7 +409,7 @@ function SwapReceiveDemo() {
   );
 }
 
-export const PATTERN_DEMOS: Record<string, () => ReactNode> = {
+export const PATTERN_DEMOS: Record<string, DemoFn> = {
   PatternStates: StatesCatalogDemo,
   PatternTxFlow: TxFlowDemo,
   PatternFormRow: FormRowDemo,

@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState } from "react";
 import { PATTERN_DEMOS } from "./patternDemos";
+import type { DemoFn, DemoOpts } from "./demoStates";
 import { PriceChart, type PricePoint } from "@/components/PriceChart/PriceChart";
 import { QRCode } from "@/components/QRCode/QRCode";
 import {
@@ -331,8 +332,21 @@ function DialogDemo() {
   );
 }
 
-function SwitchDemo() {
+function SwitchDemo({ state }: DemoOpts = {}) {
   const [on, setOn] = useState(true);
+  if (state === "on" || state === "off" || state === "disabled") {
+    return (
+      <label className="flex items-center gap-3 text-sm text-fg">
+        <Switch
+          checked={state === "on"}
+          disabled={state === "disabled"}
+          onCheckedChange={() => {}}
+          aria-label="Public watchlist"
+        />
+        Public watchlist
+      </label>
+    );
+  }
   return (
     <label className="flex items-center gap-3 text-sm text-fg">
       <Switch checked={on} onCheckedChange={setOn} aria-label="Public watchlist" />
@@ -444,22 +458,35 @@ function PaginationDemo() {
   return <Pagination page={page} count={24} onPageChange={setPage} />;
 }
 
-function WalletButtonDemo() {
+function WalletButtonDemo({ state }: DemoOpts = {}) {
   const [status, setStatus] = useState<WalletStatus>("disconnected");
   const connect = () => {
     setStatus("connecting");
     setTimeout(() => setStatus("connected"), 1400);
   };
+  const controlled =
+    state === "disconnected" || state === "connecting" || state === "connected"
+      ? (state as WalletStatus)
+      : null;
+  const shown = controlled ?? status;
   return (
     <div className="flex flex-col items-start gap-3">
       <WalletButton
-        status={status}
+        status={shown}
         address="7xKtF2mPqR8vN3wLbJd5cYhT6gAeS4uZ1oXnE9fQ2rM"
-        onClick={status === "disconnected" ? connect : () => setStatus("disconnected")}
+        onClick={
+          controlled
+            ? () => {}
+            : shown === "disconnected"
+              ? connect
+              : () => setStatus("disconnected")
+        }
       />
-      <p className="text-[11px] text-fg-subtle">
-        {status === "connected" ? "click to reset the demo" : "click to walk the states"}
-      </p>
+      {!controlled && (
+        <p className="text-[11px] text-fg-subtle">
+          {shown === "connected" ? "click to reset the demo" : "click to walk the states"}
+        </p>
+      )}
     </div>
   );
 }
@@ -604,17 +631,38 @@ const MARKET_COLS: Column<MarketRow>[] = [
   { key: "trend", header: "7d", align: "right", cell: (r) => <Sparkline data={r.trend} width={64} height={20} /> },
 ];
 
-function TxStatusDemo() {
+function TxStatusDemo({ state: external }: DemoOpts = {}) {
   const [state, setState] = useState<TxState>("idle");
+  const controlled =
+    external === "idle" ||
+    external === "signing" ||
+    external === "pending" ||
+    external === "confirmed" ||
+    external === "failed"
+      ? (external as TxState)
+      : null;
   useEffect(() => {
+    if (controlled) return;
     const SEQ: TxState[] = ["idle", "signing", "pending", "confirmed"];
     const id = setInterval(
       () => setState((s) => SEQ[(SEQ.indexOf(s) + 1) % SEQ.length]),
       1800,
     );
     return () => clearInterval(id);
-  }, []);
-  return <TxStatus state={state} detail={state === "pending" ? "5D3k…Wq signature" : undefined} />;
+  }, [controlled]);
+  const shown = controlled ?? state;
+  return (
+    <TxStatus
+      state={shown}
+      detail={
+        shown === "pending"
+          ? "5D3k…Wq signature"
+          : shown === "failed"
+            ? "User rejected"
+            : undefined
+      }
+    />
+  );
 }
 
 function AmountDemo() {
@@ -788,7 +836,7 @@ function ActivityRowDemo() {
   );
 }
 
-export const DEMOS: Record<string, () => ReactNode> = {
+export const DEMOS: Record<string, DemoFn> = {
   ...PATTERN_DEMOS,
   surfaces: () => (
     <div className="grid grid-cols-3 gap-2">
@@ -869,15 +917,18 @@ export const DEMOS: Record<string, () => ReactNode> = {
   Sheet: SheetDemo,
   CommentThread: CommentsDemo,
   Onboarding: OnboardingDemo,
-  Button: () => (
-    <div className="flex flex-wrap items-center gap-2">
-      <Button variant="primary">Confirm</Button>
-      <Button>Cancel</Button>
-      <Button variant="ghost">Skip</Button>
-      <Button variant="destructive" size="sm">Remove</Button>
+  Button: ({ state } = {}) =>
+    state === "disabled" ? (
       <Button disabled>Disabled</Button>
-    </div>
-  ),
+    ) : (
+      <div className="flex flex-wrap items-center gap-2">
+        <Button variant="primary">Confirm</Button>
+        <Button>Cancel</Button>
+        <Button variant="ghost">Skip</Button>
+        <Button variant="destructive" size="sm">Remove</Button>
+        <Button disabled>Disabled</Button>
+      </div>
+    ),
   LoadingButton: LoadingButtonDemo,
   HoldToConfirm: HoldToConfirmDemo,
   OTPInput: OTPInputDemo,
@@ -900,12 +951,19 @@ export const DEMOS: Record<string, () => ReactNode> = {
       <Badge tone="info">bridged</Badge>
     </div>
   ),
-  Input: () => (
-    <div className="space-y-2">
-      <Input aria-label="Search" placeholder="Search tokens…" />
+  Input: ({ state } = {}) =>
+    state === "invalid" ? (
       <Input aria-label="Handle" invalid defaultValue="taken_handle" />
-    </div>
-  ),
+    ) : state === "disabled" ? (
+      <Input aria-label="Search" disabled placeholder="Search tokens…" />
+    ) : state === "default" ? (
+      <Input aria-label="Search" placeholder="Search tokens…" />
+    ) : (
+      <div className="space-y-2">
+        <Input aria-label="Search" placeholder="Search tokens…" />
+        <Input aria-label="Handle" invalid defaultValue="taken_handle" />
+      </div>
+    ),
   Dialog: DialogDemo,
   AddressChip: () => (
     <AddressChip
@@ -913,13 +971,20 @@ export const DEMOS: Record<string, () => ReactNode> = {
       href="https://solscan.io/token/x"
     />
   ),
-  PegBadge: () => (
-    <div className="flex flex-wrap gap-2">
+  PegBadge: ({ state } = {}) =>
+    state === "on-peg" ? (
       <PegBadge deviationBps={4} />
+    ) : state === "drifting" ? (
       <PegBadge deviationBps={-38} />
+    ) : state === "depegged" ? (
       <PegBadge deviationBps={-230} />
-    </div>
-  ),
+    ) : (
+      <div className="flex flex-wrap gap-2">
+        <PegBadge deviationBps={4} />
+        <PegBadge deviationBps={-38} />
+        <PegBadge deviationBps={-230} />
+      </div>
+    ),
   NetworkBadge: () => (
     <div className="flex gap-2">
       <NetworkBadge name="Solana" iconSrc="https://cdn.defitriangle.xyz/logos/network/solana/32.png" />
@@ -939,13 +1004,20 @@ export const DEMOS: Record<string, () => ReactNode> = {
   AccountMenu: AccountMenuDemo,
   ActivityRow: ActivityRowDemo,
   RollingNumber: RollingDemo,
-  PriceChange: () => (
-    <div className="flex items-center gap-4">
+  PriceChange: ({ state } = {}) =>
+    state === "up" ? (
       <PriceChange value={9.4} />
+    ) : state === "down" ? (
       <PriceChange value={-4.2} />
+    ) : state === "flat" ? (
       <PriceChange value={0.04} suffix=" bps" precision={2} />
-    </div>
-  ),
+    ) : (
+      <div className="flex items-center gap-4">
+        <PriceChange value={9.4} />
+        <PriceChange value={-4.2} />
+        <PriceChange value={0.04} suffix=" bps" precision={2} />
+      </div>
+    ),
   StatCell: () => (
     <div className="grid grid-cols-3 divide-x divide-outline-variant rounded-card border border-outline-variant bg-surface-container">
       <StatCell label="Market cap" value="$1.09B" />
@@ -979,11 +1051,15 @@ export const DEMOS: Record<string, () => ReactNode> = {
       section two
     </div>
   ),
-  EmptyState: () => (
+  EmptyState: ({ state } = {}) => (
     <EmptyState
       title="No watchers yet"
       hint="Quiet tide. First one in sets the current."
-      action={<Button variant="primary" size="sm">Watch JUP</Button>}
+      action={
+        state === "no-action" ? undefined : (
+          <Button variant="primary" size="sm">Watch JUP</Button>
+        )
+      }
     />
   ),
   Menu: () => (
@@ -1044,20 +1120,53 @@ export const DEMOS: Record<string, () => ReactNode> = {
       ]}
     />
   ),
-  Alert: () => (
-    <div className="space-y-3">
-      <Alert tone="warning" title="High price impact">
-        This trade moves the pool price by 4.2%.
-      </Alert>
-      <Alert
-        tone="error"
-        title="Feed unavailable"
-        action={<Button size="sm" variant="ghost">Retry</Button>}
-      >
-        Prices may be stale.
-      </Alert>
-    </div>
-  ),
+  Alert: ({ state } = {}) => {
+    const tone =
+      state === "warning" || state === "error" || state === "info" || state === "success"
+        ? state
+        : null;
+    if (tone) {
+      return (
+        <Alert
+          tone={tone}
+          title={
+            tone === "warning"
+              ? "High price impact"
+              : tone === "error"
+                ? "Feed unavailable"
+                : tone === "info"
+                  ? "Network fee updated"
+                  : "Swap confirmed"
+          }
+          action={
+            tone === "error" ? (
+              <Button size="sm" variant="ghost">Retry</Button>
+            ) : undefined
+          }
+        >
+          {tone === "warning"
+            ? "This trade moves the pool price by 4.2%."
+            : tone === "error"
+              ? "Prices may be stale."
+              : undefined}
+        </Alert>
+      );
+    }
+    return (
+      <div className="space-y-3">
+        <Alert tone="warning" title="High price impact">
+          This trade moves the pool price by 4.2%.
+        </Alert>
+        <Alert
+          tone="error"
+          title="Feed unavailable"
+          action={<Button size="sm" variant="ghost">Retry</Button>}
+        >
+          Prices may be stale.
+        </Alert>
+      </div>
+    );
+  },
   Textarea: () => (
     <div className="space-y-3">
       <Textarea aria-label="Note" placeholder="Add a note to this transaction…" />

@@ -11,6 +11,7 @@ import { LayersPanel } from "./LayersPanel";
 import { Inspector } from "./Inspector";
 import { DEMOS } from "./demos";
 import { CanvasSearch } from "./CanvasSearch";
+import { defaultDemoState } from "./demoStates";
 
 type View = { x: number; y: number; s: number };
 
@@ -39,6 +40,7 @@ export function CanvasApp({
   const [panning, setPanning] = useState(false);
 
   const [selected, setSelected] = useState<string | null>(null);
+  const [demoState, setDemoState] = useState<string | undefined>();
   const [layersOpen, setLayersOpen] = useState(true);
   const [studioOpen, setStudioOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -92,6 +94,7 @@ export function CanvasApp({
 
   const zoomToItem = (id: string, syncUrl = true) => {
     setSelected(id);
+    setDemoState(defaultDemoState(id));
     if (syncUrl) writePermalink(id);
     const def = CANVAS_ITEMS.find((i) => i.id === id);
     const el = itemEls.current.get(id);
@@ -131,11 +134,13 @@ export function CanvasApp({
 
   const clearSelection = () => {
     setSelected(null);
+    setDemoState(undefined);
     writePermalink(null);
   };
 
   const selectFrame = (id: string) => {
     setSelected(id);
+    setDemoState(defaultDemoState(id));
     writePermalink(id);
   };
 
@@ -239,7 +244,9 @@ export function CanvasApp({
             >
               <div className={cn("mb-1.5 font-mono text-[11px]", selected === item.id ? "text-brand" : "text-fg-subtle")}>{item.title}</div>
               <div className="rounded-sm border border-outline-variant bg-surface-page p-4">
-                {Demo ? <Demo /> : null}
+                {Demo ? (
+                  <Demo state={selected === item.id ? demoState : undefined} />
+                ) : null}
               </div>
             </div>
           );
@@ -294,7 +301,15 @@ export function CanvasApp({
 
       {selected && (
         <div className="pointer-events-none absolute right-4 top-16 z-[var(--z-raised)]">
-          <Inspector key={selected} selected={selected} docs={docs} sources={sources} onClose={clearSelection} />
+          <Inspector
+            key={selected}
+            selected={selected}
+            docs={docs}
+            sources={sources}
+            demoState={demoState}
+            onDemoStateChange={setDemoState}
+            onClose={clearSelection}
+          />
         </div>
       )}
 

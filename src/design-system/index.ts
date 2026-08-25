@@ -115,4 +115,5 @@ export {
 } from "./SlippageControl";
 export { AccountMenu } from "./AccountMenu";
 export { ActivityRow, type ActivityStatus } from "./ActivityRow";
-export { ID_HUES, hueFor, hueGradient, type IdHue } from "./identity";
+export { WalletAvatar } from "./WalletAvatar";
+export { ID_HUES, hueFor, hueGradient, shardsFor, blocksFor, type IdHue } from "./identity";

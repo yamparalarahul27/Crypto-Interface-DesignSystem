@@ -12,6 +12,8 @@ export type DemoFn = (opts?: DemoOpts) => ReactNode;
 
 /** Per-demo chip labels. First entry is the default when selected. */
 export const DEMO_STATE_OPTIONS: Record<string, readonly string[]> = {
+  Avatar: ["styles", "network", "connection", "sizes", "hues"],
+  WalletAvatar: ["styles", "network", "connection", "sizes"],
   Button: ["default", "disabled"],
   Input: ["default", "invalid", "disabled"],
   Alert: ["warning", "error", "info", "success"],

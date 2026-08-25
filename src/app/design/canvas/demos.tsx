@@ -7,6 +7,7 @@ import { PriceChart, type PricePoint } from "@/components/PriceChart/PriceChart"
 import { QRCode } from "@/components/QRCode/QRCode";
 import {
   Avatar,
+  WalletAvatar,
   TokenIcon,
   AvatarGroup,
   TokenChip,
@@ -836,6 +837,15 @@ function ActivityRowDemo() {
   );
 }
 
+const WALLET_SAMPLES = [
+  { a: "7xKXtg2CW3hqPzKZ4rE9mQvNbYd1sVfLpR8aUj5nHmTc", c: "Solana" },
+  { a: "0x71C7656EC7ab88b098defB751B7401B5f6d8976F", c: "Ethereum" },
+  { a: "0x2170Ed0880ac9A755fd29B2688956BD959F933F8", c: "Polygon" },
+  { a: "0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B", c: "Optimism" },
+  { a: "0xdAC17F958D2ee523a2206206994597C13D831ec7", c: "Arbitrum" },
+  { a: "0x514910771AF9Ca656af840dff83E8264EcF986CA", c: "Base" },
+];
+
 export const DEMOS: Record<string, DemoFn> = {
   ...PATTERN_DEMOS,
   surfaces: () => (
@@ -869,15 +879,147 @@ export const DEMOS: Record<string, DemoFn> = {
       ))}
     </div>
   ),
-  Avatar: () => (
-    <div className="flex items-center gap-3">
-      <Avatar name="Mira" seed="wallet-mira" size="xs" />
-      <Avatar name="Mira" seed="wallet-mira" size="sm" />
-      <Avatar name="Mira" seed="wallet-mira" size="md" />
-      <Avatar name="Mira" seed="wallet-mira" size="lg" />
-      <Avatar name="You" you size="md" />
-    </div>
-  ),
+  Avatar: ({ state } = {}) => {
+    if (state === "network")
+      return (
+        <div className="flex flex-col gap-2.5">
+          {WALLET_SAMPLES.slice(0, 3).map((w) => (
+            <div key={w.a} className="flex items-center gap-3">
+              <Avatar
+                name={w.c}
+                seed={w.a}
+                variant="shards"
+                size="lg"
+                chain={{ name: w.c }}
+              />
+              <span className="text-xs text-fg-muted">on {w.c}</span>
+            </div>
+          ))}
+        </div>
+      );
+    if (state === "connection")
+      return (
+        <div className="flex flex-col gap-2.5">
+          {(
+            [
+              ["active", "connected & active"],
+              ["inactive", "connected & inactive"],
+              ["offline", "no connection (offline)"],
+            ] as const
+          ).map(([c, labelText]) => (
+            <div key={c} className="flex items-center gap-3">
+              <Avatar
+                name="Mira"
+                seed="wallet-mira"
+                variant="shards"
+                size="lg"
+                connection={c}
+              />
+              <span className="text-xs text-fg-muted">{labelText}</span>
+            </div>
+          ))}
+        </div>
+      );
+    if (state === "hues")
+      return (
+        <div className="flex flex-wrap items-center gap-2">
+          {ID_HUES.map((h) => (
+            <Avatar key={h} name={h} hue={h} size="md" />
+          ))}
+        </div>
+      );
+    if (state === "sizes")
+      return (
+        <div className="flex items-end gap-3">
+          {(["xs", "sm", "md", "lg"] as const).map((sz) => (
+            <Avatar key={sz} name="Mira" seed="wallet-mira" size={sz} />
+          ))}
+        </div>
+      );
+    return (
+      <div className="flex flex-col gap-3">
+        {(
+          [
+            ["initial", "initial"],
+            ["shards", "shards"],
+            ["blocks", "blocks"],
+          ] as const
+        ).map(([v, labelText]) => (
+          <div key={v} className="flex items-center gap-3">
+            {WALLET_SAMPLES.slice(0, 4).map((w) => (
+              <Avatar
+                key={w.a}
+                name={w.c}
+                seed={w.a}
+                variant={v}
+                size="lg"
+              />
+            ))}
+            <span className="text-xs text-fg-muted">{labelText}</span>
+          </div>
+        ))}
+      </div>
+    );
+  },
+  WalletAvatar: ({ state } = {}) => {
+    if (state === "network")
+      return (
+        <div className="flex flex-col gap-2.5">
+          {WALLET_SAMPLES.slice(0, 3).map((w) => (
+            <div key={w.a} className="flex items-center gap-3">
+              <WalletAvatar address={w.a} size="lg" chain={{ name: w.c }} />
+              <span className="text-xs text-fg-muted">on {w.c}</span>
+            </div>
+          ))}
+        </div>
+      );
+    if (state === "connection")
+      return (
+        <div className="flex flex-col gap-2.5">
+          {(
+            [
+              ["active", "connected & active"],
+              ["inactive", "connected & inactive"],
+              ["offline", "no connection (offline)"],
+            ] as const
+          ).map(([c, labelText]) => (
+            <div key={c} className="flex items-center gap-3">
+              <WalletAvatar
+                address={WALLET_SAMPLES[0].a}
+                size="lg"
+                connection={c}
+              />
+              <span className="text-xs text-fg-muted">{labelText}</span>
+            </div>
+          ))}
+        </div>
+      );
+    if (state === "sizes")
+      return (
+        <div className="flex items-end gap-3">
+          {(["xs", "sm", "md", "lg"] as const).map((sz) => (
+            <WalletAvatar
+              key={sz}
+              address={WALLET_SAMPLES[0].a}
+              size={sz}
+              chain={{ name: "Solana" }}
+            />
+          ))}
+        </div>
+      );
+    return (
+      <div className="flex flex-col gap-3">
+        {(["shards", "blocks"] as const).map((v) => (
+          <div key={v} className="flex items-center gap-3">
+            {WALLET_SAMPLES.slice(0, 4).map((w) => (
+              <WalletAvatar key={w.a} address={w.a} size="lg" variant={v} />
+            ))}
+            <span className="text-xs text-fg-muted">{v}</span>
+          </div>
+        ))}
+      </div>
+    );
+  },
   AvatarGroup: () => (
     <AvatarGroup
       members={[

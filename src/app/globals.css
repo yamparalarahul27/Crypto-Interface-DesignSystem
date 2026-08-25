@@ -8,6 +8,14 @@
   font-display: swap;
 }
 
+/* [data-theme="dark"] aliases the default so a *nested* element can be
+   scoped to dark explicitly (ThemeToggle's swatches show each theme's own
+   colors while the page is in another theme). <html> itself never carries
+   data-theme="dark" — absence of the attribute is dark. Selector order
+   matters to check-contrast.mjs: `:root {` must stay literal for its
+   root-block regex, and `[data-theme="dark"],` must NOT touch `{` or the
+   theme regex would re-register dark against an empty fallback. */
+[data-theme="dark"],
 :root {
   /* ── Dark token layer (market-dark palette) ──────────────────
      Single source of truth for theme colors. Components consume
@@ -559,6 +567,25 @@ html {
 }
 .animate-progress-slide {
   animation: progress-slide 1.2s var(--ease-settle) infinite;
+}
+
+/* Split-flap tile — the landing hero's letter board. One discrete flip
+   per tile, staggered by index in the component; never loops. `backwards`
+   holds the pre-flip state through the delay so the board fills in rather
+   than fading in all at once. Neutralized by the reduced-motion reset
+   below (the letters land immediately; the board still reads). */
+@keyframes flap {
+  from {
+    transform: rotateX(-88deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+}
+.animate-flap {
+  animation: flap var(--motion-settle) backwards;
 }
 
 @media (prefers-reduced-motion: reduce) {

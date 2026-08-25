@@ -2,7 +2,7 @@
 
 Status: stable
 Version: 1.0.0
-Per-person identity disc — a hue-gradient circle with the person's initial.
+Identity disc — initial, shards, or blocks; with an optional network or connection badge.
 
 ## Usage
 
@@ -34,13 +34,25 @@ import { Avatar } from "@/design-system";
 | `seed` | `string` | `name` | Value hashed to pick the hue. Pass the wallet address for stable per-person color. |
 | `hue` | `IdHue` | — | Explicit override; skips hashing. |
 | `size` | `"xs" \| "sm" \| "md" \| "lg"` | `"md"` | xs 20 · sm 28 · md 40 · lg 64 px; glyph scales with the disc. |
+| `variant` | `"initial" \| "shards" \| "blocks"` | `"initial"` | Figure style. A user setting in most wallets — persist it, don't vary per view. |
+| `chain` | `{ name: string; iconSrc?: string }` | — | Corner network marker; without `iconSrc` it shows the initial. |
+| `connection` | `"active" \| "inactive" \| "offline"` | — | Status dot. Ignored when `chain` is set — one corner, one marker. |
 | `you` | `boolean` | `false` | Forces the reserved `--id-tide` hue (the signed-in user). |
 | `className` | `string` | — | Merged via `cn` (e.g. group ring/overlap). |
+
+**Which variant.** `initial` hashes to one of 8 hues — fine for a named
+person in a feed, useless for a wallet (five addresses collide ~79% of the
+time). `shards` and `blocks` derive the whole figure from the seed instead.
+`blocks` is mirrored, so it survives 20px where `shards` blurs. For an
+address, reach for [WalletAvatar](../WalletAvatar/WalletAvatar.doc.md) — the
+same component, without inventing a display name for a hex string.
 
 ## Tokens
 
 - `--id-*` (via `hueGradient`) — the 8 identity hues. Consumed as the fill only.
 - `--color-fg-inverse` (`text-fg-inverse`) — the dark glyph color the contrast guard verifies.
+- `--color-success` — connection `active`/`inactive` · `--color-fg-subtle` — `offline`
+- `--color-surface-container` — badge ground · `--color-surface-page` — badge ring
 
 ## States
 

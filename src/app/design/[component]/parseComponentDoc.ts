@@ -158,3 +158,26 @@ export function parseComponentDoc(doc: string): {
     sections,
   };
 }
+
+/**
+ * Split a doc body into its `## ` sections. The component page renders
+ * these as accordions — the full doc in one flow was a wall of text, and
+ * Anatomy/Props/Tokens/States/Motion/A11y are reference material people
+ * scan for, not prose they read top to bottom.
+ */
+export function splitDocSections(
+  body: string,
+): { id: string; title: string; md: string }[] {
+  const out: { id: string; title: string; md: string[] }[] = [];
+  let cur: { id: string; title: string; md: string[] } | null = null;
+  for (const line of body.split("\n")) {
+    if (line.startsWith("## ")) {
+      const title = line.slice(3).trim();
+      cur = { id: kebabCase(title), title, md: [] };
+      out.push(cur);
+    } else if (cur) {
+      cur.md.push(line);
+    }
+  }
+  return out.map((s) => ({ id: s.id, title: s.title, md: s.md.join("\n").trim() }));
+}

@@ -418,6 +418,12 @@
       "description": "CIDS TxStatus v1.0.0 (stable) — docs ship with the code (TxStatus.doc.md)."
     },
     {
+      "name": "wallet-avatar",
+      "type": "registry:ui",
+      "title": "WalletAvatar",
+      "description": "CIDS WalletAvatar v0.1.0 (draft) — docs ship with the code (WalletAvatar.doc.md)."
+    },
+    {
       "name": "wallet-button",
       "type": "registry:ui",
       "title": "WalletButton",

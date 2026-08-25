@@ -1,86 +1,307 @@
+import { existsSync, readdirSync } from "node:fs";
+import { join } from "node:path";
 import type { Metadata } from "next";
-import { ID_HUES } from "@/design-system";
+import Image from "next/image";
+import Link from "next/link";
+import { CategoryPreview } from "./CategoryPreview";
+import { categorize } from "./design/canvas/zones";
+import { ThemeToggle } from "./design/ThemeToggle";
+import { SplitFlap } from "./SplitFlap";
+
+// The landing page counts and groups what actually ships: folder list and
+// Status headers come off disk at build time, categories come from the
+// canvas zones. Nothing here is a hand-maintained number.
 
 export const metadata: Metadata = {
-  title: "cids — crypto interface design system",
+  title: { absolute: "cids — crypto interface design system" },
   description:
     "Live components, tokens, and patterns for crypto UIs — inspect them on an infinite canvas.",
 };
 
-const LINKS = [
+const REPO = "https://github.com/yamparalarahul27/Crypto-Interface-DesignSystem";
+const DS = join(process.cwd(), "src/design-system");
+
+function componentNames() {
+  return readdirSync(DS).filter((n) =>
+    existsSync(join(DS, n, `${n}.doc.md`)),
+  );
+}
+
+// `image` is the swap-in point for the real graphics: drop the file under
+// public/ and set the path — the placeholder box is already the final size,
+// so nothing reflows when the art lands.
+const QUICKSTARTS: {
+  title: string;
+  body: string;
+  href: string;
+  cta: string;
+  image?: { src: string; alt: string };
+  external?: boolean;
+  beta?: boolean;
+}[] = [
   {
+    title: "Canvas",
+    body: "Pan and zoom the whole system on one surface, then select any component to read the doc it ships with.",
     href: "/design/canvas",
-    label: "Open canvas",
-    note: "desktop",
-    primary: true,
+    cta: "Open the canvas",
+    beta: true,
   },
-  { href: "/design", label: "Component gallery", note: "mobile-friendly", primary: false },
-  { href: "/design/feed", label: "Live demo screen", note: "the system as an app", primary: false },
-  { href: "/design/templates/simple-dapp", label: "Template: simple dApp", note: "the consumer end", primary: false },
-  { href: "/design/templates/exchange", label: "Template: exchange", note: "compact density terminal", primary: false },
-] as const;
+  {
+    title: "Install",
+    body: "Point the shadcn CLI at the registry and the component lands in your repo — source, doc, and cross-deps.",
+    href: `${REPO}/blob/main/docs/cids-quickstart.md`,
+    cta: "Read the quickstart",
+    external: true,
+  },
+  {
+    title: "Templates",
+    body: "Both ends of the spectrum, composed from the same tokens: a consumer dApp and a compact-density exchange.",
+    href: "/design/templates/simple-dapp",
+    cta: "Open a template",
+  },
+  {
+    title: "For agents",
+    body: "A zero-dependency MCP server over the registry — an agent gets the spec and the source in one call.",
+    href: `${REPO}/blob/main/docs/cids-contributing.md`,
+    cta: "Wire up the server",
+    external: true,
+  },
+];
+
+const NAV = [
+  { href: "/design/canvas", label: "Canvas" },
+  { href: "/design", label: "Gallery" },
+  { href: "/design/feed", label: "Feed" },
+];
+
+/** GitHub mark, inline — the repo has no icon library in use (lucide-react
+ *  is a dependency but unimported), and one brand glyph doesn't justify
+ *  introducing one. currentColor so it inherits the link's hover states. */
+function GitHubMark() {
+  return (
+    <svg
+      viewBox="0 0 16 16"
+      width="18"
+      height="18"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+    </svg>
+  );
+}
+
+function SectionHeading({
+  title,
+  note,
+}: {
+  title: string;
+  note?: string;
+}) {
+  return (
+    <div className="mb-6 flex items-baseline justify-between border-b border-outline-variant pb-3">
+      <h2 className="text-2xl font-semibold tracking-tight text-fg">{title}</h2>
+      {note && (
+        <span className="font-mono text-[11px] text-fg-subtle">{note}</span>
+      )}
+    </div>
+  );
+}
 
 export default function Home() {
+  const categories = categorize(componentNames());
+
   return (
-    <main className="flex min-h-dvh flex-col items-center justify-center bg-surface-page px-6 text-fg">
-      <div className="w-full max-w-md">
-        <h1
-          className="text-2xl font-bold"
-          style={{ fontFamily: "var(--font-geist-mono), monospace" }}
-        >
-          cids <span className="text-brand">~</span>
-        </h1>
-        <p className="mt-1 font-mono text-xs uppercase tracking-[0.14em] text-fg-subtle">
-          crypto interface design system
-        </p>
-        <p className="mt-4 text-pretty text-sm leading-relaxed text-fg-muted">
-          Live React components, semantic tokens, and the patterns crypto UIs
-          rebuild badly every time — signed price direction, wallet-hashed
-          identity, peg status, social proof. Browse them on an infinite
-          canvas, inspect the doc a human and an AI agent both build from,
-          and flip themes live.
-        </p>
-
-        {/* identity hues as the one decorative touch */}
-        <div className="mt-5 flex gap-1.5" aria-hidden="true">
-          {ID_HUES.map((hue) => (
-            <span
-              key={hue}
-              className="h-2 w-2 rounded-full"
-              style={{ background: `var(--id-${hue})` }}
-            />
-          ))}
-        </div>
-
-        <div className="mt-6 flex flex-col gap-2">
-          {LINKS.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className={
-                l.primary
-                  ? "flex items-baseline justify-between rounded-sm bg-brand px-4 py-3 text-sm font-semibold text-on-brand transition-transform active:scale-[0.98]"
-                  : "flex items-baseline justify-between rounded-sm border border-outline bg-surface-container px-4 py-3 text-sm font-semibold text-fg transition-transform active:scale-[0.98]"
-              }
-            >
-              {l.label}
-              <span
-                className={
-                  l.primary
-                    ? "font-mono text-[10px] font-normal opacity-70"
-                    : "font-mono text-[10px] font-normal text-fg-subtle"
-                }
+    <div className="min-h-dvh bg-surface-page text-fg">
+      {/* ── Top bar ───────────────────────────────────────────── */}
+      <header className="sticky top-0 z-sticky border-b border-outline-variant bg-surface-page/85 backdrop-blur">
+        <div className="mx-auto flex h-14 max-w-6xl items-center gap-4 px-5 sm:px-8">
+          <Link
+            href="/"
+            className="text-lg font-bold tracking-tight"
+            style={{ fontFamily: "var(--font-geist-mono), monospace" }}
+          >
+            cids <span className="text-brand">~</span>
+          </Link>
+          <nav className="ml-auto hidden items-center gap-1 md:flex">
+            {NAV.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="rounded-control px-3 py-2 text-sm text-fg-muted hover:bg-surface-container hover:text-fg"
+                style={{
+                  transition:
+                    "background-color var(--motion-fast), color var(--motion-fast)",
+                }}
               >
-                {l.note}
-              </span>
+                {l.label}
+              </Link>
+            ))}
+            <a
+              href={REPO}
+              aria-label="GitHub repository"
+              title="GitHub"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-control text-fg-muted hover:bg-surface-container hover:text-fg"
+              style={{
+                transition:
+                  "background-color var(--motion-fast), color var(--motion-fast)",
+              }}
+            >
+              <GitHubMark />
             </a>
-          ))}
-        </div>
+          </nav>
 
-        <p className="mt-8 font-mono text-[10px] text-fg-subtle">
-          themes: dark · mono · light · violet — 59 components, every one ships its .doc.md
-        </p>
-      </div>
-    </main>
+          <ThemeToggle variant="swatch" className="ml-auto md:ml-2" />
+        </div>
+      </header>
+
+      <main className="mx-auto max-w-6xl px-5 pb-24 sm:px-8">
+        {/* ── Hero ────────────────────────────────────────────── */}
+        <section className="pt-10 sm:pt-16">
+          <SplitFlap />
+
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href="/design/canvas"
+              className="inline-flex h-11 items-center rounded-control bg-brand px-5 text-sm font-semibold text-on-brand active:scale-[0.98]"
+              style={{
+                transition:
+                  "background-color var(--motion-fast), transform var(--motion-fast)",
+              }}
+            >
+              Open the canvas
+            </Link>
+            <Link
+              href="/design"
+              className="inline-flex h-11 items-center rounded-control border border-outline-variant bg-surface-container px-5 text-sm font-semibold text-fg active:scale-[0.98]"
+              style={{
+                transition:
+                  "background-color var(--motion-fast), transform var(--motion-fast)",
+              }}
+            >
+              Browse components
+            </Link>
+          </div>
+        </section>
+
+        {/* ── Quickstarts ─────────────────────────────────────── */}
+        <section className="pt-20">
+          <SectionHeading title="Quickstarts" />
+          <div className="grid gap-x-10 gap-y-8 sm:grid-cols-2">
+            {QUICKSTARTS.map((q) => (
+              <div key={q.title} className="flex items-start gap-5">
+                <div className="min-w-0 flex-1">
+                  <h3 className="flex items-center gap-2 text-lg font-semibold text-fg">
+                    {q.title}
+                    {q.beta && (
+                      <span
+                        className="rounded-chip bg-warning-surface px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-warning"
+                        title="Gestures are still being worked on"
+                      >
+                        beta
+                      </span>
+                    )}
+                  </h3>
+                  <p className="mt-2 text-pretty text-sm leading-relaxed text-fg-muted">
+                    {q.body}
+                  </p>
+                  {q.external ? (
+                    <a
+                      href={q.href}
+                      className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-brand hover:text-brand-hover"
+                      style={{ transition: "color var(--motion-fast)" }}
+                    >
+                      {q.cta} <span aria-hidden="true">→</span>
+                    </a>
+                  ) : (
+                    <Link
+                      href={q.href}
+                      className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-brand hover:text-brand-hover"
+                      style={{ transition: "color var(--motion-fast)" }}
+                    >
+                      {q.cta} <span aria-hidden="true">→</span>
+                    </Link>
+                  )}
+                </div>
+                {q.image ? (
+                  <Image
+                    src={q.image.src}
+                    alt={q.image.alt}
+                    width={96}
+                    height={96}
+                    className="h-24 w-24 shrink-0 rounded-card object-cover"
+                  />
+                ) : (
+                  <div
+                    aria-hidden="true"
+                    className="h-24 w-24 shrink-0 rounded-card border border-dashed border-outline bg-surface-container"
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Components ──────────────────────────────────────── */}
+        <section className="pt-20">
+          <SectionHeading
+            title="Components"
+            note="grouped by canvas zone"
+          />
+          <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2">
+            {categories.map((c) => (
+              <div key={c.id}>
+                {/* The card: a live composition over the category's own
+                    components, capped by a title/count bar. */}
+                <div className="overflow-hidden rounded-card border border-outline-variant bg-surface">
+                  <CategoryPreview id={c.id} />
+                  <h3 className="flex items-baseline justify-between border-t border-outline-variant bg-surface-container px-4 py-3 text-base font-semibold text-fg">
+                    {c.title}
+                    <span className="rounded-chip bg-surface-container-high px-2 py-0.5 font-mono text-[11px] font-normal text-fg-muted">
+                      {c.components.length}
+                    </span>
+                  </h3>
+                </div>
+                <ul className="mt-3 flex flex-wrap gap-x-3 gap-y-1.5 px-1">
+                  {c.components.map((name) => (
+                    <li key={name}>
+                      <Link
+                        href={`/design/${name}`}
+                        className="text-sm text-fg-muted hover:text-brand"
+                        style={{ transition: "color var(--motion-fast)" }}
+                      >
+                        {name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      {/* ── Footer ────────────────────────────────────────────── */}
+      <footer className="border-t border-outline-variant">
+        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-10 sm:flex-row sm:items-start sm:justify-between sm:px-8">
+          <p className="max-w-md text-pretty text-sm leading-relaxed text-fg-muted">
+            cids is an open design system for crypto interfaces — tokens as
+            the contract, themes as swappable value-sets, and a doc beside
+            every component that a human and an AI agent both build from.
+          </p>
+          <nav className="flex gap-5 font-mono text-xs text-fg-subtle">
+            <Link href="/design/canvas" className="hover:text-fg">
+              Canvas
+            </Link>
+            <Link href="/design" className="hover:text-fg">
+              Gallery
+            </Link>
+            <a href={REPO} className="hover:text-fg">
+              GitHub
+            </a>
+          </nav>
+        </div>
+      </footer>
+    </div>
   );
 }

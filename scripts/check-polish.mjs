@@ -329,6 +329,7 @@ for (const c of checks) {
 const NO_SPECIFIC_RULES = new Set([
   "Avatar", // static disc — no interaction states
   "AvatarGroup", // static composition of Avatar
+  "WalletAvatar", // static seeded disc + badge — no interaction states
   "TokenIcon", // static image w/ initials fallback
   "SocialProofChip", // static text chip
   "PostCard", // composes covered parts (ReactionBar, TokenChip)

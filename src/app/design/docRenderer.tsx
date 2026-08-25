@@ -38,7 +38,7 @@ function inline(text: string, key: number): ReactNode {
       {parts.map((p, i) => {
         if (p.startsWith("`"))
           return (
-            <code key={i} className="rounded-sm bg-surface-container px-1 text-[11px] text-brand">
+            <code key={i} className="rounded-sm bg-surface-container px-1 text-[13px] text-brand">
               {p.slice(1, -1)}
             </code>
           );
@@ -59,7 +59,7 @@ function TokenChipRow({ line, k }: { line: string; k: number }) {
   const tokens = [...line.matchAll(/--([a-z-]+)/g)].map((m) => m[1]);
   const colorish = tokens.filter((t) => !t.startsWith("motion-"));
   return (
-    <li key={k} className="flex items-start gap-1.5 text-xs leading-relaxed text-fg-muted">
+    <li key={k} className="flex items-start gap-1.5 text-sm leading-relaxed text-fg-muted">
       {colorish.length > 0 && (
         <span
           aria-hidden="true"
@@ -91,7 +91,7 @@ export function renderDoc(md: string): ReactNode[] {
       out.push(
         <div key={key++} className="relative">
           <div className="absolute right-1 top-1"><CopyButton text={code} /></div>
-          <pre className="overflow-x-auto rounded-sm border border-outline-variant bg-surface-dim p-2 font-mono text-[10px] leading-snug text-fg-muted">
+          <pre className="overflow-x-auto rounded-sm border border-outline-variant bg-surface-dim p-2 font-mono text-[13px] leading-relaxed text-fg-muted">
             {code}
           </pre>
         </div>,
@@ -102,18 +102,25 @@ export function renderDoc(md: string): ReactNode[] {
     if (line.startsWith("| ")) {
       const rows: string[][] = [];
       while (i < lines.length && lines[i].startsWith("|")) {
-        const cells = lines[i].split("|").slice(1, -1).map((c) => c.trim());
+        // Split on unescaped pipes only. Every Props table types its
+        // unions as `"xs" \| "sm"`, and a naive split("|") shredded those
+        // into extra columns — which is why union-typed rows rendered
+        // with their cells shifted out of line.
+        const cells = lines[i]
+          .split(/(?<!\\)\|/)
+          .slice(1, -1)
+          .map((c) => c.trim().replace(/\\\|/g, "|"));
         if (!cells.every((c) => /^-+$/.test(c))) rows.push(cells);
         i++;
       }
       const [head, ...body] = rows;
       out.push(
         <div key={key++} className="overflow-x-auto">
-          <table className="w-full text-left text-[11px]">
+          <table className="w-full text-left text-sm">
             <thead>
               <tr>
                 {head.map((c, ci) => (
-                  <th key={ci} className="border-b border-outline-variant py-1 pr-2 font-mono font-medium text-fg-subtle">
+                  <th key={ci} className="border-b border-outline-variant py-2 pr-3 font-mono font-medium text-fg-subtle">
                     {inline(c, ci)}
                   </th>
                 ))}
@@ -123,7 +130,7 @@ export function renderDoc(md: string): ReactNode[] {
               {body.map((r, ri) => (
                 <tr key={ri}>
                   {r.map((c, ci) => (
-                    <td key={ci} className="border-b border-outline-variant/50 py-1 pr-2 align-top text-fg-muted">
+                    <td key={ci} className="border-b border-outline-variant/50 py-2 pr-3 align-top text-fg-muted">
                       {inline(c, ci)}
                     </td>
                   ))}
@@ -147,7 +154,7 @@ export function renderDoc(md: string): ReactNode[] {
         <h3
           key={key++}
           id={id}
-          className="mt-4 scroll-mt-6 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle"
+          className="mt-4 scroll-mt-6 font-mono text-[13px] font-semibold uppercase tracking-[0.14em] text-fg-subtle"
         >
           {title}
         </h3>,
@@ -174,7 +181,7 @@ export function renderDoc(md: string): ReactNode[] {
             inTokens ? (
               <TokenChipRow key={ii} line={it} k={ii} />
             ) : (
-              <li key={ii} className="text-xs leading-relaxed text-fg-muted">
+              <li key={ii} className="text-sm leading-relaxed text-fg-muted">
                 {inline(it.replace(/^- /, "· "), ii)}
               </li>
             ),
@@ -186,7 +193,7 @@ export function renderDoc(md: string): ReactNode[] {
 
     if (line.trim() !== "" && !line.startsWith("---")) {
       out.push(
-        <p key={key++} className="text-xs leading-relaxed text-fg-muted">
+        <p key={key++} className="text-sm leading-relaxed text-fg-muted">
           {inline(line, key)}
         </p>,
       );

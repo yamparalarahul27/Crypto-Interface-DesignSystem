@@ -142,6 +142,66 @@ also PR docs when merged). Steal contracts; reimplement CIDS-native
 - [x] **OTPInput** — connect / verify code cells
 - [x] **WizardSteps** — multi-step send / onboarding rail + panel
 
+
+## Batch 6 — the identity system (planned)
+
+> Sourced from MetaMask design-system reference screenshots
+> (2026-08-25). Two shipped already — the rest is the next ring.
+> Everything here is one component family, so it wants one PR.
+
+**Shipped in this pass:**
+
+- [x] **Avatar `variant`** — `initial` (v1, unchanged default) ·
+      `shards` (jazzicon-style sectors) · `blocks` (mirrored 5×5 grid).
+      Geometry lives in `identity.ts` beside `hueFor`, so every identity
+      figure derives from one hash family and one palette.
+- [x] **Avatar `chain` / `connection`** — corner network badge, and the
+      three-state status dot (active / inactive / offline). `chain` wins
+      the corner when both are passed; states differ by shape as well as
+      colour.
+- [x] **WalletAvatar** — address-first wrapper over Avatar (truncates the
+      address for the accessible name, defaults to `shards`).
+
+**Open — needs a decision before building:**
+
+- [ ] **Size scale mismatch.** Reference uses **16 / 24 / 32 / 40 / 48**
+      (Xs–Xl, five steps). CIDS ships **20 / 28 / 40 / 64** (xs–lg, four).
+      Only `md 40` coincides. Adopting the reference scale is a breaking
+      change to a stable component *and* to the DESIGN.md avatar spec —
+      it is not a component change, it is a foundation change. Options:
+      (a) keep ours, (b) adopt theirs wholesale, (c) add `xl` and retune
+      xs/sm toward 16/24. **Blocked on a call.**
+- [ ] **Generative palette.** The `--id-*` hues are documented as "muted
+      to sit on near-black"; the reference figures are fully saturated.
+      Matching that punch needs a *new token set* + a `check:contrast`
+      pass, not a component tweak. **Blocked on a call.**
+
+**Open — buildable once the scale is settled:**
+
+- [ ] **AvatarGroup: full size scale.** Currently accepts `xs | sm` only,
+      against Avatar's four. Whatever scale wins above, the group should
+      offer all of it.
+- [ ] **AvatarGroup: content variants.** Reference stacks four kinds —
+      Accounts, Tokens, Networks, Favicons. Ours takes `members` and
+      renders `Avatar` exclusively, so a row of token or network icons is
+      impossible. Wants an API change: a `children`/item-union shape
+      instead of an Avatar-only member list. `TokenIcon` and
+      `NetworkBadge` already exist to fill the other three.
+- [ ] **AvatarGroup: `reverse`.** Controls stack direction and z-order
+      (first-on-top vs last-on-top). Not expressible today.
+- [ ] **AvatarGroup: overflow as an explicit prop.** Reference treats
+      `hasOverflow` as a boolean; ours derives it from `max`. Probably a
+      doc fix rather than an API change — `max={Infinity}` already means
+      "no counter" — but the two should be described in the same terms.
+
+**Adjacent, surfaced while building the above:**
+
+- [ ] **Accordion `defaultValue`.** The component page now renders every
+      doc section as an accordion, but `Accordion` cannot open one by
+      default — so Props, the section people actually come for, starts
+      collapsed. Accordion's own doc warns against burying primary
+      content. Small addition; benefits every consumer.
+
 ## History
 
 | Date | Change |
@@ -156,3 +216,4 @@ also PR docs when merged). Steal contracts; reimplement CIDS-native
 | 2026-08-01 | ContextMenu shipped (Batch 2 deferred item). |
 | 2026-08-01 | QRCode shipped as composition tier + `qrcode` npm (PriceChart pattern). SeedPhrase still deferred. |
 | 2026-08-01 | Batch 5 crypto ticket atoms: TokenSelect, SlippageControl, AccountMenu, ActivityRow. SeedPhrase remains deferred. |
+| 2026-08-25 | Batch 6 opened (identity system). Avatar gained variant/chain/connection; WalletAvatar shipped. Size scale + generative palette blocked on a decision. |

@@ -9,15 +9,15 @@
 import Link from "next/link";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { Accordion } from "@/design-system";
 import { DEMOS } from "../canvas/demos";
+import { DEMO_STATE_OPTIONS, defaultDemoState } from "../canvas/demoStates";
 import { CopyButton, renderDoc } from "../docRenderer";
 import { ThemeToggle } from "../ThemeToggle";
 import { MotionReplay } from "./MotionReplay";
-import { kebabCase, parseComponentDoc } from "./parseComponentDoc";
+import { kebabCase, parseComponentDoc, splitDocSections } from "./parseComponentDoc";
 import { StateMatrix } from "./StateMatrix";
 import { TokenSwatches } from "./TokenSwatches";
-
-type Density = "comfortable" | "compact";
 
 function Segmented<T extends string>({
   label,
@@ -31,11 +31,17 @@ function Segmented<T extends string>({
   onChange: (v: T) => void;
 }) {
   return (
-    <div
-      role="radiogroup"
-      aria-label={label}
-      className="inline-flex gap-0.5 rounded-sm border border-outline-variant bg-surface-page p-0.5"
-    >
+    <div className="inline-flex items-center gap-2">
+      {/* The label used to be aria-only, so sighted users met a pair of
+          unexplained words. Name the control. */}
+      <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-fg-subtle">
+        {label}
+      </span>
+      <div
+        role="radiogroup"
+        aria-label={label}
+        className="inline-flex gap-0.5 rounded-sm border border-outline-variant bg-surface-page p-0.5"
+      >
       {options.map((opt) => (
         <button
           key={opt}
@@ -52,6 +58,7 @@ function Segmented<T extends string>({
           {opt}
         </button>
       ))}
+      </div>
     </div>
   );
 }
@@ -78,30 +85,38 @@ export function ComponentPage({
     parseComponentDoc(doc);
   const [showCode, setShowCode] = useState(false);
   const [showUsage, setShowUsage] = useState(true);
-  const [density, setDensity] = useState<Density>("comfortable");
+  // Variants come from the same table the canvas Inspector uses, so the
+  // two surfaces can't offer different poses for the same component.
+  const variants = DEMO_STATE_OPTIONS[name];
+  const [variant, setVariant] = useState<string | undefined>(
+    defaultDemoState(name),
+  );
+
+  // Usage already has its own block above; don't show it twice.
+  const docSections = splitDocSections(body).filter((sec) => sec.id !== "usage");
 
   const registryName = kebabCase(name);
   const installCmd = `npx shadcn add @cids/${registryName}`;
   const canvasHref = `/design/canvas?item=${encodeURIComponent(name)}`;
 
   return (
-    <div className="mx-auto min-h-dvh w-full max-w-2xl bg-surface-page px-5 py-8 text-fg">
+    <div className="mx-auto min-h-dvh w-full max-w-6xl bg-surface-page px-5 py-8 text-fg">
       {/* ── header ───────────────────────────────────────────── */}
       <header className="mb-5 flex items-start justify-between gap-4">
         <div className="min-w-0">
           <Link
             href="/design"
-            className="font-mono text-[11px] text-fg-muted underline-offset-2 hover:underline"
+            className="font-mono text-sm text-fg-muted underline-offset-2 hover:underline"
           >
             ‹ components
           </Link>
-          <h1 className="mt-1 text-wrap text-balance font-mono text-xl font-bold">{name}</h1>
+          <h1 className="mt-1 text-wrap text-balance font-mono text-4xl font-bold">{name}</h1>
           <div className="mt-1.5 flex flex-wrap items-center gap-2">
             <span
               className={
                 status === "stable"
-                  ? "rounded-chip bg-buy-surface px-1.5 py-0.5 text-[10px] font-medium text-buy"
-                  : "rounded-chip bg-warning-surface px-1.5 py-0.5 text-[10px] font-medium text-warning"
+                  ? "rounded-chip bg-buy-surface px-1.5 py-0.5 text-[11px] font-medium text-buy"
+                  : "rounded-chip bg-warning-surface px-1.5 py-0.5 text-[11px] font-medium text-warning"
               }
             >
               {status}
@@ -112,27 +127,29 @@ export function ComponentPage({
             <span className="font-mono text-[10px] text-fg-subtle">·</span>
             <Link
               href={canvasHref}
-              className="font-mono text-[11px] text-fg-muted underline-offset-2 hover:underline"
+              className="font-mono text-sm text-fg-muted underline-offset-2 hover:underline"
             >
               open in canvas
             </Link>
           </div>
           {purpose && (
-            <p className="mt-3 text-pretty text-sm leading-relaxed text-fg-muted">{purpose}</p>
+            <p className="mt-3 text-pretty text-base leading-relaxed text-fg-muted">{purpose}</p>
           )}
         </div>
-        <ThemeToggle className="flex-none" />
+        <ThemeToggle variant="swatch" className="flex-none" />
       </header>
 
+
+      <div className="mx-auto max-w-4xl">
       {/* ── install ──────────────────────────────────────────── */}
       <section
         aria-label="Install"
         className="mb-5 flex items-center gap-2 rounded-card border border-outline-variant bg-surface-dim px-3 py-2"
       >
-        <span className="flex-none font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+        <span className="flex-none font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
           Install
         </span>
-        <code className="min-w-0 flex-1 truncate font-mono text-[11px] text-brand">
+        <code className="min-w-0 flex-1 truncate font-mono text-sm text-brand">
           {installCmd}
         </code>
         <CopyButton text={installCmd} />
@@ -141,10 +158,10 @@ export function ComponentPage({
       {/* ── when to use ──────────────────────────────────────── */}
       {bestFor && (
         <aside className="mb-5 rounded-card border border-outline-variant bg-surface-container px-3.5 py-3">
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
             When to use
           </p>
-          <p className="mt-1.5 text-pretty text-xs leading-relaxed text-fg-muted">{bestFor}</p>
+          <p className="mt-2 text-pretty text-base leading-relaxed text-fg-muted">{bestFor}</p>
         </aside>
       )}
 
@@ -152,21 +169,20 @@ export function ComponentPage({
       {Demo && (
         <section className="mb-6 overflow-hidden rounded-card border border-outline-variant bg-surface-container">
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-outline-variant px-3 py-2">
-            <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
               Live demo
             </span>
-            <Segmented
-              label="Density"
-              value={density}
-              options={["comfortable", "compact"] as const}
-              onChange={setDensity}
-            />
+            {variants && (
+              <Segmented
+                label="Variant"
+                value={variant ?? variants[0]}
+                options={variants}
+                onChange={setVariant}
+              />
+            )}
           </div>
-          <div
-            data-density={density === "compact" ? "compact" : undefined}
-            className="p-5"
-          >
-            <Demo />
+          <div className="p-5">
+            <Demo state={variant} />
           </div>
         </section>
       )}
@@ -182,14 +198,14 @@ export function ComponentPage({
               type="button"
               onClick={() => setShowUsage((v) => !v)}
               aria-expanded={showUsage}
-              className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle hover:text-fg"
+              className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-fg-subtle hover:text-fg"
             >
               {showUsage ? "▾" : "▸"} usage
             </button>
             <CopyButton text={usageCode} />
           </div>
           {showUsage && (
-            <pre className="mt-2 overflow-x-auto rounded-sm border border-outline-variant bg-surface-dim p-3 font-mono text-[10px] leading-snug text-fg-muted">
+            <pre className="mt-2 overflow-x-auto rounded-sm border border-outline-variant bg-surface-dim p-3 font-mono text-xs leading-relaxed text-fg-muted">
               {usageCode}
             </pre>
           )}
@@ -198,12 +214,12 @@ export function ComponentPage({
 
       {/* ── TOC ──────────────────────────────────────────────── */}
       {sections.length > 0 && (
-        <nav aria-label="On this page" className="mb-4 flex flex-wrap gap-x-3 gap-y-1">
+        <nav aria-label="On this page" className="mb-4 hidden">
           {sections.map((s) => (
             <a
               key={s.id}
               href={`#${s.id}`}
-              className="font-mono text-[11px] text-fg-muted underline-offset-2 hover:text-fg hover:underline"
+              className="font-mono text-sm text-fg-muted underline-offset-2 hover:text-fg hover:underline"
             >
               {s.title}
             </a>
@@ -211,12 +227,35 @@ export function ComponentPage({
         </nav>
       )}
 
-      {/* ── live tokens + states ─────────────────────────────── */}
-      <TokenSwatches tokens={tokens} />
-      <StateMatrix name={name} states={states} />
-
-      {/* ── doc from disk ────────────────────────────────────── */}
-      <article className="space-y-2">{renderDoc(body)}</article>
+      {/* ── doc from disk, one accordion per section ─────────── */}
+      <Accordion
+        type="multiple"
+        items={[
+          ...(tokens.length
+            ? [
+                {
+                  value: "tokens",
+                  title: "Tokens",
+                  content: <TokenSwatches tokens={tokens} />,
+                },
+              ]
+            : []),
+          ...(states.length
+            ? [
+                {
+                  value: "states",
+                  title: "States",
+                  content: <StateMatrix name={name} states={states} />,
+                },
+              ]
+            : []),
+          ...docSections.map((sec) => ({
+            value: sec.id,
+            title: sec.title,
+            content: <div className="space-y-3 pb-2">{renderDoc(sec.md)}</div>,
+          })),
+        ]}
+      />
 
       {/* ── source ───────────────────────────────────────────── */}
       <section className="mt-8">
@@ -225,23 +264,25 @@ export function ComponentPage({
             type="button"
             onClick={() => setShowCode((v) => !v)}
             aria-expanded={showCode}
-            className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle hover:text-fg"
+            className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-fg-subtle hover:text-fg"
           >
             {showCode ? "▾" : "▸"} source — {name}.tsx
           </button>
           <CopyButton text={source} />
         </div>
         {showCode && (
-          <pre className="mt-2 overflow-x-auto rounded-sm border border-outline-variant bg-surface-dim p-3 font-mono text-[10px] leading-snug text-fg-muted">
+          <pre className="mt-2 overflow-x-auto rounded-sm border border-outline-variant bg-surface-dim p-3 font-mono text-xs leading-relaxed text-fg-muted">
             {source}
           </pre>
         )}
-        <p className="mt-2 text-pretty text-[10px] leading-relaxed text-fg-subtle">
+        <p className="mt-2 text-pretty text-xs leading-relaxed text-fg-subtle">
           Self-contained: copy the folder into any Tailwind+React app, or use the
           install command above. Docs and this page render the same file on disk —
           they cannot drift.
         </p>
       </section>
+
+      </div>
 
       {/* ── footer ───────────────────────────────────────────── */}
       <footer className="mt-10 flex items-center justify-between border-t border-outline-variant pt-4 font-mono text-[11px]">

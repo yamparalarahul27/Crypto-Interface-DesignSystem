@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { CANVAS_ITEMS } from "./items";
 import { ThemeToggle } from "../ThemeToggle";
@@ -48,28 +48,133 @@ export function CanvasApp({
   const itemEls = useRef(new Map<string, HTMLDivElement>());
   const hydrated = useRef(false);
 
+  // ── View transform: painted on the DOM, not rendered by React ──────
+  // Pan/zoom used to live in `view` state, so every pointermove (60–120/s)
+  // reconciled all ~100 frames and their live demos. Now `viewRef` is the
+  // live truth and `paint()` writes straight to the stage node; state is
+  // committed once per gesture, for the things that genuinely need a
+  // render (permalinks, fit, zoom-to-item).
+  //
+  // The transform is deliberately absent from the stage's JSX style: React
+  // only touches style keys it declares, so an unrelated re-render mid-drag
+  // (selecting a frame, opening a panel) can't slam the canvas back to the
+  // last committed view.
+  const stageRef = useRef<HTMLDivElement>(null);
+  const viewRef = useRef<View>(INITIAL);
+  const zoomLabelRef = useRef<HTMLSpanElement>(null);
+  const commitTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const paint = useCallback((v: View) => {
+    const el = stageRef.current;
+    if (el) el.style.transform = `translate(${v.x}px, ${v.y}px) scale(${v.s})`;
+    const z = zoomLabelRef.current;
+    if (z) z.textContent = `${Math.round(v.s * 100)}%`;
+  }, []);
+
+  /** Move the canvas without telling React (pointer + wheel path). */
+  const paintView = useCallback(
+    (next: View) => {
+      viewRef.current = next;
+      paint(next);
+    },
+    [paint],
+  );
+
+  /** Commit the painted view to state — one render, at rest. */
+  const commitView = useCallback((next: View) => {
+    viewRef.current = next;
+    setView(next);
+  }, []);
+
+  /** Wheel has no "end" event; settle shortly after the last tick. */
+  const scheduleCommit = useCallback(() => {
+    if (commitTimer.current) clearTimeout(commitTimer.current);
+    commitTimer.current = setTimeout(() => setView(viewRef.current), 140);
+  }, []);
+
+  useEffect(
+    () => () => {
+      if (commitTimer.current) clearTimeout(commitTimer.current);
+    },
+    [],
+  );
+
+  // State → DOM. Runs before paint, so committed changes (fit, zoom-to-item)
+  // land in the same frame.
+  useLayoutEffect(() => {
+    viewRef.current = view;
+    paint(view);
+  }, [view, paint]);
+
   // Wheel: plain scroll pans; ctrl/cmd+wheel (and trackpad pinch) zooms.
   useEffect(() => {
     const el = wrapRef.current;
     if (!el) return;
     const onWheel = (e: WheelEvent) => {
       e.preventDefault();
+      const v = viewRef.current;
       if (e.ctrlKey || e.metaKey) {
         const rect = el.getBoundingClientRect();
         const cx = e.clientX - rect.left;
         const cy = e.clientY - rect.top;
         const factor = Math.exp(-e.deltaY * 0.01);
-        setView((v) => {
-          const s = clampS(v.s * factor);
-          const k = s / v.s;
-          return { s, x: cx - (cx - v.x) * k, y: cy - (cy - v.y) * k };
-        });
+        const s = clampS(v.s * factor);
+        const k = s / v.s;
+        paintView({ s, x: cx - (cx - v.x) * k, y: cy - (cy - v.y) * k });
       } else {
-        setView((v) => ({ ...v, x: v.x - e.deltaX, y: v.y - e.deltaY }));
+        paintView({ ...v, x: v.x - e.deltaX, y: v.y - e.deltaY });
       }
+      scheduleCommit();
     };
     el.addEventListener("wheel", onWheel, { passive: false });
     return () => el.removeEventListener("wheel", onWheel);
+  }, [paintView, scheduleCommit]);
+
+  // Dev-only overlap guard. Frame heights only exist once rendered, so no
+  // static test can catch a collision — items.ts places rows at hand-picked
+  // pitches and a demo that grows past its pitch silently lands under the
+  // next row. This measures the real boxes after mount and names the
+  // offenders. content-visibility is forced off for the measurement,
+  // otherwise off-screen frames report their guessed intrinsic size.
+  useEffect(() => {
+    if (process.env.NODE_ENV === "production") return;
+    const stage = stageRef.current;
+    if (!stage) return;
+    const t = setTimeout(() => {
+      const kids = [...stage.children] as HTMLElement[];
+      const prev = kids.map((k) => {
+        const p = k.style.contentVisibility;
+        k.style.contentVisibility = "visible";
+        return p;
+      });
+      const boxes = kids.map((k) => ({
+        id: k.dataset.itemId ?? k.textContent?.slice(0, 20) ?? "?",
+        x: k.offsetLeft,
+        y: k.offsetTop,
+        w: k.offsetWidth,
+        h: k.offsetHeight,
+      }));
+      kids.forEach((k, i) => (k.style.contentVisibility = prev[i]));
+
+      const hits: string[] = [];
+      for (let a = 0; a < boxes.length; a++) {
+        for (let b = a + 1; b < boxes.length; b++) {
+          const A = boxes[a];
+          const B = boxes[b];
+          const ox = Math.min(A.x + A.w, B.x + B.w) - Math.max(A.x, B.x);
+          const oy = Math.min(A.y + A.h, B.y + B.h) - Math.max(A.y, B.y);
+          if (ox > 2 && oy > 2) {
+            hits.push(`${A.id} ↔ ${B.id} (${Math.round(ox)}×${Math.round(oy)}px)`);
+          }
+        }
+      }
+      if (hits.length) {
+        console.warn(
+          `[canvas] ${hits.length} overlapping frame(s) — adjust items.ts:\n  ${hits.join("\n  ")}`,
+        );
+      }
+    }, 600); // let demos settle (charts, fonts) before measuring
+    return () => clearTimeout(t);
   }, []);
 
   // ⌘K / Ctrl+K — open search (ignore when typing in inputs outside).
@@ -100,14 +205,21 @@ export function CanvasApp({
     const el = itemEls.current.get(id);
     const rect = wrapRef.current?.getBoundingClientRect();
     if (!def || def.kind === "label" || !el || !rect) return;
+    // content-visibility:auto means an off-screen frame reports its
+    // *guessed* intrinsic size, not its real one — which would mis-scale
+    // every ?item= permalink (the target is off-screen by definition).
+    // Force this one subtree to lay out, measure, then hand it back.
+    const cv = el.style.contentVisibility;
+    el.style.contentVisibility = "visible";
     const w = el.offsetWidth;
     const h = el.offsetHeight;
+    el.style.contentVisibility = cv;
     const panelW = layersOpen ? 260 : 0;
     const availW = rect.width - panelW - 80;
     const availH = rect.height - 140;
     const s = clampS(Math.min(availW / w, availH / h, 1.25) * 0.9);
     setAnimating(true);
-    setView({
+    commitView({
       s,
       x: panelW + 40 + (availW - w * s) / 2 - def.x * s,
       y: 100 + (availH - h * s) / 2 - def.y * s,
@@ -156,9 +268,11 @@ export function CanvasApp({
     const dx = e.clientX - drag.current.px;
     const dy = e.clientY - drag.current.py;
     drag.current = { px: e.clientX, py: e.clientY };
-    setView((v) => ({ ...v, x: v.x + dx, y: v.y + dy }));
+    const v = viewRef.current;
+    paintView({ ...v, x: v.x + dx, y: v.y + dy });
   };
   const onPointerUp = () => {
+    if (drag.current) setView(viewRef.current); // one render per gesture
     drag.current = null;
     setPanning(false);
   };
@@ -167,11 +281,10 @@ export function CanvasApp({
     const rect = wrapRef.current?.getBoundingClientRect();
     const cx = (rect?.width ?? 0) / 2;
     const cy = (rect?.height ?? 0) / 2;
-    setView((v) => {
-      const s = clampS(v.s * factor);
-      const k = s / v.s;
-      return { s, x: cx - (cx - v.x) * k, y: cy - (cy - v.y) * k };
-    });
+    const v = viewRef.current;
+    const s = clampS(v.s * factor);
+    const k = s / v.s;
+    commitView({ s, x: cx - (cx - v.x) * k, y: cy - (cy - v.y) * k });
   };
 
   return (
@@ -190,9 +303,11 @@ export function CanvasApp({
       }}
     >
       <div
+        ref={stageRef}
         className="absolute left-0 top-0"
+        // No `transform` here on purpose — paint() owns it. See the view
+        // transform note above.
         style={{
-          transform: `translate(${view.x}px, ${view.y}px) scale(${view.s})`,
           transformOrigin: "0 0",
           transition: animating ? "transform 240ms cubic-bezier(0.2, 0.8, 0.2, 1)" : "none",
         }}
@@ -202,6 +317,7 @@ export function CanvasApp({
             return (
               <div
                 key={item.id}
+                data-item-id={item.id}
                 className="absolute whitespace-nowrap font-mono text-[13px] font-semibold uppercase tracking-[0.14em] text-fg-subtle"
                 style={{ left: item.x, top: item.y }}
               >
@@ -213,12 +329,21 @@ export function CanvasApp({
             return (
               <div
                 key={item.id}
+                data-item-id={item.id}
                 ref={(el) => {
                   if (el) itemEls.current.set(item.id, el);
                 }}
                 onClick={() => selectFrame(item.id)}
                 className={cn("absolute", selected === item.id && "outline outline-1 outline-brand")}
-                style={{ left: item.x, top: item.y }}
+                style={{
+                  left: item.x,
+                  top: item.y,
+                  // Off-screen frames skip layout + paint entirely. Safe to
+                  // guess a size here: frames are absolutely positioned, so
+                  // an inexact intrinsic size moves nothing else.
+                  contentVisibility: "auto",
+                  containIntrinsicSize: `${item.w}px ${item.h}px`,
+                }}
               >
                 <div className={cn("mb-1.5 font-mono text-[11px]", selected === item.id ? "text-brand" : "text-fg-subtle")}>{item.title}</div>
                 <iframe
@@ -226,6 +351,7 @@ export function CanvasApp({
                   title={item.title}
                   width={item.w}
                   height={item.h}
+                  loading="lazy"
                   className="pointer-events-none rounded-sm border border-outline-variant bg-surface-page"
                 />
               </div>
@@ -235,12 +361,19 @@ export function CanvasApp({
           return (
             <div
               key={item.id}
+              data-item-id={item.id}
               ref={(el) => {
                 if (el) itemEls.current.set(item.id, el);
               }}
               onClick={() => selectFrame(item.id)}
               className={cn("absolute", selected === item.id && "outline outline-1 outline-brand")}
-              style={{ left: item.x, top: item.y, width: item.w }}
+              style={{
+                left: item.x,
+                top: item.y,
+                width: item.w,
+                contentVisibility: "auto",
+                containIntrinsicSize: `${item.w}px 260px`,
+              }}
             >
               <div className={cn("mb-1.5 font-mono text-[11px]", selected === item.id ? "text-brand" : "text-fg-subtle")}>{item.title}</div>
               <div className="rounded-sm border border-outline-variant bg-surface-page p-4">
@@ -255,12 +388,33 @@ export function CanvasApp({
 
       <div className="pointer-events-none absolute inset-x-0 top-0 z-[var(--z-raised)] flex items-center justify-between px-4 py-3">
         <div className="pointer-events-auto flex items-center gap-3 rounded-sm border border-outline bg-surface-page/95 px-3 py-2">
+          {/* Exit hatch. A real link to `/` rather than history.back() —
+              the canvas is reachable by permalink, where there's no prior
+              page to go back to. */}
+          <Link
+            href="/"
+            aria-label="Exit canvas"
+            className="-ml-1 inline-flex h-8 items-center gap-1.5 rounded-control px-2 font-mono text-xs text-fg-muted hover:bg-surface-container hover:text-fg"
+            style={{
+              transition:
+                "background-color var(--motion-fast), color var(--motion-fast)",
+            }}
+          >
+            <span aria-hidden="true">←</span> back
+          </Link>
+          <span className="h-5 w-px bg-outline-variant" aria-hidden="true" />
           <span
             className="text-sm font-semibold text-fg"
             style={{ fontFamily: "var(--font-geist-mono), monospace" }}
           >
             cids <span className="text-brand">~</span>{" "}
             <span className="text-fg-subtle">canvas</span>
+          </span>
+          <span
+            className="rounded-chip bg-warning-surface px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-warning"
+            title="Gestures are still being worked on"
+          >
+            beta
           </span>
           <Link href="/design" className="font-mono text-xs text-fg-muted underline-offset-2 hover:underline">
             gallery
@@ -277,11 +431,14 @@ export function CanvasApp({
             wide
           />
           <HudButton label="−" onClick={() => zoomBy(1 / 1.25)} />
-          <span className="w-12 text-center font-mono text-[11px] text-fg-muted">
-            {Math.round(view.s * 100)}%
-          </span>
+          {/* Filled by paint(), so the readout stays live during a pinch
+              without a render. Empty in JSX so React never overwrites it. */}
+          <span
+            ref={zoomLabelRef}
+            className="w-12 text-center font-mono text-[11px] text-fg-muted"
+          />
           <HudButton label="+" onClick={() => zoomBy(1.25)} />
-          <HudButton label="fit" onClick={() => setView(INITIAL)} wide />
+          <HudButton label="fit" onClick={() => commitView(INITIAL)} wide />
           <HudButton label="layers" onClick={() => { setLayersOpen((v) => !v); setStudioOpen(false); }} wide />
           <HudButton label="studio" onClick={() => { setStudioOpen((v) => !v); setLayersOpen(false); }} wide />
         </div>

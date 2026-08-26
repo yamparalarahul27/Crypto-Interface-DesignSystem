@@ -97,7 +97,7 @@ function ChartLegendContent({
 }
 
 // ---------------------------------------------------------------------------
-// Legend indicator — each variant gets its own branch so future variants
+// Legend indicator: each variant gets its own branch so future variants
 // can diverge freely in markup & style.
 // ---------------------------------------------------------------------------
 
@@ -170,7 +170,7 @@ function getLegendFillStyle(dataKey: string, colorsCount: number): React.CSSProp
  * Outline style for stroke variants.
  * Uses background + mask-composite to punch out the center, leaving only the
  * "border" visible. Works with both solid colors and gradients, and respects
- * border-radius — unlike plain `border-color`.
+ * border-radius: unlike plain `border-color`.
  */
 function getLegendOutlineStyle(dataKey: string, colorsCount: number): React.CSSProperties {
   const maskStyle: React.CSSProperties = {

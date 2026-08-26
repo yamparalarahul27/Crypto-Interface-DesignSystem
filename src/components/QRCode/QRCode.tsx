@@ -1,6 +1,6 @@
 "use client";
 
-// QRCode — receive-address display (component-gaps Batch 3 deferred).
+// QRCode: receive-address display (component-gaps Batch 3 deferred).
 // Composition tier (same as PriceChart): depends on the `qrcode` npm
 // package, so it lives outside src/design-system/ and is exempt from
 // check:portable / the copy-in registry. Composes CIDS AddressChip for
@@ -29,7 +29,7 @@ export function QRCode({
   className,
   "aria-label": ariaLabel,
 }: {
-  /** Payload encoded in the matrix — typically a wallet/mint address. */
+  /** Payload encoded in the matrix: typically a wallet/mint address. */
   value: string;
   /** Pixel size of the SVG (square). */
   size?: number;
@@ -54,7 +54,7 @@ export function QRCode({
     })
       .then((raw) => {
         if (cancelled) return;
-        // Only accept library SVG — never inject caller-controlled HTML.
+        // Only accept library SVG: never inject caller-controlled HTML.
         if (!raw.startsWith("<svg")) {
           setFailed(true);
           setSvg(null);

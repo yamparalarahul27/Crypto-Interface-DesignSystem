@@ -1,4 +1,4 @@
-// Edge Score — fully attributed composite safety score.
+// Edge Score: fully attributed composite safety score.
 // Fuses three independent sources:
 //   - Helius (chain-truth):     authoritative on-chain mint/freeze authority + mutability
 //   - Jupiter (audit):          cross-verification of mint/freeze authority status
@@ -6,7 +6,7 @@
 //
 // Each signal contributes 0..weight. Final score = sum / sum(weights of available
 // signals) * 100, so a token with fewer available signals isn't artificially
-// penalized for missing data — it just has fewer dimensions of evidence.
+// penalized for missing data: it just has fewer dimensions of evidence.
 //
 // Burnt is treated as an instant disqualifier (score = 0).
 
@@ -77,7 +77,7 @@ export function computeEdgeScore(inputs: EdgeScoreInputs): EdgeScoreResult | nul
 
   const breakdown: BreakdownEntry[] = [];
 
-  // Burnt — instant disqualifier
+  // Burnt: instant disqualifier
   const burnt = inputs.chainTruth?.burnt === true;
   if (burnt) {
     breakdown.push({
@@ -90,7 +90,7 @@ export function computeEdgeScore(inputs: EdgeScoreInputs): EdgeScoreResult | nul
     });
   }
 
-  // Mint authority — prefer chain-truth, fall back to Jupiter audit
+  // Mint authority: prefer chain-truth, fall back to Jupiter audit
   pushAuthority(
     breakdown,
     "Mint authority renounced",
@@ -99,7 +99,7 @@ export function computeEdgeScore(inputs: EdgeScoreInputs): EdgeScoreResult | nul
     inputs.audit?.mintAuthorityDisabled ?? null
   );
 
-  // Freeze authority — same pattern
+  // Freeze authority: same pattern
   pushAuthority(
     breakdown,
     "Freeze authority renounced",
@@ -211,7 +211,7 @@ function pushAuthority(
       value = "Yes (chain-truth)";
       contribution = weight;
     } else {
-      value = "No — authority active";
+      value = "No: authority active";
       contribution = 0;
     }
   } else if (audit !== null) {
@@ -221,7 +221,7 @@ function pushAuthority(
       value = "Yes (per Jupiter audit)";
       contribution = weight;
     } else {
-      value = "No — authority active";
+      value = "No: authority active";
       contribution = 0;
     }
   } else {

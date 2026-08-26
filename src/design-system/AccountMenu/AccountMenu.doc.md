@@ -2,7 +2,7 @@
 
 Status: draft
 Version: 0.9.0
-Connected-wallet menu — address, copy, explorer, disconnect.
+Connected-wallet menu: address, copy, explorer, disconnect.
 
 ## Usage
 
@@ -22,7 +22,7 @@ import { AccountMenu, WalletButton } from "@/design-system";
 ```
 
 Best for: the connected state that `WalletButton` opens into.
-**Disconnect lives here, never on WalletButton** — accidental
+**Disconnect lives here, never on WalletButton**: accidental
 disconnects are hostile (Reown/ethereum.org guidance).
 
 ## Anatomy
@@ -47,14 +47,14 @@ disconnects are hostile (Reown/ethereum.org guidance).
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `address` | `string` | — | Full wallet address (accessible name + copy target). |
-| `balance` | `string` | — | Preformatted balance line. |
-| `explorerHref` | `string` | — | Opens in a new tab when present. |
-| `onDisconnect` | `() => void` | — | Renders the Disconnect item when set. |
-| `disabled` | `boolean` | — | Disables the trigger. |
-| `className` | `string` | — | cn-merged onto the trigger. |
+| `address` | `string` | - | Full wallet address (accessible name + copy target). |
+| `balance` | `string` | - | Preformatted balance line. |
+| `explorerHref` | `string` | - | Opens in a new tab when present. |
+| `onDisconnect` | `() => void` | - | Renders the Disconnect item when set. |
+| `disabled` | `boolean` | - | Disables the trigger. |
+| `className` | `string` | - | cn-merged onto the trigger. |
 
-`"use client"` — Radix menu + ephemeral copied label.
+`"use client"`: Radix menu + ephemeral copied label.
 
 ## Tokens
 
@@ -66,17 +66,17 @@ via `you`).
 
 ## States
 
-- **default / hover / press** — trigger bg + `active:scale-[0.96]`.
-- **open** — Radix panel; highlight follows keyboard/pointer.
-- **copied** — "Copy address" label flips to "Copied" for ~1.5s
+- **default / hover / press**: trigger bg + `active:scale-[0.96]`.
+- **open**: Radix panel; highlight follows keyboard/pointer.
+- **copied**: "Copy address" label flips to "Copied" for ~1.5s
   (menu kept open via `preventDefault` on select).
-- **disabled** — trigger opacity 40.
+- **disabled**: trigger opacity 40.
 
 ## Motion
 
 Trigger: `duration-150` bg/border + press scale. Panel:
 `data-[state=open]:fade-in` via Radix presets. Copy confirmation is a
-label swap — no bounce.
+label swap: no bounce.
 
 ## A11y
 

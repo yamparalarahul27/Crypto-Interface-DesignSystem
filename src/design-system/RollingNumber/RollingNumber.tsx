@@ -5,14 +5,14 @@ import { cn } from "@/lib/utils";
 /**
  * Streaming numeral (CDS RollingNumber's role): each character that
  * CHANGES rolls in on --motion-settle; unchanged characters keep their
- * DOM nodes still — so a last digit ticking doesn't animate the whole
+ * DOM nodes still: so a last digit ticking doesn't animate the whole
  * figure. Pixel font + tabular-nums; zero layout shift by design.
  */
 export function RollingNumber({
   value,
   className,
 }: {
-  /** Pre-formatted string ("$184.26") — formatting is the caller's. */
+  /** Pre-formatted string ("$184.26"): formatting is the caller's. */
   value: string;
   className?: string;
 }) {

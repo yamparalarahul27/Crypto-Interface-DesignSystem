@@ -27,8 +27,8 @@ import { Input } from "@/design-system";
 |---|---|---|---|
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` | Heights 28 / 36 / 44 px (shared scale). |
 | `invalid` | `boolean` | `false` | Sets `aria-invalid` + sell border. Put the error text next to the field and link via `aria-describedby`. |
-| `className` | `string` | — | cn-merged. |
-| …rest | `InputHTMLAttributes` | — | Native pass-through (value, onChange, type…). |
+| `className` | `string` | - | cn-merged. |
+| …rest | `InputHTMLAttributes` | - | Native pass-through (value, onChange, type…). |
 
 ## Tokens
 
@@ -45,5 +45,5 @@ Border/background transition 150ms, targeted properties only.
 ## A11y
 
 - Always label it: visible `<label htmlFor>` or `aria-label` from the caller.
-- `invalid` sets `aria-invalid`; pair with a visible message via `aria-describedby` — errors appear next to where the action happens.
+- `invalid` sets `aria-invalid`; pair with a visible message via `aria-describedby`: errors appear next to where the action happens.
 - Paste is never blocked.

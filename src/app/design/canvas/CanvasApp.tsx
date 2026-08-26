@@ -12,6 +12,7 @@ import { Inspector } from "./Inspector";
 import { DEMOS } from "./demos";
 import { CanvasSearch } from "./CanvasSearch";
 import { defaultDemoState } from "./demoStates";
+import { IconArrowLeft } from "@/design-system";
 
 type View = { x: number; y: number; s: number };
 
@@ -80,7 +81,7 @@ export function CanvasApp({
     [paint],
   );
 
-  /** Commit the painted view to state — one render, at rest. */
+  /** Commit the painted view to state: one render, at rest. */
   const commitView = useCallback((next: View) => {
     viewRef.current = next;
     setView(next);
@@ -131,7 +132,7 @@ export function CanvasApp({
   }, [paintView, scheduleCommit]);
 
   // Dev-only overlap guard. Frame heights only exist once rendered, so no
-  // static test can catch a collision — items.ts places rows at hand-picked
+  // static test can catch a collision: items.ts places rows at hand-picked
   // pitches and a demo that grows past its pitch silently lands under the
   // next row. This measures the real boxes after mount and names the
   // offenders. content-visibility is forced off for the measurement,
@@ -170,14 +171,14 @@ export function CanvasApp({
       }
       if (hits.length) {
         console.warn(
-          `[canvas] ${hits.length} overlapping frame(s) — adjust items.ts:\n  ${hits.join("\n  ")}`,
+          `[canvas] ${hits.length} overlapping frame(s); adjust items.ts:\n  ${hits.join("\n  ")}`,
         );
       }
     }, 600); // let demos settle (charts, fonts) before measuring
     return () => clearTimeout(t);
   }, []);
 
-  // ⌘K / Ctrl+K — open search (ignore when typing in inputs outside).
+  // ⌘K / Ctrl+K: open search (ignore when typing in inputs outside).
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
@@ -206,7 +207,7 @@ export function CanvasApp({
     const rect = wrapRef.current?.getBoundingClientRect();
     if (!def || def.kind === "label" || !el || !rect) return;
     // content-visibility:auto means an off-screen frame reports its
-    // *guessed* intrinsic size, not its real one — which would mis-scale
+    // *guessed* intrinsic size, not its real one: which would mis-scale
     // every ?item= permalink (the target is off-screen by definition).
     // Force this one subtree to lay out, measure, then hand it back.
     const cv = el.style.contentVisibility;
@@ -305,7 +306,7 @@ export function CanvasApp({
       <div
         ref={stageRef}
         className="absolute left-0 top-0"
-        // No `transform` here on purpose — paint() owns it. See the view
+        // No `transform` here on purpose: paint() owns it. See the view
         // transform note above.
         style={{
           transformOrigin: "0 0",
@@ -318,7 +319,7 @@ export function CanvasApp({
               <div
                 key={item.id}
                 data-item-id={item.id}
-                className="absolute whitespace-nowrap font-mono text-[13px] font-semibold uppercase tracking-[0.14em] text-fg-subtle"
+                className="absolute whitespace-nowrap font-mono text-[13px] font-semibold text-fg-subtle"
                 style={{ left: item.x, top: item.y }}
               >
                 {item.title}
@@ -388,7 +389,7 @@ export function CanvasApp({
 
       <div className="pointer-events-none absolute inset-x-0 top-0 z-[var(--z-raised)] flex items-center justify-between px-4 py-3">
         <div className="pointer-events-auto flex items-center gap-3 rounded-sm border border-outline bg-surface-page/95 px-3 py-2">
-          {/* Exit hatch. A real link to `/` rather than history.back() —
+          {/* Exit hatch. A real link to `/` rather than history.back():
               the canvas is reachable by permalink, where there's no prior
               page to go back to. */}
           <Link
@@ -400,7 +401,7 @@ export function CanvasApp({
                 "background-color var(--motion-fast), color var(--motion-fast)",
             }}
           >
-            <span aria-hidden="true">←</span> back
+            <IconArrowLeft size={13} weight="bold" aria-hidden="true" /> back
           </Link>
           <span className="h-5 w-px bg-outline-variant" aria-hidden="true" />
           <span
@@ -411,19 +412,19 @@ export function CanvasApp({
             <span className="text-fg-subtle">canvas</span>
           </span>
           <span
-            className="rounded-chip bg-warning-surface px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-warning"
+            className="rounded-chip bg-warning-surface px-1.5 py-0.5 font-mono text-[10px] font-medium text-warning"
             title="Gestures are still being worked on"
           >
-            beta
+            Beta
           </span>
           <Link href="/design" className="font-mono text-xs text-fg-muted underline-offset-2 hover:underline">
-            gallery
+            Gallery
           </Link>
           <ThemeToggle />
         </div>
         <div className="pointer-events-auto flex items-center gap-1 rounded-sm border border-outline bg-surface-page/95 p-1">
           <HudButton
-            label="search"
+            label="Search"
             onClick={() => {
               setSearchOpen(true);
               setStudioOpen(false);
@@ -438,9 +439,9 @@ export function CanvasApp({
             className="w-12 text-center font-mono text-[11px] text-fg-muted"
           />
           <HudButton label="+" onClick={() => zoomBy(1.25)} />
-          <HudButton label="fit" onClick={() => commitView(INITIAL)} wide />
-          <HudButton label="layers" onClick={() => { setLayersOpen((v) => !v); setStudioOpen(false); }} wide />
-          <HudButton label="studio" onClick={() => { setStudioOpen((v) => !v); setLayersOpen(false); }} wide />
+          <HudButton label="Fit" onClick={() => commitView(INITIAL)} wide />
+          <HudButton label="Layers" onClick={() => { setLayersOpen((v) => !v); setStudioOpen(false); }} wide />
+          <HudButton label="Studio" onClick={() => { setStudioOpen((v) => !v); setLayersOpen(false); }} wide />
         </div>
       </div>
 
@@ -483,7 +484,7 @@ export function CanvasApp({
           drag to pan · ⌘K search · share <span className="text-fg-subtle">?item=</span>
         </span>
         <span className="hidden [@media(pointer:coarse)]:inline">
-          canvas is desktop-first for now — drag to pan · use + / −
+          canvas is desktop-first for now: drag to pan · use + / −
         </span>
       </div>
     </div>

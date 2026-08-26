@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 // Read every component's colocated .doc.md AND its .tsx source at render
-// time — the inspector shows the real files (the same ones agents read),
+// time: the inspector shows the real files (the same ones agents read),
 // so neither can drift from the source.
 function readComponentFiles() {
   const root = join(process.cwd(), "src/design-system");

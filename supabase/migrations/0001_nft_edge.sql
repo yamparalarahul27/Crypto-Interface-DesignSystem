@@ -1,5 +1,5 @@
 -- ============================================================
--- NFT Edge v1 — schema migration
+-- NFT Edge v1: schema migration
 -- ============================================================
 --
 -- Three tables that cache NFT collection data fetched from Helius DAS
@@ -16,7 +16,7 @@
 --   3. Run
 --   4. Verify with: SELECT * FROM nft_collections LIMIT 1;
 --
--- To roll back (destructive — drops all NFT cache data):
+-- To roll back (destructive; drops all NFT cache data):
 --   DROP TABLE IF EXISTS nft_trait_rarity;
 --   DROP TABLE IF EXISTS nft_assets;
 --   DROP TABLE IF EXISTS nft_collections;
@@ -75,7 +75,7 @@ CREATE INDEX IF NOT EXISTS idx_nft_assets_owner
   ON nft_assets (owner)
   WHERE owner IS NOT NULL;
 
--- Sequential rail pagination — "PERK #1, #2, #3, ..."
+-- Sequential rail pagination: "PERK #1, #2, #3, ..."
 CREATE INDEX IF NOT EXISTS idx_nft_assets_collection_number
   ON nft_assets (collection_id, number)
   WHERE number IS NOT NULL;
@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS nft_trait_rarity (
 
 
 -- ------------------------------------------------------------
--- Smoke test — should return 0 rows on a fresh apply
+-- Smoke test: should return 0 rows on a fresh apply
 -- ------------------------------------------------------------
 -- SELECT COUNT(*) FROM nft_collections;
 -- SELECT COUNT(*) FROM nft_assets;

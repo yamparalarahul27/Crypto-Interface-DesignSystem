@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-// CIDS MCP server (Phase 7 — agent adoption; shadcn CLI 3.0 precedent).
+// CIDS MCP server (Phase 7: agent adoption; shadcn CLI 3.0 precedent).
 // Zero dependencies: MCP is JSON-RPC 2.0 over stdio. Exposes the
 // generated registry (public/r) so coding agents can discover and
-// fetch CIDS components — docs travel with the code, so an agent gets
+// fetch CIDS components: docs travel with the code, so an agent gets
 // the spec and the source in one call.
 //
 // Wire into a client:
@@ -39,7 +39,7 @@ const TOOLS = [
   },
   {
     name: "get_quickstart",
-    description: "The CIDS adopter quickstart (docs/cids-quickstart.md) — install path, theming, guarantees.",
+    description: "The CIDS adopter quickstart (docs/cids-quickstart.md): install path, theming, guarantees.",
     inputSchema: { type: "object", properties: {}, additionalProperties: false },
   },
 ];
@@ -47,7 +47,7 @@ const TOOLS = [
 function callTool(name, args) {
   if (name === "list_components") {
     return index.items
-      .map((i) => `${i.name} — ${i.description}`)
+      .map((i) => `${i.name}: ${i.description}`)
       .join("\n");
   }
   if (name === "get_component") {
@@ -91,7 +91,7 @@ createInterface({ input: process.stdin }).on("line", (line) => {
       replyError(id, String(e.message ?? e));
     }
   } else if (id !== undefined) {
-    // Unknown request — answer politely so clients don't hang.
+    // Unknown request: answer politely so clients don't hang.
     replyError(id, `method not supported: ${method}`);
   }
   // notifications (no id) are ignored by design

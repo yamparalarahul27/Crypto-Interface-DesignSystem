@@ -1,18 +1,19 @@
 "use client";
 
 // Motion tap-to-replay panel for /design/<Component> (roadmap §6).
-// Remounts a preview chip to re-fire CSS animations — the only honest
+// Remounts a preview chip to re-fire CSS animations: the only honest
 // way to "replay" tokenized motion without a timeline scrubber.
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { IconPlay } from "@/design-system";
 
 const PREVIEWS = [
   {
     token: "--motion-fast",
     label: "fast",
     use: "state / hover",
-    // Targeted color flash — matches 150ms ease-out.
+    // Targeted color flash: matches 150ms ease-out.
     replayClass: "motion-replay-fast",
   },
   {
@@ -92,13 +93,13 @@ function ReplayChip({
       <span
         key={tick}
         className={cn(
-          "inline-flex h-9 w-9 items-center justify-center rounded-control bg-brand text-[10px] font-semibold text-on-brand",
+          "inline-flex h-9 w-9 items-center justify-center rounded-control bg-brand text-on-brand",
           replayClass,
         )}
       >
-        ▶
+        <IconPlay size={12} weight="fill" aria-hidden="true" />
       </span>
-      <span className="font-mono text-[10px] text-fg-muted">{label}</span>
+      <span className="font-mono text-[0.6875rem] text-fg-muted">{label}</span>
     </button>
   );
 }
@@ -111,16 +112,16 @@ export function MotionReplay({ doc }: { doc: string }) {
   return (
     <section id="motion-replay" className="mb-6 scroll-mt-6">
       <div className="flex items-baseline justify-between gap-3">
-        <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+        <h3 className="font-mono text-[0.6875rem] font-semibold text-fg-subtle">
           Motion · tap to replay
         </h3>
-        <span className="font-mono text-[10px] text-fg-subtle">honors reduced-motion</span>
+        <span className="font-mono text-[0.6875rem] text-fg-subtle">Honors reduced-motion</span>
       </div>
       {note && (
-        <p className="mt-1.5 text-pretty text-xs leading-relaxed text-fg-muted">{note}</p>
+        <p className="mt-1.5 text-pretty text-sm leading-relaxed text-fg-muted">{note}</p>
       )}
       {none ? (
-        <p className="mt-3 text-xs text-fg-subtle">This component declares no motion.</p>
+        <p className="mt-3 text-sm text-fg-subtle">This component declares no motion.</p>
       ) : (
         <div className="mt-3 grid grid-cols-3 gap-2">
           {PREVIEWS.map((p) => (
@@ -133,7 +134,7 @@ export function MotionReplay({ doc }: { doc: string }) {
           ))}
         </div>
       )}
-      <p className="mt-2 text-[10px] text-fg-subtle">
+      <p className="mt-2 text-xs leading-relaxed text-fg-subtle">
         Brand chip remounts on tap · highlighted tokens are named in this
         component&apos;s doc · spring is budgeted to human feedback only.
       </p>

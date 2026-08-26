@@ -14,7 +14,7 @@ const BASE = process.env.BASE_URL ?? "http://localhost:3000";
 // Use a known-good Solana mint (Wrapped SOL) so success paths are exercised.
 const SOL = "So11111111111111111111111111111111111111112";
 
-// Mirror of CACHE constants in src/lib/cacheControl.ts (do not import — keep
+// Mirror of CACHE constants in src/lib/cacheControl.ts (do not import: keep
 // this script standalone & runnable with plain node).
 const CACHE = {
   STATIC_LONG: "public, s-maxage=3600, stale-while-revalidate=86400",
@@ -89,7 +89,7 @@ const cases = [
     expected: CACHE.SEMI_STATIC,
   },
   {
-    // Birdeye token_security requires a paid plan — local free-tier key returns
+    // Birdeye token_security requires a paid plan: local free-tier key returns
     // 401 + no-store. Either the success policy OR no-store is acceptable here;
     // the route's behavior is correct in both cases.
     label: "birdeye security",
@@ -140,14 +140,14 @@ for (const c of cases) {
     const res = await fetch(url);
     actual = res.headers.get("cache-control");
   } catch (err) {
-    console.error(`✗ ${c.label} — network error: ${err.message}`);
+    console.error(`✗ ${c.label}; network error: ${err.message}`);
     fail++;
     continue;
   }
 
   if (actual === c.expected || actual === c.acceptAlso) {
     const note =
-      actual === c.acceptAlso ? " (matched acceptAlso — upstream failed)" : "";
+      actual === c.acceptAlso ? " (matched acceptAlso: upstream failed)" : "";
     console.log(`✓ ${c.label}${note}`);
     pass++;
   } else {

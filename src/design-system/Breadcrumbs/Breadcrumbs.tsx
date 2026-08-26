@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 export type Crumb = {
   label: string;
-  /** Omit on the last item (current page) — it renders as text, not a link. */
+  /** Omit on the last item (current page): it renders as text, not a link. */
   href?: string;
 };
 

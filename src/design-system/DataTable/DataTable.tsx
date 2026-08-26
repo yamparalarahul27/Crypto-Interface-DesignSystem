@@ -2,6 +2,7 @@
 
 import { useMemo, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { IconCaretDown, IconCaretUp } from "../icons";
 
 export type Column<T> = {
   key: string;
@@ -21,12 +22,12 @@ type Sort = { key: string; dir: "asc" | "desc" } | null;
 /**
  * The terminal-grade table: real <table> semantics, sticky header,
  * client sort with aria-sort, numeric alignment discipline. Row height
- * and cell padding ride the density tokens (--row-h / --cell-px) — the
+ * and cell padding ride the density tokens (--row-h / --cell-px): the
  * compact axis retunes every row with zero component changes.
  *
  * Virtualization is deliberately not shipped (no reference system ships
  * it either); for streaming lists beyond ~200 rows pair with TanStack
- * Virtual — recipe in the doc.
+ * Virtual: recipe in the doc.
  */
 export function DataTable<T>({
   columns,
@@ -100,7 +101,7 @@ export function DataTable<T>({
                   aria-sort={ariaSort}
                   style={{ width: c.width, padding: "0 var(--cell-px)", height: "var(--row-h)" }}
                   className={cn(
-                    "whitespace-nowrap text-[10px] font-semibold uppercase tracking-wider text-fg-subtle",
+                    "whitespace-nowrap text-[10px] font-semibold text-fg-subtle",
                     c.align === "right" ? "text-right" : "text-left",
                   )}
                 >
@@ -109,13 +110,19 @@ export function DataTable<T>({
                       type="button"
                       onClick={() => toggle(c.key)}
                       className={cn(
-                        "inline-flex items-center gap-1 uppercase transition-colors duration-150 hover:text-fg",
+                        "inline-flex items-center gap-1 transition-colors duration-150 hover:text-fg",
                         active && "text-fg",
                       )}
                     >
                       {c.header}
-                      <span aria-hidden="true" className="w-2">
-                        {active ? (sort!.dir === "desc" ? "▾" : "▴") : ""}
+                      <span aria-hidden="true" className="inline-flex w-2">
+                        {active ? (
+                          sort!.dir === "desc" ? (
+                            <IconCaretDown size={9} weight="fill" />
+                          ) : (
+                            <IconCaretUp size={9} weight="fill" />
+                          )
+                        ) : null}
                       </span>
                     </button>
                   ) : (

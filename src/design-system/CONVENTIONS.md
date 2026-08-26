@@ -1,8 +1,8 @@
-# Design system — conventions
+# Design system: conventions
 
 > The tide design system, shaped after [Astryx](https://github.com/facebook/astryx):
 > an **in-repo module** (not an npm monorepo) whose defining trait is that
-> **a person and an AI agent build the same way** — because every component
+> **a person and an AI agent build the same way**: because every component
 > ships the same predictable doc shape, and tokens are consumed, never invented.
 >
 > This file is the contract. [DESIGN.md](../../DESIGN.md) is the source of
@@ -22,7 +22,7 @@
 └ GUARDS  check:theme · check:polish · check:contrast ┘
 ```
 
-The design system **consumes** tokens — it never declares color/spacing/motion
+The design system **consumes** tokens; it never declares color/spacing/motion
 values of its own. New foundations (a hue, a motion pair) are added to
 `globals.css` + DESIGN.md first, verified by a guard, *then* consumed here.
 
@@ -33,7 +33,7 @@ src/design-system/
   CONVENTIONS.md          ← this file
   <Component>/
     <Component>.tsx        ← the component
-    <Component>.doc.md     ← the doc (shape below) — REQUIRED
+    <Component>.doc.md     ← the doc (shape below): REQUIRED
     index.ts               ← re-export
 ```
 
@@ -44,7 +44,7 @@ finds its spec in the same directory.
 ## The doc shape (every component ships this)
 
 Every `<Component>.doc.md` has these sections **in this order**. Uniformity is
-the point — an agent can rely on the layout without re-learning it per file.
+the point: an agent can rely on the layout without re-learning it per file.
 
 ```
 # <Component>
@@ -65,11 +65,11 @@ Typed table: prop | type | default | notes. Mirror the .tsx exactly.
 
 ## Tokens
 Every token this component CONSUMES (--id-*, --motion-*, surface/fg/…).
-It must consume only — if a value isn't a token yet, stop and add it to
+It must consume only: if a value isn't a token yet, stop and add it to
 globals.css + DESIGN.md first (see Layer model).
 
 ## States
-default / hover / active / disabled / loading / empty / error — whichever
+default / hover / active / disabled / loading / empty / error: whichever
 apply. Each says which tokens/classes change.
 
 ## Motion
@@ -81,23 +81,23 @@ result if hue-dependent), reduced-motion behavior, keyboard/focus.
 ```
 
 A component is not done until its `.doc.md` exists and every section is filled
-(or explicitly marked N/A). "Docs later" is not allowed — the doc is how the
+(or explicitly marked N/A). "Docs later" is not allowed: the doc is how the
 next human *and* the next agent build against it.
 
 ## Component API contract
 
-Uniform prop conventions — every component follows all of these (Phase-2
+Uniform prop conventions: every component follows all of these (Phase-2
 of the roadmap unified the older ad-hoc APIs; future components must
 comply from their first commit):
 
 1. **`className` on every component**, merged with `cn()` (never string
-   concatenation — concatenation breaks tailwind-merge dedup). Sheet-based
+   concatenation: concatenation breaks tailwind-merge dedup). Sheet-based
    components (CommentThread, Onboarding) forward it to the Sheet panel.
-2. **`size` is a string union from the shared scale** — a subset of
+2. **`size` is a string union from the shared scale**: a subset of
    `"xs" | "sm" | "md" | "lg" | "xl"`, never raw numbers. Each component
    documents its px mapping in its doc's Props table (Avatar: xs 20 ·
    sm 28 · md 40 · lg 64; TokenIcon: sm 20 · md 24 · lg 32). Components
-   without a size prop are fixed-size by design — say so in the doc.
+   without a size prop are fixed-size by design: say so in the doc.
 3. **Controlled callbacks are `on<Event>`** (`onChange`, `onReact`,
    `onOpenChange`…) and state is the caller's: components never own the
    domain value, only ephemeral UI state (open pickers, drag offsets).
@@ -105,7 +105,7 @@ comply from their first commit):
    semantics (Sheet → Dialog, ReactionBar picker → Popover). Hand-rolled
    keyboard handling is allowed only for patterns Radix doesn't ship
    (Lane's roving tabindex) and must implement the full WAI-ARIA pattern.
-5. **Server-safe by default** — `"use client"` only where state/handlers
+5. **Server-safe by default**: `"use client"` only where state/handlers
    require it; the doc notes which.
 
 ## Lifecycle: the ladder
@@ -120,11 +120,11 @@ Every component carries `Status:` + `Version:` in its doc header
 | `deprecated` | still works; scheduled for removal | replacement exists and is named in the doc + CHANGELOG migration note | frozen |
 
 **Versioning (SemVer per component, CDS-style visual policy):**
-- **patch** — bug fix, no visible change.
-- **minor** — additive props **and/or visual refinements** (visual
+- **patch**: bug fix, no visible change.
+- **minor**: additive props **and/or visual refinements** (visual
   changes are allowed in minors; note them in the CHANGELOG so
   adopters can review before re-pulling from the registry).
-- **major** — renamed/removed/retyped props or behavior breaks; only
+- **major**: renamed/removed/retyped props or behavior breaks; only
   on `stable`, always with a migration note. Deprecation precedes
   removal by at least one dated release.
 - Copy-in means upgrades are pull-based: adopters re-add from the
@@ -138,14 +138,14 @@ package only if adopter demand pulls for it. Never both as defaults.
 
 A component is promoted `draft → stable` only when ALL of these hold:
 
-1. **API reviewed & frozen** — after promotion, props are only *added*.
+1. **API reviewed & frozen**: after promotion, props are only *added*.
    Renaming, removing, or retyping a prop requires a `CHANGELOG.md` entry
    with a migration note.
-2. **Tests pass** — the component's colocated `<Name>.test.tsx` covers
+2. **Tests pass**: the component's colocated `<Name>.test.tsx` covers
    render, its key interactions, and its accessibility contract
    (`npm test`).
-3. **Doc complete** — all seven sections (guard-enforced).
-4. **Both themes verified** — renders correctly in `dark` and `mono`.
+3. **Doc complete**: all seven sections (guard-enforced).
+4. **Both themes verified**: renders correctly in `dark` and `mono`.
 
 Promotions and breaking changes are recorded in [`CHANGELOG.md`](../../CHANGELOG.md).
 Test files are colocated but NOT part of the vendored folder (excluded
@@ -164,7 +164,7 @@ from the portability import whitelist).
 
 ## Rules of thumb
 
-- **Consume, don't invent.** No hex, no magic durations — reference a token.
+- **Consume, don't invent.** No hex, no magic durations: reference a token.
 - **Stay portable.** A component folder must work copied into any
   Tailwind+React app: import only react, radix-ui, `@/lib/utils`, or the
   design system itself. Never app components/hooks/lib. Enforced by

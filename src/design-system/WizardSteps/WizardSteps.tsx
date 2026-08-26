@@ -9,6 +9,7 @@ import {
   type ReactNode,
 } from "react";
 import { cn } from "@/lib/utils";
+import { IconCheck } from "../icons";
 import { Button } from "../Button";
 
 export type WizardDirection = 1 | -1;
@@ -181,7 +182,7 @@ export function WizardSteps({
                     : "scale-[0.92] border-outline-variant bg-surface-container text-fg-subtle",
               )}
             >
-              {done ? "✓" : i + 1}
+              {done ? <IconCheck size={13} weight="bold" aria-hidden="true" /> : i + 1}
             </span>
           );
 

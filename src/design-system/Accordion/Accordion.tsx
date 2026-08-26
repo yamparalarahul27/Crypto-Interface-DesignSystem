@@ -3,6 +3,7 @@
 import { Accordion as RadixAccordion } from "radix-ui";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { IconCaretDown } from "../icons";
 
 export type AccordionItem = {
   value: string;
@@ -11,7 +12,7 @@ export type AccordionItem = {
 };
 
 /**
- * Collapsible sections on Radix Accordion — keyboard (arrows/Home/End),
+ * Collapsible sections on Radix Accordion: keyboard (arrows/Home/End),
  * ARIA wiring, and height animation for free. `type="single"` (default,
  * collapsible) is the FAQ shape; `type="multiple"` lets panels coexist
  * (transaction breakdowns, advanced settings).
@@ -44,9 +45,9 @@ export function Accordion({
           {item.title}
           <span
             aria-hidden="true"
-            className="text-fg-subtle transition-transform duration-150 group-data-[state=open]:rotate-180"
+            className="inline-flex text-fg-subtle transition-transform duration-150 group-data-[state=open]:rotate-180"
           >
-            ▾
+            <IconCaretDown size={12} weight="bold" />
           </span>
         </RadixAccordion.Trigger>
       </RadixAccordion.Header>

@@ -1,7 +1,7 @@
-# CIDS — Evolution Roadmap
+# CIDS: Evolution Roadmap
 
 > **North star.** Any designer or developer can pick up CIDS and build
-> anything crypto — from a simple web3 app to a complex financial
+> anything crypto: from a simple web3 app to a complex financial
 > exchange. A **build-with system**, not a showcase. This doc is the
 > end-to-end map from today's state to that bar, benchmarked against
 > well-maintained systems (Material 3, Apple HIG, shadcn/ui, Radix,
@@ -38,19 +38,19 @@ R5 TRUST      docs/tests/versioning discipline that
 Evidence-based snapshot @ `main` `3f68e82`. Full audit lives in the
 PR that added this doc; file:line refs preserved where load-bearing.
 
-**Strong — keep and defend:**
+**Strong; keep and defend:**
 - **Doc-as-contract**: every component ships `.doc.md` in a fixed
   7-section shape (Usage·Anatomy·Props·Tokens·States·Motion·A11y),
   guard-enforced (`check:portable` P2). The canvas Inspector renders
-  the *real* file from disk — docs cannot drift from source.
+  the *real* file from disk: docs cannot drift from source.
 - **Token discipline**: components consume semantic tokens; hex is
   guard-banned (`check:theme`); per-theme WCAG contrast is *computed*,
   not eyeballed (`check:contrast`).
 - **Portability**: import allowlist (react / radix-ui / cn) makes any
   component folder copy-pasteable (`check:portable` P1).
 - **The canvas** as a docs surface (layers rail, doc+code inspector
-  with copy buttons) — a genuine differentiator.
-- 50 vitest tests incl. sign-discipline (▲/▼ + `Math.abs`) — the
+  with copy buttons): a genuine differentiator.
+- 50 vitest tests incl. sign-discipline (▲/▼ + `Math.abs`): the
   crypto-correctness seed.
 
 **The 15 audited gaps, ranked:**
@@ -58,22 +58,22 @@ PR that added this doc; file:line refs preserved where load-bearing.
 | # | Gap | Evidence |
 |---|---|---|
 | 1 | No distribution despite stated goal | `package.json` `private:true`, no `exports`; `components.json` registries `{}` |
-| 2 | DESIGN.md (declared SoT) half-stale — documents the deleted app | `DESIGN.md:1,245-563,604-605` (dead `Button.tsx`, banned `transition-all`, old hex) |
+| 2 | DESIGN.md (declared SoT) half-stale: documents the deleted app | `DESIGN.md:1,245-563,604-605` (dead `Button.tsx`, banned `transition-all`, old hex) |
 | 3 | No shadow/elevation tokens; shadows hardcoded ×4 | `Lane.tsx:9`, `Sheet.tsx:60`, `ReactionBar.tsx:69`, `FeedScreen.tsx:237` |
-| 4 | No CI — guards+tests run only by memory | no `.github/` |
+| 4 | No CI: guards+tests run only by memory | no `.github/` |
 | 5 | A11y holes: ReactionBar picker (no focus trap/Escape/outside-click), Lane tablist (no arrow keys) | `ReactionBar.tsx:66-86`, `Lane.tsx:41` |
 | 6 | `className` contract broken 3 ways | `TokenIcon.tsx:40` concat; CommentThread/Onboarding omit it |
 | 7 | `size` API non-uniform (numeric vs string vs absent 9/12) | `Avatar.tsx:4` vs `TokenIcon.tsx:5` vs `FollowButton.tsx:26` |
 | 8 | No spacing / z-index tokens (8px scale documented, never tokenized) | `DESIGN.md:217-229` |
 | 9 | Tests don't verify the promises (no axe, keyboard, theme-render, reduced-motion) | vs `CONVENTIONS.md:95-98` |
-| 10 | Theme Studio 1/N — radius tokens only, no editor | `CHANGELOG.md:35-40` |
-| 11 | `check:polish` path-brittle — new components silently escape | `check-polish.mjs:56-93` |
+| 10 | Theme Studio 1/N: radius tokens only, no editor | `CHANGELOG.md:35-40` |
+| 11 | `check:polish` path-brittle: new components silently escape | `check-polish.mjs:56-93` |
 | 12 | Canvas: desktop-only (search + permalinks + state switcher shipped) | mobile gesture polish deferred |
 | 13 | No per-component versioning / unused deprecation bucket | `CONVENTIONS.md:52,100`, `CHANGELOG.md:20` |
 | 14 | Orphans muddy the boundary: `ui/{Skeleton,Tooltip}`, `agent-elements/` (dup `cn`), guard-exempt `evilcharts` | `src/components/*` |
 | 15 | README says 11 components; there are 12 (TokenIcon omitted, still draft) | `README.md:23-24` |
 
-**Inventory reality:** 12 components — 10 social/crypto molecules +
+**Inventory reality:** 12 components, 10 social/crypto molecules +
 2 primitives (Avatar, TokenIcon). **No Button, no Input, no Dialog,
 no Table.** ~15% of the canonical core (Material ≈35, shadcn ≈50,
 Polaris/Carbon ≈60), but ahead of *all* generic systems in the social-
@@ -84,7 +84,7 @@ identity band. The floor is missing, not the differentiator.
 ## 3 · The reference bar
 
 What "well-maintained" concretely means, per system (researched
-2026-07, numbers verified against live docs) — and what CIDS takes
+2026-07, numbers verified against live docs): and what CIDS takes
 from each.
 
 ```
@@ -101,34 +101,34 @@ from each.
 |---|---|---|
 | **Material 3** | ~36 components · 6 categories | `md.ref → md.sys → md.comp` token tiers; paired `X`/`on-X` color roles (contrast baked into tokens); 15-style type ramp; **density as a numbered token scale** (0/−1/−2/−3, −4px per step, 48dp targets preserved) |
 | **Apple HIG** | ~40 pages · 8 categories | Guidance voice ("Prefer X. Avoid Y because Z."); Dynamic Type as user-controlled scale; **per-page dated changelogs**; a11y woven into each page, not annexed |
-| **shadcn/ui** | 79 components + Blocks | Copy-in registry + CLI (adopters *own* code — `check:portable`'s philosophy, unshipped); ~30 semantic CSS vars theme everything; CLI 3.0 ships namespaced registries + an **MCP server** (agent adoption) |
+| **shadcn/ui** | 79 components + Blocks | Copy-in registry + CLI (adopters *own* code: `check:portable`'s philosophy, unshipped); ~30 semantic CSS vars theme everything; CLI 3.0 ships namespaced registries + an **MCP server** (agent adoption) |
 | **Radix / Base UI** | 28+ / 45 headless | Behavior bought, not built: focus traps, roving tabindex, typeahead, ARIA per WAI-ARIA APG. Caution: Radix handed to WorkOS 2025; **Base UI** (MUI + ex-Radix, v1.6) is the actively maintained successor |
 | **Polaris** | 66 active + **24 visibly deprecated** | Token grammar `--p-color-bg-fill-critical-secondary`; **content guidelines per component** (exact button wording); deprecation as public IA; migration codemods. Caution: polaris-react → maintenance-mode 2025 (web-components rebuild) |
 | **Carbon** | 67 components · 4 themes | **The density benchmark**: DataTable w/ 5 row heights, layering model (contextual `layer` tokens for nested surfaces), spacing-01..13, productive/expressive type sets; **biweekly releases, published schedule, `npx @carbon/upgrade` codemods**; a11y = WCAG 2.1 AA + Section 508 + EN 301 549 w/ published per-component evidence |
 | **Primer** | 80+ dual-stack | **The lifecycle ladder**: draft → experimental → alpha → beta → stable → deprecated, criteria-gated, runtime deprecation warnings; 8-9 themes incl. colorblind/high-contrast (themes as a11y). Caution: repos archived Oct-Nov 2025 |
 | **Coinbase CDS** | **141 components · 11 categories** | The crypto corporate bar: React+RN shared source; theme = spectrum+semantic tokens, 8px base, CSS vars for no-re-render theme switch, **nested themes**; 3 starter templates; explicit visual-versioning policy; **16 chart components + Scrubber + RollingNumber** (streaming price numerals) |
-| **Reown / AppKit** | 5 wallet atoms · 11 framework quickstarts | White-labeling with ~8 variables — incl. **two master knobs** (`--apkt-border-radius-master`, `--apkt-font-size-master`) that rescale the whole kit; the canonical wallet-UX atom inventory (connect/account/network buttons) |
+| **Reown / AppKit** | 5 wallet atoms · 11 framework quickstarts | White-labeling with ~8 variables: incl. **two master knobs** (`--apkt-border-radius-master`, `--apkt-font-size-master`) that rescale the whole kit; the canonical wallet-UX atom inventory (connect/account/network buttons) |
 | **ethereum.org D&UX** | heuristics layer | **7 web3 heuristics**: tx status always visible; design the UI↔wallet seam; always show chain + switcher; accelerators (batch flows); vocabulary control. The patterns layer CIDS should encode as components |
-| **interior.dev** | ~54 micro-interactions | The **half-second after a click**: no layout jump · interruptible springs · reduced-motion still informs. Copy-in + headless hooks, but **requires `motion`** — CIDS steals contracts into Radix/CSS (or composition-tier with approval). Mapping: [`docs/references/interior.md`](./references/interior.md) |
+| **interior.dev** | ~54 micro-interactions | The **half-second after a click**: no layout jump · interruptible springs · reduced-motion still informs. Copy-in + headless hooks, but **requires `motion`**; CIDS steals contracts into Radix/CSS (or composition-tier with approval). Mapping: [`docs/references/interior.md`](./references/interior.md) |
 
 ### The 10 traits of a well-maintained system <sub>(ranked for the CIDS north star)</sub>
 
-1. **Layered token architecture** — components never touch raw values *(M3)*
-2. **Behavior from a headless a11y layer** — solved once, upstream *(Radix/Base UI)*
-3. **Density/scale as a token axis** — "simple dApp" and "terminal" are two values of one variable, not two component sets *(Carbon, M3)*
-4. **Criteria-gated lifecycle labels** — adopters know exactly what to trust *(Primer)*
-5. **Minutes-to-first-component** — registry/CLI/templates/quickstarts *(shadcn; Reown, CDS in crypto)*
-6. **Docs that encode judgment** — when-to-use, do/don't, exact content vocabulary; in crypto, wording ("Sign" vs "Approve" vs "Confirm") is a **security surface** *(HIG voice, Polaris content)*
-7. **Release discipline w/ migration automation** — cadence, support phases, codemods, explicit visual-change policy *(Carbon; CDS)*
-8. **A11y with published evidence** — stated target + CI automation + per-component test results *(Carbon, Primer)*
-9. **A patterns/blocks layer above components** — recipes teach composition; components alone don't build an exchange *(Carbon Patterns, shadcn Blocks, HIG)*
-10. **Visible governance/continuity** — 2025's lesson from polaris-react, Primer, Radix: trust = changelog + support phases + evidence someone's home *(Carbon)*
+1. **Layered token architecture**: components never touch raw values *(M3)*
+2. **Behavior from a headless a11y layer**: solved once, upstream *(Radix/Base UI)*
+3. **Density/scale as a token axis**: "simple dApp" and "terminal" are two values of one variable, not two component sets *(Carbon, M3)*
+4. **Criteria-gated lifecycle labels**: adopters know exactly what to trust *(Primer)*
+5. **Minutes-to-first-component**: registry/CLI/templates/quickstarts *(shadcn; Reown, CDS in crypto)*
+6. **Docs that encode judgment**: when-to-use, do/don't, exact content vocabulary; in crypto, wording ("Sign" vs "Approve" vs "Confirm") is a **security surface** *(HIG voice, Polaris content)*
+7. **Release discipline w/ migration automation**: cadence, support phases, codemods, explicit visual-change policy *(Carbon; CDS)*
+8. **A11y with published evidence**: stated target + CI automation + per-component test results *(Carbon, Primer)*
+9. **A patterns/blocks layer above components**: recipes teach composition; components alone don't build an exchange *(Carbon Patterns, shadcn Blocks, HIG)*
+10. **Visible governance/continuity**: 2025's lesson from polaris-react, Primer, Radix: trust = changelog + support phases + evidence someone's home *(Carbon)*
 
 ### The crypto whitespace (what nobody ships)
 
 | Pattern | Closest reference |
 |---|---|
-| Tx lifecycle states (idle→sign→pending→confirmed/failed) | ethereum.org heuristic only — **no library ships this** |
+| Tx lifecycle states (idle→sign→pending→confirmed/failed) | ethereum.org heuristic only: **no library ships this** |
 | Account pill (address + balance + avatar) | Reown (closed web component) |
 | Network badge + switcher | Reown; heuristic #3 |
 | Streaming/rolling numerals | CDS `RollingNumber` |
@@ -139,7 +139,7 @@ from each.
 
 > **The strategic finding:** every reference is strong on a different
 > axis; **none combines crypto-native inventory + exchange-grade
-> density + registry distribution.** That intersection is empty — and
+> density + registry distribution.** That intersection is empty: and
 > it is exactly where the CIDS north star points.
 
 ---
@@ -165,13 +165,13 @@ W6 GOVERNANCE    CI, guard robustness, SoT truth,
 
 ---
 
-## 5 · The evolution plan — phases, actions, checkpoints
+## 5 · The evolution plan: phases, actions, checkpoints
 
 Phases are sequenced so each unlocks the next; each has a **gate**
 (merge criteria) and ships PR-sized. Estimates assume the current
 one-PR-at-a-time rhythm.
 
-### Phase 0 — Truth & safety net <sub>(W6 · unblocks everything)</sub>
+### Phase 0: Truth & safety net <sub>(W6 · unblocks everything)</sub>
 
 The cheapest phase, and the one that makes "well-maintained" honest.
 
@@ -179,7 +179,7 @@ The cheapest phase, and the one that makes "well-maintained" honest.
       section (dead Button, Instrument Sans, `transition-all`, old
       hex, old title). DESIGN.md must only describe what exists.
 - [x] **README truth**: 12 components, TokenIcon listed.
-- [x] **CI**: GitHub Actions workflow — `tsc` + lint + all 4 guards +
+- [x] **CI**: GitHub Actions workflow, `tsc` + lint + all 4 guards +
       vitest on every PR. The contract stops depending on memory.
 - [ ] **Orphan policy**: decide Skeleton/Tooltip (migrate → DS in
       Phase 2), `agent-elements` (delete or label), `evilcharts`
@@ -190,7 +190,7 @@ The cheapest phase, and the one that makes "well-maintained" honest.
 **Gate:** CI green on a no-op PR; grep DESIGN.md for `Button.tsx`,
 `transition-all`, `Instrument Sans` returns nothing.
 
-### Phase 1 — Foundations completion <sub>(W1 · the scalability spine)</sub>
+### Phase 1: Foundations completion <sub>(W1 · the scalability spine)</sub>
 
 Tokenize what DESIGN.md already promises. Theme Studio needs these
 axes to be impressive; density (R2) is impossible without them.
@@ -199,16 +199,16 @@ axes to be impressive; density (R2) is impossible without them.
       vars + usage rules (deliberately not remapping Tailwind's scale);
       component-wide adoption rides with the Phase-5 density axis,
       where it becomes load-bearing.
-- [x] **Type scale tokens** — financial ramp tokenized
+- [x] **Type scale tokens**: financial ramp tokenized
       (`--text-data-*` + `font-pixel` utilities; `.data-*` classes now
       consume the vars). General UI sizes stay on Tailwind's ramp until
       density work needs them.
 - [x] **Elevation tokens** (`--elevation-1…3` + `--glow-brand`/`-strong`
-      → `shadow-card/raised/overlay/glow-brand*`) — all 4 hardcoded
+      → `shadow-card/raised/overlay/glow-brand*`): all 4 hardcoded
       shadows replaced.
 - [x] **Z-index scale** (`--z-base/raised/sticky/overlay/modal/toast`),
       adopted across DS + design app.
-- [x] **Motion into `@theme`** — durations/easings split into tokens;
+- [x] **Motion into `@theme`**: durations/easings split into tokens;
       `ease-settle`/`ease-spring` utilities.
 - [x] **State-surface completeness**: `error-surface` +
       `success-surface` added.
@@ -220,7 +220,7 @@ axes to be impressive; density (R2) is impossible without them.
 **Gate:** zero hardcoded shadows/z-index in DS (`grep` guard added);
 every token category has a DESIGN.md table + guard coverage.
 
-### Phase 2 — API contract v1 + quality program <sub>(W2 · trust)</sub>
+### Phase 2: API contract v1 + quality program <sub>(W2 · trust)</sub>
 
 One breaking-change window, done once, announced in CHANGELOG.
 
@@ -229,16 +229,16 @@ One breaking-change window, done once, announced in CHANGELOG.
       scale, on<Event> callbacks, Radix-for-behavior, server-safe default.
 - [x] Offenders fixed: TokenIcon cn-merges; CommentThread + Onboarding
       take className (forwarded to Sheet); Avatar/AvatarGroup sizes
-      moved to the string scale (xs/sm/md/lg) — the declared break.
+      moved to the string scale (xs/sm/md/lg): the declared break.
 - [x] **A11y repairs**: ReactionBar picker → Radix Popover (Escape,
-      outside-click, focus return — tested); Lane → roving tabindex +
+      outside-click, focus return: tested); Lane → roving tabindex +
       Arrow/Home/End (tested).
-- [x] **Test depth**: axe matrix — every component × dark/mono, zero
+- [x] **Test depth**: axe matrix, every component × dark/mono, zero
       violations (caught + fixed a real aria-prohibited-attr in
       SocialProofChip); keyboard tests (Lane arrows, popover/sheet
       Escape + focus-return); motion/reduced-motion contract test.
 - [x] **Skeleton + Tooltip migrated into the DS** (docs, tests, canvas
-      demos; Tooltip re-tokenized: z-ladder, elevation, text-fg) —
+      demos; Tooltip re-tokenized: z-ladder, elevation, text-fg),
       14 components, 12 stable.
 - [x] TokenIcon promoted draft → stable under the new contract
       (10 stable / 2 draft).
@@ -246,17 +246,17 @@ One breaking-change window, done once, announced in CHANGELOG.
 **Gate:** axe zero violations across all components × all themes in
 CI; CONVENTIONS "accessibility contract" is enforced, not promised.
 
-### Phase 3 — Light theme + Theme Studio 2 <sub>(W1/R3 · the adaptability proof)</sub>
+### Phase 3: Light theme + Theme Studio 2 <sub>(W1/R3 · the adaptability proof)</sub>
 
 - [x] **`light` theme** shipped: full re-valuation (white canvas,
       dark-jewel identity hues, deep-teal brand, inverted glyph,
-      softened elevations) — AA-verified; axe matrix runs 14×4 themes.
+      softened elevations): AA-verified; axe matrix runs 14×4 themes.
 - [x] **`violet` demo theme**: accent family + reserved "you" hue
-      swapped in ONE block — the white-labeling proof (R3).
+      swapped in ONE block: the white-labeling proof (R3).
 - [x] **Theme Studio step 2** shipped: canvas "studio" panel with the
-      Reown-style master knobs — accent (derives hover/bright/subtle +
+      Reown-style master knobs: accent (derives hover/bright/subtle +
       luminance-picked on-brand + the reserved "you" hue), radius
-      master, spacing-scale master, data-type master — applied live as
+      master, spacing-scale master, data-type master: applied live as
       inline token overrides on <html>, layering over the active theme;
       **export css** copies a recipe-compatible `[data-theme]` block.
 - [x] Adopter recipe documented in DESIGN.md (4-step: block → forced
@@ -265,27 +265,27 @@ CI; CONVENTIONS "accessibility contract" is enforced, not promised.
 **Gate:** all themes pass `check:contrast` in CI; a theme authored
 by following the recipe alone (no code reading) renders correctly.
 
-### Phase 4 — Core atoms <sub>(W3/R1 · closes "where's the Button")</sub>
+### Phase 4: Core atoms <sub>(W3/R1 · closes "where's the Button")</sub>
 
 Radix-backed where behavior is nontrivial; every component ships the
 full doc shape + axe/keyboard tests (Phase 2 program applies).
 
 - [x] Tier 1 shipped: **Button, IconButton, Input, Badge, Dialog,
-      Menu** — contract API, 7-section docs, tests, axe×4-themes,
+      Menu**: contract API, 7-section docs, tests, axe×4-themes,
       canvas Primitives zone. Draft status; promote after baking.
 - [x] Tier 2 shipped: **Select, Switch, Checkbox, Toast (provider +
       useToast, first --z-toast consumer), Tabs (Lane generalized via
-      Radix), Divider, EmptyState** — full program each.
+      Radix), Divider, EmptyState**: full program each.
 - [x] Canvas "Primitives" zone live (6 demos incl. stateful Dialog).
       Gallery/feed adoption + promotions ride with Tier 2 (4b).
 
-**Gate — MET (2026-07-13):** 27 components (≥25 ✓); every category
-≥1 stable ✓ — actions: Button/IconButton · forms: Input · feedback:
+**Gate: MET (2026-07-13):** 27 components (≥25 ✓); every category
+≥1 stable ✓; actions: Button/IconButton · forms: Input · feedback:
 Badge/Skeleton · containment: Sheet/Dialog · navigation: Lane ·
 selection: Menu. Tier-1 promoted to stable after one bake cycle;
 Tier-2 enters draft.
 
-### Phase 5 — Terminal-grade layer <sub>(W3/R1+R2 · the exchange claim)</sub>
+### Phase 5: Terminal-grade layer <sub>(W3/R1+R2 · the exchange claim)</sub>
 
 The phase that makes "complex financial exchanges" honest. Carbon
 proves dense data UIs belong in a system; CIDS adds the crypto
@@ -297,12 +297,12 @@ domain generic systems lack.
 - [x] **DataTable** shipped: real table semantics, sticky header,
       aria-sort cycle, numeric alignment discipline, density-token row
       grid. Virtualization = TanStack pairing recipe in the doc (as
-      decided — no reference ships it).
+      decided: no reference ships it).
 - [x] **Streaming-number kit** shipped: RollingNumber (per-slot roll,
       zero layout shift), PriceChange (sign discipline hard-coded +
       polish-guard-pinned), StatCell (density-responsive), Sparkline
       (direction-toned SVG). Numeric skeleton = Skeleton + tabular box.
-- [x] **Crypto verticals shipped** — the whitespace column:
+- [x] **Crypto verticals shipped**; the whitespace column:
       AddressChip (full address always accessible), PegBadge (bps
       thresholds, guideline-#5 pinned by the polish guard),
       NetworkBadge (heuristic #3), TxStatus (lifecycle live-region,
@@ -310,44 +310,44 @@ domain generic systems lack.
 - [x] **Order-book demo** on the canvas Crypto zone: bids/asks depth
       bars + spread, streaming ticks every 900ms.
 
-**Gate — MET (2026-07-13):** the order-book rows are fixed to the
-density tokens (`--row-h`/`--cell-px`) with tabular numerals — ticks
+**Gate; MET (2026-07-13):** the order-book rows are fixed to the
+density tokens (`--row-h`/`--cell-px`) with tabular numerals: ticks
 change text and bar widths only, zero layout shift, and the studio's
 compact switch tightens it live. PegBadge/PriceChange sign discipline
 is guard-pinned; all five verticals pass the axe×4-themes matrix
 (37 × 4 = 148 checks).
 
-### Phase 6 — Patterns & templates <sub>(W3/W4/R4 · composition)</sub>
+### Phase 6: Patterns & templates <sub>(W3/W4/R4 · composition)</sub>
 
-- [x] **Patterns shipped** — `src/design-system/PATTERNS.md` (contract:
+- [x] **Patterns shipped**; `src/design-system/PATTERNS.md` (contract:
       Problem·Composition·States·Do/Don't·Code) with five entries:
       states catalog, tx flow (heuristics #1/#2 encoded), form row,
       market list, **swap/receive ticket** (Batch 5 + LoadingButton
-      composed) — each a live canvas frame in the Patterns zone.
+      composed): each a live canvas frame in the Patterns zone.
 - [x] **Do/Don't pairs** rendered inside every pattern frame
-      (✓ buy / ✗ sell, glyph + word — never color alone).
+      (✓ buy / ✗ sell, glyph + word: never color alone).
 - [x] **Content guidelines** in PATTERNS.md: the action-verb table
-      (Connect/Sign/Approve/Confirm/Cancel-vs-Reject — one verb per
+      (Connect/Sign/Approve/Confirm/Cancel-vs-Reject: one verb per
       meaning) + voice rules; the ethereum.org heuristics live inside
       the tx-flow pattern's rules.
 - [x] **Two starter templates shipped**: `/design/templates/simple-dapp`
       (connect session, balances, full send flow w/ review + lifecycle)
       and `/design/templates/exchange` (markets table, streaming order
-      book, trade form, RollingNumber header — **compact density,
-      element-scoped**) — both DS-components-only, framed live on the
+      book, trade form, RollingNumber header: **compact density,
+      element-scoped**); both DS-components-only, framed live on the
       canvas, linked from the landing.
 
-**Gate — MET (2026-07-13):** both templates are DS-exports-only with
+**Gate; MET (2026-07-13):** both templates are DS-exports-only with
 zero one-off styles (guards pass on template code); the exchange runs
 at compact density and streams with zero layout shift. Promotions
-batched here: 17 drafts → stable (**35 stable / 2 draft** — only
+batched here: 17 drafts → stable (**35 stable / 2 draft**, only
 CommentThread + Onboarding stay draft pending real product use).
 
-### Phase 7 — Distribution & governance <sub>(W5/R4+R5 · adoptable)</sub>
+### Phase 7: Distribution & governance <sub>(W5/R4+R5 · adoptable)</sub>
 
 - [x] **Registry shipped**: `scripts/build-registry.mjs` generates 39
       shadcn-compatible items into `public/r/` (37 components + tokens
-      + identity) — cross-imports become `@cids/*` registryDependencies,
+      + identity): cross-imports become `@cids/*` registryDependencies,
       docs ship beside the code, radix declared per item; the new
       `check:registry` CI guard fails on any drift from source.
 - [x] **Versioning & lifecycle shipped**: draft → stable → deprecated
@@ -356,7 +356,7 @@ CommentThread + Onboarding stay draft pending real product use).
       tested); stable baseline = 1.0.0; SemVer-per-component with the
       CDS visual-minors policy in CHANGELOG; registry descriptions
       surface versions.
-- [x] **Agent adoption shipped**: `scripts/cids-mcp.mjs` — a
+- [x] **Agent adoption shipped**: `scripts/cids-mcp.mjs`, a
       zero-dependency stdio MCP server over the registry
       (list_components / get_component / get_quickstart); an agent
       gets spec + source in one call. Smoke-tested over JSON-RPC.
@@ -368,11 +368,11 @@ CommentThread + Onboarding stay draft pending real product use).
       first; a package only if adopter demand pulls. Never both as
       defaults.
 
-**Gate — structurally met (2026-07-13):** the quickstart is the
+**Gate; structurally met (2026-07-13):** the quickstart is the
 <5-minute path (namespace → tokens → component → theme); items are
 schema-valid with cross-deps resolving; `check:registry` guarantees
 freshness. The literal fresh-app run happens against the deployed URL
-— first adopter (or preview session) confirms; everything it depends
+: first adopter (or preview session) confirms; everything it depends
 on is CI-enforced.
 
 ---
@@ -392,7 +392,7 @@ phases rather than a phase of its own):
 
 ### The component page (anatomy)
 
-Every component gets an individual page at `/design/<component>` —
+Every component gets an individual page at `/design/<component>`:
 the Material/HIG-style read surface where a designer or developer
 learns the component end-to-end. **Rendered from the same `.doc.md` +
 `.tsx` on disk** (extending the Inspector's renderer), so pages can
@@ -425,7 +425,7 @@ Phase 2 doc upgrades (the content already exists in `.doc.md`);
 motion replay + state/density switchers land with Phases 3/5.
 
 Principles: the Inspector and the pages keep rendering *real files
-from disk* (no duplicated doc content — the anti-drift property is
+from disk* (no duplicated doc content: the anti-drift property is
 the moat); mobile keeps the gallery + pages as its first-class
 surface; the canvas stays the desktop wow.
 
@@ -437,11 +437,11 @@ Re-scored at the end of every phase; lives in README once ≥ M2.
 
 | Level | Claim | Measurable criteria |
 |---|---|---|
-| **M0 — Collection** *(the 2026-07-13 starting point)* | "12 documented components" | docs+guards exist; no CI; inventory <20% core |
-| **M1 — Honest system** | "the contract is enforced" | Phase 0+1 gates: CI green, SoT truthful, all token categories exist |
-| **M2 — Trustworthy** | "safe to depend on" | Phase 2+3 gates: axe×themes green, API conventions uniform, 3+ themes AA |
-| **M3 — Buildable** | "you can build real apps" | Phase 4+5 gates: ≥25 components incl. data layer, density axis, exchange demo |
-| **M4 — Adoptable** ✅ *(reached 2026-07-13)* | "strangers ship with it" | Phase 6+7 gates: templates, registry, <5-min quickstart, versioning live |
+| **M0: Collection** *(the 2026-07-13 starting point)* | "12 documented components" | docs+guards exist; no CI; inventory <20% core |
+| **M1; Honest system** | "the contract is enforced" | Phase 0+1 gates: CI green, SoT truthful, all token categories exist |
+| **M2; Trustworthy** | "safe to depend on" | Phase 2+3 gates: axe×themes green, API conventions uniform, 3+ themes AA |
+| **M3: Buildable** | "you can build real apps" | Phase 4+5 gates: ≥25 components incl. data layer, density axis, exchange demo |
+| **M4; Adoptable** ✅ *(reached 2026-07-13)* | "strangers ship with it" | Phase 6+7 gates: templates, registry, <5-min quickstart, versioning live |
 ```
 M0 ──► M1 ──► M2 ──► M3 ──► M4
 today  truth  trust  build  adopt
@@ -456,7 +456,7 @@ today  truth  trust  build  adopt
   items ride along inside phase PRs.
 - **Every new/changed component PR** ships: component + `.doc.md`
   (7 sections) + tests (render, a11y, keyboard, themes) + canvas
-  registration — "a component without its doc is not done" extends
+  registration: "a component without its doc is not done" extends
   to tests and the canvas.
 - **Breaking changes** only inside a declared window (Phase 2) or
   under the deprecation policy after it.

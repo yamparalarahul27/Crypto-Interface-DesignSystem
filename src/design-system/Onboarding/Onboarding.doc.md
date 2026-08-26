@@ -37,13 +37,13 @@ import { Onboarding } from "@/design-system";
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `open` / `onOpenChange` | `boolean` / `(b) => void` | — | Controlled, forwarded to `Sheet`. |
-| `walletAddress` | `string \| null` | — | Truthy → step 1 collapses to a checked row (shortened addr). |
-| `onConnectWallet` | `() => void` | — | Shown when not connected. |
-| `handle` | `string` | — | Controlled; sanitized to `[a-z0-9_]`. |
-| `onHandleChange` | `(v: string) => void` | — | Availability check is the caller's job. |
+| `open` / `onOpenChange` | `boolean` / `(b) => void` | - | Controlled, forwarded to `Sheet`. |
+| `walletAddress` | `string \| null` | - | Truthy → step 1 collapses to a checked row (shortened addr). |
+| `onConnectWallet` | `() => void` | - | Shown when not connected. |
+| `handle` | `string` | - | Controlled; sanitized to `[a-z0-9_]`. |
+| `onHandleChange` | `(v: string) => void` | - | Availability check is the caller's job. |
 | `availability` | `"idle" \| "checking" \| "available" \| "taken"` | `"idle"` | Inline indicator + gates the CTA. |
-| `onJoin` | `() => void` | — | Fires only when connected + available. |
+| `onJoin` | `() => void` | - | Fires only when connected + available. |
 
 ## Tokens
 
@@ -51,7 +51,7 @@ import { Onboarding } from "@/design-system";
 - `--color-surface-container` fields · `--color-outline` connect button.
 - `--color-buy` (checked / available) · `--color-sell` (taken).
 - `--color-brand` / `--color-on-brand` CTA · `--id-*` via the live `Avatar`.
-- `--radius-card` / `--radius-control` — rows/CTA and inputs.
+- `--radius-card` / `--radius-control`: rows/CTA and inputs.
 
 ## States
 
@@ -62,7 +62,7 @@ import { Onboarding } from "@/design-system";
 
 ## Motion
 
-Sheet slide + drag-dismiss; buttons press-scale `0.98`. Avatar updates instantly as the handle changes (no transition — identity is calm).
+Sheet slide + drag-dismiss; buttons press-scale `0.98`. Avatar updates instantly as the handle changes (no transition: identity is calm).
 
 ## A11y
 

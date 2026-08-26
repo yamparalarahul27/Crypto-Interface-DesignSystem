@@ -2,6 +2,7 @@
 
 import { Select as RadixSelect } from "radix-ui";
 import { cn } from "@/lib/utils";
+import { IconCheck } from "../icons";
 
 export type SelectOption<T extends string> = {
   value: T;
@@ -63,7 +64,9 @@ export function Select<T extends string>({
                 )}
               >
                 <RadixSelect.ItemText>{o.label}</RadixSelect.ItemText>
-                <RadixSelect.ItemIndicator className="text-brand">✓</RadixSelect.ItemIndicator>
+                <RadixSelect.ItemIndicator className="text-brand">
+                  <IconCheck size={12} weight="bold" aria-hidden="true" />
+                </RadixSelect.ItemIndicator>
               </RadixSelect.Item>
             ))}
           </RadixSelect.Viewport>

@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "DeFi Triangle — Solana token intelligence";
+export const alt = "DeFi Triangle: Solana token intelligence";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -96,7 +96,7 @@ export default function OpengraphImage() {
                 maxWidth: 680,
               }}
             >
-              Trending markets, variants, risk — scored in real time.
+              Trending markets, variants, risk: scored in real time.
             </div>
           </div>
         </div>

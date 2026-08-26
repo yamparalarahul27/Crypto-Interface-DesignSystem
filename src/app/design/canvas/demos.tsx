@@ -6,88 +6,97 @@ import type { DemoFn, DemoOpts } from "./demoStates";
 import { PriceChart, type PricePoint } from "@/components/PriceChart/PriceChart";
 import { QRCode } from "@/components/QRCode/QRCode";
 import {
-  Avatar,
-  WalletAvatar,
-  TokenIcon,
-  AvatarGroup,
-  TokenChip,
-  ReactionBar,
-  FollowButton,
-  Lane,
-  SocialProofChip,
-  PostCard,
-  Sheet,
-  CommentThread,
-  Onboarding,
-  ID_HUES,
-  type Reaction,
-  type Comment,
-  Skeleton,
-  SectionSkeleton,
-  Tooltip,
-  Button,
-  LoadingButton,
-  HoldToConfirm,
-  OTPInput,
-  InlineValidation,
-  WizardSteps,
-  IconButton,
-  Badge,
-  Input,
-  Dialog,
-  Menu,
-  Switch,
-  Checkbox,
-  Select,
-  Tabs,
-  ToastProvider,
-  useToast,
-  Divider,
-  EmptyState,
-  DataTable,
-  type Column,
-  RollingNumber,
-  PriceChange,
-  StatCell,
-  Sparkline,
-  AddressChip,
-  PegBadge,
-  NetworkBadge,
-  TxStatus,
-  AmountInput,
-  type TxState,
   Accordion,
-  Alert,
-  Card,
-  Progress,
-  RadioGroup,
-  Textarea,
-  AppBar,
-  BottomNav,
-  Breadcrumbs,
-  Combobox,
-  Drawer,
-  Pagination,
-  Popover,
-  ContextMenu,
-  Amount,
-  ChainSwitcher,
-  GasFee,
-  WalletButton,
-  type WalletStatus,
-  OrderBook,
-  type OrderBookLevel,
-  OrderTypeTabs,
-  type OrderType,
-  SizeSlider,
-  MarketTabs,
-  type MarketTabItem,
-  MarginHealth,
-  TokenSelect,
-  type TokenOption,
-  SlippageControl,
   AccountMenu,
   ActivityRow,
+  AddressChip,
+  Alert,
+  Amount,
+  AmountInput,
+  AppBar,
+  Avatar,
+  AvatarGroup,
+  Badge,
+  BottomNav,
+  Breadcrumbs,
+  Button,
+  Card,
+  ChainSwitcher,
+  Checkbox,
+  Combobox,
+  CommentThread,
+  ContextMenu,
+  DataTable,
+  Dialog,
+  Divider,
+  Drawer,
+  EmptyState,
+  FollowButton,
+  GasFee,
+  HoldToConfirm,
+  ID_HUES,
+  IconAdd,
+  IconButton,
+  IconClose,
+  IconFeed,
+  IconMarkets,
+  IconOverflow,
+  IconPortfolio,
+  IconRadioOff,
+  IconRadioOn,
+  IconSettings,
+  InlineValidation,
+  Input,
+  Lane,
+  LoadingButton,
+  MarginHealth,
+  MarketTabs,
+  Menu,
+  NetworkBadge,
+  OTPInput,
+  Onboarding,
+  OrderBook,
+  OrderTypeTabs,
+  Pagination,
+  PegBadge,
+  Popover,
+  PostCard,
+  PriceChange,
+  Progress,
+  RadioGroup,
+  ReactionBar,
+  RollingNumber,
+  SectionSkeleton,
+  Select,
+  Sheet,
+  SizeSlider,
+  Skeleton,
+  SlippageControl,
+  SocialProofChip,
+  Sparkline,
+  StatCell,
+  Switch,
+  Tabs,
+  Textarea,
+  ToastProvider,
+  TokenChip,
+  TokenIcon,
+  TokenSelect,
+  Tooltip,
+  TxStatus,
+  WalletAvatar,
+  WalletButton,
+  WizardSteps,
+  type Column,
+  type Comment,
+  type MarketTabItem,
+  type OrderBookLevel,
+  type OrderType,
+  type Reaction,
+  type TokenOption,
+  type TxState,
+  type WalletStatus,
+  useToast,
 } from "@/design-system";
 
 const SURFACES = [
@@ -263,7 +272,7 @@ const COMMENTS: Comment[] = [
   {
     author: { name: "Kip", handle: "kip", seed: "wallet-kip" },
     time: "6m",
-    body: "Agreed — the retest held cleanly.",
+    body: "Agreed: the retest held cleanly.",
     likes: 3,
     liked: true,
   },
@@ -381,11 +390,11 @@ function ProgressDemo() {
   return (
     <div className="space-y-4">
       <div className="space-y-1.5">
-        <p className="text-xs text-fg-muted">Determinate — value {Math.min(value, 100)}%</p>
+        <p className="text-xs text-fg-muted">Determinate: value {Math.min(value, 100)}%</p>
         <Progress aria-label="Upload progress" value={value} />
       </div>
       <div className="space-y-1.5">
-        <p className="text-xs text-fg-muted">Indeterminate — unknown duration</p>
+        <p className="text-xs text-fg-muted">Indeterminate: unknown duration</p>
         <Progress aria-label="Syncing" />
       </div>
     </div>
@@ -399,9 +408,9 @@ function BottomNavDemo() {
       value={tab}
       onValueChange={setTab}
       items={[
-        { value: "feed", label: "Feed", icon: "≋" },
-        { value: "markets", label: "Markets", icon: "▤" },
-        { value: "portfolio", label: "Portfolio", icon: "◎" },
+        { value: "feed", label: "Feed", icon: <IconFeed size={18} /> },
+        { value: "markets", label: "Markets", icon: <IconMarkets size={18} /> },
+        { value: "portfolio", label: "Portfolio", icon: <IconPortfolio size={18} /> },
       ]}
     />
   );
@@ -445,9 +454,9 @@ function DrawerDemo() {
         }
       >
         <div className="space-y-2 text-xs text-fg-muted">
-          <p>Pair — SOL / USDC</p>
-          <p>Side — buy · 1.25 SOL</p>
-          <p>Route — Jupiter (best route)</p>
+          <p>Pair: SOL / USDC</p>
+          <p>Side: buy · 1.25 SOL</p>
+          <p>Route: Jupiter (best route)</p>
         </div>
       </Drawer>
     </>
@@ -507,7 +516,7 @@ function ChainSwitcherDemo() {
   );
 }
 
-// Deterministic synthetic series (no Math.random — the canvas SSRs, so
+// Deterministic synthetic series (no Math.random: the canvas SSRs, so
 // random data would hydrate-mismatch). Shape varies by range via a seed.
 function series(points: number, seed: number, base: number, amp: number): PricePoint[] {
   return Array.from({ length: points }, (_, i) => {
@@ -591,10 +600,10 @@ function ToastInner() {
   return (
     <div className="flex flex-wrap gap-2">
       <Button size="sm" onClick={() => toast({ title: "Watchlist updated", description: "JUP added", tone: "buy" })}>
-        success toast
+        Success toast
       </Button>
       <Button size="sm" variant="ghost" onClick={() => toast({ title: "Couldn't reach the network", tone: "sell" })}>
-        error toast
+        Error toast
       </Button>
     </div>
   );
@@ -778,7 +787,7 @@ function TokenSelectDemo() {
     <div className="flex flex-col items-start gap-3">
       <TokenSelect tokens={DEMO_TOKENS} value={token} onValueChange={setToken} />
       <p className="text-[11px] text-fg-subtle">
-        {token ? `selected · ${token}` : "none selected — click to pick"}
+        {token ? `selected · ${token}` : "none selected: click to pick"}
       </p>
     </div>
   );
@@ -1078,9 +1087,15 @@ export const DEMOS: Record<string, DemoFn> = {
   WizardSteps: WizardStepsDemo,
   IconButton: () => (
     <div className="flex items-center gap-2">
-      <IconButton aria-label="Settings" variant="secondary">⚙</IconButton>
-      <IconButton aria-label="Close">×</IconButton>
-      <IconButton aria-label="Add" variant="primary" size="lg">+</IconButton>
+      <IconButton aria-label="Settings" variant="secondary">
+        <IconSettings size={16} />
+      </IconButton>
+      <IconButton aria-label="Close">
+        <IconClose size={16} weight="bold" />
+      </IconButton>
+      <IconButton aria-label="Add" variant="primary" size="lg">
+        <IconAdd size={18} weight="bold" />
+      </IconButton>
     </div>
   ),
   Badge: () => (
@@ -1188,9 +1203,9 @@ export const DEMOS: Record<string, DemoFn> = {
   ),
   Divider: () => (
     <div className="text-xs text-fg-muted">
-      section one
+      Section one
       <Divider className="my-2" />
-      section two
+      Section two
     </div>
   ),
   EmptyState: ({ state } = {}) => (
@@ -1206,7 +1221,9 @@ export const DEMOS: Record<string, DemoFn> = {
   ),
   Menu: () => (
     <Menu
-      trigger={<IconButton aria-label="Post actions" variant="secondary">⋯</IconButton>}
+      trigger={<IconButton aria-label="Post actions" variant="secondary">
+          <IconOverflow size={16} weight="bold" />
+        </IconButton>}
       items={[
         { label: "Copy link", onSelect: () => {} },
         { label: "Mute @deg", onSelect: () => {} },
@@ -1321,7 +1338,11 @@ export const DEMOS: Record<string, DemoFn> = {
     <AppBar
       title="Markets"
       leading={<IconButton aria-label="Back" variant="ghost">‹</IconButton>}
-      actions={<IconButton aria-label="Settings" variant="ghost">⚙</IconButton>}
+      actions={
+        <IconButton aria-label="Settings" variant="ghost">
+          <IconSettings size={16} />
+        </IconButton>
+      }
     />
   ),
   BottomNav: BottomNavDemo,
@@ -1359,9 +1380,15 @@ export const DEMOS: Record<string, DemoFn> = {
     <Popover trigger={<Button variant="secondary" size="sm">Filters</Button>}>
       <p className="mb-2 text-xs font-medium text-fg">Show</p>
       <div className="space-y-1 text-xs text-fg-muted">
-        <p>◉ All markets</p>
-        <p>○ Watchlist only</p>
-        <p>○ Depegged only</p>
+        <p className="flex items-center gap-1.5">
+          <IconRadioOn size={12} aria-hidden="true" /> All markets
+        </p>
+        <p className="flex items-center gap-1.5">
+          <IconRadioOff size={12} aria-hidden="true" /> Watchlist only
+        </p>
+        <p className="flex items-center gap-1.5">
+          <IconRadioOff size={12} aria-hidden="true" /> Depegged only
+        </p>
       </div>
     </Popover>
   ),

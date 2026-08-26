@@ -2,15 +2,19 @@
 
 Status: stable
 Version: 1.0.0
-Square icon-only action — `aria-label` is a **required prop**, so an unnamed icon button is a compile error.
+Square icon-only action: `aria-label` is a **required prop**, so an unnamed icon button is a compile error.
 
 ## Usage
 
 ```tsx
-import { IconButton } from "@/design-system";
+import { IconButton, IconClose, IconSettings } from "@/design-system";
 
-<IconButton aria-label="Close" onClick={close}>×</IconButton>
-<IconButton aria-label="Settings" variant="secondary" size="lg">⚙</IconButton>
+<IconButton aria-label="Close" onClick={close}>
+  <IconClose size={16} weight="bold" />
+</IconButton>
+<IconButton aria-label="Settings" variant="secondary" size="lg">
+  <IconSettings size={18} />
+</IconButton>
 ```
 
 ## Anatomy
@@ -25,10 +29,10 @@ import { IconButton } from "@/design-system";
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `aria-label` | `string` | **required** | The accessible name — enforced by the type. |
+| `aria-label` | `string` | **required** | The accessible name: enforced by the type. |
 | `variant` | `ButtonVariant` | `"ghost"` | Same four variants as Button. |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` | 28 / 36 / 44 px square. `sm` only inside dense rows; prefer `lg` (44px target) on primary surfaces. |
-| `className` | `string` | — | cn-merged. |
+| `className` | `string` | - | cn-merged. |
 | …rest | `ButtonHTMLAttributes` | `type="button"` | Native pass-through. |
 
 ## Tokens

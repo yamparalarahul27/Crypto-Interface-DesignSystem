@@ -1,8 +1,8 @@
-# 06 · UI spec — layout, tokens, component anatomy, states
+# 06 · UI spec: layout, tokens, component anatomy, states
 
 Companion to the HTML mocks in `public/Prototypes/tide/` (view on any
 Vercel preview at `/Prototypes/tide/`). The mocks are the look; this doc
-is the measurements. Values reference DESIGN.md tokens only — anything
+is the measurements. Values reference DESIGN.md tokens only: anything
 new here (identity hues, motion primitives) is a proposed DESIGN.md
 amendment, finalized in phase 0.
 
@@ -46,10 +46,10 @@ amendment, finalized in phase 0.
 | Section labels | IBM Plex Sans 600 UPPERCASE, tracking 0.1em, `text-fg-subtle` | 11px |
 | Timestamps, meta | IBM Plex Sans 400, `text-fg-subtle` | 11px |
 
-Handles are mono deliberately — identity reads as *terminal-native*,
+Handles are mono deliberately: identity reads as *terminal-native*,
 tying the social layer to the market DNA.
 
-## Identity hues (proposed values — phase 0 verifies contrast)
+## Identity hues (proposed values: phase 0 verifies contrast)
 
 Assigned `hash(wallet) % 8`; consumed only by Avatar, handle accents,
 presence. Never for data.
@@ -66,7 +66,7 @@ presence. Never for data.
 | `--id-slate` | `#93a1b8` | |
 
 Avatar fill: `radial-gradient(120% 120% at 30% 20%, <hue>, <hue-40%-darker>)`,
-glyph = first letter of handle in `#07080a` (≥ 4.5:1 on every hue —
+glyph = first letter of handle in `#07080a` (≥ 4.5:1 on every hue:
 verified in phase 0), IBM Plex Mono 600.
 
 ## Component anatomy
@@ -88,7 +88,7 @@ verified in phase 0), IBM Plex Mono 600.
 
 - Press: `scale(0.98)` 150ms (card-level, per polish skill).
 - Kind tag: 9px uppercase badge (`watched` mint-tinted / `take` plain /
-  `milestone` info-tinted) — DESIGN.md badge spec.
+  `milestone` info-tinted): DESIGN.md badge spec.
 - Milestone variant: no author row; leading ▲/▼ glyph in buy/sell color,
   body is system copy, `border-l-2` in the same color.
 
@@ -101,7 +101,7 @@ verified in phase 0), IBM Plex Mono 600.
 
 ### SocialProofChip
 
-`◔ 41 watching` — 12px, `text-fg-muted`, dotted-ring glyph in brand at
+`◔ 41 watching`: 12px, `text-fg-muted`, dotted-ring glyph in brand at
 60% opacity. Never bolder than the price it sits near. On cards it
 truncates to `◔ 41`.
 
@@ -118,7 +118,7 @@ Morph fill→outline 200ms; label crossfades. Unfollow needs no confirm.
 ### AvatarGroup
 
 Overlap −8px, max 3 + `+N` disc (`surface-bright`, `.data-sm`).
-Order: followed-by-you first — recognition beats recency.
+Order: followed-by-you first, recognition beats recency.
 
 ### Comment thread (bottom sheet)
 
@@ -134,7 +134,7 @@ Order: followed-by-you first — recognition beats recency.
 
 Segmented control per DESIGN.md pill spec: h-36, r-2 segments; active
 `bg-brand text-on-brand` + mint glow shadow; inactive `text-fg-muted`.
-Underline-free — fill is the state.
+Underline-free: fill is the state.
 
 ### Onboarding sheet (identity gate)
 
@@ -161,8 +161,8 @@ dot semantics (buy=on-peg, warning=drift ≥ 25bps, sell=broken < 0.98).
 
 ### Token detail
 Header: back 44px, icon 28 + symbol, price `.data-lg` live-ticks
-(no animation on tick — terminal calm), 24h signed `.data-sm`.
-Social strip: h-auto p-12 `surface-container` r-8 — row 1: proof chip +
+(no animation on tick: terminal calm), 24h signed `.data-sm`.
+Social strip: h-auto p-12 `surface-container` r-8; row 1: proof chip +
 Watch button; row 2: AvatarGroup + "watched by @mira +38" 12px; row 3:
 `💬 12 comments ▸` full-width tap row. Sections below unchanged from
 engine contract (13 sections, own skeletons).

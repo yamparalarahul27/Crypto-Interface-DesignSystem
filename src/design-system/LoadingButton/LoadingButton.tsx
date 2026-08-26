@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { cn } from "@/lib/utils";
+import { IconCheck, IconExclamation, IconSpinner } from "../icons";
 import {
   BUTTON_SIZE,
   BUTTON_VARIANT,
@@ -26,7 +27,7 @@ type UseAsyncActionOptions = {
 /**
  * Idle → pending → success|error → idle. Rejects while pending so a
  * second click never queues; success/error can be re-run (Retry).
- * Behavior contract stolen from Interior's loading-button — CSS only,
+ * Behavior contract stolen from Interior's loading-button: CSS only,
  * no `motion` dep (portable core).
  */
 function useAsyncAction({
@@ -100,75 +101,10 @@ function useAsyncAction({
   };
 }
 
-function Spinner() {
-  return (
-    <svg
-      width="12"
-      height="12"
-      viewBox="0 0 12 12"
-      fill="none"
-      aria-hidden="true"
-      className="shrink-0 animate-spin"
-    >
-      <circle
-        cx="6"
-        cy="6"
-        r="4.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeOpacity="0.22"
-      />
-      <path
-        d="M10.5 6A4.5 4.5 0 0 0 6 1.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function CheckMark() {
-  return (
-    <svg
-      width="12"
-      height="12"
-      viewBox="0 0 12 12"
-      fill="none"
-      aria-hidden="true"
-      className="shrink-0"
-    >
-      <path
-        d="M2.6 6.3 4.9 8.6 9.4 3.6"
-        stroke="currentColor"
-        strokeWidth="1.7"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function AlertMark() {
-  return (
-    <svg
-      width="12"
-      height="12"
-      viewBox="0 0 12 12"
-      fill="none"
-      aria-hidden="true"
-      className="shrink-0"
-    >
-      <path d="M6 2.9v3.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-      <path d="M6 9.05h.01" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" />
-    </svg>
-  );
-}
-
 export type LoadingButtonProps = {
   /** Runs on click. Sync throws and rejected promises → error; else success. */
   onAction: () => unknown;
-  /** Idle label — string so it can also be the accessible name. */
+  /** Idle label: string so it can also be the accessible name. */
   children: string;
   pendingLabel?: string;
   successLabel?: string;
@@ -186,7 +122,7 @@ export type LoadingButtonProps = {
 /**
  * Async action button: width-stable label swap across idle → pending →
  * success|error → idle. Compose on Button tokens; do not put irreversible
- * confirms here — that is HoldToConfirm territory.
+ * confirms here: that is HoldToConfirm territory.
  */
 export function LoadingButton({
   onAction,
@@ -222,9 +158,21 @@ export function LoadingButton({
     icon: ReactNode;
   }[] = [
     { key: "idle", text: children, icon: null },
-    { key: "pending", text: pendingLabel, icon: <Spinner /> },
-    { key: "success", text: successLabel, icon: <CheckMark /> },
-    { key: "error", text: errorLabel, icon: <AlertMark /> },
+    {
+      key: "pending",
+      text: pendingLabel,
+      icon: <IconSpinner size={12} weight="bold" aria-hidden="true" className="shrink-0 animate-spin" />,
+    },
+    {
+      key: "success",
+      text: successLabel,
+      icon: <IconCheck size={12} weight="bold" aria-hidden="true" className="shrink-0" />,
+    },
+    {
+      key: "error",
+      text: errorLabel,
+      icon: <IconExclamation size={12} weight="bold" aria-hidden="true" className="shrink-0" />,
+    },
   ];
 
   return (
@@ -255,7 +203,7 @@ export function LoadingButton({
       >
         {/*
           Stack every face in one grid cell so the button reserves the
-          widest label up front — Save → Saving… never shoves the row.
+          widest label up front: Save → Saving… never shoves the row.
         */}
         <span aria-hidden className="relative inline-grid place-items-center">
           {faces.map((face) => (

@@ -6,12 +6,12 @@ import { cn } from "@/lib/utils";
 export type BottomNavItem<T extends string> = {
   value: T;
   label: string;
-  /** Glyph above the label — decorative (aria-hidden); the label names the tab. */
+  /** Glyph above the label: decorative (aria-hidden); the label names the tab. */
   icon?: ReactNode;
 };
 
 /**
- * Mobile tab bar — 3–5 top-level destinations, labels always visible.
+ * Mobile tab bar: 3–5 top-level destinations, labels always visible.
  * Positioning is the caller's (typically `fixed inset-x-0 bottom-0`
  * via className); safe-area padding is built in.
  */

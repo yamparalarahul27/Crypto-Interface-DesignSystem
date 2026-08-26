@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { IconCheck, IconExclamation } from "../icons";
 import { Input } from "../Input";
 
 export type ValidationStatus = "idle" | "pending" | "valid" | "invalid";
@@ -155,37 +156,22 @@ export function InlineValidation({
           className="pointer-events-none absolute right-3 top-1/2 grid size-3.5 -translate-y-1/2 place-items-center"
           aria-hidden
         >
-          <svg
-            viewBox="0 0 12 12"
-            width="14"
-            height="14"
-            fill="none"
+          <IconCheck
+            size={14}
+            weight="bold"
             className={cn(
               "col-start-1 row-start-1 text-buy transition-opacity duration-150",
               valid ? "opacity-100" : "opacity-0",
             )}
-          >
-            <path
-              d="M2 6.3 4.7 9 10 3.2"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <svg
-            viewBox="0 0 12 12"
-            width="14"
-            height="14"
-            fill="none"
+          />
+          <IconExclamation
+            size={14}
+            weight="bold"
             className={cn(
               "col-start-1 row-start-1 text-sell transition-opacity duration-150",
               invalid ? "opacity-100" : "opacity-0",
             )}
-          >
-            <path d="M6 2v4.4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-            <rect x="5.15" y="8.4" width="1.7" height="1.7" rx="0.5" fill="currentColor" />
-          </svg>
+          />
         </span>
       </div>
       <div className="relative mt-1.5 grid h-4 text-[11px] leading-4">

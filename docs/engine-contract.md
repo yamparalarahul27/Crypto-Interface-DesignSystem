@@ -2,16 +2,16 @@
 
 > **Why this doc exists.** We are about to revamp the UI/UX from scratch. The
 > static HTML prototype under `public/Prototypes/` (PR #51) froze the **look** of
-> the old app. This doc freezes the **seam** — the connection points between the
+> the old app. This doc freezes the **seam**: the connection points between the
 > presentation layer (the `.tsx` we will rebuild) and the engine (the API routes,
 > hooks, and data logic we will **keep**). When the new UI is built, every screen
 > plugs back into the hooks below with the exact data shapes recorded here.
 >
-> <sub>Snapshot as of <code>f0c776d</code> (2026-06-18). If a hook's signature or return shape changes, update this doc in the same PR — it is a contract, not a one-time note.</sub>
+> <sub>Snapshot as of <code>f0c776d</code> (2026-06-18). If a hook's signature or return shape changes, update this doc in the same PR; it is a contract, not a one-time note.</sub>
 
 ---
 
-## 1. The two-layer model — what is safe to delete
+## 1. The two-layer model: what is safe to delete
 
 ```
 ┌─ PRESENTATION (rebuild for the revamp) ───────────────┐
@@ -22,7 +22,7 @@
 └────────────────────────────────────────────────────────┘
                          │  connects via hooks (the seam)
                          ▼
-┌─ ENGINE (KEEP — irreplaceable, not captured by HTML) ──┐
+┌─ ENGINE (KEEP: irreplaceable, not captured by HTML) ──┐
 │  src/app/api/**         route handlers                  │
 │  src/lib/hooks/*        14 hooks (the seam itself)      │
 │  src/lib/{home,jupiter,token,nft}/*  adapters/scoring   │
@@ -34,7 +34,7 @@
 `src/app/api/`, `src/lib/hooks/`, or `src/lib/*` logic modules destroys work the
 HTML prototype cannot restore. The fresh UI **re-wires to the same hooks**.
 
-> **Caveat — hooks live in `src/lib/hooks/` but some embed UI-coupled types.**
+> **Caveat: hooks live in `src/lib/hooks/` but some embed UI-coupled types.**
 > A few domain types are currently *defined inside component files*
 > (`OnChainData`, `HolderRow` in their panels). Before deleting those panels,
 > move the type definitions into `src/lib/token/` so the hooks keep compiling.
@@ -46,7 +46,7 @@ HTML prototype cannot restore. The fresh UI **re-wires to the same hooks**.
 
 Each screen, the hooks that feed it, and the gate that shows it.
 
-### Home — `/` · `src/app/page.tsx`
+### Home: `/` · `src/app/page.tsx`
 
 | View (tab) | Hook(s) | API route | Gate |
 |---|---|---|---|
@@ -56,37 +56,37 @@ Each screen, the hooks that feed it, and the gate that shows it.
 | NFT Edge tab | `useNftEdge(collectionMint, sessionWallet)` → see §3 | `/api/nft` | `NFT_EDGE` |
 | ⌘K search modal | `useTokenSearch(query)`, `useRecentSearches()`, `useRecommendedTokens(enabled)` | `/api/jupiter?type=search` + localStorage | always |
 | Token modal (card click) | `useTokenDetails(address)`, `useTokenSecurity(address)` | birdeye + jupiter + tokens-xyz | always |
-| Stablecoin modal | (data passed from `useStablecoins`) | — | `STABLECOIN` |
+| Stablecoin modal | (data passed from `useStablecoins`) | - | `STABLECOIN` |
 
-### Token detail — `/token/[address]` · `src/app/token/[address]/page.tsx`
+### Token detail: `/token/[address]` · `src/app/token/[address]/page.tsx`
 
 Single hook drives the whole page: **`useTokenDetails(address)`** plus
 **`useTokenPriceTicker(address)`** for the live price tick. Per-section loading
 flags let each section render independently (`statsLoading`, `onChainLoading`,
 `holdersLoading`, `edgeScoreLoading`, `tradingActivityLoading`, `slippageLoading`,
 `identityLoading`, `chartLoading`). The 13 sections all read off the one result
-object — see the field map in §3 `useTokenDetails`.
+object: see the field map in §3 `useTokenDetails`.
 
-### Static pages — no hooks
+### Static pages: no hooks
 
 | Screen | Route | Data source |
 |---|---|---|
 | Brand kit | `/brand` | static |
 | Maintenance | `/maintenance` | env flag (`MAINTENANCE_MODE`) |
-| 404 | any unmatched | `src/app/not-found.tsx` — static |
-| Route error | thrown in page | `src/app/error.tsx` — static |
-| Global error | thrown at root | `src/app/global-error.tsx` — static |
+| 404 | any unmatched | `src/app/not-found.tsx`: static |
+| Route error | thrown in page | `src/app/error.tsx`: static |
+| Global error | thrown at root | `src/app/global-error.tsx`: static |
 
 > The 3 system pages (404 / error / global-error) are **not** in the HTML
 > prototype. The revamp must redesign them from scratch.
 
-### ⚠ Dormant tabs — orphaned presentation
+### ⚠ Dormant tabs: orphaned presentation
 
 `src/components/tabs/{Defi,Trending,Live,Meme,Whale,Smart}Tab.tsx` exist and use
 `useTabPairs<T>(url, refreshMs, paused)` against `/api/birdeye`, **but they are
 not wired into the live home flow** (`HomeTab = "home" | "watchlist" | "nft-edge"`
 only). They are safe to delete with the rest of the presentation. `useTabPairs`
-itself becomes unused if all 6 go — drop the hook too in that case.
+itself becomes unused if all 6 go: drop the hook too in that case.
 
 ---
 
@@ -95,7 +95,7 @@ itself becomes unused if all 6 go — drop the hook too in that case.
 Signatures and exact return shapes the new UI must honor. Types resolved from
 `src/lib/{home,jupiter,tokens-xyz,token}` and the noted component files.
 
-<details><summary><b>useHomeJupiterPairs(refreshMs: number, paused: boolean)</b> — home rails</summary>
+<details><summary><b>useHomeJupiterPairs(refreshMs: number, paused: boolean)</b>, home rails</summary>
 
 ```ts
 return { data, sections, loading, refetch }
@@ -107,7 +107,7 @@ return { data, sections, loading, refetch }
 Route: `/api/jupiter?type=home&limit=140`. Consumer: `HomeSectionsView`.
 </details>
 
-<details><summary><b>useStablecoins(refreshMs: number, paused: boolean)</b> — Park Your Money</summary>
+<details><summary><b>useStablecoins(refreshMs: number, paused: boolean)</b>, Park Your Money</summary>
 
 ```ts
 return { data, loading, refetch }
@@ -129,7 +129,7 @@ type StablePendingData = {
 Route: `/api/stablecoins`. Consumer: `ParkYourMoneyRail`.
 </details>
 
-<details><summary><b>useWatchlist(authed: boolean)</b> — Watchlist tab + star buttons</summary>
+<details><summary><b>useWatchlist(authed: boolean)</b>, Watchlist tab + star buttons</summary>
 
 ```ts
 return { items, loaded, starredSet, refresh, add, remove }
@@ -149,7 +149,7 @@ interface WatchlistItem {
 Routes: GET/POST/DELETE `/api/watchlist` (all JWT-gated). Consumer: `WatchlistTab`.
 </details>
 
-<details><summary><b>useNftEdge(collectionMint: string, sessionWallet: string | null)</b> — NFT Edge tab</summary>
+<details><summary><b>useNftEdge(collectionMint: string, sessionWallet: string | null)</b>, NFT Edge tab</summary>
 
 ```ts
 return {
@@ -181,7 +181,7 @@ Routes: `/api/nft?collection=` (list), `?asset=` (detail), `?owner=&collection=`
 Consumers: `NftRail`, `NftDetail`. (Types currently defined in the hook file.)
 </details>
 
-<details><summary><b>useTokenDetails(address: string)</b> — token modal + full token page</summary>
+<details><summary><b>useTokenDetails(address: string)</b>, token modal + full token page</summary>
 
 The page's single source of truth. Returns 24 fields: domain data + per-section
 loading flags.
@@ -226,7 +226,7 @@ Routes: `/api/birdeye?type=token|holders`, `/api/tokens-xyz?type=asset`,
 Consumers: `TokenModal`, `IdentityStrip` (+ every token-page section).
 </details>
 
-<details><summary><b>useTokenPriceTicker(address: string)</b> — live price tick</summary>
+<details><summary><b>useTokenPriceTicker(address: string)</b>, live price tick</summary>
 
 ```ts
 return { price, priceChange24h, lastUpdatedAt }   // all number | null
@@ -235,7 +235,7 @@ Route: **direct** `https://lite-api.jup.ag/price/v3?ids=` (~1.5s, bypasses proxy
 Consumer: token detail header.
 </details>
 
-<details><summary><b>useTokenChart(address: string)</b> — chart candles</summary>
+<details><summary><b>useTokenChart(address: string)</b>, chart candles</summary>
 
 ```ts
 return { candles, loading }   // candles: Candle[] | null
@@ -244,7 +244,7 @@ Routes (fallback order): `/api/birdeye?type=ohlcv` → `/api/tokens-xyz?type=pri
 → `/api/jupiter?type=search` (derived). Folded into `useTokenDetails`.
 </details>
 
-<details><summary><b>useTokenSecurity(address: string)</b> — security signals</summary>
+<details><summary><b>useTokenSecurity(address: string)</b>, security signals</summary>
 
 ```ts
 return { signals, loading, error }
@@ -253,7 +253,7 @@ return { signals, loading, error }
 Route: `/api/birdeye?type=security`. Consumer: `IdentityStrip`.
 </details>
 
-<details><summary><b>useTokenSearch(query) / useRecommendedTokens(enabled) / useRecentSearches()</b> — search modal</summary>
+<details><summary><b>useTokenSearch(query) / useRecommendedTokens(enabled) / useRecentSearches()</b>: search modal</summary>
 
 ```ts
 useTokenSearch(query: string)        → { results: TokenSearchResult[]; loading }
@@ -276,7 +276,7 @@ Routes: `/api/jupiter?type=search|home`; recents are localStorage (V2: server-si
 see CLAUDE.md pending followups). Consumers: `SearchModal`, `HomeSectionsView`.
 </details>
 
-<details><summary><b>useTabPairs&lt;T&gt;(url, refreshMs, paused)</b> — ⚠ dormant tabs only</summary>
+<details><summary><b>useTabPairs&lt;T&gt;(url, refreshMs, paused)</b>: ⚠ dormant tabs only</summary>
 
 ```ts
 return { data, loading, extra, refetch }   // data: any[]; extra: T (json minus {success,data})
@@ -294,21 +294,21 @@ via Upstash (fail-open), generic error bodies.
 
 | Route | Verb | Key params | Returns |
 |---|---|---|---|
-| `/api/jupiter` | GET | `type=home\|search\|tokenInfo\|quote` | `{ success, data \| sections }` — primary token data, search, audit, slippage quote |
-| `/api/birdeye` | GET | `type=token\|holders\|security\|ohlcv\|list_v3\|trending\|search` | `{ success, data, ... }` — overview, holders, security, candles |
-| `/api/tokens-xyz` | GET | `type=asset\|price-chart`, `assetId` | `{ success, data }` — asset profile + risk A–F + markets, candles |
-| `/api/helius` | GET/POST | RPC `method` | proxied Helius JSON-RPC — on-chain authority/supply/metadata |
-| `/api/stablecoins` | GET | — | `{ success, data:{ live, pending } }` |
-| `/api/nft` | GET | `asset \| collection&page&limit \| owner&collection` | `{ success, data }` — Supabase index + Magic Eden live pricing |
-| `/api/watchlist` | GET/POST/DELETE | `?token=` (DELETE) | `{ success, data }` — JWT-gated, wallet from token |
+| `/api/jupiter` | GET | `type=home\|search\|tokenInfo\|quote` | `{ success, data \| sections }`: primary token data, search, audit, slippage quote |
+| `/api/birdeye` | GET | `type=token\|holders\|security\|ohlcv\|list_v3\|trending\|search` | `{ success, data, ... }`: overview, holders, security, candles |
+| `/api/tokens-xyz` | GET | `type=asset\|price-chart`, `assetId` | `{ success, data }`: asset profile + risk A–F + markets, candles |
+| `/api/helius` | GET/POST | RPC `method` | proxied Helius JSON-RPC: on-chain authority/supply/metadata |
+| `/api/stablecoins` | GET | - | `{ success, data:{ live, pending } }` |
+| `/api/nft` | GET | `asset \| collection&page&limit \| owner&collection` | `{ success, data }`: Supabase index + Magic Eden live pricing |
+| `/api/watchlist` | GET/POST/DELETE | `?token=` (DELETE) | `{ success, data }`: JWT-gated, wallet from token |
 | `/api/auth/nonce` | POST | `{ wallet }` | `{ success, data:{ nonce } }` |
 | `/api/auth/verify` | POST | `{ wallet, nonce, signature }` | `{ success, data:{ token } }` + sets HTTP-only cookie |
-| `/api/auth/me` | GET | — | `{ success, data:{ wallet } }` |
-| `/api/auth/logout` | POST | — | `{ success }` |
+| `/api/auth/me` | GET | - | `{ success, data:{ wallet } }` |
+| `/api/auth/logout` | POST | - | `{ success }` |
 
 See [docs/api-inventory.md](./api-inventory.md) for upstream provider detail and
 the planned consolidation (Jupiter v2 as primary). **The consolidation work and
-this revamp touch the same hooks** — sequence them deliberately (§6).
+this revamp touch the same hooks**: sequence them deliberately (§6).
 
 ---
 
@@ -329,11 +329,11 @@ this revamp touch the same hooks** — sequence them deliberately (§6).
 1. KEEP everything in §1 "ENGINE".
 2. Before deleting token panels, move the ⚠ types
    (OnChainData, HolderRow) into src/lib/token/.
-3. Build each new screen against the hook shapes in §3 —
+3. Build each new screen against the hook shapes in §3:
    the hook is the only thing the UI may import from the engine.
 4. Delete dormant tabs (§2 ⚠) + useTabPairs in the same pass.
 5. Redesign the 3 system pages (404/error/global-error) fresh.
-6. Decide ordering vs the api-inventory.md consolidation —
+6. Decide ordering vs the api-inventory.md consolidation:
    both edit the hooks. Do consolidation FIRST or the new UI
    gets built against shapes that are about to change.
 ```

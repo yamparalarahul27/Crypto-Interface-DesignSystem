@@ -9,6 +9,7 @@ import {
   type ReactNode,
 } from "react";
 import { cn } from "@/lib/utils";
+import { IconClose } from "../icons";
 
 export type ToastTone = "neutral" | "buy" | "sell" | "warning";
 
@@ -17,7 +18,7 @@ type ToastRecord = ToastInput & { id: number };
 
 const ToastContext = createContext<((t: ToastInput) => void) | null>(null);
 
-/** Imperative toast trigger — must be used under <ToastProvider>. */
+/** Imperative toast trigger: must be used under <ToastProvider>. */
 export function useToast() {
   const push = useContext(ToastContext);
   if (!push) throw new Error("useToast must be used within <ToastProvider>");
@@ -78,7 +79,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
               aria-label="Dismiss"
               className="ml-auto inline-flex h-6 w-6 flex-none items-center justify-center rounded-control text-fg-muted hover:text-fg"
             >
-              ×
+              <IconClose size={12} weight="bold" aria-hidden="true" />
             </RadixToast.Close>
           </RadixToast.Root>
         ))}

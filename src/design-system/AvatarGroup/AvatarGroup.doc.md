@@ -2,7 +2,7 @@
 
 Status: stable
 Version: 1.0.0
-Overlapping row of Avatars with a `+N` overflow disc — "who's here" at a glance.
+Overlapping row of Avatars with a `+N` overflow disc: "who's here" at a glance.
 
 ## Usage
 
@@ -28,25 +28,25 @@ import { AvatarGroup } from "@/design-system";
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `members` | `AvatarGroupMember[]` | — | `{ name, seed?, hue?, you? }`. Render order is the caller's concern — spec wants followed-by-you first. |
+| `members` | `AvatarGroupMember[]` | - | `{ name, seed?, hue?, you? }`. Render order is the caller's concern: spec wants followed-by-you first. |
 | `max` | `number` | `3` | Avatars shown before collapsing to `+N`. |
 | `size` | `"xs" \| "sm"` | `"xs"` | Avatar diameter (xs 20 · sm 28 px). |
-| `className` | `string` | — | Merged via `cn`. |
+| `className` | `string` | - | Merged via `cn`. |
 
 ## Tokens
 
 - Inherits `--id-*` through `Avatar`.
-- `--color-surface-container` (`ring-surface-container`) — the 2px separating ring.
-- `--color-surface-bright` + `--color-fg-muted` — the `+N` overflow disc.
+- `--color-surface-container` (`ring-surface-container`): the 2px separating ring.
+- `--color-surface-bright` + `--color-fg-muted`: the `+N` overflow disc.
 
 ## States
 
-- **Overflow** — `members.length > max` renders the `+N` disc; otherwise omitted.
-- **Single member** — `aria-label` uses "person"; plural otherwise.
+- **Overflow**: `members.length > max` renders the `+N` disc; otherwise omitted.
+- **Single member**: `aria-label` uses "person"; plural otherwise.
 
 ## Motion
 
-None — inherits Avatar's static nature.
+None: inherits Avatar's static nature.
 
 ## A11y
 

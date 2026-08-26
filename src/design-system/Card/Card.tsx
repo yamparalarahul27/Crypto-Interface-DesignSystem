@@ -1,10 +1,10 @@
 import { cn } from "@/lib/utils";
 
 /**
- * The generic container primitive — the `rounded-card border
+ * The generic container primitive: the `rounded-card border
  * bg-surface-container` recipe that templates and patterns were
  * hand-rolling, made canonical. `interactive` adds the hover lift +
- * card-grade press (0.98 — cards press softer than controls).
+ * card-grade press (0.98: cards press softer than controls).
  */
 export function Card({
   interactive = false,

@@ -1,6 +1,8 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { IconCheck } from "../icons";
 import { Avatar } from "../Avatar";
 import { Sheet } from "../Sheet";
 
@@ -10,10 +12,17 @@ function shortAddr(addr: string) {
   return addr.length > 10 ? `${addr.slice(0, 4)}…${addr.slice(-4)}` : addr;
 }
 
-const AVAILABILITY_COPY: Record<HandleAvailability, { text: string; cls: string } | null> = {
+const AVAILABILITY_COPY: Record<HandleAvailability, { text: ReactNode; cls: string } | null> = {
   idle: null,
   checking: { text: "checking…", cls: "text-fg-subtle" },
-  available: { text: "✓ available", cls: "text-buy" },
+  available: {
+    text: (
+      <>
+        <IconCheck size={11} weight="bold" aria-hidden="true" /> available
+      </>
+    ),
+    cls: "text-buy",
+  },
   taken: { text: "taken", cls: "text-sell" },
 };
 
@@ -47,11 +56,11 @@ export function Onboarding({
   return (
     <Sheet open={open} onOpenChange={onOpenChange} title="Join the tide" className={className}>
       <div className="space-y-4 pt-1">
-        {/* Step 1 — wallet */}
+        {/* Step 1: wallet */}
         {connected ? (
           <div className="flex items-center gap-2 rounded-card bg-surface-container px-3 py-2.5 text-sm">
             <span className="text-buy" aria-hidden="true">
-              ✓
+              <IconCheck size={16} weight="bold" />
             </span>
             <span className="text-fg">wallet connected</span>
             <span className="ml-auto font-mono text-xs text-fg-subtle">
@@ -68,7 +77,7 @@ export function Onboarding({
           </button>
         )}
 
-        {/* Step 2 — handle + live avatar preview */}
+        {/* Step 2: handle + live avatar preview */}
         <div className={cn("space-y-2", !connected && "pointer-events-none opacity-40")}>
           <div className="flex items-center gap-3">
             <Avatar name={handle || "?"} seed={handle || "preview"} size="md" />
@@ -85,7 +94,7 @@ export function Onboarding({
                 className="min-w-0 flex-1 bg-transparent font-mono text-sm text-fg placeholder:text-fg-subtle focus:outline-none"
               />
               {avail && (
-                <span className={cn("flex-none text-[11px]", avail.cls)}>
+                <span className={cn("inline-flex flex-none items-center gap-1 text-[11px]", avail.cls)}>
                   {avail.text}
                 </span>
               )}

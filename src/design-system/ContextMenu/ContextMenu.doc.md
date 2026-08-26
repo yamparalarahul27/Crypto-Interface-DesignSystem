@@ -2,7 +2,7 @@
 
 Status: draft
 Version: 0.9.0
-Right-click / long-press menu — Menu's context sibling on Radix ContextMenu.
+Right-click / long-press menu: Menu's context sibling on Radix ContextMenu.
 
 ## Usage
 
@@ -24,7 +24,7 @@ import { ContextMenu } from "@/design-system";
 Best for: row/card actions that shouldn't compete with a visible ⋯
 trigger (order book rows, watchlist lines, activity items). Prefer
 `Menu` when the affordance must be visible and keyboard-first on
-mobile — context menus are pointer/long-press native.
+mobile: context menus are pointer/long-press native.
 
 ## Anatomy
 
@@ -44,11 +44,11 @@ mobile — context menus are pointer/long-press native.
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `children` | `ReactNode` | **required** | Trigger surface; rendered `asChild` — pass one element. |
+| `children` | `ReactNode` | **required** | Trigger surface; rendered `asChild`: pass one element. |
 | `items` | `MenuItem[]` | **required** | Same shape as `Menu` (`label`/`onSelect`/`destructive?`/`disabled?` or `separator`). |
-| `className` | `string` | — | cn-merged onto the panel. |
+| `className` | `string` | - | cn-merged onto the panel. |
 
-`"use client"` — Radix ContextMenu.
+`"use client"`: Radix ContextMenu.
 
 ## Tokens
 

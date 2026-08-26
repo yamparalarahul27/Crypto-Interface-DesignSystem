@@ -195,7 +195,7 @@ export function OrderBook({
       )}
     >
       <header className="flex h-9 shrink-0 items-center gap-3 border-b border-outline-variant px-3">
-        <span className="text-[10px] font-semibold uppercase tracking-wider text-fg-subtle">
+        <span className="text-[10px] font-semibold text-fg-subtle">
           Order book
         </span>
         {stale?.level === "mild" && (
@@ -215,7 +215,7 @@ export function OrderBook({
 
       <div
         className={cn(
-          "grid h-7 shrink-0 items-center gap-2 border-b border-outline-variant px-3 text-[10px] font-semibold uppercase tracking-wider text-fg-subtle",
+          "grid h-7 shrink-0 items-center gap-2 border-b border-outline-variant px-3 text-[10px] font-semibold text-fg-subtle",
           showCumulativeBars ? "grid-cols-[1fr_5rem_3.5rem]" : "grid-cols-[1fr_5rem]",
         )}
       >
@@ -289,7 +289,7 @@ export function OrderBook({
             )}
 
             <div className="flex h-9 shrink-0 items-center gap-2 border-y border-outline-variant px-3 font-mono text-sm tabular-nums">
-              <span className="text-[10px] uppercase tracking-wider text-fg-subtle">Mid</span>
+              <span className="text-[10px] text-fg-subtle">Mid</span>
               <span className="text-fg">{computedMid === null ? "-" : valueFormat(computedMid)}</span>
             </div>
 

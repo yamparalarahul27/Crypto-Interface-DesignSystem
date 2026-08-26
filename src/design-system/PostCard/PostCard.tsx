@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { IconPriceDown, IconPriceUp } from "../icons";
 import { Avatar } from "../Avatar";
 import { TokenChip } from "../TokenChip";
 import { ReactionBar, type Reaction } from "../ReactionBar";
@@ -27,7 +28,7 @@ function KindBadge({ kind }: { kind: PostKind }) {
   return (
     <span
       className={cn(
-        "rounded-control px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide",
+        "rounded-control px-1.5 py-0.5 text-[9px] font-semibold ",
         KIND_BADGE[kind],
       )}
     >
@@ -55,7 +56,7 @@ export function PostCard({
   token?: PostToken;
   reactions?: Reaction[];
   onReact?: (emoji: string) => void;
-  /** Milestone only — colors the leading glyph + left border. */
+  /** Milestone only: colors the leading glyph + left border. */
   direction?: "up" | "down";
   className?: string;
 }) {
@@ -73,8 +74,12 @@ export function PostCard({
     >
       {isMilestone ? (
         <div className="flex items-start gap-2">
-          <span className={cn("text-sm leading-6", dirColor)} aria-hidden="true">
-            {up ? "▲" : "▼"}
+          <span
+            className={cn("inline-flex leading-6", dirColor)}
+            aria-hidden="true"
+            data-direction={up ? "up" : "down"}
+          >
+            {up ? <IconPriceUp size={12} weight="fill" /> : <IconPriceDown size={12} weight="fill" />}
           </span>
           <div className="min-w-0 flex-1">
             <div className="text-sm text-fg" style={{ textWrap: "pretty" }}>

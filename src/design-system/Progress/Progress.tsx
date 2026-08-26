@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * Determinate progress bar on Radix Progress (ARIA progressbar wiring).
- * Pass `value` as 0–100; omit it for indeterminate (unknown duration —
+ * Pass `value` as 0–100; omit it for indeterminate (unknown duration:
  * the bar shimmers). For content placeholders use Skeleton; for
  * transaction stages use TxStatus.
  */

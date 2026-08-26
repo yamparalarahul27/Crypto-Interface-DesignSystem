@@ -5,9 +5,9 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * Anchored floating panel on Radix Popover — Menu's free-form sibling.
+ * Anchored floating panel on Radix Popover: Menu's free-form sibling.
  * Menu is for lists of commands; Popover holds arbitrary content
- * (filters, mini-forms, detail cards). Trigger renders asChild — pass a
+ * (filters, mini-forms, detail cards). Trigger renders asChild: pass a
  * focusable element.
  */
 export function Popover({

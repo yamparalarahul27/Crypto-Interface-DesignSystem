@@ -16,7 +16,7 @@ export function Input({
 }: Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> & {
   /** sm 28 · md 36 · lg 44 px height (shared scale). */
   size?: InputSize;
-  /** Error state — sets aria-invalid + sell border. Pair with visible error text near the field. */
+  /** Error state: sets aria-invalid + sell border. Pair with visible error text near the field. */
   invalid?: boolean;
 }) {
   return (

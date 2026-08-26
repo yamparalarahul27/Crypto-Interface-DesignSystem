@@ -1,7 +1,7 @@
-// Opt-in canvas state switcher — selection-scoped chips in the Inspector
+// Opt-in canvas state switcher: selection-scoped chips in the Inspector
 // drive a `state` arg into demos that declare options here. Demos without
 // an entry keep today's zero-arg pose. Roadmap: "state switcher
-// (default/hover/loading/empty/error per demo)" — hover stays live CSS;
+// (default/hover/loading/empty/error per demo)": hover stays live CSS;
 // compositional states (loading/empty/error/…) are switched here.
 
 import type { ReactNode } from "react";

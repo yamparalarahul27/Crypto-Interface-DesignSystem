@@ -2,7 +2,7 @@
 
 Status: stable
 Version: 1.0.0
-Small status label on the tinted-surface pairs — tone conveys state category, never price direction on its own.
+Small status label on the tinted-surface pairs: tone conveys state category, never price direction on its own.
 
 ## Usage
 
@@ -24,8 +24,8 @@ import { Badge } from "@/design-system";
 | Prop | Type | Default | Notes |
 |---|---|---|---|
 | `tone` | `"neutral" \| "brand" \| "buy" \| "sell" \| "warning" \| "info"` | `"neutral"` | Maps to the tinted state-surface pairs. |
-| `className` | `string` | — | cn-merged. |
-| …rest | `HTMLAttributes<span>` | — | Pass-through. |
+| `className` | `string` | - | cn-merged. |
+| …rest | `HTMLAttributes<span>` | - | Pass-through. |
 
 ## Tokens
 
@@ -33,7 +33,7 @@ import { Badge } from "@/design-system";
 
 ## States
 
-Static — no interactive states. Tone is the only variant axis.
+Static: no interactive states. Tone is the only variant axis.
 
 ## Motion
 

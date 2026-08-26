@@ -17,7 +17,7 @@ function pageWindow(page: number, count: number, siblings: number): (number | "â
 
 /**
  * Page controls for long tables/lists. Callback-driven (buttons, not
- * links) â€” wire `onPageChange` to your data layer or router. `page` is
+ * links): wire `onPageChange` to your data layer or router. `page` is
  * 1-based.
  */
 export function Pagination({

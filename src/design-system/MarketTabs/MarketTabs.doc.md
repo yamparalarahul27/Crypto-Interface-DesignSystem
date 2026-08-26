@@ -32,15 +32,15 @@ import { MarketTabs } from "@/design-system";
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `markets` | `MarketTabItem[]` | -- | Each item has `symbol`, optional `label`, `price`, `changePct`, `iconSrc`, `disabled`. |
-| `activeSymbol` | `string` | -- | Active tab key. |
-| `onActiveChange` | `(symbol:string)=>void` | -- | Activates a market. |
-| `onClose` | `(symbol:string)=>void` | -- | Renders close buttons when provided and more than one tab exists. |
-| `onAdd` | `() => void` | -- | Renders the trailing add button. |
+| `markets` | `MarketTabItem[]` | - | Each item has `symbol`, optional `label`, `price`, `changePct`, `iconSrc`, `disabled`. |
+| `activeSymbol` | `string` | - | Active tab key. |
+| `onActiveChange` | `(symbol:string)=>void` | - | Activates a market. |
+| `onClose` | `(symbol:string)=>void` | - | Renders close buttons when provided and more than one tab exists. |
+| `onAdd` | `() => void` | - | Renders the trailing add button. |
 | `addDisabled` | `boolean` | `false` | Disables the add button, e.g. tab cap reached. |
 | `addLabel` | `string` | `Add market` | Add button accessible label. |
 | `aria-label` | `string` | `Open markets` | Names the tablist. |
-| `className` | `string` | -- | cn-merged. |
+| `className` | `string` | - | cn-merged. |
 
 ## Tokens
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * NFT seed — thin wrapper around /api/nft/admin/seed
+ * NFT seed: thin wrapper around /api/nft/admin/seed
  *
  * Usage:
  *   node scripts/nft-seed.mjs                              # defaults to PERKs
@@ -27,7 +27,7 @@ function loadEnvVar(key) {
     const match = env.match(new RegExp(`^${key}=(.+)$`, "m"));
     if (!match) {
       throw new Error(
-        `${key} missing from .env.local — generate one with:\n  openssl rand -base64 32`
+        `${key} missing from .env.local; generate one with:\n  openssl rand -base64 32`
       );
     }
     return match[1].trim().replace(/^["']|["']$/g, "");

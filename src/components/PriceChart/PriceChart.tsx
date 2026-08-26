@@ -1,12 +1,12 @@
 "use client";
 
-// PriceChart — the interactive price chart (component-gaps Batch 3, the
+// PriceChart: the interactive price chart (component-gaps Batch 3, the
 // CDS-signature surface). Unlike the rest of CIDS, this is NOT a
 // portable design-system primitive: it composes the vendored EvilLineChart
 // (recharts under the hood), so it lives outside src/design-system/ and
 // is exempt from check:portable.
 //
-// Built on EvilCharts by legions-developer — vendored under
+// Built on EvilCharts by legions-developer: vendored under
 // src/components/evilcharts/ (https://github.com/legions-developer/evilcharts).
 // The line, crosshair cursor, and hover tooltip are EvilLineChart's; the
 // price/change header and range switcher (CIDS Lane) are composed on top.

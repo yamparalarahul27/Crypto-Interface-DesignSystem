@@ -3,6 +3,7 @@
 import { Dialog as RadixDialog, Tooltip as RadixTooltip } from "radix-ui";
 import { useSyncExternalStore, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { IconClose } from "../icons";
 
 const COARSE_POINTER_QUERY = "(pointer: coarse)";
 const HOVER_NONE_QUERY = "(hover: none)";
@@ -21,7 +22,7 @@ function subscribeTouch(callback: () => void): () => void {
 
 function readTouch(): boolean {
   if (typeof window === "undefined") return false;
-  // Touch coverage on iOS Safari can be flaky on (pointer: coarse) alone —
+  // Touch coverage on iOS Safari can be flaky on (pointer: coarse) alone,
   // layer in (hover: none) and ontouchstart for robust detection.
   if (window.matchMedia(COARSE_POINTER_QUERY).matches) return true;
   if (window.matchMedia(HOVER_NONE_QUERY).matches) return true;
@@ -81,7 +82,7 @@ export function Tooltip({
               aria-label="Close"
               className="absolute right-3 top-3 inline-flex h-7 w-7 items-center justify-center rounded-control text-fg-muted transition-colors hover:bg-surface-page hover:text-fg"
             >
-              ×
+              <IconClose size={14} weight="bold" aria-hidden="true" />
             </RadixDialog.Close>
           </RadixDialog.Content>
         </RadixDialog.Portal>

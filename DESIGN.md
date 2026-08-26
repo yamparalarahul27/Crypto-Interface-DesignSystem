@@ -1,4 +1,4 @@
-# Design System — CIDS (Crypto Interface Design System)
+# Design System: CIDS (Crypto Interface Design System)
 
 > Single source of truth for the CIDS design language: foundations
 > (color, type, spacing, radius, motion) live here; component specs
@@ -11,20 +11,20 @@
 
 ## Identity
 
-**Product name:** CIDS — the design system is the product (pivoted 2026-07-11)
-**Visual theme:** Near-Black Financial Terminal — "Fey Dark Wealth" / market-dark
-**Aesthetic:** A premium, data-dense trading interface that communicates competence and authority. A cinematic near-black canvas with soft charcoal elevation; mint-teal is the single identity accent. Numbers are the hero, decoration is the enemy — depth comes from tonal layering and soft shadows, not borders.
+**Product name:** CIDS, the design system is the product (pivoted 2026-07-11)
+**Visual theme:** Near-Black Financial Terminal, "Fey Dark Wealth" / market-dark
+**Aesthetic:** A premium, data-dense trading interface that communicates competence and authority. A cinematic near-black canvas with soft charcoal elevation; mint-teal is the single identity accent. Numbers are the hero, decoration is the enemy: depth comes from tonal layering and soft shadows, not borders.
 
 **Mood words:** Precise · Premium · Spacious · Trustworthy · Calm authority · Cinematic
 **Anti-mood words:** Flashy · Neon · Cluttered · Bright
 
-> **Amendment — tide social layer (calm base, playful moments).** The
+> **Amendment: tide social layer (calm base, playful moments).** The
 > canvas, typography, and data surfaces keep calm authority. Playfulness
-> is budgeted *exclusively* to feedback on human actions — reacting,
+> is budgeted *exclusively* to feedback on human actions: reacting,
 > following, watching, celebrating. If a static screen looks playful, we
 > overspent. *Playful* is therefore removed from the anti-mood list as an
 > absolute; *Gamified* is refined to **no mechanics** (points / streaks /
-> ranks) — celebratory feedback is allowed, game loops are not. Rationale
+> ranks): celebratory feedback is allowed, game loops are not. Rationale
 > and scope: [docs/tide/02-design-system.md](./docs/tide/02-design-system.md).
 
 ---
@@ -32,7 +32,7 @@
 ## Color
 
 > **Single source of truth: `src/app/globals.css`.** Every colour is a CSS variable
-> exposed as a semantic Tailwind utility via `@theme inline`. **Consume tokens —
+> exposed as a semantic Tailwind utility via `@theme inline`. **Consume tokens:
 > never hardcode hex in classes.** Use `bg-surface-container`, `text-fg`,
 > `text-brand`, `text-buy`, etc. The `npm run check:theme` guard fails CI if a
 > `*-[#hex]` utility class reappears anywhere under `src/` (evilcharts exempt).
@@ -46,7 +46,7 @@
 > utilities and are what components consume. Never point a component at
 > a raw value a theme can't retune.
 
-> **Amendment — themes (CIDS pivot; light added Phase 3).** Themes are
+> **Amendment: themes (CIDS pivot; light added Phase 3).** Themes are
 > swappable token value-sets: `:root` is the default (`market-dark`),
 > and each `[data-theme="x"]` block in `globals.css` overrides the same
 > token names (activated via `<html data-theme="x">`, switchable at
@@ -56,8 +56,8 @@
 > |---|---|
 > | **dark** | the default market-dark terminal |
 > | **mono** | grayscale except the signal (buy/sell + hues kept) |
-> | **light** | full re-valuation — white canvas, dark-jewel identity hues, deep-teal brand, inverted glyphs, softened elevations |
-> | **violet** | white-labeling — the accent family (+ reserved "you" hue) swapped in ONE block, everything else inherited |
+> | **light** | full re-valuation: white canvas, dark-jewel identity hues, deep-teal brand, inverted glyphs, softened elevations |
+> | **violet** | white-labeling: the accent family (+ reserved "you" hue) swapped in ONE block, everything else inherited |
 >
 > `npm run check:contrast` verifies every theme (with `:root` fallback
 > for tokens a theme doesn't override). The dark-only rule above is
@@ -72,10 +72,10 @@
 2. Check the two forced pairs: if surfaces flip polarity, `--fg-inverse`
    (avatar glyph) and `--on-brand` must flip with them; identity hues
    must go dark-jewel on light surfaces.
-3. Run `npm run check:contrast` — it auto-discovers the block and fails
+3. Run `npm run check:contrast`: it auto-discovers the block and fails
    any hue/glyph/surface pair below WCAG AA. Adjust until green.
 4. Add the name to `THEMES` in `src/app/design/ThemeToggle.tsx`.
-   That's the whole integration — components need zero changes.
+   That's the whole integration: components need zero changes.
 
 ### Surfaces (near-black, layered by elevation)
 
@@ -109,54 +109,79 @@
 
 ### Identity hues (tide social layer)
 
-> **Amendment — new foundation.** Social UIs need per-person color; one
+> **Amendment: new foundation.** Social UIs need per-person color; one
 > accent (`--brand`) can't carry N people, and free hex would break the
-> token system. This adds a fixed **8-hue identity palette**, muted to sit
-> on near-black. Assigned deterministically from the wallet address
-> (`hash(wallet) % 8`) — stable, no user picker in v1. Consumed **only** by
-> avatars, handle accents, and presence indicators — **never for data or
+> token system. This adds a fixed **8-hue identity palette**, each hue
+> shipping as an accent + disc pair (see below). Assigned deterministically
+> from the wallet address
+> (`hash(wallet) % 8`): stable, no user picker in v1. Consumed **only** by
+> avatars, handle accents, and presence indicators: **never for data or
 > state** (buy / sell / warning keep their semantic hues).
 
-| Token | Value | Utility | Note |
+**Each hue is a pair** (changed 2026-08-26). A hue has two jobs that pull
+in opposite directions: it is handle text on a near-black page, which
+forces it *light*, and it is an avatar disc, which wants it *saturated*.
+Serving both from one token is what kept the palette pale and forced a
+near-black glyph. So:
+
+| Token | Value | Utility | Role |
 |---|---|---|---|
-| `--id-tide` | `#5ad8c4` | `text-id-tide` / `bg-id-tide` | reserved for the signed-in user (matches `--brand`; kept a separate token so it can diverge) |
-| `--id-coral` | `#e8927c` | `*-id-coral` | |
-| `--id-sand` | `#d9b380` | `*-id-sand` | |
-| `--id-lilac` | `#b39fd8` | `*-id-lilac` | |
-| `--id-sky` | `#7fb3d9` | `*-id-sky` | |
-| `--id-moss` | `#93b98a` | `*-id-moss` | |
-| `--id-rose` | `#cf8ca3` | `*-id-rose` | |
-| `--id-slate` | `#93a1b8` | `*-id-slate` | |
+| `--id-tide` | `#5ad8c4` | `text-id-tide` | **accent**: handle text, presence dots. Reserved for the signed-in user (matches `--brand`; separate token so it can diverge) |
+| `--id-coral` | `#e8927c` | `text-id-coral` | accent |
+| `--id-sand` | `#d9b380` | `text-id-sand` | accent |
+| `--id-lilac` | `#b39fd8` | `text-id-lilac` | accent |
+| `--id-sky` | `#7fb3d9` | `text-id-sky` | accent |
+| `--id-moss` | `#93b98a` | `text-id-moss` | accent |
+| `--id-rose` | `#cf8ca3` | `text-id-rose` | accent |
+| `--id-slate` | `#93a1b8` | `text-id-slate` | accent |
+| `--id-tide-fill` | `#2d6c62` | `bg-id-tide-fill` | **disc**: the avatar fill. Free to saturate: only `--id-glyph` reads on it |
+| `--id-coral-fill` | `#74493e` | `bg-id-coral-fill` | disc |
+| `--id-sand-fill` | `#6c5a40` | `bg-id-sand-fill` | disc |
+| `--id-lilac-fill` | `#5a506c` | `bg-id-lilac-fill` | disc |
+| `--id-sky-fill` | `#405a6c` | `bg-id-sky-fill` | disc |
+| `--id-moss-fill` | `#4a5c45` | `bg-id-moss-fill` | disc |
+| `--id-rose-fill` | `#684652` | `bg-id-rose-fill` | disc |
+| `--id-slate-fill` | `#4a505c` | `bg-id-slate-fill` | disc |
+| `--id-glyph` | `#fbfcfe` | `text-id-glyph` | the letter on a disc. One value for every theme, because every disc is deep |
+
+The `light` theme's accents are already deep enough to read on white, so
+its discs reuse them rather than doubling down. `mono` inherits both sets;
+`violet` overrides `--id-tide` and its fill together.
 
 **Verification (not eyeballed).** `npm run check:contrast` asserts WCAG AA
-(4.5:1) for both consumption paths and fails CI otherwise:
+(4.5:1) on all three paths, across all four themes, and fails CI otherwise:
 
-- **Avatar glyph** — dark `--fg-inverse` (`#07080a`) on the flat hue:
-  **7.6–11.5:1** ✓
-- **Handle / presence accent** — the hue as text on `surface-page`,
-  `surface-container`, and `surface-bright`: lowest **5.2:1** ✓
+- **Avatar glyph**: `--id-glyph` on each `--id-*-fill`: **5.96–8.03:1** ✓
+- **Handle / presence accent**: the accent hue as text on `surface-page`,
+  `surface-container`, `surface-bright`: lowest **5.2:1** ✓
+- **Completeness**: every accent hue ships a matching `-fill`, so a new
+  hue cannot silently inherit another theme's disc colour ✓
 
 **Avatar fill** is a radial gradient
-`radial-gradient(120% 120% at 30% 20%, var(--id-x), color-mix(in srgb, var(--id-x) 60%, black))`
-— always reference the token, never a hardcoded dark end. The gradient's
-*darkest corner* measures 3.2–4.4:1 against the glyph, but the glyph is
-centered (~30% down the gradient from the light origin) and never occupies
-that corner, so it stays above 4.5:1 in use. The verifier reports the
-corner value as an informational note.
+`radial-gradient(120% 120% at 30% 20%, var(--id-x-fill), color-mix(in srgb, var(--id-x-fill) 78%, black))`
+: always reference the token, never a hardcoded dark end. The dark end is
+now the *safe* direction: the glyph is light, so the flat fill (the
+gradient's lightest point) is the worst case, and that is exactly what the
+verifier asserts. No informational carve-out is needed any more.
 
-### Brand — mint-teal identity accent
+**Generative variants** (`shards`, `blocks`) keep building from the accent
+hues rather than the fills: they carry no glyph, so no contrast rule binds
+them, and their per-facet `color-mix` at 35–56% already lands at luminance
+0.039–0.155 against the discs' 0.079–0.122, the same depth family.
+
+### Brand: mint-teal identity accent
 
 | Token | Value | Utility | Role |
 |---|---|---|---|
 | `--brand` | `#5ad8c4` | `text-brand` / `bg-brand` | Primary CTA, links, selected state, focus |
 | `--brand-hover` | `#78e8d7` | `bg-brand-hover` | Hover on brand-filled actions |
-| `--brand-bright` | `#a7fff0` | — | High-contrast glow for charts/highlights |
-| `--brand-subtle` | `#c9fbf2` | — | Pale mint tint for soft brand fills |
+| `--brand-bright` | `#a7fff0` | - | High-contrast glow for charts/highlights |
+| `--brand-subtle` | `#c9fbf2` | - | Pale mint tint for soft brand fills |
 
-> **Filled mint surfaces use dark text (`text-on-brand`), never `text-white`** — mint
+> **Filled mint surfaces use dark text (`text-on-brand`), never `text-white`**: mint
 > is a light accent; white text on it fails contrast. The guard enforces this.
 
-### Semantic — trading + state
+### Semantic: trading + state
 
 | Token | Value | Utility | Role |
 |---|---|---|---|
@@ -175,7 +200,7 @@ corner value as an informational note.
 | `--warning-surface` | `#211d10` | `bg-warning-surface` | Subtle warning background |
 | `--info-surface` | `#111827` | `bg-info-surface` | Subtle info background |
 | `--error-surface` | `#221114` | `bg-error-surface` | Subtle destructive background |
-| `--success-surface` | `#0f1f1a` | `bg-success-surface` | Subtle success background (same value as buy — distinct token so they can diverge) |
+| `--success-surface` | `#0f1f1a` | `bg-success-surface` | Subtle success background (same value as buy: distinct token so they can diverge) |
 
 <sub>Sign vs. magnitude (guideline #5): magnitude drives tone via `Math.abs()`, direction drives the signed `+`/`−` and ▲/▼. Two concerns, two computations. Peg-health colour reflects health, not price direction.</sub>
 
@@ -190,7 +215,7 @@ What is actually loaded (nothing else may be referenced):
 | **Geist** | `next/font/google` (`layout.tsx`) | `--font-sans` → `font-sans` | All UI text: labels, buttons, body |
 | **Geist Mono** | `next/font/google` (`layout.tsx`) | `--font-mono` → `font-mono` | Code, addresses, handles |
 | **GeistPixelSquare** | Self-hosted `/fonts/GeistPixelSquare.woff2` (`@font-face` in globals) | `.data-lg/md/sm` | Financial data (prices, %, PnL) |
-| IBM Plex Mono | *not loaded* — CSS fallback only | inside `.data-*` stacks | Fallback if pixel font fails |
+| IBM Plex Mono | *not loaded*: CSS fallback only | inside `.data-*` stacks | Fallback if pixel font fails |
 
 **Font smoothing:** `antialiased` on all body text.
 
@@ -199,7 +224,7 @@ What is actually loaded (nothing else may be referenced):
 | Class / Level | Font | Weight | Size | Use |
 |---|---|---|---|---|
 | Page title | Geist | 600–700 | 1.25–1.5rem | Page/section headings |
-| Section label | Geist | 600 | 0.6875rem, uppercase, tracking 0.1em, `text-fg-subtle` | Section dividers (pattern, not a CSS class — see `SectionLabel` in `design/page.tsx`) |
+| Section label | Geist | 600 | 0.6875rem, sentence case, `text-fg-subtle` | Section dividers (pattern, not a CSS class: see `SectionLabel` in `design/page.tsx`) |
 | Body | Geist | 400–500 | 0.875rem | Descriptions, general UI |
 | `.data-lg` | GeistPixelSquare | 400 | `--text-data-lg-size` 1.125rem (1.875 ≥768px) | Hero financial figures |
 | `.data-md` | GeistPixelSquare | 400 | `--text-data-md-size` 0.875rem | Table values, prices |
@@ -213,14 +238,17 @@ classes and the `text-data-lg/md/sm` utilities (pair those with
 ### Rules
 
 - All financial numbers use **GeistPixelSquare** (fallback: IBM Plex Mono) with `tabular-nums`. Never a serif or variable-weight font.
-- Section labels are always **uppercase with letter-spacing ≥ 0.08em**, `text-fg-subtle`.
+- Section labels are **sentence case at 0.6875rem**, `font-semibold`, `text-fg-subtle`.
+  No all-caps and no tracking: letter-spacing exists to open up capitals, so
+  once the capitals go it only loosens the word. (Changed 2026-08-26; the
+  system was previously all-caps at 0.08–0.14em.)
 - Never use serif fonts anywhere in the UI.
 
 ---
 
 ## Spacing
 
-**Base unit: 8px**, tokenized as `--space-1…8` (the density lever — a
+**Base unit: 8px**, tokenized as `--space-1…8` (the density lever, a
 compact mode retunes these values and every consumer follows):
 
 | Token | Value | Name | Use |
@@ -229,18 +257,18 @@ compact mode retunes these values and every consumer follows):
 | `--space-2` | 16px | Standard | Component spacing, card padding |
 | `--space-3` | 24px | Comfortable | Section padding, sheet padding |
 | `--space-4` | 32px | Spacious | Between major sections |
-| `--space-5` | 40px | — | Large section gaps |
+| `--space-5` | 40px | - | Large section gaps |
 | `--space-6` | 48px | Generous | Hero/page-level padding |
-| `--space-7` | 56px | — | Rare, page-level |
+| `--space-7` | 56px | - | Rare, page-level |
 | `--space-8` | 64px | Maximal | Rare, page-level |
 
 ### Density (the terminal axis)
 
 `<html data-density="compact">` re-values the spacing scale, the
 financial type ramp, and the row grid (`--row-h` 44→32, `--cell-px`
-12→8) — one attribute, zero component changes. Orthogonal to themes;
+12→8): one attribute, zero component changes. Orthogonal to themes;
 switchable live from the canvas Theme Studio. Interactive controls
-(Button/IconButton) keep their own heights — density compresses data
+(Button/IconButton) keep their own heights: density compresses data
 surfaces, never tap targets.
 
 Rules:
@@ -251,7 +279,7 @@ Rules:
 - Tailwind's fine-grained default scale (`gap-1` = 4px, `px-2.5` = 10px…)
   remains allowed for micro-adjustments inside a component.
 
-**Border radius scale** — token-driven since the Theme Studio work; a
+**Border radius scale**: token-driven since the Theme Studio work; a
 theme (or the canvas token panel) can reshape every component by
 overriding these:
 
@@ -261,7 +289,66 @@ overriding these:
 | `--radius-chip` | `4px` | `rounded-chip` | token chips, icon boxes |
 | `--radius-card` | `8px` | `rounded-card` | cards, CTAs, list rows |
 | `--radius-sheet` | `12px` | `rounded-sheet` (`rounded-t-sheet`) | sheets, large modals |
-| — | `9999px` | `rounded-full` | discs, avatars (deliberately not a token) |
+| - | `9999px` | `rounded-full` | discs, avatars (deliberately not a token) |
+
+---
+
+## Icons
+
+**[Phosphor](https://phosphoricons.com) is the icon family.** One family,
+one optical grid: the system previously improvised with unicode glyphs
+(`▲`, `✓`, `⧉`, `⚙`) and hand-drawn SVG paths, which disagreed on weight
+and baseline across platforms and could not be re-weighted together.
+
+Components never name the vendor. They import intent from
+[`src/design-system/icons.ts`](./src/design-system/icons.ts), the system's
+single icon seam:
+
+```tsx
+import { IconClose, IconPriceUp } from "../icons";   // inside the design system
+import { IconClose, IconPriceUp } from "@/design-system"; // from app code
+
+<IconClose size={14} weight="bold" aria-hidden="true" />
+```
+
+`check:portable` enforces this (rule **P1a**): `@phosphor-icons/react` is
+an allowed import, but only `icons.ts` may name it. That keeps the family
+swappable in one file, and lets the registry declare the npm dependency
+exactly once: every component that draws an icon picks up `@cids/icons`
+as a registry dependency automatically.
+
+### Rules
+
+- **Import from `@phosphor-icons/react/dist/ssr`, not the package root.**
+  Root icons read `IconContext` and are client-only; the ssr build is
+  context-free and renders in server components too. `icons.ts` uses
+  per-icon paths so a vendored copy costs an adopter only what it draws.
+- **Size explicitly on icon-only controls** (`size={14}` in an `h-7`
+  button). Omitting `size` inherits `1em`, which is right inside a text
+  run and wrong inside a fixed-size control.
+- **Colour comes from `currentColor`.** Put `text-buy` / `text-sell` /
+  `text-fg-muted` on the icon or its wrapper; never hard-code a fill.
+- **Centre icons against text with `inline-flex items-center`.** An SVG
+  sits on the text baseline otherwise and rides high next to numerals.
+- **Weight carries meaning.** `fill` for values being reported (the
+  money carets) and brand marks; `bold` for small marks that must stay
+  legible under 14px; `regular` for everything else.
+- **Decorative by default.** Icons take `aria-hidden="true"`; the
+  control's `aria-label` or adjacent text is the accessible name
+  ([Icon-only controls](#icon-only-controls)).
+- **Adding one:** find it on phosphoricons.com, re-export its
+  `<Name>Icon` binding from `icons.ts` under a CIDS-intent name, and use
+  that name downstream. The unsuffixed `<Name>` bindings are deprecated
+  upstream.
+
+### What is *not* an icon
+
+Unicode that is typography or data stays as it is: `…` ellipses, the
+`−` (U+2212) minus in number formatting, `×` in dimensions, `⌘` in key
+hints, and the box-drawing art in `.doc.md` anatomy sketches. Emoji in
+`ReactionBar` and `EmptyState` are user content, not iconography.
+Structural SVG: `Sparkline` geometry, the `QRCode` matrix, `Avatar`
+gradients, the `HoldToConfirm` progress ring: is drawing, not an icon.
 
 ---
 
@@ -272,7 +359,7 @@ overriding these:
 > `index.ts`; the `.doc.md` (fixed shape: Usage · Anatomy · Props ·
 > Tokens · States · Motion · A11y) is the component's spec, enforced by
 > `npm run check:portable` and rendered live by the canvas Inspector.
-> **This file never duplicates component specs** — that's how docs
+> **This file never duplicates component specs**; that's how docs
 > stayed truthful. Authoring rules: [`src/design-system/CONVENTIONS.md`](./src/design-system/CONVENTIONS.md).
 
 Current inventory (37):
@@ -299,7 +386,7 @@ Current inventory (37):
 | NetworkBadge | stable | | TxStatus | stable |
 | AmountInput | stable | | LoadingButton | draft |
 
-Components consume tokens from this file's foundations — they never
+Components consume tokens from this file's foundations; they never
 define color/spacing/motion values of their own (`check:theme`).
 Evolution plan: [docs/cids-roadmap.md](./docs/cids-roadmap.md).
 
@@ -309,7 +396,7 @@ Evolution plan: [docs/cids-roadmap.md](./docs/cids-roadmap.md).
 
 ### Page Structure
 
-- **Dark-only**: every surface sits on the near-black ladder — there is
+- **Dark-only**: every surface sits on the near-black ladder; there is
   no light body (light theme is a roadmap Phase 3 deliverable).
 - **Canvas** (`/design/canvas`): full-viewport, desktop-first.
 - **Gallery / feed demo / landing**: single centered column, `max-w`
@@ -343,7 +430,7 @@ Evolution plan: [docs/cids-roadmap.md](./docs/cids-roadmap.md).
 
 ### Surface Hierarchy (dark-first)
 
-Tokens only — values live in `globals.css` per theme:
+Tokens only; values live in `globals.css` per theme:
 
 | Layer | Token | Role |
 |---|---|---|
@@ -353,11 +440,11 @@ Tokens only — values live in `globals.css` per theme:
 | 3 | `surface-container` | Cards, rows, inputs |
 | 4 | `surface-container-high` | Hover, dropdowns, raised controls |
 | 5 | `surface-bright` | Selected, popovers, tooltips |
-| — | `surface-dim/60 + backdrop-blur` | Modal/sheet backdrop |
+| - | `surface-dim/60 + backdrop-blur` | Modal/sheet backdrop |
 
 ### Elevation tokens
 
-Shadows are tokens — components never write literal `box-shadow` values
+Shadows are tokens: components never write literal `box-shadow` values
 (guard-enforced by `check:theme` T4 inside the DS + design app):
 
 | Token | Utility | Use |
@@ -365,11 +452,11 @@ Shadows are tokens — components never write literal `box-shadow` values
 | `--elevation-1` | `shadow-card` | Card at rest |
 | `--elevation-2` | `shadow-raised` | Popovers, raised controls, FABs |
 | `--elevation-3` | `shadow-overlay` | Sheets, modals (over `surface-dim/60` backdrop) |
-| `--glow-brand` | `shadow-glow-brand` | Active `bg-brand` segment/pill — the mint halo |
+| `--glow-brand` | `shadow-glow-brand` | Active `bg-brand` segment/pill: the mint halo |
 | `--glow-brand-strong` | `shadow-glow-brand-strong` | Brand FAB / hero CTA |
 
 - **Depth comes from tonal layering** (surface → container → container-high → bright) first; shadows are secondary and deep/black.
-- The **only** coloured shadows allowed are the two brand glows — and they derive from `--brand` via `color-mix` inside the token, so they re-tint per theme. No other neon glows.
+- The **only** coloured shadows allowed are the two brand glows: and they derive from `--brand` via `color-mix` inside the token, so they re-tint per theme. No other neon glows.
 
 ### Z-index scale
 
@@ -393,34 +480,34 @@ such as `z-[var(--z-raised)]`
 | Interaction | Duration | Easing | Property |
 |---|---|---|---|
 | Button / Pill hover | **`150ms`** | `ease` | all (background, color, border) |
-| Nav item color | `150ms` | — | color |
+| Nav item color | `150ms` | - | color |
 | Card hover (interactive) | `150ms` | `ease-in-out` | all |
 | `.animate-fade-up` | `400ms` | `ease-out` | opacity, transform (Y +8px → 0) |
-| Active card press | — | — | `scale(0.98)` |
-| Active CTA press (landing) | — | `200ms` | `scale(0.97)` |
-| Chevron rotate (dropdown) | — | — | `rotate-180` on open |
+| Active card press | - |: | `scale(0.98)` |
+| Active CTA press (landing) | - | `200ms` | `scale(0.97)` |
+| Chevron rotate (dropdown) | - |: | `rotate-180` on open |
 | Modal entry | `300ms` | `ease-out` | opacity, transform |
 
-**Note:** The standard transition is `150ms` across all interactive UI components — the old doc incorrectly stated `200ms`.
+**Note:** The standard transition is `150ms` across all interactive UI components, the old doc incorrectly stated `200ms`.
 
 ### Motion primitives (tide social layer)
 
-> **Amendment — named tokens.** Three duration + easing pairs live in
+> **Amendment: named tokens.** Three duration + easing pairs live in
 > `globals.css` so motion is consumed by name, not by re-typed magic
 > numbers. Consume via CSS (`transition: transform var(--motion-fast)`) or
 > an arbitrary-value utility. All honor `prefers-reduced-motion` through
 > the global reset.
 
 Durations and easings are also split into their own tokens so they can
-be consumed (and re-tuned) independently — `--duration-fast/settle/spring`
+be consumed (and re-tuned) independently: `--duration-fast/settle/spring`
 and `--ease-settle` / `--ease-spring` (the latter two also exist as
 `ease-settle` / `ease-spring` utilities):
 
 | Composite token | Value | Use |
 |---|---|---|
-| `--motion-fast` | `var(--duration-fast) ease-out` = 150ms | state / hover / press — the `150ms` base above, as a token |
+| `--motion-fast` | `var(--duration-fast) ease-out` = 150ms | state / hover / press: the `150ms` base above, as a token |
 | `--motion-settle` | `var(--duration-settle) var(--ease-settle)` = 200ms | enter / morph (e.g. FollowButton fill→outline) |
-| `--motion-spring` | `var(--duration-spring) var(--ease-spring)` = 250ms overshoot | playful feedback on human actions only (react-pop) — the "budgeted playfulness" from Identity |
+| `--motion-spring` | `var(--duration-spring) var(--ease-spring)` = 250ms overshoot | playful feedback on human actions only (react-pop): the "budgeted playfulness" from Identity |
 
 ### `fade-up` keyframe
 ```css
@@ -431,21 +518,21 @@ and `--ease-settle` / `--ease-spring` (the latter two also exist as
 ```
 
 **Rules:**
-- Reserve `backdrop-filter: blur()` for modal backdrops only — never on cards
+- Reserve `backdrop-filter: blur()` for modal backdrops only: never on cards
 - No shine, sweep, or parallax effects
 - No looping animations on data elements
-- **Honor `prefers-reduced-motion`** — all motion is disabled under it via a global guard in `globals.css`. New motion must degrade to its final state instantly. See [Accessibility](#accessibility).
+- **Honor `prefers-reduced-motion`**: all motion is disabled under it via a global guard in `globals.css`. New motion must degrade to its final state instantly. See [Accessibility](#accessibility).
 
 ---
 
 ## Accessibility
 
-> Keyboard, motion, and contrast guarantees the UI must hold. Not optional polish —
+> Keyboard, motion, and contrast guarantees the UI must hold. Not optional polish:
 > the floor. Verified, not eyeballed.
 
 ### Keyboard focus
 
-Every interactive element shows a **`:focus-visible` ring** on keyboard / programmatic focus —
+Every interactive element shows a **`:focus-visible` ring** on keyboard / programmatic focus:
 brand mint, drawn with `outline` (never `box-shadow`, so layout never shifts), never removed.
 The ring is suppressed for pointer interaction (`:focus` without `-visible`), so mouse users
 don't see it. The base rule lives in `globals.css`:
@@ -482,7 +569,7 @@ Never gate meaning behind an animation.
 ### Contrast
 
 All `fg`-on-surface pairs clear **WCAG AA (4.5:1)**; `fg-subtle` is AA on page/container and
-AA-large on `surface-bright`. Filled mint surfaces use `text-on-brand` (dark) — white on mint
+AA-large on `surface-bright`. Filled mint surfaces use `text-on-brand` (dark): white on mint
 fails contrast, and `check:theme` blocks it. See [Color](#color).
 
 ### Touch targets
@@ -514,39 +601,40 @@ Buttons or links with no visible text label require an **`aria-label`** describi
 ### Do ✅
 - Use background-color shifts for depth on dark surfaces (not shadows)
 - Keep all financial numbers in **Geist Pixel Square** or IBM Plex Mono
-- Use `rounded-sm` (2px) on buttons, pills, cards, inputs — it is the system default radius
-- Use `bg-brand` (mint) as the single identity accent — links, selected state, primary CTA. Filled brand always pairs with `text-on-brand` (dark text)
+- Use `rounded-sm` (2px) on buttons, pills, cards, inputs; it is the system default radius
+- Use `bg-brand` (mint) as the single identity accent: links, selected state, primary CTA. Filled brand always pairs with `text-on-brand` (dark text)
 - Use `bg-surface` modals over `bg-surface-dim/60` blurred backdrops for clear layer separation
-- Show `text-buy` (mint-green) for positive values, `text-sell` (red) for negative — always
-- Use 0.08–0.10em letter-spacing on all uppercase section labels
+- Show `text-buy` (mint-green) for positive values, `text-sell` (red) for negative: always
+- Set section labels in sentence case at `text-[0.6875rem] font-semibold text-fg-subtle`: no `uppercase`, no `tracking-*`
 - Keep a minimum `44px` touch target on mobile
+- Draw every icon from Phosphor via `icons.ts` intent names, `aria-hidden`, sized to its control
 - Use `150ms` for all hover/active transitions
 
 ### Don't ❌
-- Don't use `border-radius: 0` — minimum is `rounded-sm` (2px)
-- Don't use `rounded-full` (9999px) on buttons or pills — that's for status dots only
+- Don't use `border-radius: 0`: minimum is `rounded-sm` (2px)
+- Don't use `rounded-full` (9999px) on buttons or pills; that's for status dots only
 - Don't use neon glows or text shadows (the one allowed coloured shadow is the subtle mint glow on an active `bg-brand` pill)
-- Don't use `backdrop-filter: blur()` on cards (Navbar and BottomBar use it — but not data cards)
+- Don't use `backdrop-filter: blur()` on cards (Navbar and BottomBar use it: but not data cards)
 - Don't use decorative corner accents or shine/sweep animations
 - Don't use serif fonts anywhere
 - Don't use gradients on cards or buttons (flat surface tokens only, except the featured StableCard, banners, and hero)
 - Don't alternate table row background colours
-- Don't hardcode hex in Tailwind classes (`bg-[#…]`) — always use a semantic token; `npm run check:theme` enforces this
-- Don't put `text-white` on a `bg-brand` fill — mint needs dark `text-on-brand`
+- Don't hardcode hex in Tailwind classes (`bg-[#…]`): always use a semantic token; `npm run check:theme` enforces this
+- Don't put `text-white` on a `bg-brand` fill: mint needs dark `text-on-brand`
 
 ---
 
 ## Font Loading
 
 ```tsx
-// src/app/layout.tsx — next/font (self-hosted by Next, no external <link>)
+// src/app/layout.tsx: next/font (self-hosted by Next, no external <link>)
 import { Geist, Geist_Mono } from "next/font/google";
 // exposed as --font-geist-sans / --font-geist-mono,
 // mapped to --font-sans / --font-mono in globals @theme
 ```
 
 ```css
-/* src/app/globals.css — the pixel data font */
+/* src/app/globals.css: the pixel data font */
 @font-face {
   font-family: "GeistPixelSquare";
   src: url("/fonts/GeistPixelSquare.woff2") format("woff2");
@@ -561,7 +649,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 ### Colour Tokens (semantic Tailwind utilities)
 
-> Use these utilities — **never** `bg-[#hex]`. Defined in `globals.css @theme`.
+> Use these utilities: **never** `bg-[#hex]`. Defined in `globals.css @theme`.
 
 ```
 /* Surfaces (low → high elevation) */
@@ -578,7 +666,7 @@ text-fg-subtle               /* tertiary / placeholders */
 
 /* Brand (mint) + filled */
 text-brand                   /* links, selected, accent */
-bg-brand text-on-brand hover:bg-brand-hover   /* primary CTA — DARK text */
+bg-brand text-on-brand hover:bg-brand-hover   /* primary CTA, DARK text */
 
 /* Semantic */
 text-buy   text-sell   text-warning   text-info
@@ -589,6 +677,20 @@ border-outline               /* visible separator */
 border-outline-variant       /* hairline / table rule */
 border-white/15              /* subtle glass rim on hero/glass only */
 ```
+
+### Icons
+
+```
+import { IconClose, IconCheck } from "@/design-system";   /* app code   */
+import { IconClose, IconCheck } from "../icons";          /* inside DS  */
+
+<IconClose size={14} weight="bold" aria-hidden="true" />
+```
+
+> Phosphor, always via `src/design-system/icons.ts`: **never** import
+> `@phosphor-icons/react` directly outside that file (`check:portable`
+> rule P1a). Size explicitly inside fixed-size controls; colour via
+> `text-*` on the icon or wrapper. See [Icons](#icons).
 
 ### Font Tokens
 
@@ -603,13 +705,13 @@ font-sans                          /* Geist */
 font-mono                          /* Geist Mono */
 
 /* Section labels (pattern) */
-font-sans font-semibold text-[0.6875rem] uppercase tracking-[0.1em] text-fg-subtle
+font-sans font-semibold text-[0.6875rem] text-fg-subtle
 ```
 
 ### Component Prompt Recipes
 
 **Data table:**
-> "`bg-surface-container`. Headers: `font-sans` 600, 12px, uppercase, `tracking-[0.05em]`, `text-fg-subtle`. Numbers: `.data-md` + `tabular-nums`, `text-fg`. Row rule: `border-outline-variant`. Row hover: `bg-surface-container-high`. `text-buy` positive, `text-sell` negative — magnitude via `Math.abs`, direction via sign."
+> "`bg-surface-container`. Headers: `font-sans` 600, 12px, sentence case, `text-fg-subtle`. Numbers: `.data-md` + `tabular-nums`, `text-fg`. Row rule: `border-outline-variant`. Row hover: `bg-surface-container-high`. `text-buy` positive, `text-sell` negative: magnitude via `Math.abs`, direction via sign."
 
 **Card:**
 > "`bg-surface-container`, `border border-outline-variant`, `rounded-card`, `16–24px` padding. Layered shadow; hover lifts to `bg-surface-container-high`. Text `text-fg` / `text-fg-muted`."

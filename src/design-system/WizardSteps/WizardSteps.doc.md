@@ -23,7 +23,7 @@ import { WizardSteps } from "@/design-system";
 
 ```
 Step label
-(1)—(2)—(3)     ← rail; past = check, future inert
+(1): (2): (3)     ← rail; past = check, future inert
 ┌─────────────────────┐
 │ panel (fixed height)│
 └─────────────────────┘
@@ -34,14 +34,14 @@ Step label
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `steps` | `{ id, label, content }[]` | — | Stable `id` keys the panel. |
+| `steps` | `{ id, label, content }[]` | - | Stable `id` keys the panel. |
 | `index` / `defaultIndex` | `number` | uncontrolled `0` | Controlled or default. |
-| `onIndexChange` | `(i, dir) => void` | — | `dir` is `1 \| -1`. |
-| `onComplete` | `() => void` | — | Primary on last step. |
+| `onIndexChange` | `(i, dir) => void` | - | `dir` is `1 \| -1`. |
+| `onComplete` | `() => void` | - | Primary on last step. |
 | `height` | `number` | `184` | Panel viewport px. |
 | `backLabel` / `nextLabel` / `finishLabel` | `string` | Back / Next / Finish | Finish shares grid with Next. |
 | `label` | `string` | `"Steps"` | Rail list name. |
-| `className` | `string` | — | cn-merged. |
+| `className` | `string` | - | cn-merged. |
 
 ## Tokens
 

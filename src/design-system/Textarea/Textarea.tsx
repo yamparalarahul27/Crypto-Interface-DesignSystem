@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Multi-line text entry — Input's sibling, same border/focus/invalid
+ * Multi-line text entry: Input's sibling, same border/focus/invalid
  * grammar, vertical resize only (horizontal resize breaks layouts).
  * Height via `rows` (default 3).
  */
@@ -11,7 +11,7 @@ export function Textarea({
   className,
   ...rest
 }: React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
-  /** Error state — sets aria-invalid + sell border. Pair with visible error text near the field. */
+  /** Error state: sets aria-invalid + sell border. Pair with visible error text near the field. */
   invalid?: boolean;
 }) {
   return (

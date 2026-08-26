@@ -6,7 +6,7 @@ captured: 2026-05-20
 
 # Visual gas-fee tiles
 
-> Replace the abstract gwei number with a vehicle-metaphor speed tier — Walking / Speed Bike / Future Car — so users *feel* low vs high gas before they read the number.
+> Replace the abstract gwei number with a vehicle-metaphor speed tier (Walking / Speed Bike / Future Car), so users *feel* low vs high gas before they read the number.
 
 ## What it is
 
@@ -21,12 +21,12 @@ The metaphor compresses three abstract values (gwei, $cost, seconds) into a sing
 Not yet decided. Candidates:
 
 ```
-(a) Header strip          — always visible, smallest footprint
+(a) Header strip: always visible, smallest footprint
     ┌──────────────────────────────────────────┐
     │ 🚶 31 │ 🏍 32 │ 🏎 34 gwei                │  ← micro tiles
     └──────────────────────────────────────────┘
 
-(b) Sidebar widget        — persistent reference
+(b) Sidebar widget: persistent reference
     ┌──────────────┐
     │ Gas Fees     │
     │ 🚶 31 Low    │
@@ -34,16 +34,16 @@ Not yet decided. Candidates:
     │ 🏎 34 High   │
     └──────────────┘
 
-(c) Inline on Trade Edge  — at point-of-action
+(c) Inline on Trade Edge: at point-of-action
     "Place $100 swap" preview shows the chosen tier
     expanded into the full Proteus-style card.
 
-(d) Dedicated /gas page   — full multi-chain comparison view
+(d) Dedicated /gas page: full multi-chain comparison view
 ```
 
-Recommend (c) — point-of-action gas data is what users actually want.
+Recommend (c): point-of-action gas data is what users actually want.
 
-## Sketch — the Proteus-style full card
+## Sketch: the Proteus-style full card
 
 ```
 ┌─ Gas Fees ────────────────────── Base: 30 │ next in 3s ┐
@@ -59,7 +59,7 @@ Recommend (c) — point-of-action gas data is what users actually want.
 └─────────────────────────────────────────────────────────┘
 ```
 
-## Sketch — Solana adaptation
+## Sketch: Solana adaptation
 
 ```
 ETH/EVM has gwei tiers (slow/avg/fast).
@@ -72,15 +72,15 @@ Solana has priority fees in microLamports/CU.
   🏎 Future Car               🛸 Spaceship        ← top-decile tip
 
   (Cosmic vocab also pairs nicely with the
-   cosmos-canvas idea — consistent universe.)
+   cosmos-canvas idea: consistent universe.)
 ```
 
 ## Open questions
 
 - **Which chains?** Project is Solana-first → Solana priority fees primary, EVM (ETH, Base, Polygon, BSC) as secondary?
 - **Solana-only first**, or multi-chain v1?
-- **Vehicle vs cosmic metaphor** — vehicles map cleanly to ETH/EVM but feel off-brand if the app is Solana-first with a space/cosmos visual identity.
-- **Cost basis** — show current "median tx" cost (USDC swap, NFT mint, simple transfer)? The Proteus reference uses one number; users may want context-specific ($X for swap, $Y for mint).
+- **Vehicle vs cosmic metaphor**: vehicles map cleanly to ETH/EVM but feel off-brand if the app is Solana-first with a space/cosmos visual identity.
+- **Cost basis**: show current "median tx" cost (USDC swap, NFT mint, simple transfer)? The Proteus reference uses one number; users may want context-specific ($X for swap, $Y for mint).
 - **Data sources:**
   - EVM → Blocknative, Etherscan gas tracker, Alchemy
   - Solana → Helius `getRecentPrioritizationFees`, Triton's geyser endpoints
@@ -98,7 +98,7 @@ Solana has priority fees in microLamports/CU.
 
 ## Prior art / reference
 
-- [Proteus dashboard](https://proteus.app/) — direct inspiration; vehicle metaphor
-- [Etherscan gas tracker](https://etherscan.io/gastracker) — canonical EVM gas view
-- [Ethereum.org gas calculator](https://ethereum.org/en/) — simpler educational pattern
-- [Helius Solana fee API](https://docs.helius.dev/) — best Solana priority-fee data source
+- [Proteus dashboard](https://proteus.app/): direct inspiration; vehicle metaphor
+- [Etherscan gas tracker](https://etherscan.io/gastracker): canonical EVM gas view
+- [Ethereum.org gas calculator](https://ethereum.org/en/): simpler educational pattern
+- [Helius Solana fee API](https://docs.helius.dev/): best Solana priority-fee data source

@@ -7,7 +7,7 @@
 > API version offers, and (c) a consolidation map of which single provider should
 > own each data need. It is the reference for the API cleanup work.
 >
-> <sub>Researched mid-2026 against official provider docs. Citations at the bottom of each section. Treat pricing/quota figures as approximate — they live on dashboards, not API reference pages.</sub>
+> <sub>Researched mid-2026 against official provider docs. Citations at the bottom of each section. Treat pricing/quota figures as approximate: they live on dashboards, not API reference pages.</sub>
 
 ---
 
@@ -24,7 +24,7 @@
 | **Upstash KV** | Vercel KV | KV token | rate limiting only (fail-open) | all `/api/*` |
 
 ### Direct client call (bypasses proxy)
-- `lite-api.jup.ag/price/v3` — live price ticker (~1.5s refresh) in `src/lib/hooks/useTokenPriceTicker.ts`
+- `lite-api.jup.ag/price/v3`: live price ticker (~1.5s refresh) in `src/lib/hooks/useTokenPriceTicker.ts`
 
 ### Call flow
 
@@ -65,64 +65,64 @@ NFT                 │         │         │            │ ✓
 
 ---
 
-## 3. Latest version — per provider
+## 3. Latest version: per provider
 
-### Jupiter — Token API **v2** (current; v1 sunset Sep 2025)
+### Jupiter: Token API **v2** (current; v1 sunset Sep 2025)
 
 The single richest call we have. **One `tokens/v2` request returns, per token:**
 
 - `usdPrice`; `priceChange` for **5m / 1h / 6h / 24h**
-- volume, buy/sell volumes, buy/sell counts, traders — per window
+- volume, buy/sell volumes, buy/sell counts, traders: per window
 - `liquidity`, `mcap`, `fdv`, `holderCount`
 - `audit` { `mintAuthorityDisabled`, `freezeAuthorityDisabled`, `topHoldersPercentage` }
 - `isVerified`, `organicScore` + label, `tags`, `decimals`, `circSupply`, `totalSupply`
 
 Surface: `tokens/v2/search` (≤100 mints), `tokens/v2/tag`, `tokens/v2/{category}/{interval}`, `tokens/v2/recent`.
 
-- **Price API v3** — `price/v3?ids=` (≤50 mints): `usdPrice`, `blockId`, `decimals`, `priceChange24h`. Single authoritative price; unreliable tokens return `null`.
-- **Swap quote v1** — `swap/v1/quote`: `priceImpactPct`, `otherAmountThreshold`, `routePlan[]`, slippage. Still current.
+- **Price API v3**: `price/v3?ids=` (≤50 mints): `usdPrice`, `blockId`, `decimals`, `priceChange24h`. Single authoritative price; unreliable tokens return `null`.
+- **Swap quote v1**: `swap/v1/quote`: `priceImpactPct`, `otherAmountThreshold`, `routePlan[]`, slippage. Still current.
 
 **Hosts:** `lite-api.jup.ag` = keyless, 0.5 RPS (lite-api deprecation was *postponed*, no deadline). `api.jup.ag` + key = higher RPS. Rate limits are **per-account**, 60s sliding window. Free paid-key tier = 1 RPS; Developer $25/mo = 10 RPS.
 
-**Forward note:** new swap work should target the unified **Swap v2** (`/order` + `/execute`, launched Mar 2026) — it folds in Ultra/Metis. Our `swap/v1/quote` is safe to keep.
+**Forward note:** new swap work should target the unified **Swap v2** (`/order` + `/execute`, launched Mar 2026); it folds in Ultra/Metis. Our `swap/v1/quote` is safe to keep.
 
-<sub>Docs: developers.jup.ag (moved from dev.jup.ag) — tokens/v2/token-information, price/v3, swap/get-quote, portal/rate-limits, pricing, changelog.</sub>
+<sub>Docs: developers.jup.ag (moved from dev.jup.ag), tokens/v2/token-information, price/v3, swap/get-quote, portal/rate-limits, pricing, changelog.</sub>
 
-### Birdeye — mostly **v3** now (`public-api.birdeye.so`)
+### Birdeye: mostly **v3** now (`public-api.birdeye.so`)
 
 Versioned per family, not globally. Current paths:
 
 | Family | Path | Notes |
 |---|---|---|
 | OHLCV | `/defi/v3/ohlcv` | **sub-minute (1s/15s/30s)** + up to **5000 candles/call** |
-| Token security | `/defi/token_security` | v1, current — mint/freeze, holder concentration |
+| Token security | `/defi/token_security` | v1, current: mint/freeze, holder concentration |
 | Top holders | `/defi/v3/token/holder` | Solana only, `offset+limit ≤ 10000` |
 | Token list | `/defi/v3/token/list` | rich filter/sort discovery |
 | Search | `/defi/v3/search` | exact/fuzzy, market filters |
 | Trending | `/defi/token_trending` | v1, **limit capped at 20** |
-| Token overview | `/defi/token_overview` | v1, current — **the rich blob Jupiter v2 now duplicates** |
+| Token overview | `/defi/token_overview` | v1, current: **the rich blob Jupiter v2 now duplicates** |
 | Market data | `/defi/v3/token/market-data` | v3-native lighter counterpart |
 | Price / multi | `/defi/price`, `/defi/multi_price` | multi caps at 100 mints |
 
 **Auth:** `X-API-KEY` + `x-chain` (matches our CLAUDE.md convention). **Billing = compute units**, rate limit **per-account** (Standard 1 RPS … Premium 50 RPS). **Deprecated:** `/v1/wallet/token_list`.
 
-<sub>Docs: docs.birdeye.so — token-list/market-data/ohlcv/search/holder v3 references, token_overview, token_security, rate-limiting, compute-unit-cost, changelog.</sub>
+<sub>Docs: docs.birdeye.so, token-list/market-data/ohlcv/search/holder v3 references, token_overview, token_security, rate-limiting, compute-unit-cost, changelog.</sub>
 
-### Tokens.xyz — **v1 stable**, now public docs (`api.tokens.xyz/v1`)
+### Tokens.xyz: **v1 stable**, now public docs (`api.tokens.xyz/v1`)
 
 - `GET /v1/assets/:id?include=profile,risk,ohlcv,markets`
-  - `risk` block → **`riskLabel` + `riskGrade` (A–F) + `riskScore` + `riskFactors`** — its unique value
+  - `risk` block → **`riskLabel` + `riskGrade` (A–F) + `riskScore` + `riskFactors`**: its unique value
   - `stats` → price, marketCap, volume24h/30d, liquidity, priceChange24hPercent
   - `markets` → per-DEX liquidity/volume/trades
-- `GET /v1/assets/:id/price-chart` — candles, intervals `1m | 5m | 15m | 1H | 4H | 1D | 1W`
+- `GET /v1/assets/:id/price-chart`: candles, intervals `1m | 5m | 15m | 1H | 4H | 1D | 1W`
 - Also: `search`, **`resolve`** (cbBTC/WBTC/tBTC → one Bitcoin), `trending`, batch `market-snapshots`, news feed
-- **Auth:** `x-api-key`, scoped (`assets:read`, `assets:risk:read`). Pricing/quotas **not published** — gated behind `app.tokens.xyz`.
+- **Auth:** `x-api-key`, scoped (`assets:read`, `assets:risk:read`). Pricing/quotas **not published**: gated behind `app.tokens.xyz`.
 
-**Dependency read:** Solana Foundation **public good**, integrators incl. Phantom/Titan/DFlow — credible, but **young (v1 left beta ~Apr 2026), no published SLA/pricing.** Keep behind a feature flag with last-good fallback.
+**Dependency read:** Solana Foundation **public good**, integrators incl. Phantom/Titan/DFlow: credible, but **young (v1 left beta ~Apr 2026), no published SLA/pricing.** Keep behind a feature flag with last-good fallback.
 
 <sub>Docs: docs.tokens.xyz (v1/*), tokens.xyz/assets-api, solana.com/news/inside-tokens-xyz.</sub>
 
-### Helius — **DAS** current (`mainnet.helius-rpc.com`)
+### Helius: **DAS** current (`mainnet.helius-rpc.com`)
 
 - `getAsset` → authority, supply, decimals, metadata **+ best-effort `price_info`** ({ `price_per_token`, `currency` } only)
 - **Price caveats:** top ~10k tokens by volume only, **cached ≤10 min**, no liquidity/volume/mcap → **not a live-price source.**
@@ -131,36 +131,36 @@ Versioned per family, not globally. Current paths:
 
 > **Verdict:** keep Helius for **on-chain truth only** (authority/supply/metadata). Do not rely on it for live price/market data.
 
-<sub>Docs: helius.dev/docs — das-api, getasset reference, billing/credits, billing/plans.</sub>
+<sub>Docs: helius.dev/docs, das-api, getasset reference, billing/credits, billing/plans.</sub>
 
 ---
 
-## 4. Consolidation map — keep / drop
+## 4. Consolidation map: keep / drop
 
 ```
 DATA NEED          │ KEEP          │ DROP / DEMOTE
 ───────────────────┼───────────────┼──────────────────────
 price + 24h + vol  │ Jupiter v2    │ Birdeye overview,
  liq + mcap + fdv  │  (1 call)     │  Tokens.xyz profile
-holder count       │ Jupiter v2    │ —
+holder count       │ Jupiter v2    │:
 audit(mint/freeze) │ Jupiter v2    │ Helius (for this)
-live price tick    │ Jupiter price │ —
+live price tick    │ Jupiter price │:
 ───────────────────┼───────────────┼──────────────────────
 OHLCV / chart      │ Birdeye v3    │ Tokens.xyz chart,
                    │               │  Jupiter-derived
-top holders        │ Birdeye v3    │ —
-token security     │ Birdeye       │ —
+top holders        │ Birdeye v3    │:
+token security     │ Birdeye       │:
 search             │ Jupiter v2    │ Birdeye search
 ───────────────────┼───────────────┼──────────────────────
-risk grade A–F     │ Tokens.xyz    │ unique — keep ONLY if
+risk grade A–F     │ Tokens.xyz    │ unique: keep ONLY if
                    │               │  surfaced in UI
 on-chain authority │ Helius        │ only if not covered
  / supply truth    │               │  by Jupiter audit
-NFT floor/traits   │ Magic Eden    │ —
-NFT on-chain/index │ Helius+Supa   │ —
+NFT floor/traits   │ Magic Eden    │:
+NFT on-chain/index │ Helius+Supa   │:
 ```
 
-**Headline:** **Jupiter Token v2 alone replaces the Birdeye-`token_overview` + Jupiter + Tokens.xyz trio** for price/vol/liq/mcap/holders/audit — collapsing ~3 upstream round-trips per token to 1. After consolidation:
+**Headline:** **Jupiter Token v2 alone replaces the Birdeye-`token_overview` + Jupiter + Tokens.xyz trio** for price/vol/liq/mcap/holders/audit, collapsing ~3 upstream round-trips per token to 1. After consolidation:
 
 - **Jupiter** → primary token data + live price + slippage + search
 - **Birdeye** → chart (OHLCV) + security + top holders + trending
@@ -174,6 +174,6 @@ NFT on-chain/index │ Helius+Supa   │ —
 
 1. **Is the Tokens.xyz A–F risk grade surfaced in the UI?** If no → drop Tokens.xyz entirely.
 2. **Does Jupiter v2's `audit` (mint/freeze) satisfy our security display**, or do we still need Birdeye `token_security` / Helius authority for the full picture?
-3. Per-screen call audit (home / search / token detail / NFT) — what each calls today vs. after — to confirm no regressions before editing.
+3. Per-screen call audit (home / search / token detail / NFT): what each calls today vs. after, to confirm no regressions before editing.
 
 <sub>This doc is the input to that consolidation plan; it does not itself change any code.</sub>

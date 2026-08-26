@@ -29,11 +29,11 @@ pointer:                 touch:
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `content` | `ReactNode` | — | The help content. |
-| `children` | `ReactNode` | — | Trigger (rendered `asChild` — must accept a ref, e.g. a button). |
+| `content` | `ReactNode` | - | The help content. |
+| `children` | `ReactNode` | - | Trigger (rendered `asChild`: must accept a ref, e.g. a button). |
 | `side` | `"top" \| "right" \| "bottom" \| "left"` | `"top"` | Bubble placement (pointer only). |
 | `title` | `string` | `"Details"` | Sheet heading (touch only). |
-| `className` | `string` | — | cn-merged onto the floating content. |
+| `className` | `string` | - | cn-merged onto the floating content. |
 
 ## Tokens
 

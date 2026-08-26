@@ -9,7 +9,7 @@ const truncate = (addr: string) =>
   addr.length <= 10 ? addr : `${addr.slice(0, 4)}…${addr.slice(-4)}`;
 
 /**
- * Connected-wallet account menu — WalletButton's companion. Trigger
+ * Connected-wallet account menu: WalletButton's companion. Trigger
  * shows the truncated address; the panel holds copy, optional explorer,
  * optional balance, and Disconnect. Disconnect lives HERE, never on
  * WalletButton (accidental disconnects are hostile).
@@ -45,7 +45,7 @@ export function AccountMenu({
     <RadixMenu.Root>
       <RadixMenu.Trigger
         disabled={disabled}
-        aria-label={`Wallet ${address} — open account`}
+        aria-label={`Wallet ${address}: open account`}
         className={cn(
           "inline-flex h-9 items-center gap-2 rounded-control border border-outline-variant bg-surface-container px-2.5 text-sm text-fg",
           "transition-[background-color,border-color,transform] duration-150",

@@ -7,7 +7,13 @@
       "name": "identity",
       "type": "registry:ui",
       "title": "identity",
-      "description": "CIDS identity-hue helpers — deterministic per-wallet hue (hash % 8) + avatar gradient. Dependency of Avatar/AvatarGroup."
+      "description": "CIDS identity-hue helpers: deterministic per-wallet hue (hash % 8) + avatar gradient. Dependency of Avatar/AvatarGroup."
+    },
+    {
+      "name": "icons",
+      "type": "registry:ui",
+      "title": "icons",
+      "description": "The CIDS icon layer: Phosphor (phosphoricons.com) behind intent names (IconClose, IconPriceUp…). The system's single icon vendor seam; dependency of every component that draws one."
     },
     {
       "name": "tokens",
@@ -19,421 +25,421 @@
       "name": "accordion",
       "type": "registry:ui",
       "title": "Accordion",
-      "description": "CIDS Accordion v0.9.0 (draft) — docs ship with the code (Accordion.doc.md)."
+      "description": "CIDS Accordion v0.9.0 (draft): docs ship with the code (Accordion.doc.md)."
     },
     {
       "name": "account-menu",
       "type": "registry:ui",
       "title": "AccountMenu",
-      "description": "CIDS AccountMenu v0.9.0 (draft) — docs ship with the code (AccountMenu.doc.md)."
+      "description": "CIDS AccountMenu v0.9.0 (draft): docs ship with the code (AccountMenu.doc.md)."
     },
     {
       "name": "activity-row",
       "type": "registry:ui",
       "title": "ActivityRow",
-      "description": "CIDS ActivityRow v0.9.0 (draft) — docs ship with the code (ActivityRow.doc.md)."
+      "description": "CIDS ActivityRow v0.9.0 (draft): docs ship with the code (ActivityRow.doc.md)."
     },
     {
       "name": "address-chip",
       "type": "registry:ui",
       "title": "AddressChip",
-      "description": "CIDS AddressChip v1.0.0 (stable) — docs ship with the code (AddressChip.doc.md)."
+      "description": "CIDS AddressChip v1.0.0 (stable): docs ship with the code (AddressChip.doc.md)."
     },
     {
       "name": "alert",
       "type": "registry:ui",
       "title": "Alert",
-      "description": "CIDS Alert v0.9.0 (draft) — docs ship with the code (Alert.doc.md)."
+      "description": "CIDS Alert v0.9.0 (draft): docs ship with the code (Alert.doc.md)."
     },
     {
       "name": "amount",
       "type": "registry:ui",
       "title": "Amount",
-      "description": "CIDS Amount v0.9.0 (draft) — docs ship with the code (Amount.doc.md)."
+      "description": "CIDS Amount v0.9.0 (draft): docs ship with the code (Amount.doc.md)."
     },
     {
       "name": "amount-input",
       "type": "registry:ui",
       "title": "AmountInput",
-      "description": "CIDS AmountInput v1.0.0 (stable) — docs ship with the code (AmountInput.doc.md)."
+      "description": "CIDS AmountInput v1.0.0 (stable): docs ship with the code (AmountInput.doc.md)."
     },
     {
       "name": "app-bar",
       "type": "registry:ui",
       "title": "AppBar",
-      "description": "CIDS AppBar v0.9.0 (draft) — docs ship with the code (AppBar.doc.md)."
+      "description": "CIDS AppBar v0.9.0 (draft): docs ship with the code (AppBar.doc.md)."
     },
     {
       "name": "avatar",
       "type": "registry:ui",
       "title": "Avatar",
-      "description": "CIDS Avatar v1.0.0 (stable) — docs ship with the code (Avatar.doc.md)."
+      "description": "CIDS Avatar v1.0.0 (stable): docs ship with the code (Avatar.doc.md)."
     },
     {
       "name": "avatar-group",
       "type": "registry:ui",
       "title": "AvatarGroup",
-      "description": "CIDS AvatarGroup v1.0.0 (stable) — docs ship with the code (AvatarGroup.doc.md)."
+      "description": "CIDS AvatarGroup v1.0.0 (stable): docs ship with the code (AvatarGroup.doc.md)."
     },
     {
       "name": "badge",
       "type": "registry:ui",
       "title": "Badge",
-      "description": "CIDS Badge v1.0.0 (stable) — docs ship with the code (Badge.doc.md)."
+      "description": "CIDS Badge v1.0.0 (stable): docs ship with the code (Badge.doc.md)."
     },
     {
       "name": "bottom-nav",
       "type": "registry:ui",
       "title": "BottomNav",
-      "description": "CIDS BottomNav v0.9.0 (draft) — docs ship with the code (BottomNav.doc.md)."
+      "description": "CIDS BottomNav v0.9.0 (draft): docs ship with the code (BottomNav.doc.md)."
     },
     {
       "name": "breadcrumbs",
       "type": "registry:ui",
       "title": "Breadcrumbs",
-      "description": "CIDS Breadcrumbs v0.9.0 (draft) — docs ship with the code (Breadcrumbs.doc.md)."
+      "description": "CIDS Breadcrumbs v0.9.0 (draft): docs ship with the code (Breadcrumbs.doc.md)."
     },
     {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "CIDS Button v1.0.0 (stable) — docs ship with the code (Button.doc.md)."
+      "description": "CIDS Button v1.0.0 (stable): docs ship with the code (Button.doc.md)."
     },
     {
       "name": "card",
       "type": "registry:ui",
       "title": "Card",
-      "description": "CIDS Card v0.9.0 (draft) — docs ship with the code (Card.doc.md)."
+      "description": "CIDS Card v0.9.0 (draft): docs ship with the code (Card.doc.md)."
     },
     {
       "name": "chain-switcher",
       "type": "registry:ui",
       "title": "ChainSwitcher",
-      "description": "CIDS ChainSwitcher v0.9.0 (draft) — docs ship with the code (ChainSwitcher.doc.md)."
+      "description": "CIDS ChainSwitcher v0.9.0 (draft): docs ship with the code (ChainSwitcher.doc.md)."
     },
     {
       "name": "checkbox",
       "type": "registry:ui",
       "title": "Checkbox",
-      "description": "CIDS Checkbox v1.0.0 (stable) — docs ship with the code (Checkbox.doc.md)."
+      "description": "CIDS Checkbox v1.0.0 (stable): docs ship with the code (Checkbox.doc.md)."
     },
     {
       "name": "combobox",
       "type": "registry:ui",
       "title": "Combobox",
-      "description": "CIDS Combobox v0.9.0 (draft) — docs ship with the code (Combobox.doc.md)."
+      "description": "CIDS Combobox v0.9.0 (draft): docs ship with the code (Combobox.doc.md)."
     },
     {
       "name": "comment-thread",
       "type": "registry:ui",
       "title": "CommentThread",
-      "description": "CIDS CommentThread v0.9.0 (draft) — docs ship with the code (CommentThread.doc.md)."
+      "description": "CIDS CommentThread v0.9.0 (draft): docs ship with the code (CommentThread.doc.md)."
     },
     {
       "name": "context-menu",
       "type": "registry:ui",
       "title": "ContextMenu",
-      "description": "CIDS ContextMenu v0.9.0 (draft) — docs ship with the code (ContextMenu.doc.md)."
+      "description": "CIDS ContextMenu v0.9.0 (draft): docs ship with the code (ContextMenu.doc.md)."
     },
     {
       "name": "data-table",
       "type": "registry:ui",
       "title": "DataTable",
-      "description": "CIDS DataTable v1.0.0 (stable) — docs ship with the code (DataTable.doc.md)."
+      "description": "CIDS DataTable v1.0.0 (stable): docs ship with the code (DataTable.doc.md)."
     },
     {
       "name": "dialog",
       "type": "registry:ui",
       "title": "Dialog",
-      "description": "CIDS Dialog v1.0.0 (stable) — docs ship with the code (Dialog.doc.md)."
+      "description": "CIDS Dialog v1.0.0 (stable): docs ship with the code (Dialog.doc.md)."
     },
     {
       "name": "divider",
       "type": "registry:ui",
       "title": "Divider",
-      "description": "CIDS Divider v1.0.0 (stable) — docs ship with the code (Divider.doc.md)."
+      "description": "CIDS Divider v1.0.0 (stable): docs ship with the code (Divider.doc.md)."
     },
     {
       "name": "drawer",
       "type": "registry:ui",
       "title": "Drawer",
-      "description": "CIDS Drawer v0.9.0 (draft) — docs ship with the code (Drawer.doc.md)."
+      "description": "CIDS Drawer v0.9.0 (draft): docs ship with the code (Drawer.doc.md)."
     },
     {
       "name": "empty-state",
       "type": "registry:ui",
       "title": "EmptyState",
-      "description": "CIDS EmptyState v1.0.0 (stable) — docs ship with the code (EmptyState.doc.md)."
+      "description": "CIDS EmptyState v1.0.0 (stable): docs ship with the code (EmptyState.doc.md)."
     },
     {
       "name": "follow-button",
       "type": "registry:ui",
       "title": "FollowButton",
-      "description": "CIDS FollowButton v1.0.0 (stable) — docs ship with the code (FollowButton.doc.md)."
+      "description": "CIDS FollowButton v1.0.0 (stable): docs ship with the code (FollowButton.doc.md)."
     },
     {
       "name": "gas-fee",
       "type": "registry:ui",
       "title": "GasFee",
-      "description": "CIDS GasFee v0.9.0 (draft) — docs ship with the code (GasFee.doc.md)."
+      "description": "CIDS GasFee v0.9.0 (draft): docs ship with the code (GasFee.doc.md)."
     },
     {
       "name": "hold-to-confirm",
       "type": "registry:ui",
       "title": "HoldToConfirm",
-      "description": "CIDS HoldToConfirm v0.9.0 (draft) — docs ship with the code (HoldToConfirm.doc.md)."
+      "description": "CIDS HoldToConfirm v0.9.0 (draft): docs ship with the code (HoldToConfirm.doc.md)."
     },
     {
       "name": "icon-button",
       "type": "registry:ui",
       "title": "IconButton",
-      "description": "CIDS IconButton v1.0.0 (stable) — docs ship with the code (IconButton.doc.md)."
+      "description": "CIDS IconButton v1.0.0 (stable): docs ship with the code (IconButton.doc.md)."
     },
     {
       "name": "inline-validation",
       "type": "registry:ui",
       "title": "InlineValidation",
-      "description": "CIDS InlineValidation v0.9.0 (draft) — docs ship with the code (InlineValidation.doc.md)."
+      "description": "CIDS InlineValidation v0.9.0 (draft): docs ship with the code (InlineValidation.doc.md)."
     },
     {
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
-      "description": "CIDS Input v1.0.0 (stable) — docs ship with the code (Input.doc.md)."
+      "description": "CIDS Input v1.0.0 (stable): docs ship with the code (Input.doc.md)."
     },
     {
       "name": "lane",
       "type": "registry:ui",
       "title": "Lane",
-      "description": "CIDS Lane v1.0.0 (stable) — docs ship with the code (Lane.doc.md)."
+      "description": "CIDS Lane v1.0.0 (stable): docs ship with the code (Lane.doc.md)."
     },
     {
       "name": "loading-button",
       "type": "registry:ui",
       "title": "LoadingButton",
-      "description": "CIDS LoadingButton v0.9.0 (draft) — docs ship with the code (LoadingButton.doc.md)."
+      "description": "CIDS LoadingButton v0.9.0 (draft): docs ship with the code (LoadingButton.doc.md)."
     },
     {
       "name": "margin-health",
       "type": "registry:ui",
       "title": "MarginHealth",
-      "description": "CIDS MarginHealth v0.9.0 (draft) — docs ship with the code (MarginHealth.doc.md)."
+      "description": "CIDS MarginHealth v0.9.0 (draft): docs ship with the code (MarginHealth.doc.md)."
     },
     {
       "name": "market-tabs",
       "type": "registry:ui",
       "title": "MarketTabs",
-      "description": "CIDS MarketTabs v0.9.0 (draft) — docs ship with the code (MarketTabs.doc.md)."
+      "description": "CIDS MarketTabs v0.9.0 (draft): docs ship with the code (MarketTabs.doc.md)."
     },
     {
       "name": "menu",
       "type": "registry:ui",
       "title": "Menu",
-      "description": "CIDS Menu v1.0.0 (stable) — docs ship with the code (Menu.doc.md)."
+      "description": "CIDS Menu v1.0.0 (stable): docs ship with the code (Menu.doc.md)."
     },
     {
       "name": "network-badge",
       "type": "registry:ui",
       "title": "NetworkBadge",
-      "description": "CIDS NetworkBadge v1.0.0 (stable) — docs ship with the code (NetworkBadge.doc.md)."
+      "description": "CIDS NetworkBadge v1.0.0 (stable): docs ship with the code (NetworkBadge.doc.md)."
     },
     {
       "name": "otpinput",
       "type": "registry:ui",
       "title": "OTPInput",
-      "description": "CIDS OTPInput v0.9.0 (draft) — docs ship with the code (OTPInput.doc.md)."
+      "description": "CIDS OTPInput v0.9.0 (draft): docs ship with the code (OTPInput.doc.md)."
     },
     {
       "name": "onboarding",
       "type": "registry:ui",
       "title": "Onboarding",
-      "description": "CIDS Onboarding v0.9.0 (draft) — docs ship with the code (Onboarding.doc.md)."
+      "description": "CIDS Onboarding v0.9.0 (draft): docs ship with the code (Onboarding.doc.md)."
     },
     {
       "name": "order-book",
       "type": "registry:ui",
       "title": "OrderBook",
-      "description": "CIDS OrderBook v0.9.0 (draft) — docs ship with the code (OrderBook.doc.md)."
+      "description": "CIDS OrderBook v0.9.0 (draft): docs ship with the code (OrderBook.doc.md)."
     },
     {
       "name": "order-type-tabs",
       "type": "registry:ui",
       "title": "OrderTypeTabs",
-      "description": "CIDS OrderTypeTabs v0.9.0 (draft) — docs ship with the code (OrderTypeTabs.doc.md)."
+      "description": "CIDS OrderTypeTabs v0.9.0 (draft): docs ship with the code (OrderTypeTabs.doc.md)."
     },
     {
       "name": "pagination",
       "type": "registry:ui",
       "title": "Pagination",
-      "description": "CIDS Pagination v0.9.0 (draft) — docs ship with the code (Pagination.doc.md)."
+      "description": "CIDS Pagination v0.9.0 (draft): docs ship with the code (Pagination.doc.md)."
     },
     {
       "name": "peg-badge",
       "type": "registry:ui",
       "title": "PegBadge",
-      "description": "CIDS PegBadge v1.0.0 (stable) — docs ship with the code (PegBadge.doc.md)."
+      "description": "CIDS PegBadge v1.0.0 (stable): docs ship with the code (PegBadge.doc.md)."
     },
     {
       "name": "popover",
       "type": "registry:ui",
       "title": "Popover",
-      "description": "CIDS Popover v0.9.0 (draft) — docs ship with the code (Popover.doc.md)."
+      "description": "CIDS Popover v0.9.0 (draft): docs ship with the code (Popover.doc.md)."
     },
     {
       "name": "post-card",
       "type": "registry:ui",
       "title": "PostCard",
-      "description": "CIDS PostCard v1.0.0 (stable) — docs ship with the code (PostCard.doc.md)."
+      "description": "CIDS PostCard v1.0.0 (stable): docs ship with the code (PostCard.doc.md)."
     },
     {
       "name": "price-change",
       "type": "registry:ui",
       "title": "PriceChange",
-      "description": "CIDS PriceChange v1.0.0 (stable) — docs ship with the code (PriceChange.doc.md)."
+      "description": "CIDS PriceChange v1.0.0 (stable): docs ship with the code (PriceChange.doc.md)."
     },
     {
       "name": "progress",
       "type": "registry:ui",
       "title": "Progress",
-      "description": "CIDS Progress v0.9.0 (draft) — docs ship with the code (Progress.doc.md)."
+      "description": "CIDS Progress v0.9.0 (draft): docs ship with the code (Progress.doc.md)."
     },
     {
       "name": "radio-group",
       "type": "registry:ui",
       "title": "RadioGroup",
-      "description": "CIDS RadioGroup v0.9.0 (draft) — docs ship with the code (RadioGroup.doc.md)."
+      "description": "CIDS RadioGroup v0.9.0 (draft): docs ship with the code (RadioGroup.doc.md)."
     },
     {
       "name": "reaction-bar",
       "type": "registry:ui",
       "title": "ReactionBar",
-      "description": "CIDS ReactionBar v1.0.0 (stable) — docs ship with the code (ReactionBar.doc.md)."
+      "description": "CIDS ReactionBar v1.0.0 (stable): docs ship with the code (ReactionBar.doc.md)."
     },
     {
       "name": "rolling-number",
       "type": "registry:ui",
       "title": "RollingNumber",
-      "description": "CIDS RollingNumber v1.0.0 (stable) — docs ship with the code (RollingNumber.doc.md)."
+      "description": "CIDS RollingNumber v1.0.0 (stable): docs ship with the code (RollingNumber.doc.md)."
     },
     {
       "name": "select",
       "type": "registry:ui",
       "title": "Select",
-      "description": "CIDS Select v1.0.0 (stable) — docs ship with the code (Select.doc.md)."
+      "description": "CIDS Select v1.0.0 (stable): docs ship with the code (Select.doc.md)."
     },
     {
       "name": "sheet",
       "type": "registry:ui",
       "title": "Sheet",
-      "description": "CIDS Sheet v1.0.0 (stable) — docs ship with the code (Sheet.doc.md)."
+      "description": "CIDS Sheet v1.0.0 (stable): docs ship with the code (Sheet.doc.md)."
     },
     {
       "name": "size-slider",
       "type": "registry:ui",
       "title": "SizeSlider",
-      "description": "CIDS SizeSlider v0.9.0 (draft) — docs ship with the code (SizeSlider.doc.md)."
+      "description": "CIDS SizeSlider v0.9.0 (draft): docs ship with the code (SizeSlider.doc.md)."
     },
     {
       "name": "skeleton",
       "type": "registry:ui",
       "title": "Skeleton",
-      "description": "CIDS Skeleton v1.0.0 (stable) — docs ship with the code (Skeleton.doc.md)."
+      "description": "CIDS Skeleton v1.0.0 (stable): docs ship with the code (Skeleton.doc.md)."
     },
     {
       "name": "slippage-control",
       "type": "registry:ui",
       "title": "SlippageControl",
-      "description": "CIDS SlippageControl v0.9.0 (draft) — docs ship with the code (SlippageControl.doc.md)."
+      "description": "CIDS SlippageControl v0.9.0 (draft): docs ship with the code (SlippageControl.doc.md)."
     },
     {
       "name": "social-proof-chip",
       "type": "registry:ui",
       "title": "SocialProofChip",
-      "description": "CIDS SocialProofChip v1.0.0 (stable) — docs ship with the code (SocialProofChip.doc.md)."
+      "description": "CIDS SocialProofChip v1.0.0 (stable): docs ship with the code (SocialProofChip.doc.md)."
     },
     {
       "name": "sparkline",
       "type": "registry:ui",
       "title": "Sparkline",
-      "description": "CIDS Sparkline v1.0.0 (stable) — docs ship with the code (Sparkline.doc.md)."
+      "description": "CIDS Sparkline v1.0.0 (stable): docs ship with the code (Sparkline.doc.md)."
     },
     {
       "name": "stat-cell",
       "type": "registry:ui",
       "title": "StatCell",
-      "description": "CIDS StatCell v1.0.0 (stable) — docs ship with the code (StatCell.doc.md)."
+      "description": "CIDS StatCell v1.0.0 (stable): docs ship with the code (StatCell.doc.md)."
     },
     {
       "name": "switch",
       "type": "registry:ui",
       "title": "Switch",
-      "description": "CIDS Switch v1.0.0 (stable) — docs ship with the code (Switch.doc.md)."
+      "description": "CIDS Switch v1.0.0 (stable): docs ship with the code (Switch.doc.md)."
     },
     {
       "name": "tabs",
       "type": "registry:ui",
       "title": "Tabs",
-      "description": "CIDS Tabs v1.0.0 (stable) — docs ship with the code (Tabs.doc.md)."
+      "description": "CIDS Tabs v1.0.0 (stable): docs ship with the code (Tabs.doc.md)."
     },
     {
       "name": "textarea",
       "type": "registry:ui",
       "title": "Textarea",
-      "description": "CIDS Textarea v0.9.0 (draft) — docs ship with the code (Textarea.doc.md)."
+      "description": "CIDS Textarea v0.9.0 (draft): docs ship with the code (Textarea.doc.md)."
     },
     {
       "name": "toast",
       "type": "registry:ui",
       "title": "Toast",
-      "description": "CIDS Toast v1.0.0 (stable) — docs ship with the code (Toast.doc.md)."
+      "description": "CIDS Toast v1.0.0 (stable): docs ship with the code (Toast.doc.md)."
     },
     {
       "name": "token-chip",
       "type": "registry:ui",
       "title": "TokenChip",
-      "description": "CIDS TokenChip v1.0.0 (stable) — docs ship with the code (TokenChip.doc.md)."
+      "description": "CIDS TokenChip v1.0.0 (stable): docs ship with the code (TokenChip.doc.md)."
     },
     {
       "name": "token-icon",
       "type": "registry:ui",
       "title": "TokenIcon",
-      "description": "CIDS TokenIcon v1.0.0 (stable) — docs ship with the code (TokenIcon.doc.md)."
+      "description": "CIDS TokenIcon v1.0.0 (stable): docs ship with the code (TokenIcon.doc.md)."
     },
     {
       "name": "token-select",
       "type": "registry:ui",
       "title": "TokenSelect",
-      "description": "CIDS TokenSelect v0.9.0 (draft) — docs ship with the code (TokenSelect.doc.md)."
+      "description": "CIDS TokenSelect v0.9.0 (draft): docs ship with the code (TokenSelect.doc.md)."
     },
     {
       "name": "tooltip",
       "type": "registry:ui",
       "title": "Tooltip",
-      "description": "CIDS Tooltip v1.0.0 (stable) — docs ship with the code (Tooltip.doc.md)."
+      "description": "CIDS Tooltip v1.0.0 (stable): docs ship with the code (Tooltip.doc.md)."
     },
     {
       "name": "tx-status",
       "type": "registry:ui",
       "title": "TxStatus",
-      "description": "CIDS TxStatus v1.0.0 (stable) — docs ship with the code (TxStatus.doc.md)."
+      "description": "CIDS TxStatus v1.0.0 (stable): docs ship with the code (TxStatus.doc.md)."
     },
     {
       "name": "wallet-avatar",
       "type": "registry:ui",
       "title": "WalletAvatar",
-      "description": "CIDS WalletAvatar v0.1.0 (draft) — docs ship with the code (WalletAvatar.doc.md)."
+      "description": "CIDS WalletAvatar v0.1.0 (draft): docs ship with the code (WalletAvatar.doc.md)."
     },
     {
       "name": "wallet-button",
       "type": "registry:ui",
       "title": "WalletButton",
-      "description": "CIDS WalletButton v0.9.0 (draft) — docs ship with the code (WalletButton.doc.md)."
+      "description": "CIDS WalletButton v0.9.0 (draft): docs ship with the code (WalletButton.doc.md)."
     },
     {
       "name": "wizard-steps",
       "type": "registry:ui",
       "title": "WizardSteps",
-      "description": "CIDS WizardSteps v0.9.0 (draft) — docs ship with the code (WizardSteps.doc.md)."
+      "description": "CIDS WizardSteps v0.9.0 (draft): docs ship with the code (WizardSteps.doc.md)."
     }
   ]
 }

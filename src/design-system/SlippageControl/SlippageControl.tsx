@@ -15,7 +15,7 @@ const LEVEL: Record<SlippageLevel, { word: string; text: string }> = {
   high: { word: "high", text: "text-error" },
 };
 
-/** Risk band from bps — word + tint (mono-safe). Exported for tests. */
+/** Risk band from bps: word + tint (mono-safe). Exported for tests. */
 export function slippageLevel(bps: number): SlippageLevel {
   const m = Math.abs(bps);
   if (m <= 50) return "low";
@@ -31,7 +31,7 @@ function formatPct(bps: number): string {
 }
 
 /**
- * Slippage tolerance control — presets + custom bps. Lives above the
+ * Slippage tolerance control: presets + custom bps. Lives above the
  * confirm button next to GasFee. Value is basis points (50 = 0.5%);
  * display is percent. Tone bands warn when tolerance is loose.
  */
@@ -93,7 +93,7 @@ export function SlippageControl({
           <span className="data-sm text-fg">{formatPct(value)}</span>
           <span
             className={cn(
-              "font-medium uppercase tracking-wider text-[10px]",
+              "font-medium text-[10px]",
               LEVEL[level].text,
             )}
           >

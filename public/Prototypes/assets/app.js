@@ -48,7 +48,7 @@
     return a.length <= 12 ? a : a.slice(0, 4) + "…" + a.slice(-4);
   }
 
-  // TokenIcon — initials fallback (matches src/components/ui/TokenIcon.tsx)
+  // TokenIcon: initials fallback (matches src/components/ui/TokenIcon.tsx)
   function tokenIcon(src, symbol, size) {
     var sz = { sm: "w-5 h-5", md: "w-6 h-6", lg: "w-8 h-8" }[size || "md"];
     var tx = { sm: "text-[9px]", md: "text-[10px]", lg: "text-xs" }[size || "md"];
@@ -109,7 +109,7 @@
     return { label: "Depegged", bg: "bg-sell/10", t: "text-sell", dev: "text-sell" };
   }
   function fmtStable(p) {
-    return p > 0 ? "$" + Number(p).toFixed(4) : "—";
+    return p > 0 ? "$" + Number(p).toFixed(4) : ": ";
   }
   function stableCardLive(t) {
     var ps = pegState(t.pegDeviationBps);
@@ -119,7 +119,7 @@
         '<div class="flex items-start justify-between gap-2 mb-3"><div class="flex items-center gap-2 min-w-0">' + tokenIcon(t.iconUrl, t.symbol, "md") +
           '<div class="min-w-0"><div class="text-sm font-semibold text-fg truncate">' + esc(t.symbol) + '</div><div class="text-xs text-fg-muted truncate">' + esc(t.name) + "</div></div></div>" +
           '<span class="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded shrink-0 whitespace-nowrap ' + ps.bg + " " + ps.t + '">' + ps.label + "</span></div>" +
-        '<div class="flex items-baseline justify-between gap-2 mb-3"><div class="font-mono text-base text-fg">' + fmtStable(t.priceUsd) + '</div><div class="text-xs font-mono ' + ps.dev + '">' + (t.priceUsd > 0 ? (dev >= 0 ? "+" : "") + dev.toFixed(2) + "%" : "—") + "</div></div>" +
+        '<div class="flex items-baseline justify-between gap-2 mb-3"><div class="font-mono text-base text-fg">' + fmtStable(t.priceUsd) + '</div><div class="text-xs font-mono ' + ps.dev + '">' + (t.priceUsd > 0 ? (dev >= 0 ? "+" : "") + dev.toFixed(2) + "%" : ": ") + "</div></div>" +
         '<div class="grid grid-cols-2 gap-2"><div><div class="text-[10px] uppercase tracking-wider text-fg-muted">Liquidity</div><div class="font-mono text-xs text-fg mt-0.5">' + fmtUsd(t.liquidityUsd, { compact: true }) + '</div></div><div><div class="text-[10px] uppercase tracking-wider text-fg-muted">Vol 24h</div><div class="font-mono text-xs text-fg mt-0.5">' + fmtUsd(t.volume24hUsd, { compact: true }) + "</div></div></div>" +
       "</div>"
     );
@@ -223,7 +223,7 @@
       stat("Volume 24h", fmtUsd((pair.volume || {}).h24, { compact: true })) +
       stat("Market cap", fmtUsd(pair.marketCap, { compact: true })) +
       stat("FDV", fmtUsd(pair.fdv, { compact: true })) +
-      stat("DEX", esc(pair.dexId || "—")) +
+      stat("DEX", esc(pair.dexId || ": ")) +
       stat("Buys / Sells 24h", fmtNum(((pair.txns || {}).h24 || {}).buys, { compact: true }) + " / " + fmtNum(((pair.txns || {}).h24 || {}).sells, { compact: true }));
     return (
       '<div class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm" data-close role="dialog" aria-modal="true">' +
@@ -252,8 +252,8 @@
     function section(l, inner) {
       return '<div><div class="text-[10px] uppercase tracking-wider text-fg-subtle mb-2">' + l + '</div><div class="space-y-1.5">' + inner + "</div></div>";
     }
-    var stats = row("Liquidity", fmtUsd(t.liquidityUsd, { compact: true })) + row("Volume 24h", fmtUsd(t.volume24hUsd, { compact: true })) + row("Market Cap", fmtUsd(t.marketCapUsd, { compact: true })) + row("Circulating", t.circulatingSupply > 0 ? fmtNum(t.circulatingSupply, { compact: true }) + " " + t.symbol : "—");
-    var trust = row("Mint Authority", t.mintAuthorityDisabled ? "✓ Disabled" : "Enabled") + row("Freeze Authority", t.freezeAuthorityDisabled ? "✓ Disabled" : "Enabled") + row("Jupiter Verified", t.jupiterVerified ? "✓ Yes" : "— No");
+    var stats = row("Liquidity", fmtUsd(t.liquidityUsd, { compact: true })) + row("Volume 24h", fmtUsd(t.volume24hUsd, { compact: true })) + row("Market Cap", fmtUsd(t.marketCapUsd, { compact: true })) + row("Circulating", t.circulatingSupply > 0 ? fmtNum(t.circulatingSupply, { compact: true }) + " " + t.symbol : ": ");
+    var trust = row("Mint Authority", t.mintAuthorityDisabled ? "✓ Disabled" : "Enabled") + row("Freeze Authority", t.freezeAuthorityDisabled ? "✓ Disabled" : "Enabled") + row("Jupiter Verified", t.jupiterVerified ? "✓ Yes" : ": No");
     return (
       '<div class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm" data-close role="dialog" aria-modal="true">' +
         '<div class="relative w-full sm:max-w-[480px] max-h-[100vh] sm:max-h-[92vh] overflow-y-auto bg-surface-container sm:rounded-lg sm:m-4" style="box-shadow:0 25px 50px rgba(0,0,0,0.5)" onclick="event.stopPropagation()">' +
@@ -261,7 +261,7 @@
             '<div class="min-w-0"><div class="text-base font-semibold text-fg truncate">' + esc(t.symbol) + '</div><div class="text-xs text-fg-subtle truncate">' + esc(t.name) + "</div></div></div>" +
             '<button type="button" data-close aria-label="Close" class="text-2xl text-fg-subtle hover:text-fg transition-colors leading-none w-8 h-8 flex items-center justify-center shrink-0">×</button></div>' +
           '<div class="p-4 space-y-4"><div class="flex items-baseline justify-between gap-3"><div><div class="text-[10px] uppercase tracking-wider text-fg-subtle">Current price</div><div class="font-mono text-xl text-fg mt-1">' + fmtStable(t.priceUsd) + '</div></div>' +
-            '<div class="text-right ' + ps.dev + '"><span class="text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded whitespace-nowrap ' + ps.bg + " " + ps.t + '">' + ps.label + '</span><div class="font-mono text-xs mt-1">' + (t.priceUsd > 0 ? (dev >= 0 ? "+" : "") + dev.toFixed(2) + "% from peg" : "— from peg") + "</div></div></div>" +
+            '<div class="text-right ' + ps.dev + '"><span class="text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded whitespace-nowrap ' + ps.bg + " " + ps.t + '">' + ps.label + '</span><div class="font-mono text-xs mt-1">' + (t.priceUsd > 0 ? (dev >= 0 ? "+" : "") + dev.toFixed(2) + "% from peg" : ": from peg") + "</div></div></div>" +
             section("Stats", stats) + section("Trust", trust) +
             section("Mint", '<div class="flex items-center justify-between gap-2"><code class="font-mono text-[11px] text-fg break-all">' + truncate(t.mint) + '</code><button type="button" class="text-[10px] uppercase tracking-wider px-2 py-1 rounded border border-outline-variant bg-surface-container text-fg hover:bg-surface-page transition-colors shrink-0">Copy</button></div>') +
           "</div></div></div>"
@@ -349,7 +349,7 @@
 
   // ── NFT edge selection ─────────────────────────────────────────
   var nftIndex = 0;
-  function lamportsToSol(l) { return l == null ? "—" : (l / 1e9).toFixed(2) + " SOL"; }
+  function lamportsToSol(l) { return l == null ? ": " : (l / 1e9).toFixed(2) + " SOL"; }
   function renderNftDetail() {
     var host = document.getElementById("nft-detail");
     if (!host) return;

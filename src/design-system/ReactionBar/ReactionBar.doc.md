@@ -33,30 +33,30 @@ const [reactions, setReactions] = useState<Reaction[]>([
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `reactions` | `Reaction[]` | — | `{ emoji, count, mine? }`. Counts/mine are owned by the caller. |
-| `onReact` | `(emoji: string) => void` | — | Fired on pill tap or picker choice. |
+| `reactions` | `Reaction[]` | - | `{ emoji, count, mine? }`. Counts/mine are owned by the caller. |
+| `onReact` | `(emoji: string) => void` | - | Fired on pill tap or picker choice. |
 | `pickerEmojis` | `string[]` | `♥ 🔥 👀 🧠 😅 📈` | Emoji offered by the `+` picker. |
-| `className` | `string` | — | Merged via `cn`. |
+| `className` | `string` | - | Merged via `cn`. |
 
 ## Tokens
 
-- `--color-brand` (via `bg-brand/10` + `text-brand`) — own-reaction state.
-- `--color-fg-muted` — counts / `+`.
-- `--color-surface-bright`, `--color-outline-variant` — picker popover.
-- `--motion-spring` (via `.animate-pop`) — the tap bounce; `--motion-fast` — press scale.
-- `.data-sm` — the count numerals.
-- `--radius-control` (`rounded-control`) — pill + picker corners.
+- `--color-brand` (via `bg-brand/10` + `text-brand`): own-reaction state.
+- `--color-fg-muted`: counts / `+`.
+- `--color-surface-bright`, `--color-outline-variant`: picker popover.
+- `--motion-spring` (via `.animate-pop`): the tap bounce; `--motion-fast`: press scale.
+- `.data-sm`: the count numerals.
+- `--radius-control` (`rounded-control`): pill + picker corners.
 
 ## States
 
-- **Default** — transparent pill, `fg-muted` count.
-- **Mine** (`mine=true`) — `bg-brand/10`, count in `text-brand`.
-- **Popping** — the tapped emoji plays `.animate-pop` once (re-armed each tap).
-- **Picker open** — `+` toggles the popover; choosing closes it.
+- **Default**: transparent pill, `fg-muted` count.
+- **Mine** (`mine=true`): `bg-brand/10`, count in `text-brand`.
+- **Popping**: the tapped emoji plays `.animate-pop` once (re-armed each tap).
+- **Picker open**: `+` toggles the popover; choosing closes it.
 
 ## Motion
 
-`--motion-spring` (250ms, overshoot) scales the emoji `1 → 1.3 → 1` on tap — the budgeted-playfulness moment (DESIGN.md → Identity). Cleared on `animationend` so repeated taps replay. Reduced-motion: the global reset collapses the animation.
+`--motion-spring` (250ms, overshoot) scales the emoji `1 → 1.3 → 1` on tap; the budgeted-playfulness moment (DESIGN.md → Identity). Cleared on `animationend` so repeated taps replay. Reduced-motion: the global reset collapses the animation.
 
 ## A11y
 

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { IconCheck, IconCopy, IconExternal } from "../icons";
 
 const truncate = (addr: string) =>
   addr.length <= 10 ? addr : `${addr.slice(0, 4)}…${addr.slice(-4)}`;
@@ -9,7 +10,7 @@ const truncate = (addr: string) =>
 /**
  * Wallet/mint address: truncated mono display, one-tap copy with
  * confirmation, optional explorer link. The full address is always the
- * accessible name — truncation is visual only.
+ * accessible name: truncation is visual only.
  */
 export function AddressChip({
   address,
@@ -17,7 +18,7 @@ export function AddressChip({
   className,
 }: {
   address: string;
-  /** Explorer URL — renders a ↗ link when present. */
+  /** Explorer URL: renders an IconExternal link when present. */
   href?: string;
   className?: string;
 }) {
@@ -49,7 +50,11 @@ export function AddressChip({
           copied ? "text-buy" : "text-fg-muted hover:text-fg",
         )}
       >
-        {copied ? "✓" : "⧉"}
+        {copied ? (
+          <IconCheck size={13} weight="bold" aria-hidden="true" />
+        ) : (
+          <IconCopy size={13} aria-hidden="true" />
+        )}
       </button>
       {href && (
         <a
@@ -59,7 +64,7 @@ export function AddressChip({
           aria-label="View on explorer"
           className="inline-flex h-6 w-6 items-center justify-center rounded-control text-xs text-fg-muted transition-colors duration-150 hover:text-fg"
         >
-          ↗
+          <IconExternal size={13} aria-hidden="true" />
         </a>
       )}
     </span>

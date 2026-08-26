@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { IconArrowUp } from "../icons";
 import { Avatar } from "../Avatar";
 import { Sheet } from "../Sheet";
 
@@ -81,7 +82,7 @@ export function CommentThread({
   open: boolean;
   onOpenChange: (open: boolean) => void;
   comments: Comment[];
-  /** (topLevelIndex, replyIndex?) — replyIndex present when a reply is liked. */
+  /** (topLevelIndex, replyIndex?): replyIndex present when a reply is liked. */
   onLike?: (index: number, replyIndex?: number) => void;
   onSubmit?: (text: string) => void;
   /** Merged onto the underlying Sheet panel (API contract: every component takes className). */
@@ -125,7 +126,7 @@ export function CommentThread({
         disabled={!text.trim()}
         className="inline-flex h-9 w-9 flex-none items-center justify-center rounded-full bg-brand text-on-brand transition-transform active:scale-[0.96] disabled:opacity-40"
       >
-        ↑
+        <IconArrowUp size={18} weight="bold" aria-hidden="true" />
       </button>
     </div>
   );

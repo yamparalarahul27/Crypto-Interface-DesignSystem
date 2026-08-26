@@ -2,7 +2,7 @@
 
 Status: stable
 Version: 1.0.0
-Designed empty -- cold-start is a first-class state.
+Designed empty: cold-start is a first-class state.
 
 ## Usage
 
@@ -32,10 +32,10 @@ import { EmptyState, Button } from "@/design-system";
 | Prop | Type | Default | Notes |
 |---|---|---|---|
 | `glyph` | `string` | `"@"`-like marker | Decorative, aria-hidden. |
-| `title` | `string` | -- | The factual line. |
-| `hint` | `string` | -- | One line -- the playful budget lives here. |
-| `action` | `ReactNode` | -- | Usually a Button. |
-| `className` | `string` | -- | cn-merged. |
+| `title` | `string` | - | The factual line. |
+| `hint` | `string` | - | One line: the playful budget lives here. |
+| `action` | `ReactNode` | - | Usually a Button. |
+| `className` | `string` | - | cn-merged. |
 
 ## Tokens
 

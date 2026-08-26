@@ -1,9 +1,10 @@
 import { cn } from "@/lib/utils";
+import { IconCheck, IconCross } from "../icons";
 
 export type TxState = "idle" | "signing" | "pending" | "confirmed" | "failed";
 
 // The transaction lifecycle, visible at every step (ethereum.org
-// heuristic #1) — the component no reference library ships.
+// heuristic #1): the component no reference library ships.
 const COPY: Record<TxState, string> = {
   idle: "Ready",
   signing: "Waiting for wallet…",
@@ -39,7 +40,7 @@ export function TxStatus({
   className?: string;
 }) {
   return (
-    // Live region: state changes are announced without stealing focus —
+    // Live region: state changes are announced without stealing focus,
     // the user acts in the wallet while the UI reports (heuristic #2).
     <div role="status" aria-live="polite" className={cn("inline-flex items-start gap-2", className)}>
       <span
@@ -47,8 +48,12 @@ export function TxStatus({
         className={cn("mt-1 h-2 w-2 flex-none rounded-full", DOT[state])}
       />
       <span className="min-w-0">
-        <span className={cn("block text-sm font-medium", TEXT[state])}>
-          {state === "confirmed" ? "✓ " : state === "failed" ? "✕ " : ""}
+        <span className={cn("flex items-center gap-1.5 text-sm font-medium", TEXT[state])}>
+          {state === "confirmed" ? (
+            <IconCheck size={13} weight="bold" aria-hidden="true" />
+          ) : state === "failed" ? (
+            <IconCross size={13} weight="bold" aria-hidden="true" />
+          ) : null}
           {COPY[state]}
         </span>
         {detail && (

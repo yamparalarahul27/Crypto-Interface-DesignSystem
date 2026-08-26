@@ -7,15 +7,16 @@ import { CategoryPreview } from "./CategoryPreview";
 import { categorize } from "./design/canvas/zones";
 import { ThemeToggle } from "./design/ThemeToggle";
 import { SplitFlap } from "./SplitFlap";
+import { IconArrowRight, IconGithub } from "@/design-system";
 
 // The landing page counts and groups what actually ships: folder list and
 // Status headers come off disk at build time, categories come from the
 // canvas zones. Nothing here is a hand-maintained number.
 
 export const metadata: Metadata = {
-  title: { absolute: "cids — crypto interface design system" },
+  title: { absolute: "cids: crypto interface design system" },
   description:
-    "Live components, tokens, and patterns for crypto UIs — inspect them on an infinite canvas.",
+    "Live components, tokens, and patterns for crypto UIs: inspect them on an infinite canvas.",
 };
 
 const REPO = "https://github.com/yamparalarahul27/Crypto-Interface-DesignSystem";
@@ -28,7 +29,7 @@ function componentNames() {
 }
 
 // `image` is the swap-in point for the real graphics: drop the file under
-// public/ and set the path — the placeholder box is already the final size,
+// public/ and set the path: the placeholder box is already the final size,
 // so nothing reflows when the art lands.
 const QUICKSTARTS: {
   title: string;
@@ -48,7 +49,7 @@ const QUICKSTARTS: {
   },
   {
     title: "Install",
-    body: "Point the shadcn CLI at the registry and the component lands in your repo — source, doc, and cross-deps.",
+    body: "Point the shadcn CLI at the registry and the component lands in your repo: source, doc, and cross-deps.",
     href: `${REPO}/blob/main/docs/cids-quickstart.md`,
     cta: "Read the quickstart",
     external: true,
@@ -61,7 +62,7 @@ const QUICKSTARTS: {
   },
   {
     title: "For agents",
-    body: "A zero-dependency MCP server over the registry — an agent gets the spec and the source in one call.",
+    body: "A zero-dependency MCP server over the registry: an agent gets the spec and the source in one call.",
     href: `${REPO}/blob/main/docs/cids-contributing.md`,
     cta: "Wire up the server",
     external: true,
@@ -73,23 +74,6 @@ const NAV = [
   { href: "/design", label: "Gallery" },
   { href: "/design/feed", label: "Feed" },
 ];
-
-/** GitHub mark, inline — the repo has no icon library in use (lucide-react
- *  is a dependency but unimported), and one brand glyph doesn't justify
- *  introducing one. currentColor so it inherits the link's hover states. */
-function GitHubMark() {
-  return (
-    <svg
-      viewBox="0 0 16 16"
-      width="18"
-      height="18"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
-    </svg>
-  );
-}
 
 function SectionHeading({
   title,
@@ -147,11 +131,11 @@ export default function Home() {
                   "background-color var(--motion-fast), color var(--motion-fast)",
               }}
             >
-              <GitHubMark />
+              <IconGithub size={18} weight="fill" aria-hidden="true" />
             </a>
           </nav>
 
-          <ThemeToggle variant="swatch" className="ml-auto md:ml-2" />
+          <ThemeToggle className="ml-auto md:ml-2" />
         </div>
       </header>
 
@@ -195,10 +179,10 @@ export default function Home() {
                     {q.title}
                     {q.beta && (
                       <span
-                        className="rounded-chip bg-warning-surface px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-warning"
+                        className="rounded-chip bg-warning-surface px-1.5 py-0.5 font-mono text-[10px] font-medium text-warning"
                         title="Gestures are still being worked on"
                       >
-                        beta
+                        Beta
                       </span>
                     )}
                   </h3>
@@ -211,7 +195,7 @@ export default function Home() {
                       className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-brand hover:text-brand-hover"
                       style={{ transition: "color var(--motion-fast)" }}
                     >
-                      {q.cta} <span aria-hidden="true">→</span>
+                      {q.cta} <IconArrowRight size={14} weight="bold" aria-hidden="true" />
                     </a>
                   ) : (
                     <Link
@@ -219,7 +203,7 @@ export default function Home() {
                       className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-brand hover:text-brand-hover"
                       style={{ transition: "color var(--motion-fast)" }}
                     >
-                      {q.cta} <span aria-hidden="true">→</span>
+                      {q.cta} <IconArrowRight size={14} weight="bold" aria-hidden="true" />
                     </Link>
                   )}
                 </div>
@@ -285,7 +269,7 @@ export default function Home() {
       <footer className="border-t border-outline-variant">
         <div className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-10 sm:flex-row sm:items-start sm:justify-between sm:px-8">
           <p className="max-w-md text-pretty text-sm leading-relaxed text-fg-muted">
-            cids is an open design system for crypto interfaces — tokens as
+            cids is an open design system for crypto interfaces: tokens as
             the contract, themes as swappable value-sets, and a doc beside
             every component that a human and an AI agent both build from.
           </p>

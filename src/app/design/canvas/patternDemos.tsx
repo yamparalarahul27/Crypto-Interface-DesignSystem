@@ -1,6 +1,6 @@
 "use client";
 
-// Live frames for src/design-system/PATTERNS.md — composed ONLY from
+// Live frames for src/design-system/PATTERNS.md: composed ONLY from
 // design-system exports (the pattern contract). Registered into DEMOS
 // via the spread in demos.tsx; kept separate for the 700-LOC cap.
 
@@ -15,6 +15,9 @@ import {
   Dialog,
   EmptyState,
   GasFee,
+  IconArrowRight,
+  IconCheck,
+  IconCross,
   Input,
   Lane,
   LoadingButton,
@@ -27,10 +30,10 @@ import {
   TokenIcon,
   TokenSelect,
   TxStatus,
-  useToast,
   type Column,
   type TokenOption,
   type TxState,
+  useToast,
 } from "@/design-system";
 
 // ── Do/Don't strip (HIG's most-copied device) ────────────────────────
@@ -40,14 +43,20 @@ function DoDont({ dos, donts }: { dos: string[]; donts: string[] }) {
       <ul className="space-y-1">
         {dos.map((d) => (
           <li key={d} className="flex gap-1.5 text-fg-muted">
-            <span className="font-semibold text-buy">✓ Do</span> {d}
+            <span className="inline-flex flex-none items-center gap-1 font-semibold text-buy">
+              <IconCheck size={11} weight="bold" aria-hidden="true" /> Do
+            </span>{" "}
+            {d}
           </li>
         ))}
       </ul>
       <ul className="space-y-1">
         {donts.map((d) => (
           <li key={d} className="flex gap-1.5 text-fg-muted">
-            <span className="font-semibold text-sell">✗ Don&apos;t</span> {d}
+            <span className="inline-flex flex-none items-center gap-1 font-semibold text-sell">
+              <IconCross size={11} weight="bold" aria-hidden="true" /> Don&apos;t
+            </span>{" "}
+            {d}
           </li>
         ))}
       </ul>
@@ -83,7 +92,7 @@ function StatesCatalogDemo({ state: external }: DemoOpts = {}) {
       )}
       {state === "offline" && (
         <div className="mb-2 flex items-center gap-2 rounded-chip bg-warning-surface px-2 py-1 text-[11px] text-warning">
-          <Badge tone="warning">offline</Badge> Reconnecting — showing last-good data.
+          <Badge tone="warning">offline</Badge> Reconnecting: showing last-good data.
         </div>
       )}
       {state === "loading" ? (
@@ -104,7 +113,7 @@ function StatesCatalogDemo({ state: external }: DemoOpts = {}) {
         />
       ) : (
         <div className="min-h-[132px] rounded-card border border-outline-variant bg-surface-container p-4">
-          <div className="text-[10px] uppercase tracking-wider text-fg-muted">Watchers</div>
+          <div className="text-[10px] text-fg-muted">Watchers</div>
           <div className="data-lg mt-1 text-fg">41</div>
           <div className="mt-1 text-xs text-fg-muted">9 joined today</div>
         </div>
@@ -178,7 +187,7 @@ function TxFlowInner() {
       >
         <div className="flex flex-wrap items-center gap-2 text-sm">
           <span className="data-md text-fg">{amt} SOL</span>
-          <span className="text-fg-subtle">→</span>
+          <IconArrowRight size={13} className="text-fg-subtle" aria-hidden="true" />
           <AddressChip address="7xKtF3aB9cD2eF4gH6jK8mN1pQ5rS7tU9vW2xY4z9fQ2" />
           <NetworkBadge name="Solana" />
         </div>
@@ -217,7 +226,7 @@ function FormRowDemo() {
         />
         {taken && (
           <p id="p3-handle-err" className="text-xs text-sell">
-            That handle is taken — try another.
+            That handle is taken: try another.
           </p>
         )}
       </div>
@@ -260,7 +269,7 @@ function MarketListDemo() {
       <DataTable columns={P4_COLS} rows={P4_ROWS} rowKey={(r) => r.sym} caption="Markets pattern" />
       <DoDont
         dos={["right-align numerals in the tabular ramp", "let density tokens set row height"]}
-        donts={["color-only direction (pair ▲/▼ + sign)", "animate rows on data ticks"]}
+        donts={["color-only direction (pair the direction icon + sign)", "animate rows on data ticks"]}
       />
     </div>
   );
@@ -323,7 +332,7 @@ function SwapReceiveInner() {
               aria-label="You pay"
               className="min-w-[7.5rem]"
             />
-            <span className="text-xs text-fg-subtle">→</span>
+            <IconArrowRight size={12} className="text-fg-subtle" aria-hidden="true" />
             <TokenSelect
               tokens={TICKET_TOKENS}
               value={to}
@@ -389,7 +398,7 @@ function SwapReceiveInner() {
           <AddressChip address="7xKtF2mPqR8vN3wLbJd5cYhT6gAeS4uZ1oXnE9fQ2rM" />
           <p className="text-[11px] text-fg-muted">
             Copy the address to receive. Pair with the QRCode composition in product
-            UIs — it stays outside this portable pattern.
+            UIs: it stays outside this portable pattern.
           </p>
         </div>
       )}

@@ -12,7 +12,7 @@ export type RadioOption<T extends string> = {
 };
 
 /**
- * Single-choice list on Radix RadioGroup — roving tabindex, arrow-key
+ * Single-choice list on Radix RadioGroup: roving tabindex, arrow-key
  * movement, form-safe. Use when all options should be visible at once
  * (≤5, e.g. slippage presets, network selection); past that reach for
  * Select.

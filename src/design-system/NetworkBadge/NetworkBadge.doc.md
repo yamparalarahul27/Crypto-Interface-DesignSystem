@@ -2,7 +2,7 @@
 
 Status: stable
 Version: 1.0.0
-Chain indicator -- always show the network (ethereum.org heuristic #3). Neutral: chains are facts, not states.
+Chain indicator; always show the network (ethereum.org heuristic #3). Neutral: chains are facts, not states.
 
 ## Usage
 
@@ -22,9 +22,9 @@ import { NetworkBadge } from "@/design-system";
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `name` | `string` | -- | Chain name. |
-| `iconSrc` | `string` | -- | e.g. Logobase `network/<slug>`; falls back to a dot. |
-| `className` | `string` | -- | cn-merged. |
+| `name` | `string` | - | Chain name. |
+| `iconSrc` | `string` | - | e.g. Logobase `network/<slug>`; falls back to a dot. |
+| `className` | `string` | - | cn-merged. |
 
 ## Tokens
 

@@ -1,17 +1,22 @@
 "use client";
 
-// Client body for /design/<component> — the per-component read surface
+// Client body for /design/<component>: the per-component read surface
 // (roadmap §6 "The component page"). Renders the SAME .doc.md + .tsx
 // the canvas Inspector uses (passed from the server page, read from
-// disk) — pages cannot drift from source. The hero is the live canvas
+// disk): pages cannot drift from source. The hero is the live canvas
 // demo, so what you read is what runs.
 
 import Link from "next/link";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { Accordion } from "@/design-system";
+import {
+  Accordion,
+  IconCaretDown,
+  IconCaretRight,
+} from "@/design-system";
 import { DEMOS } from "../canvas/demos";
 import { DEMO_STATE_OPTIONS, defaultDemoState } from "../canvas/demoStates";
+import { IconBack } from "@/design-system";
 import { CopyButton, renderDoc } from "../docRenderer";
 import { ThemeToggle } from "../ThemeToggle";
 import { MotionReplay } from "./MotionReplay";
@@ -34,7 +39,7 @@ function Segmented<T extends string>({
     <div className="inline-flex items-center gap-2">
       {/* The label used to be aria-only, so sighted users met a pair of
           unexplained words. Name the control. */}
-      <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-fg-subtle">
+      <span className="font-mono text-[11px] text-fg-subtle">
         {label}
       </span>
       <div
@@ -97,18 +102,23 @@ export function ComponentPage({
 
   const registryName = kebabCase(name);
   const installCmd = `npx shadcn add @cids/${registryName}`;
-  const canvasHref = `/design/canvas?item=${encodeURIComponent(name)}`;
 
   return (
     <div className="mx-auto min-h-dvh w-full max-w-6xl bg-surface-page px-5 py-8 text-fg">
       {/* ── header ───────────────────────────────────────────── */}
       <header className="mb-5 flex items-start justify-between gap-4">
         <div className="min-w-0">
+          {/* Icon-only, so it carries an aria-label + title (DESIGN.md →
+              Icon-only controls) and a full 40x40 hit area. The negative
+              margin pulls the box back so the glyph optically aligns with
+              the title's left edge instead of sitting indented by padding. */}
           <Link
             href="/design"
-            className="font-mono text-sm text-fg-muted underline-offset-2 hover:underline"
+            aria-label="Back to components"
+            title="Back to components"
+            className="-ml-2.5 inline-flex h-10 w-10 items-center justify-center rounded-control text-fg-muted transition-colors duration-150 hover:bg-surface-container hover:text-fg"
           >
-            ‹ components
+            <IconBack size={18} aria-hidden="true" />
           </Link>
           <h1 className="mt-1 text-wrap text-balance font-mono text-4xl font-bold">{name}</h1>
           <div className="mt-1.5 flex flex-wrap items-center gap-2">
@@ -124,29 +134,24 @@ export function ComponentPage({
             <span className="font-mono text-[11px] tabular-nums text-fg-subtle">
               v{version}
             </span>
-            <span className="font-mono text-[10px] text-fg-subtle">·</span>
-            <Link
-              href={canvasHref}
-              className="font-mono text-sm text-fg-muted underline-offset-2 hover:underline"
-            >
-              open in canvas
-            </Link>
           </div>
           {purpose && (
             <p className="mt-3 text-pretty text-base leading-relaxed text-fg-muted">{purpose}</p>
           )}
         </div>
-        <ThemeToggle variant="swatch" className="flex-none" />
+        <ThemeToggle className="flex-none" />
       </header>
 
 
-      <div className="mx-auto max-w-4xl">
+      {/* Body fills the page container, so it lines up with the header
+          and footer above/below it rather than sitting 216px narrower. */}
+      <div className="w-full">
       {/* ── install ──────────────────────────────────────────── */}
       <section
         aria-label="Install"
         className="mb-5 flex items-center gap-2 rounded-card border border-outline-variant bg-surface-dim px-3 py-2"
       >
-        <span className="flex-none font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+        <span className="flex-none font-mono text-[11px] font-semibold text-fg-subtle">
           Install
         </span>
         <code className="min-w-0 flex-1 truncate font-mono text-sm text-brand">
@@ -158,7 +163,7 @@ export function ComponentPage({
       {/* ── when to use ──────────────────────────────────────── */}
       {bestFor && (
         <aside className="mb-5 rounded-card border border-outline-variant bg-surface-container px-3.5 py-3">
-          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+          <p className="font-mono text-[11px] font-semibold text-fg-subtle">
             When to use
           </p>
           <p className="mt-2 text-pretty text-base leading-relaxed text-fg-muted">{bestFor}</p>
@@ -169,7 +174,7 @@ export function ComponentPage({
       {Demo && (
         <section className="mb-6 overflow-hidden rounded-card border border-outline-variant bg-surface-container">
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-outline-variant px-3 py-2">
-            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+            <span className="font-mono text-[11px] font-semibold text-fg-subtle">
               Live demo
             </span>
             {variants && (
@@ -198,9 +203,16 @@ export function ComponentPage({
               type="button"
               onClick={() => setShowUsage((v) => !v)}
               aria-expanded={showUsage}
-              className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-fg-subtle hover:text-fg"
+              className="font-mono text-[11px] font-semibold text-fg-subtle hover:text-fg"
             >
-              {showUsage ? "▾" : "▸"} usage
+              <span className="inline-flex items-center gap-1">
+                {showUsage ? (
+                  <IconCaretDown size={10} weight="bold" aria-hidden="true" />
+                ) : (
+                  <IconCaretRight size={10} weight="bold" aria-hidden="true" />
+                )}{" "}
+                Usage
+              </span>
             </button>
             <CopyButton text={usageCode} />
           </div>
@@ -264,9 +276,16 @@ export function ComponentPage({
             type="button"
             onClick={() => setShowCode((v) => !v)}
             aria-expanded={showCode}
-            className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-fg-subtle hover:text-fg"
+            className="font-mono text-[11px] font-semibold text-fg-subtle hover:text-fg"
           >
-            {showCode ? "▾" : "▸"} source — {name}.tsx
+            <span className="inline-flex items-center gap-1">
+                {showCode ? (
+                  <IconCaretDown size={10} weight="bold" aria-hidden="true" />
+                ) : (
+                  <IconCaretRight size={10} weight="bold" aria-hidden="true" />
+                )}{" "}
+                Source: {name}.tsx
+              </span>
           </button>
           <CopyButton text={source} />
         </div>
@@ -277,7 +296,7 @@ export function ComponentPage({
         )}
         <p className="mt-2 text-pretty text-xs leading-relaxed text-fg-subtle">
           Self-contained: copy the folder into any Tailwind+React app, or use the
-          install command above. Docs and this page render the same file on disk —
+          install command above. Docs and this page render the same file on disk:
           they cannot drift.
         </p>
       </section>
@@ -285,12 +304,9 @@ export function ComponentPage({
       </div>
 
       {/* ── footer ───────────────────────────────────────────── */}
-      <footer className="mt-10 flex items-center justify-between border-t border-outline-variant pt-4 font-mono text-[11px]">
+      <footer className="mt-10 flex items-center justify-between border-t border-outline-variant pt-4 font-mono text-sm">
         <Link href={`/design/${prev}`} className="text-fg-muted underline-offset-2 hover:underline">
           ‹ {prev}
-        </Link>
-        <Link href={canvasHref} className="text-fg-muted underline-offset-2 hover:underline">
-          open in canvas
         </Link>
         <Link href={`/design/${next}`} className="text-fg-muted underline-offset-2 hover:underline">
           {next} ›

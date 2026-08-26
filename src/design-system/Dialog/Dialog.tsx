@@ -3,11 +3,12 @@
 import { Dialog as RadixDialog } from "radix-ui";
 import { useId, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { IconClose } from "../icons";
 
 /**
  * Centered modal (Sheet's desktop-centered sibling). Behavior is Radix
  * Dialog: focus trap, Escape + overlay-click dismiss, focus restore.
- * Title is required — a dialog must name itself.
+ * Title is required: a dialog must name itself.
  */
 export function Dialog({
   open,
@@ -24,7 +25,7 @@ export function Dialog({
   /** Optional supporting line under the title (wired to aria-describedby). */
   description?: string;
   children?: ReactNode;
-  /** Action row — typically Buttons; pinned under the body. */
+  /** Action row: typically Buttons; pinned under the body. */
   footer?: ReactNode;
   /** Merged onto the panel. */
   className?: string;
@@ -58,7 +59,7 @@ export function Dialog({
               aria-label="Close"
               className="-mr-1 -mt-1 inline-flex h-7 w-7 flex-none items-center justify-center rounded-control text-fg-muted transition-colors hover:bg-surface-container-high hover:text-fg"
             >
-              ×
+              <IconClose size={14} weight="bold" aria-hidden="true" />
             </RadixDialog.Close>
           </div>
           {children && <div className="text-sm text-fg">{children}</div>}

@@ -23,8 +23,8 @@ import {
 } from "@/design-system";
 
 /**
- * Category card previews. Every tile is composed from the real exports —
- * the canonical calls out of each component's .doc.md — so the landing
+ * Category card previews. Every tile is composed from the real exports,
+ * the canonical calls out of each component's .doc.md, so the landing
  * page demonstrates the system rather than illustrating it.
  *
  * The compositions are decorative: `inert` on the wrapper takes them out
@@ -143,7 +143,7 @@ export function CategoryPreview({ id }: { id: string }) {
       inert
       className="pointer-events-none flex h-40 select-none items-center justify-center overflow-hidden px-4"
     >
-      {/* Scaled to fill the frame — components render at their real sizes,
+      {/* Scaled to fill the frame: components render at their real sizes,
           which are tuned for a page, not a 160px card. */}
       <div className="scale-[1.05] sm:scale-[1.2]">
         <Preview />

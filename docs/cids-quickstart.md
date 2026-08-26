@@ -1,4 +1,4 @@
-# CIDS quickstart — themed component in under 5 minutes
+# CIDS quickstart: themed component in under 5 minutes
 
 > The adopter path (cids-roadmap Phase 7). CIDS distributes **copy-in**,
 > shadcn-style: the code lands in *your* repo, you own it. Requirements:
@@ -24,7 +24,7 @@ with `npx shadcn init` if you don't have one):
 npx shadcn add @cids/tokens
 ```
 
-This writes `app/cids-tokens.css` — the full token layer: surfaces,
+This writes `app/cids-tokens.css`; the full token layer: surfaces,
 semantic colors, identity hues, spacing/z/elevation/motion, the
 financial type ramp, **four themes** (dark · mono · light · violet) and
 the **compact density axis**. Import it from your root layout (it
@@ -45,7 +45,7 @@ npx shadcn add @cids/order-book @cids/order-type-tabs @cids/size-slider
 
 Cross-dependencies resolve automatically (`@cids/post-card` pulls
 avatar, token-chip, reaction-bar). Every component lands in
-`components/cids/<Name>/` **with its `.doc.md` beside the code** —
+`components/cids/<Name>/` **with its `.doc.md` beside the code**:
 the spec travels with the source.
 
 ```tsx
@@ -61,21 +61,21 @@ import { Button } from "@/components/cids/Button/Button";
 <div data-density="compact">        // terminal density, scopeable
 ```
 
-Author your own theme in minutes: one `[data-theme]` block — the
+Author your own theme in minutes: one `[data-theme]` block, the
 4-step recipe is in [DESIGN.md → Adding a theme](../DESIGN.md), and the
 canvas **Theme Studio** exports a paste-ready block from live knobs.
 
 ## What you're depending on
 
-- **Behavior:** `radix-ui` (declared per item) — focus, keyboard, ARIA.
+- **Behavior:** `radix-ui` (declared per item), focus, keyboard, ARIA.
 - **Styling:** Tailwind utilities over the CIDS tokens; no other deps.
 - **Guarantees:** every component shipped `Status: stable` passed the
   axe × 4-themes matrix, keyboard tests, and the sign-discipline guards
   in CI. Drafts are marked in the item description.
 - **Freshness:** the registry is generated from source and CI fails if
-  it drifts (`check:registry`) — what you install is what the canvas
+  it drifts (`check:registry`): what you install is what the canvas
   shows.
 
 <sub>Patterns (states catalog, tx flow, form row, market list) are
-documented in `src/design-system/PATTERNS.md` and live on the canvas —
+documented in `src/design-system/PATTERNS.md` and live on the canvas:
 copy the Code blocks; they compose the components you just installed.</sub>

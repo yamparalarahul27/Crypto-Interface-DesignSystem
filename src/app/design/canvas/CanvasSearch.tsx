@@ -1,10 +1,14 @@
 "use client";
 
-// ⌘K / Ctrl+K canvas search — jump to any demo or iframe frame.
+// ⌘K / Ctrl+K canvas search: jump to any demo or iframe frame.
 // Uses Radix Dialog via CIDS Dialog for focus trap + Escape.
 
 import { useId, useState } from "react";
-import { Dialog } from "@/design-system";
+import {
+  Dialog,
+  IconArrowDown,
+  IconArrowUp,
+} from "@/design-system";
 import { cn } from "@/lib/utils";
 import { filterCanvasItems, type SearchableItem } from "./canvasSearch";
 
@@ -106,8 +110,10 @@ export function CanvasSearch({
           ))
         )}
       </div>
-      <p className="mt-2 font-mono text-[10px] text-fg-subtle">
-        ↑↓ move · Enter open · Esc close · ⌘K anytime
+      <p className="mt-2 flex items-center gap-1 font-mono text-[10px] text-fg-subtle">
+        <IconArrowUp size={10} weight="bold" aria-hidden="true" />
+        <IconArrowDown size={10} weight="bold" aria-hidden="true" />
+        Move · Enter open · Esc close · ⌘K anytime
       </p>
     </Dialog>
   );

@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 /**
  * Sliding-window rate limiting backed by Vercel KV (Upstash Redis).
- * Fail-open on KV errors — never block users because infra is down.
+ * Fail-open on KV errors: never block users because infra is down.
  *
  * Env vars are prefixed "ratelimit_" because the Vercel KV store is
  * named "rate-limit"; Vercel injects <storeName>_KV_REST_API_URL etc.
@@ -32,7 +32,7 @@ function makeLimiter(requests: number, window: `${number}${"s" | "m"}`) {
   });
 }
 
-// Tiered limiters — named so we can adjust per-route intent.
+// Tiered limiters: named so we can adjust per-route intent.
 let publicReadLimiter: Ratelimit | null = null;
 let authFlowLimiter: Ratelimit | null = null;
 let sessionLimiter: Ratelimit | null = null;
@@ -121,7 +121,7 @@ export async function enforceRateLimit(
       }
     );
   } catch (err) {
-    // Fail open on KV errors — do not block users because infra is down.
+    // Fail open on KV errors: do not block users because infra is down.
     console.error("[rate-limit] KV error, failing open:", err);
     return null;
   }

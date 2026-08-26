@@ -31,15 +31,15 @@ import { HoldToConfirm } from "@/design-system";
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `onConfirm` | `() => void` | — | Fires once at full duration. Click never reaches it. |
-| `children` | `ReactNode` | — | Resting label / accessible name. |
-| `onAbort` | `() => void` | — | Early release / stray click. |
+| `onConfirm` | `() => void` | - | Fires once at full duration. Click never reaches it. |
+| `children` | `ReactNode` | - | Resting label / accessible name. |
+| `onAbort` | `() => void` | - | Early release / stray click. |
 | `confirmLabel` | `string` | `"Confirmed"` | Post-commit face + live region. |
 | `duration` | `number` | `1800` | ms of continuous hold. |
 | `resetAfter` | `number` | `1600` | ms to hold confirmed before idle. `0` = stay. |
 | `releaseRate` | `number` | `2.5` | Drain speed vs fill. |
 | `disabled` | `boolean` | `false` | `aria-disabled` (keeps focus). |
-| `className` | `string` | — | cn-merged. |
+| `className` | `string` | - | cn-merged. |
 
 ## Tokens
 

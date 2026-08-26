@@ -10,7 +10,7 @@ describe("demoStates", () => {
 
   it("defaultDemoState is the first chip", () => {
     expect(defaultDemoState("TxStatus")).toBe("idle");
-    // AvatarGroup stands in for "demo with no entry" — it keeps the
+    // AvatarGroup stands in for "demo with no entry": it keeps the
     // zero-arg pose. (Avatar used to be the example here, until it
     // gained sizes/hues/you chips.)
     expect(defaultDemoState("AvatarGroup")).toBeUndefined();

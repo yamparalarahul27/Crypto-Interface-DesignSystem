@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { Tooltip } from "./Tooltip";
 
 // jsdom exposes `ontouchstart`, so the component's touch heuristic picks the
-// BOTTOM-SHEET (Radix Dialog) branch here — which is exactly the behavior
+// BOTTOM-SHEET (Radix Dialog) branch here: which is exactly the behavior
 // worth testing: on touch devices the content must be reachable by tap,
 // with dialog semantics. (The pointer branch is plain Radix Tooltip.)
 describe("Tooltip (touch adaptation)", () => {

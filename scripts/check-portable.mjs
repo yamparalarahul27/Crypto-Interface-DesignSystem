@@ -1,17 +1,22 @@
 #!/usr/bin/env node
-// Portability guard for src/design-system — the property that makes the
+// Portability guard for src/design-system: the property that makes the
 // system vendorable (and eventually registry-distributable): a component
 // folder must work when copied into any Tailwind+React app.
 //
 // Rule P1: design-system files may import ONLY
 //   - react / react-dom
 //   - radix-ui
+//   - @phosphor-icons/react (the icon family)
 //   - "@/lib/utils" (the shadcn-conventional cn helper)
 //   - the design system itself (relative paths)
 //   Anything else (app components, hooks, lib, other packages) fails.
 //
+// Rule P1a: only src/design-system/icons.ts may name @phosphor-icons/react.
+//   Components import intent ("../icons"), never the vendor, so the family
+//   is swappable in one file and the registry declares the dep once.
+//
 // Rule P2: every component folder ships <Name>.tsx + <Name>.doc.md +
-//   index.ts — "a component without its doc is not done" (CONVENTIONS.md),
+//   index.ts: "a component without its doc is not done" (CONVENTIONS.md),
 //   enforced mechanically.
 //
 // Pure Node, no deps. Mirrors check-theme.mjs / check-contrast.mjs.
@@ -26,26 +31,38 @@ const DS = join(ROOT, "src/design-system");
 const ALLOWED = [
   /^react(-dom)?(\/|$)/,
   /^radix-ui(\/|$)/,
+  /^@phosphor-icons\/react(\/|$)/,
   /^@\/lib\/utils$/,
-  /^\.\.?\//, // relative — inside the design system
+  /^\.\.?\//, // relative: inside the design system
 ];
+
+// P1a: @phosphor-icons/react is allowed, but only icons.ts may name it.
+// It is the icon layer's single vendor seam: components import intent
+// from "../icons", so re-weighting or replacing the family is a one-file
+// edit and the registry declares the npm dep exactly once.
+const ICON_SEAM = "src/design-system/icons.ts";
 
 const failures = [];
 
 const entries = readdirSync(DS, { withFileTypes: true });
 
-// P1 — import whitelist across every .ts/.tsx in the tree
+// P1: import whitelist across every .ts/.tsx in the tree
 function walk(dir) {
   for (const e of readdirSync(dir, { withFileTypes: true })) {
     const p = join(dir, e.name);
     if (e.isDirectory()) walk(p);
     else if (/\.tsx?$/.test(e.name) && !/\.test\.tsx?$/.test(e.name)) {
       const src = readFileSync(p, "utf8");
+      const rel = relative(ROOT, p);
       for (const m of src.matchAll(/from\s+"([^"]+)"/g)) {
         const spec = m[1];
         if (!ALLOWED.some((rx) => rx.test(spec))) {
           failures.push(
-            `${relative(ROOT, p)}: forbidden import "${spec}" — design-system may only use react, radix-ui, @/lib/utils, or itself`,
+            `${rel}: forbidden import "${spec}", design-system may only use react, radix-ui, @phosphor-icons/react (icons.ts only), @/lib/utils, or itself`,
+          );
+        } else if (/^@phosphor-icons\/react(\/|$)/.test(spec) && rel !== ICON_SEAM) {
+          failures.push(
+            `${rel}: imports "${spec}" directly, icons come from "../icons" (intent names), so ${ICON_SEAM} stays the only vendor seam`,
           );
         }
       }
@@ -54,7 +71,7 @@ function walk(dir) {
 }
 walk(DS);
 
-// P2 — component-folder completeness + doc shape (CONVENTIONS.md sections)
+// P2: component-folder completeness + doc shape (CONVENTIONS.md sections)
 const DOC_SECTIONS = ["## Usage", "## Anatomy", "## Props", "## Tokens", "## States", "## Motion", "## A11y"];
 const DOC_HEADERS = [/^Status: (draft|stable|deprecated)$/m, /^Version: \d+\.\d+\.\d+$/m];
 for (const e of entries) {
@@ -90,4 +107,4 @@ if (failures.length) {
 }
 
 const count = entries.filter((e) => e.isDirectory()).length;
-console.log(`✓ check:portable — ${count} components are self-contained (imports: react · radix-ui · @/lib/utils · self) and fully documented`);
+console.log(`✓ check:portable, ${count} components are self-contained (imports: react · radix-ui · phosphor (via icons.ts) · @/lib/utils · self) and fully documented`);

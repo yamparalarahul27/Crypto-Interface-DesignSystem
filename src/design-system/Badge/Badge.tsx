@@ -9,7 +9,7 @@ export type BadgeTone =
   | "info";
 
 // Tinted-surface + tone-text pairs from the semantic token table. Never
-// used for price direction alone — pair with the signed value (sign
+// used for price direction alone: pair with the signed value (sign
 // discipline lives with the data, not the badge).
 const TONE: Record<BadgeTone, string> = {
   neutral: "bg-surface-container-high text-fg-muted",

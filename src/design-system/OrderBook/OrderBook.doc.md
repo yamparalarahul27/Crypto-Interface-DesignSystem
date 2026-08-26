@@ -37,7 +37,7 @@ import { OrderBook } from "@/design-system";
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `asks` / `bids` | `OrderBookLevel[]` | -- | Raw levels. Asks sort low to high; bids sort high to low after aggregation. |
+| `asks` / `bids` | `OrderBookLevel[]` | - | Raw levels. Asks sort low to high; bids sort high to low after aggregation. |
 | `midPrice` | `number \| null` | derived from best ask/bid | Center row. |
 | `valueFormat` / `sizeFormat` | `(value:number)=>string` | built-in formatters | Caller owns exchange-specific decimals. |
 | `quoteLabel` / `baseLabel` | `string` | `USDT` / `BASE` | Header units. |
@@ -45,13 +45,13 @@ import { OrderBook } from "@/design-system";
 | `tick` / `defaultTick` / `tickOptions` / `onTickChange` | `number` | `defaultTickOptions(mid)` | Controlled or uncontrolled tick aggregation. |
 | `showCumulativeBars` | `boolean` | `true` | Adds right-side cumulative depth bars. |
 | `loading` | `boolean` | `false` | Skeleton rows. |
-| `error` | `string \| null` | -- | Inline error state. |
-| `stale` | `{ level; secondsSinceUpdate? }` | -- | `mild` shows a small pill; `severe`/`frozen` blur rows and show updating overlay. |
-| `onReconnect` | `() => void` | -- | Adds retry/reconnect action in error/frozen states. |
-| `onPriceSelect` | `(price, side) => void` | -- | When provided, rows become buttons that fill a price input. |
+| `error` | `string \| null` | - | Inline error state. |
+| `stale` | `{ level; secondsSinceUpdate? }` | - | `mild` shows a small pill; `severe`/`frozen` blur rows and show updating overlay. |
+| `onReconnect` | `() => void` | - | Adds retry/reconnect action in error/frozen states. |
+| `onPriceSelect` | `(price, side) => void` | - | When provided, rows become buttons that fill a price input. |
 | `rowsPerSide` | `number` | `8` | Mixed view rows per side; one-side views render at least 16. |
 | `aria-label` | `string` | `Order book` | Names the region. |
-| `className` | `string` | -- | cn-merged. |
+| `className` | `string` | - | cn-merged. |
 
 ## Tokens
 

@@ -3,6 +3,7 @@
 import { Dialog as RadixDialog } from "radix-ui";
 import { useRef, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { IconClose } from "../icons";
 
 export function Sheet({
   open,
@@ -78,7 +79,7 @@ export function Sheet({
                 aria-label="Close"
                 className="inline-flex h-7 w-7 items-center justify-center rounded-control text-fg-muted transition-colors hover:bg-surface-container-high hover:text-fg"
               >
-                ×
+                <IconClose size={14} weight="bold" aria-hidden="true" />
               </RadixDialog.Close>
             </div>
           </div>

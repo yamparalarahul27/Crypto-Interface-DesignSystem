@@ -58,7 +58,7 @@ export function MarginHealth({
         className,
       )}
     >
-      <span className="shrink-0 text-[10px] font-semibold uppercase tracking-wider text-fg-subtle">
+      <span className="shrink-0 text-[10px] font-semibold text-fg-subtle">
         {label}
       </span>
       <span className="h-2 min-w-12 flex-1 overflow-hidden rounded-full bg-surface-bright">

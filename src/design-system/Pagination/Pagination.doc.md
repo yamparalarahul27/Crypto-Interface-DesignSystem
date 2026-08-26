@@ -2,7 +2,7 @@
 
 Status: draft
 Version: 0.9.0
-Page controls for long tables — windowed numbers with ellipses.
+Page controls for long tables: windowed numbers with ellipses.
 
 ## Usage
 
@@ -26,7 +26,7 @@ pagination suits tables users reference and return to.
 │  │  │  └─┬─┘       │   └ next (disabled on last)
 │  │  │    └ current ±siblings
 │  │  └ ellipsis (aria-hidden)
-│  └ first page — always visible
+│  └ first page: always visible
 └ prev (disabled on first)
 ```
 
@@ -34,11 +34,11 @@ pagination suits tables users reference and return to.
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `page` | `number` | — | Current page, 1-based. |
-| `count` | `number` | — | Total pages. |
-| `onPageChange` | `(page: number) => void` | — | Fires for numbers and ‹/›. |
+| `page` | `number` | - | Current page, 1-based. |
+| `count` | `number` | - | Total pages. |
+| `onPageChange` | `(page: number) => void` | - | Fires for numbers and ‹/›. |
 | `siblings` | `number` | `1` | Pages shown each side of current. |
-| `className` | `string` | — | cn-merged onto the nav. |
+| `className` | `string` | - | cn-merged onto the nav. |
 
 ## Tokens
 
@@ -48,18 +48,18 @@ pagination suits tables users reference and return to.
 ## States
 
 - **Current page**: outline ring + fill + semibold +
-  `aria-current="page"` — three non-color cues.
+  `aria-current="page"`: three non-color cues.
 - **Prev/next at the ends**: disabled (40% opacity, no pointer).
-- **Ellipsis**: static, `aria-hidden` — never clickable.
+- **Ellipsis**: static, `aria-hidden`, never clickable.
 
 ## Motion
 
 150ms on background/color only. Page changes re-render the window
-instantly — no sliding.
+instantly: no sliding.
 
 ## A11y
 
-`<nav aria-label="Pagination">` with a list of real buttons — 40px hit
+`<nav aria-label="Pagination">` with a list of real buttons: 40px hit
 targets (h-10/min-w-10). Prev/next carry explicit labels ("Previous
 page"/"Next page"); the current page is `aria-current="page"`.
 Callback-driven: if pages are URLs in your app, wrap in links at the

@@ -422,7 +422,7 @@ const bufferLineShape = (props: CurveProps) => {
     return <Curve {...props} />;
   }
 
-  // x coordinate of the second-to-last point — where solid meets dashed
+  // x coordinate of the second-to-last point: where solid meets dashed
   const splitX = drawablePoints[drawablePoints.length - 2].x;
 
   // Ref callback runs synchronously during React commit (before browser paint),

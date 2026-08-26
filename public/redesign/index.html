@@ -17,7 +17,7 @@
   body { font-family: "Geist", "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif; }
   .num { font-family: "Geist Mono", "IBM Plex Mono", ui-monospace, monospace; }
   .card-shadow { box-shadow: 0 1px 2px rgba(0,0,0,0.40), 0 8px 24px -12px rgba(0,0,0,0.55); }
-  /* card hover lift — specific props only, ease-out (make-interfaces-feel-better) */
+  /* card hover lift: specific props only, ease-out (make-interfaces-feel-better) */
   .card { transition: transform 160ms ease-out, box-shadow 160ms ease-out, border-color 160ms ease-out; }
   .card:hover { transform: translateY(-3px); border-color: rgba(90,216,196,0.35); box-shadow: 0 2px 4px rgba(0,0,0,0.4), 0 16px 40px -14px rgba(0,0,0,0.65); }
   .card:active { transform: translateY(-1px) scale(0.99); }
@@ -37,7 +37,7 @@
       </div>
       <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight text-balance">Prototype gallery</h1>
       <p class="mt-2 text-sm text-fg-muted max-w-xl text-pretty">
-        Static HTML mockups of the redesign — click any screen to open it. These are design artifacts (frozen data, no live APIs); they aren't wired into the app yet.
+        Static HTML mockups of the redesign: click any screen to open it. These are design artifacts (frozen data, no live APIs); they aren't wired into the app yet.
       </p>
     </header>
 
@@ -52,11 +52,11 @@
   <script>
     const SCREENS = [
       { file: "watchlist.html",       title: "Watchlist",        desc: "xStocks + crypto tokens, Logobase logos, earnings + performance", icon: "ph-bookmark-simple", tag: "Desktop" },
-      { file: "asset.html",           title: "Asset detail",     desc: "Desktop token page (NVDAx) — chart, news, stats, analyst", icon: "ph-chart-line-up", tag: "Desktop" },
-      { file: "token.html",           title: "Token detail",     desc: "Mobile token screen (NVDAx) — chart, chips, why-it's-moving", icon: "ph-device-mobile", tag: "Mobile" },
-      { file: "chart.html",           title: "Price chart",      desc: "Standalone chart — crosshair, tooltip, volume, ranges", icon: "ph-chart-line", tag: "Component" },
+      { file: "asset.html",           title: "Asset detail",     desc: "Desktop token page (NVDAx), chart, news, stats, analyst", icon: "ph-chart-line-up", tag: "Desktop" },
+      { file: "token.html",           title: "Token detail",     desc: "Mobile token screen (NVDAx), chart, chips, why-it's-moving", icon: "ph-device-mobile", tag: "Mobile" },
+      { file: "chart.html",           title: "Price chart",      desc: "Standalone chart, crosshair, tooltip, volume, ranges", icon: "ph-chart-line", tag: "Component" },
       { file: "compare.html",         title: "Performance compare", desc: "Multi-line Solana basket with sorted % pills", icon: "ph-chart-line", tag: "Component" },
-      { file: "modal.html",           title: "Wallet connections", desc: "Connect/remove wallets — depth-replicated modal", icon: "ph-plugs-connected", tag: "Modal" },
+      { file: "modal.html",           title: "Wallet connections", desc: "Connect/remove wallets, depth-replicated modal", icon: "ph-plugs-connected", tag: "Modal" },
       { file: "holdings.html",        title: "Holdings",         desc: "Account value / holdings view", icon: "ph-wallet", tag: "Desktop" },
       { file: "transaction-card.html",title: "Transaction card", desc: "Single transaction card component", icon: "ph-receipt", tag: "Component" },
     ];

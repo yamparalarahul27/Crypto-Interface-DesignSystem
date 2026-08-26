@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Builds the shadcn-compatible registry (cids-roadmap Phase 7) from
-// src/design-system into public/r/*.json — the copy-in distribution
+// src/design-system into public/r/*.json: the copy-in distribution
 // model check:portable was built for. Adopters configure the @cids
 // namespace and `npx shadcn add @cids/button`; cross-component imports
 // become registryDependencies; folder-relative imports keep working
@@ -22,6 +22,7 @@ const kebab = (s) => s.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
 
 // ── shared items ─────────────────────────────────────────────────────
 const identitySrc = readFileSync(join(DS, "identity.ts"), "utf8");
+const iconsSrc = readFileSync(join(DS, "icons.ts"), "utf8");
 const tokensSrc = readFileSync(join(ROOT, "src/app/globals.css"), "utf8");
 
 const items = [];
@@ -31,13 +32,30 @@ items.push({
   type: "registry:ui",
   title: "identity",
   description:
-    "CIDS identity-hue helpers — deterministic per-wallet hue (hash % 8) + avatar gradient. Dependency of Avatar/AvatarGroup.",
+    "CIDS identity-hue helpers: deterministic per-wallet hue (hash % 8) + avatar gradient. Dependency of Avatar/AvatarGroup.",
   files: [
     {
       path: "cids/identity.ts",
       type: "registry:ui",
       target: "components/cids/identity.ts",
       content: identitySrc,
+    },
+  ],
+});
+
+items.push({
+  name: "icons",
+  type: "registry:ui",
+  title: "icons",
+  description:
+    "The CIDS icon layer: Phosphor (phosphoricons.com) behind intent names (IconClose, IconPriceUp…). The system's single icon vendor seam; dependency of every component that draws one.",
+  dependencies: ["@phosphor-icons/react"],
+  files: [
+    {
+      path: "cids/icons.ts",
+      type: "registry:ui",
+      target: "components/cids/icons.ts",
+      content: iconsSrc,
     },
   ],
 });
@@ -54,7 +72,7 @@ items.push({
       type: "registry:file",
       target: "app/cids-tokens.css",
       content:
-        "/* CIDS tokens — generated from src/app/globals.css.\n" +
+        "/* CIDS tokens: generated from src/app/globals.css.\n" +
         "   Import in your root layout: `import \"./cids-tokens.css\";`\n" +
         "   (replaces the default globals; includes @import \"tailwindcss\") */\n" +
         tokensSrc,
@@ -110,7 +128,7 @@ for (const name of folders) {
     name: kebab(name),
     type: "registry:ui",
     title: name,
-    description: `CIDS ${name} v${version} (${status}) — docs ship with the code (${name}.doc.md).`,
+    description: `CIDS ${name} v${version} (${status}): docs ship with the code (${name}.doc.md).`,
     dependencies: [...dependencies],
     registryDependencies: [...registryDependencies],
     files: outFiles,
@@ -142,4 +160,4 @@ writeFileSync(
   ) + "\n",
 );
 
-console.log(`✓ build:registry — ${items.length} items → public/r/ (${folders.length} components + tokens + identity)`);
+console.log(`✓ build:registry, ${items.length} items → public/r/ (${folders.length} components + tokens + identity + icons)`);

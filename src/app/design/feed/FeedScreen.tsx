@@ -4,14 +4,20 @@ import { useState } from "react";
 import {
   Avatar,
   AvatarGroup,
+  CommentThread,
   FollowButton,
+  IconAccount,
+  IconChart,
+  IconComments,
+  IconCompose,
+  IconFeed,
+  IconSearch,
   Lane,
+  Onboarding,
   PostCard,
   SocialProofChip,
-  CommentThread,
-  Onboarding,
-  type Reaction,
   type Comment,
+  type Reaction,
 } from "@/design-system";
 
 type LaneValue = "following" | "everyone";
@@ -59,7 +65,7 @@ const FOLLOWING: FeedPost[] = [
     body: (
       <div className="space-y-3">
         <span>
-          BONK ran <span className="data-sm text-buy">+12.4%</span> in 24h — 5
+          BONK ran <span className="data-sm text-buy">+12.4%</span> in 24h: 5
           people you follow watch it.
         </span>
         <div className="flex items-center justify-between">
@@ -72,7 +78,7 @@ const FOLLOWING: FeedPost[] = [
               { name: "ali", seed: "wallet-ali" },
             ]}
           />
-          <span className="text-xs text-brand">view BONK ›</span>
+          <span className="text-xs text-brand">View BONK ›</span>
         </div>
       </div>
     ),
@@ -109,7 +115,7 @@ const SAMPLE_COMMENTS: Comment[] = [
   {
     author: { name: "Kip", handle: "kip", seed: "wallet-kip" },
     time: "6m",
-    body: "Agreed — the retest held cleanly.",
+    body: "Agreed: the retest held cleanly.",
     likes: 3,
     liked: true,
   },
@@ -211,12 +217,13 @@ export function FeedScreen() {
             onClick={() => setCommentsOpen(true)}
             className="w-full rounded-lg border border-dashed border-outline bg-surface-container px-4 py-3 text-left text-xs text-fg-muted transition-transform active:scale-[0.99]"
           >
-            💬 12 comments on @noor&apos;s take ›
+            <IconComments size={13} aria-hidden="true" className="mr-1 inline align-[-2px]" />
+            12 comments on @noor&apos;s take ›
           </button>
 
           {/* suggested follows (empty-lane teaser) */}
           <article className="rounded-lg border border-dashed border-outline bg-surface-container p-4">
-            <div className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-fg-subtle">
+            <div className="text-[0.6875rem] font-semibold text-fg-subtle">
               Grow your tide
             </div>
             <p className="mt-2 text-xs text-fg-muted">Suggested to follow:</p>
@@ -233,24 +240,24 @@ export function FeedScreen() {
         type="button"
         aria-label="Compose"
         onClick={() => setJoinOpen(true)}
-        className="sticky bottom-20 z-[var(--z-overlay)] ml-auto mr-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand text-xl text-on-brand shadow-glow-brand-strong transition-transform active:scale-[0.96]"
+        className="sticky bottom-20 z-[var(--z-overlay)] ml-auto mr-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand text-on-brand shadow-glow-brand-strong transition-transform active:scale-[0.96]"
       >
-        ✎
+        <IconCompose size={20} aria-hidden="true" />
       </button>
 
       {/* bottom bar */}
       <nav className="sticky bottom-0 z-[var(--z-sticky)] grid h-16 grid-cols-4 border-t border-outline-variant bg-surface-page/90 backdrop-blur">
         {[
-          { ic: "~", label: "Feed", active: true },
-          { ic: "◍", label: "Markets" },
-          { ic: "⌕", label: "Search" },
-          { ic: "◐", label: "Me" },
+          { ic: <IconFeed size={20} aria-hidden="true" />, label: "Feed", active: true },
+          { ic: <IconChart size={20} aria-hidden="true" />, label: "Markets" },
+          { ic: <IconSearch size={20} aria-hidden="true" />, label: "Search" },
+          { ic: <IconAccount size={20} aria-hidden="true" />, label: "Me" },
         ].map((t) => (
           <span
             key={t.label}
             className={cnTab(t.active)}
           >
-            <span className="text-xl leading-none">{t.ic}</span>
+            <span className="inline-flex leading-none">{t.ic}</span>
             {t.label}
           </span>
         ))}

@@ -1,4 +1,4 @@
-/* Tailwind Play CDN config — redefines the same semantic tokens the
+/* Tailwind Play CDN config: redefines the same semantic tokens the
    real app exposes via @theme in globals.css, so className strings copied
    verbatim from the React components resolve identically here.
    Loaded synchronously right after the CDN script in every page head. */

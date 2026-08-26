@@ -23,10 +23,10 @@ import { Switch } from "@/design-system";
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `checked` / `onCheckedChange` | controlled pair | -- | Caller owns state. |
-| `disabled` | `boolean` | -- | Native semantics via Radix. |
-| `className` | `string` | -- | cn-merged onto the track. |
-| ...rest | Radix Switch props | -- | e.g. `aria-label`, `name`. |
+| `checked` / `onCheckedChange` | controlled pair | - | Caller owns state. |
+| `disabled` | `boolean` | - | Native semantics via Radix. |
+| `className` | `string` | - | cn-merged onto the track. |
+| ...rest | Radix Switch props | - | e.g. `aria-label`, `name`. |
 
 ## Tokens
 

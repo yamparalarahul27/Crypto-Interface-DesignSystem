@@ -25,7 +25,7 @@ import { Divider } from "@/design-system";
 | Prop | Type | Default | Notes |
 |---|---|---|---|
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Sets `aria-orientation`. |
-| `className` | `string` | -- | cn-merged. |
+| `className` | `string` | - | cn-merged. |
 
 ## Tokens
 
@@ -41,4 +41,4 @@ None.
 
 ## A11y
 
-- `role="separator"` + `aria-orientation` -- announced as a boundary, not content.
+- `role="separator"` + `aria-orientation`: announced as a boundary, not content.

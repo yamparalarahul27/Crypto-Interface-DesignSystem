@@ -47,7 +47,7 @@ describe("Combobox", () => {
     expect(document.activeElement).toBe(input);
   });
 
-  it("free text never sticks — Escape reverts to the selected label", async () => {
+  it("free text never sticks: Escape reverts to the selected label", async () => {
     const { input, onChange } = setup("sol");
     expect((input as HTMLInputElement).value).toBe("SOL");
     await userEvent.type(input, "xyz-not-a-token");

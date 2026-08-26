@@ -8,10 +8,10 @@ const truncate = (addr: string) =>
 
 /**
  * The connect-wallet atom (Reown's territory, tokens-native): one
- * button, three states. Presentational — wire `onClick` to your wallet
+ * button, three states. Presentational: wire `onClick` to your wallet
  * adapter's connect when disconnected, and to your account UI (Drawer,
  * Menu) when connected. Disconnect lives in that account UI, never on
- * this button — accidental disconnects are hostile.
+ * this button: accidental disconnects are hostile.
  */
 export function WalletButton({
   status,
@@ -20,7 +20,7 @@ export function WalletButton({
   className,
 }: {
   status: WalletStatus;
-  /** Connected wallet address — required when status="connected". */
+  /** Connected wallet address: required when status="connected". */
   address?: string;
   /** disconnected → connect; connected → open account UI. */
   onClick?: () => void;
@@ -31,7 +31,7 @@ export function WalletButton({
       <Button
         variant="secondary"
         onClick={onClick}
-        aria-label={`Wallet ${address} — open account`}
+        aria-label={`Wallet ${address}: open account`}
         className={cn("font-mono", className)}
       >
         <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-buy" />

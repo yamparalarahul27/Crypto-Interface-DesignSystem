@@ -13,7 +13,7 @@ describe("ChainSwitcher", () => {
   it("trigger always names the active network", () => {
     render(<ChainSwitcher networks={NETWORKS} value="solana" onValueChange={() => {}} />);
     expect(
-      screen.getByRole("button", { name: "Network: Solana — switch" }),
+      screen.getByRole("button", { name: "Network: Solana, switch" }),
     ).toBeTruthy();
   });
 

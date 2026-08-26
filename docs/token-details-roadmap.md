@@ -1,4 +1,4 @@
-# Token Details — Implementation Roadmap
+# Token Details: Implementation Roadmap
 
 **Branch:** `imp-token-details`
 **Status doc updated:** 2026-04-25
@@ -7,28 +7,28 @@
 
 ## Quick-start for any Claude session reading this
 
-1. Read [CLAUDE.md](../CLAUDE.md) — repo-wide rules (Behavioral guidelines + Collaboration).
-2. Read [token-details-source-of-truth.md](./token-details-source-of-truth.md) — **locked decisions**, do not relitigate.
+1. Read [CLAUDE.md](../CLAUDE.md): repo-wide rules (Behavioral guidelines + Collaboration).
+2. Read [token-details-source-of-truth.md](./token-details-source-of-truth.md): **locked decisions**, do not relitigate.
 3. Read this file's **Status snapshot** (below) to know which step is next.
 4. When asked to "do step X", scroll to that step, follow its checklist verbatim, and use its `Commit msg` template.
 
-> Do not skip steps. Each is independently shippable — after every step the page should still render and `npm run build` should pass. If a step would require also doing parts of a later step, **stop and ask** before bundling.
+> Do not skip steps. Each is independently shippable: after every step the page should still render and `npm run build` should pass. If a step would require also doing parts of a later step, **stop and ask** before bundling.
 
 ---
 
 ## Goal
 
-Build the **best token information experience on Solana** — a token-details page (`/token/[address]`) that surfaces data and signals no competitor exposes in one place. Detailed scope and source-of-truth in [source-of-truth.md](./token-details-source-of-truth.md).
+Build the **best token information experience on Solana**: a token-details page (`/token/[address]`) that surfaces data and signals no competitor exposes in one place. Detailed scope and source-of-truth in [source-of-truth.md](./token-details-source-of-truth.md).
 
 ---
 
 ## Status snapshot
 
 ```
-Phase A — Foundation        [ ✅ A1  ✅ A2  ✅ A3 ]
-Phase B — Spec compliance   [ ✅ B1  ✅ B2  ✅ B2.5  ✅ B3  ✅ B4 ]
-Phase C — Net-new sections  [ ✅ C1  ✅ C2  ✅ C3  ✅ C4  ✅ C5 ]
-Phase D — Differentiators   [ ✅ D1  ✅ D2  ✅ D3  ✅ D4  ✅ D5 ]
+Phase A: Foundation        [ ✅ A1  ✅ A2  ✅ A3 ]
+Phase B: Spec compliance   [ ✅ B1  ✅ B2  ✅ B2.5  ✅ B3  ✅ B4 ]
+Phase C: Net-new sections  [ ✅ C1  ✅ C2  ✅ C3  ✅ C4  ✅ C5 ]
+Phase D: Differentiators   [ ✅ D1  ✅ D2  ✅ D3  ✅ D4  ✅ D5 ]
 Polish (cross-cutting)      [ ✅ P1  ⏸ P2  ✗ P3  ⏸ P4  ⏸ P5  ⏸ P6  ⏸ P7 ]
 Tier 1 quick wins           [ ✅ 1.1  ✅ 1.2  ✅ 1.3  ✅ 1.4 ]
 Backlog                     [ F1  F2  ✗ F3 ]
@@ -36,9 +36,9 @@ Backlog                     [ F1  F2  ✗ F3 ]
 
 Legend: ⏸ pending · 🔄 in progress · ✅ shipped · ✗ scrapped (no longer needed)
 
-**Next ship:** Phases A–D, Tier 1, P1 all ✅. Remaining tracks: **Polish (P2 + P4–P7)** and **Backlog (F1, F2)**. P3 and F3 scrapped. No core ships left — focus is now on perceived speed (P6 / P2) or shipping `stage → main` for users.
+**Next ship:** Phases A–D, Tier 1, P1 all ✅. Remaining tracks: **Polish (P2 + P4–P7)** and **Backlog (F1, F2)**. P3 and F3 scrapped. No core ships left: focus is now on perceived speed (P6 / P2) or shipping `stage → main` for users.
 
-> When a step ships, update its status icon AND tick it off in the table below. Keep this snapshot in sync with the per-step sections — that's the canonical "where are we" indicator for the next session.
+> When a step ships, update its status icon AND tick it off in the table below. Keep this snapshot in sync with the per-step sections; that's the canonical "where are we" indicator for the next session.
 
 ---
 
@@ -46,8 +46,8 @@ Legend: ⏸ pending · 🔄 in progress · ✅ shipped · ✗ scrapped (no longe
 
 | # | Step | Phase | User-visible? | Depends on |
 |---|---|---|---|---|
-| A1 | Promote `_archive` components | Foundation | no | — |
-| A2 | Create `/api/helius` route | Foundation | no | — |
+| A1 | Promote `_archive` components | Foundation | no | - |
+| A2 | Create `/api/helius` route | Foundation | no | - |
 | A3 | Extract `useTokenDetails` hook | Foundation | no | A1 |
 | B1 | Swap chart fallback to Birdeye-primary | Compliance | yes (charts) | A3 |
 | B2 | Jupiter Lite Price realtime ticker | Compliance | yes (live price) | A3 |
@@ -55,26 +55,26 @@ Legend: ⏸ pending · 🔄 in progress · ✅ shipped · ✗ scrapped (no longe
 | B3 | Jupiter-first lookup with Helius fallback | Compliance | yes (404 state) | A2, A3 |
 | B4 | Invalid-mint hardening (format check + empty-data → not-found) | Compliance | yes (error states) | B3 |
 | C1 | On-chain truth panel (Helius) | Sections | yes | A2 |
-| C2 | Token meta strip (Token Program ID, organicScore, tags, first-pool age, market count) | Sections | yes | — |
-| C3 | Top Holders ranked list | Sections | yes | — |
-| C4 | Multi-window trading panel (9-window merge) | Sections | yes | — |
-| C5 | All Pools polish (verify + sort by liquidity) | Sections | maybe | — |
+| C2 | Token meta strip (Token Program ID, organicScore, tags, first-pool age, market count) | Sections | yes | - |
+| C3 | Top Holders ranked list | Sections | yes | - |
+| C4 | Multi-window trading panel (9-window merge) | Sections | yes | - |
+| C5 | All Pools polish (verify + sort by liquidity) | Sections | maybe | - |
 | D1 | **Edge Score** composite + attribution | Differentiators | yes ⭐ | A2, C1, C2 |
-| D2 | Price-source divergence flag | Differentiators | yes | — |
-| D3 | DEX vs CEX spread | Differentiators | yes | — |
+| D2 | Price-source divergence flag | Differentiators | yes | - |
+| D3 | DEX vs CEX spread | Differentiators | yes | - |
 | D4 | Real-human activity score | Differentiators | yes | C4 |
-| D5 | Slippage at size ($1k/$10k/$100k) | Differentiators | yes | — |
+| D5 | Slippage at size ($1k/$10k/$100k) | Differentiators | yes | - |
 | P1 | Chart range-switch smoothness (no loading flash) | Polish | yes | A3 |
 | P2 | Reload / address-change smoothness (stale-while-revalidate) | Polish | yes | A3 |
-| ~~P3~~ | ~~Chart visual polish (match app UI)~~ — **scrapped** | Polish | — | — |
+| ~~P3~~ | ~~Chart visual polish (match app UI)~~: **scrapped** | Polish | - |: |
 | P4 | Evilcharts loading state polish | Polish | yes | B2.5 |
-| P5 | NumberFlow coverage on mutating numerics | Polish | yes | — |
+| P5 | NumberFlow coverage on mutating numerics | Polish | yes | - |
 | P6 | Persistent caching + progressive page hydration | Polish | yes (perceived speed) | P2 |
-| P7 | Split `src/app/api/birdeye/route.ts` (currently 690 LOC, near cap) | Polish | no | — |
-| 1.1 | Brand kit at `/brand` + downloadable SVGs | Tier 1 | yes | — |
+| P7 | Split `src/app/api/birdeye/route.ts` (currently 690 LOC, near cap) | Polish | no | - |
+| 1.1 | Brand kit at `/brand` + downloadable SVGs | Tier 1 | yes | - |
 | 1.2 | TokenModal chart parity (swap to `EvilLineChart`) | Tier 1 | yes | B2.5 |
 | 1.3 | `PriceChartSection` header copy (drop "· Tokens.xyz") | Tier 1 | yes | B1 |
-| 1.4 | `useTokenChart` cache TTL (30s) | Tier 1 | maybe | — |
+| 1.4 | `useTokenChart` cache TTL (30s) | Tier 1 | maybe | - |
 
 ---
 
@@ -84,7 +84,7 @@ Legend: ⏸ pending · 🔄 in progress · ✅ shipped · ✗ scrapped (no longe
 
 ---
 
-### A1 — Promote `_archive/solana/_components/*`
+### A1: Promote `_archive/solana/_components/*`
 
 **Goal:** clean up half-completed migration so new components land in a sensible directory.
 
@@ -110,17 +110,17 @@ updates, no behavior change. Removes _archive/ directory.
 
 ---
 
-### A2 — Create `/api/helius` route
+### A2: Create `/api/helius` route
 
-**Goal:** establish Helius integration plumbing — every later Helius-dependent step uses this.
+**Goal:** establish Helius integration plumbing, every later Helius-dependent step uses this.
 
 **What to do:**
-- New file: [`src/app/api/helius/route.ts`](../src/app/api/helius/route.ts) (mirror the shape of [`src/app/api/birdeye/route.ts`](../src/app/api/birdeye/route.ts) — single GET, query-param `type` switches handler)
+- New file: [`src/app/api/helius/route.ts`](../src/app/api/helius/route.ts) (mirror the shape of [`src/app/api/birdeye/route.ts`](../src/app/api/birdeye/route.ts), single GET, query-param `type` switches handler)
 - Implement handlers for these `type` values:
-  - `getAsset` — calls Helius DAS `getAsset` with `showFungible: true`. Param: `address`
-  - `getAccountInfo` — calls RPC `getAccountInfo` with `encoding: "jsonParsed"`. Param: `address`
-  - `getTokenSupply` — calls RPC `getTokenSupply`. Param: `address`
-  - `getSignaturesForAddress` — calls RPC `getSignaturesForAddress`, used to derive token age (oldest signature). Param: `address`, `limit` (default 1)
+  - `getAsset`; calls Helius DAS `getAsset` with `showFungible: true`. Param: `address`
+  - `getAccountInfo`; calls RPC `getAccountInfo` with `encoding: "jsonParsed"`. Param: `address`
+  - `getTokenSupply`; calls RPC `getTokenSupply`. Param: `address`
+  - `getSignaturesForAddress`; calls RPC `getSignaturesForAddress`, used to derive token age (oldest signature). Param: `address`, `limit` (default 1)
 - Auth: `HELIUS_API_KEY` from env, build URL `https://mainnet.helius-rpc.com/?api-key=${KEY}` server-side only
 - Add `enforceRateLimit(req, "public-read")` like other routes
 - Generic error responses (no upstream message leak) per CLAUDE.md "External APIs"
@@ -137,13 +137,13 @@ feat(api): add /api/helius route for DAS + RPC
 
 Wires Helius as a server-side data source. Handlers: getAsset (DAS),
 getAccountInfo, getTokenSupply, getSignaturesForAddress (RPC). Auth via
-HELIUS_API_KEY, rate-limited. No UI integration yet — plumbing only,
+HELIUS_API_KEY, rate-limited. No UI integration yet: plumbing only,
 unblocks Phase B/C/D steps that need on-chain truth.
 ```
 
 ---
 
-### A3 — Extract `useTokenDetails(address)` hook
+### A3: Extract `useTokenDetails(address)` hook
 
 **Goal:** move data-fetching out of the 576-LOC page component into a reusable hook. Future sections add to the hook, not the page.
 
@@ -153,8 +153,8 @@ unblocks Phase B/C/D steps that need on-chain truth.
   - `fetchTokenData` callback (Birdeye + Tokens.xyz parallel)
   - `useEffect` for initial load
   - `useInterval` polling
-  - chart fetch logic (`fetchTokenChartCandles`, `fetchJupiterDerivedCandles`) — keep behavior identical for now (B1 will swap order)
-  - normalization helpers (`buildAssetFromPair`, `mergeAssetWithFallback`, etc.) — could move to `src/lib/token/utils.ts`
+  - chart fetch logic (`fetchTokenChartCandles`, `fetchJupiterDerivedCandles`): keep behavior identical for now (B1 will swap order)
+  - normalization helpers (`buildAssetFromPair`, `mergeAssetWithFallback`, etc.): could move to `src/lib/token/utils.ts`
 - Hook returns: `{ asset, primary, profile, risk, markets, chartCandles, chartRange, setChartRange, loading, chartLoading }`
 - Page imports the hook and renders. Target page LOC: ~200 (down from 576).
 
@@ -175,7 +175,7 @@ to the hook rather than to a giant client component.
 
 ---
 
-### B1 — Swap chart fallback to Birdeye-primary
+### B1: Swap chart fallback to Birdeye-primary
 
 **Goal:** match the [source-of-truth](./token-details-source-of-truth.md#f-chart--ohlcv) chart order.
 
@@ -183,7 +183,7 @@ to the hook rather than to a giant client component.
 - In `useTokenDetails` (or wherever chart fetch landed in A3), swap the order:
   - Current: Tokens.xyz → Birdeye → Jupiter-2-candle synth
   - Target: Birdeye → Tokens.xyz → (no synth fallback)
-- Delete `fetchJupiterDerivedCandles` — the 2-candle synth is not in the spec; if both real sources fail, render the chart's empty state instead.
+- Delete `fetchJupiterDerivedCandles`: the 2-candle synth is not in the spec; if both real sources fail, render the chart's empty state instead.
 
 **Verify:**
 - SOL chart loads (Birdeye OK)
@@ -201,16 +201,16 @@ when both real sources failed; we now show a clean empty state instead.
 
 ---
 
-### B2 — Jupiter Lite Price realtime ticker
+### B2: Jupiter Lite Price realtime ticker
 
-**Goal:** the page "feels alive" — price flickers in realtime without page-wide refresh. First competitive-feel parity.
+**Goal:** the page "feels alive", price flickers in realtime without page-wide refresh. First competitive-feel parity.
 
 **What to do:**
 - Add `useTokenPriceTicker(address)` hook in `src/lib/hooks/useTokenPriceTicker.ts`
 - Polls `https://lite-api.jup.ag/price/v3?ids=${address}` every **1500ms**
 - Returns `{ price, priceChange24h, lastUpdatedAt }`
-- Wire into `IdentityStrip` (or wherever the displayed price is) — small flicker on update, no layout shift
-- This polls **client-side direct** to Jupiter Lite (it's a free, no-auth endpoint per spec) — does NOT proxy through `/api/jupiter`
+- Wire into `IdentityStrip` (or wherever the displayed price is): small flicker on update, no layout shift
+- This polls **client-side direct** to Jupiter Lite (it's a free, no-auth endpoint per spec): does NOT proxy through `/api/jupiter`
 - Use `Decimal.js` for display formatting to avoid float drift
 
 **Verify:**
@@ -230,21 +230,21 @@ remains on its existing 15s cadence.
 
 ---
 
-### B2.5 — Chart library swap to evilcharts + triangle background
+### B2.5: Chart library swap to evilcharts + triangle background
 
 **Goal:** replace the hand-rolled SVG `src/components/ui/PriceChart.tsx` with [evilcharts](https://evilcharts.com/docs/line-chart/static), and add an upward-triangle pattern background (matching the project logo) using [evilcharts background components](https://evilcharts.com/docs/ui/background).
 
 **Open questions to resolve before starting:**
 - Is evilcharts an npm package or a copy-paste shadcn-style component? Install steps need to be captured.
 - Does it support OHLCV / candlestick rendering, or line-only? If line-only, downstream Phase C work (TradingActivityPanel candle views) needs a separate solution.
-- What's the data shape for the line chart props? Our current `Candle[]` has `{o, h, l, c, v, unixTime}` — needs adapter to whatever evilcharts expects.
+- What's the data shape for the line chart props? Our current `Candle[]` has `{o, h, l, c, v, unixTime}`: needs adapter to whatever evilcharts expects.
 - Triangle background: are the triangles a built-in evilcharts background variant, or does it need a custom SVG pattern matching `/brand/defi_logo_*.svg`?
 
 **What to do (once questions answered):**
 - Install evilcharts per docs (likely shadcn-style: copy components into `src/components/ui/charts/`).
 - Add adapter in `src/lib/token/utils.ts` (or new file) to map `Candle[]` → evilcharts data shape.
-- Replace `PriceChart` usage in [`src/components/token/PriceChartSection.tsx`](../src/components/token/PriceChartSection.tsx). Token Modal's `useTokenChart` consumer (`src/components/ui/TokenModalChart.tsx`) is out of scope — separate task.
-- Wrap chart in evilcharts background component (or custom triangle SVG pattern) — upward triangles, brand-toned (cta-color `#3B7DDD` or frost-400 `#19549b` per [DESIGN.md](../DESIGN.md)). Subtle opacity so it doesn't fight the line.
+- Replace `PriceChart` usage in [`src/components/token/PriceChartSection.tsx`](../src/components/token/PriceChartSection.tsx). Token Modal's `useTokenChart` consumer (`src/components/ui/TokenModalChart.tsx`) is out of scope: separate task.
+- Wrap chart in evilcharts background component (or custom triangle SVG pattern): upward triangles, brand-toned (cta-color `#3B7DDD` or frost-400 `#19549b` per [DESIGN.md](../DESIGN.md)). Subtle opacity so it doesn't fight the line.
 - Verify mobile layout still works (charts are full-width on `<sm`).
 
 **Verify:**
@@ -266,7 +266,7 @@ follow-up.
 
 ---
 
-### B3 — Jupiter-first lookup with Helius DAS fallback ✅
+### B3: Jupiter-first lookup with Helius DAS fallback ✅
 
 **Goal:** match the lookup contract in [source-of-truth §lookup-contract](./token-details-source-of-truth.md#lookup-contract).
 
@@ -276,10 +276,10 @@ follow-up.
   2. If miss, try Helius `getAsset` (via `/api/helius?type=getAsset`)
   3. If both miss, return `null`
 - Use this in `useTokenDetails` as the entry-point identity source (replaces the implicit "Birdeye returned nothing → fail" path)
-- Update the "not found" UI: when both sources miss, show `"Token not indexed yet — try a different address"` (not "Unable to load token right now")
+- Update the "not found" UI: when both sources miss, show `"Token not indexed yet, try a different address"` (not "Unable to load token right now")
 
 **Verify:**
-- Known mint (SOL) loads via Jupiter — verify in network tab
+- Known mint (SOL) loads via Jupiter: verify in network tab
 - A made-up mint (e.g. `1111...1111`) shows the new not-indexed state
 - A brand-new mint Jupiter doesn't have but Helius does → loads via fallback (test with a freshly-launched memecoin if available)
 
@@ -294,7 +294,7 @@ Replaces the prior "Birdeye returns nothing → generic error" path.
 
 ---
 
-### B4 — Invalid-mint hardening ✅
+### B4: Invalid-mint hardening ✅
 
 **Goal:** when the URL has a malformed or unindexed mint, fail clearly rather than rendering an empty page shell with `$0` placeholders.
 
@@ -304,7 +304,7 @@ Replaces the prior "Birdeye returns nothing → generic error" path.
 - In `src/app/token/[address]/page.tsx` (or in `useTokenDetails`), add an upfront address-format check using `new PublicKey(address)`. If invalid → render a clean "Invalid mint address" state, **no API calls fired**.
 - Treat "all-zero" payloads as not-found: if Birdeye + Tokens.xyz + lookup all return empty/zero data, fall through to the existing "Token not indexed yet" state instead of rendering shell UI. (Heuristic: check `asset.symbol` is non-empty and `stats.price > 0` OR `stats.liquidity > 0`.)
 - Both error states should reuse the existing `notIndexed` styling (centered message + "Back to dashboard" link).
-- Keep `OnChainPanel` and other section-level hide rules unchanged — those work correctly for partial-data tokens.
+- Keep `OnChainPanel` and other section-level hide rules unchanged: those work correctly for partial-data tokens.
 
 **Verify:**
 - `/token/1111111111111111111111111111111111111111111` (43 chars, may or may not be a valid `PublicKey`) → "Invalid mint address" state OR "not indexed" depending on which path triggers; **no shell UI with $0 stats**
@@ -316,7 +316,7 @@ Replaces the prior "Birdeye returns nothing → generic error" path.
 ```
 feat(token): invalid-mint hardening
 
-Validates the URL address as a Solana PublicKey upfront — invalid
+Validates the URL address as a Solana PublicKey upfront: invalid
 addresses render a clean "Invalid mint address" state with no API
 calls. Treats all-zero data payloads as not-found instead of letting
 buildAssetFromPair synthesize an empty page shell. Closes the gap left
@@ -325,14 +325,14 @@ open by B3 where bogus mints rendered $0-everywhere placeholder pages.
 
 ---
 
-### C1 — On-chain truth panel ✅
+### C1: On-chain truth panel ✅
 
 **Goal:** new section showing chain-truth security data per [source-of-truth §G](./token-details-source-of-truth.md#g-security--risk).
 
 **What to do:**
 - New component: `src/components/token/OnChainPanel.tsx`
 - Add to `useTokenDetails`: parallel fetch for `/api/helius?type=getAccountInfo` + `/api/helius?type=getAsset`
-- Render rows (hide row if data missing — see source-of-truth render rule):
+- Render rows (hide row if data missing; see source-of-truth render rule):
   - **Mint authority**: address (with copy + truncate) OR "Renounced ✓" badge
   - **Freeze authority**: same shape
   - **Mutable**: ✓/✗
@@ -356,7 +356,7 @@ created in A2. Section hides cleanly if both sources fail.
 
 ---
 
-### C2 — Token meta strip ✅
+### C2: Token meta strip ✅
 
 > **⚠️ Open decision before starting C2 (raised by user 2026-04-28):**
 > Most users won't know what `organicScore` or the `tags` mean without context. Confirm with user before implementation:
@@ -366,8 +366,8 @@ created in A2. Section hides cleanly if both sources fail.
 > Placement decision (locked): MetaStrip sits **directly below `IdentityStrip`**, above `PriceChartSection`.
 >
 > Definitions for the tooltips (so we don't waste time researching at impl-time):
-> - **organicScore** — Jupiter's 0–100 estimate of how much trading volume is real-human (vs. bots / wash). Higher = healthier. Reported alongside `organicScoreLabel` ("high" / "medium" / "low") which we'll use to color-tint the badge (green/amber/red).
-> - **tags** — Jupiter's categorical labels: `verified`, `lst`, `community`, `meme`, `stablecoin`, `bridged`, `wrapped`, etc. Rendered as small pills.
+> - **organicScore**: Jupiter's 0–100 estimate of how much trading volume is real-human (vs. bots / wash). Higher = healthier. Reported alongside `organicScoreLabel` ("high" / "medium" / "low") which we'll use to color-tint the badge (green/amber/red).
+> - **tags**: Jupiter's categorical labels: `verified`, `lst`, `community`, `meme`, `stablecoin`, `bridged`, `wrapped`, etc. Rendered as small pills.
 
 **Goal:** surface trust signals from [source-of-truth §G](./token-details-source-of-truth.md#g-security--risk) and [§J](./token-details-source-of-truth.md#j-dex-pools).
 
@@ -379,7 +379,7 @@ created in A2. Section hides cleanly if both sources fail.
   - organicScore (0–100) + label badge
   - isVerified ✓ if true
   - Tags pills
-  - First-pool age ("Listed 14d ago" — derive from `firstPool.createdAt`)
+  - First-pool age ("Listed 14d ago": derive from `firstPool.createdAt`)
   - Total markets count ("132,804 markets")
 - Hide individual cells where source value missing
 
@@ -398,12 +398,12 @@ source value missing.
 
 ---
 
-### C3 — Top Holders ranked list ✅
+### C3: Top Holders ranked list ✅
 
 **Goal:** the holder distribution table per [source-of-truth §E](./token-details-source-of-truth.md#e-holders).
 
 **What to do:**
-- Add to `/api/birdeye?type=holders` (new handler in [`src/app/api/birdeye/route.ts`](../src/app/api/birdeye/route.ts)) — calls `/defi/v3/token/holder?address=...&limit=10`
+- Add to `/api/birdeye?type=holders` (new handler in [`src/app/api/birdeye/route.ts`](../src/app/api/birdeye/route.ts)): calls `/defi/v3/token/holder?address=...&limit=10`
 - New component: `src/components/token/TopHoldersPanel.tsx`
 - Add holder fetch to `useTokenDetails`
 - Render 10-row list:
@@ -428,7 +428,7 @@ Adds /api/birdeye?type=holders handler + TopHoldersPanel component.
 
 ---
 
-### C4 — Multi-window trading panel ✅
+### C4: Multi-window trading panel ✅
 
 **Goal:** the 9-window merged trading panel per [source-of-truth §D](./token-details-source-of-truth.md#d-trading-activity-multi-window).
 
@@ -441,8 +441,8 @@ Adds /api/birdeye?type=holders handler + TopHoldersPanel component.
 
 **Verify:**
 - For SOL: 8 windows from Birdeye + Jupiter's 6h adds 9th
-- For a small memecoin: maybe only 5m/1h/24h survive — others hidden cleanly
-- No "0" or "N/A" in UI — missing = hidden
+- For a small memecoin: maybe only 5m/1h/24h survive, others hidden cleanly
+- No "0" or "N/A" in UI: missing = hidden
 
 **Commit msg:**
 ```
@@ -456,12 +456,12 @@ rules.
 
 ---
 
-### C5 — All Pools polish ✅
+### C5: All Pools polish ✅
 
 **Goal:** verify [`MarketsSection`](../src/app/_archive/solana/_components/MarketsSection.tsx) (post-A1: `src/components/token/MarketsSection.tsx`) shows every pool from Tokens.xyz `markets` array, sorted by liquidity, with name + DEX + liquidity USD.
 
 **What to do:**
-- Read current `MarketsSection` — verify it consumes `response.includes.markets.data.markets` correctly
+- Read current `MarketsSection`: verify it consumes `response.includes.markets.data.markets` correctly
 - If sorting is missing / not by liquidity: add it
 - If only some pools shown: lift the cap
 - If polish needed (column widths, mobile wrap): apply per [DESIGN.md](../DESIGN.md)
@@ -476,17 +476,17 @@ refactor(token): polish All Pools section
 
 Verifies and tunes MarketsSection: sort by liquidity desc, no row cap,
 mobile-friendly columns. Tokens.xyz markets[] is unique-source per
-spec — make sure we display its full value.
+spec: make sure we display its full value.
 ```
 
 ---
 
-### D1 — Edge Score (composite + attribution) ⭐ ✅
+### D1: Edge Score (composite + attribution) ⭐ ✅
 
 **Goal:** the headline differentiator per [source-of-truth §K-4](./token-details-source-of-truth.md#4-edge-score-composite-safety).
 
 **What to do:**
-- New file: `src/lib/token/edgeScore.ts` — pure function `computeEdgeScore({ chainTruth, audit, riskInputs }) → { score, grade, breakdown[] }`
+- New file: `src/lib/token/edgeScore.ts`, pure function `computeEdgeScore({ chainTruth, audit, riskInputs }) → { score, grade, breakdown[] }`
   - Inputs:
     - chainTruth (from C1's Helius data): `mintAuthorityRenounced`, `freezeAuthorityRenounced`, `mutable`, `burnt`
     - audit (from Jupiter): `mintAuthorityDisabled`, `freezeAuthorityDisabled`, `topHoldersPercentage`, `devMintCount`, etc.
@@ -497,7 +497,7 @@ spec — make sure we display its full value.
 - Replace existing `RiskPanel` (or expand it) with `src/components/token/EdgeScorePanel.tsx`:
   - Big A–F badge + score
   - Expandable list: each contributing signal with raw value, weight, source attribution
-- Tunable weights — define as constants at top of `edgeScore.ts` for easy adjustment
+- Tunable weights: define as constants at top of `edgeScore.ts` for easy adjustment
 
 **Verify:**
 - For SOL: high score (renounced authorities, high liquidity, high volume, old)
@@ -509,7 +509,7 @@ spec — make sure we display its full value.
 ```
 feat(token): Edge Score composite safety with full attribution
 
-Introduces Edge Score — a weighted composite of chain-truth (Helius),
+Introduces Edge Score: a weighted composite of chain-truth (Helius),
 trust audit (Jupiter), and risk inputs (Tokens.xyz). A–F grade with
 expandable per-signal breakdown showing raw value + source attribution
 for every input. Replaces RiskPanel as the primary safety signal.
@@ -517,13 +517,13 @@ for every input. Replaces RiskPanel as the primary safety signal.
 
 ---
 
-### D2 — Price-source divergence flag ✅
+### D2: Price-source divergence flag ✅
 
 **Goal:** [source-of-truth §K-1](./token-details-source-of-truth.md#1-price-source-divergence-flag).
 
 **What to do:**
-- New file: `src/lib/token/priceDivergence.ts` — pure function `computeDivergence({ birdeye, jupiter, tokensXyzStats, tokensXyzCanonical, helius }) → { spreadPct, healthy, sources }`
-- Wire into `IdentityStrip`: small pill — green "5 sources within 0.3%" or amber "spread 2.1% — see breakdown"
+- New file: `src/lib/token/priceDivergence.ts`, pure function `computeDivergence({ birdeye, jupiter, tokensXyzStats, tokensXyzCanonical, helius }) → { spreadPct, healthy, sources }`
+- Wire into `IdentityStrip`: small pill, green "5 sources within 0.3%" or amber "spread 2.1%, see breakdown"
 - Click pill → small popover showing all 5 prices side by side
 
 **Verify:**
@@ -541,7 +541,7 @@ in the identity strip. Click for per-source breakdown.
 
 ---
 
-### D3 — DEX vs CEX spread ✅
+### D3: DEX vs CEX spread ✅
 
 **Goal:** [source-of-truth §K-2](./token-details-source-of-truth.md#2-dex-vs-cex-spread).
 
@@ -565,14 +565,14 @@ either source missing.
 
 ---
 
-### D4 — Real-human activity score ✅
+### D4: Real-human activity score ✅
 
 **Goal:** [source-of-truth §K-3](./token-details-source-of-truth.md#3-real-human-activity-score).
 
 **What to do:**
 - New file: `src/lib/token/humanActivityScore.ts`
 - Inputs from C4 data: Birdeye `uniqueWallet5m / uniqueWallet1h` + Jupiter `numOrganicBuyers / numBuys`
-- Compute: `unique_wallets × organic_ratio` → percentile-rank within tag (need a small reference table — start with a fixed scale, refine later)
+- Compute: `unique_wallets × organic_ratio` → percentile-rank within tag (need a small reference table, start with a fixed scale, refine later)
 - Display: 0–100 score with sub-bars (unique wallets percentile + organic % filter)
 - Place in `TradingActivityPanel` (from C4) as a header
 
@@ -591,7 +591,7 @@ as a header on the multi-window trading panel.
 
 ---
 
-### D5 — Slippage at size ✅
+### D5: Slippage at size ✅
 
 **Goal:** [source-of-truth §K-5](./token-details-source-of-truth.md#5-slippage-at-size).
 
@@ -613,7 +613,7 @@ as a header on the multi-window trading panel.
 feat(token): slippage-at-size panel ($1k/$10k/$100k)
 
 Adds /api/jupiter-quote (or /api/jupiter?type=quote) and SlippagePanel
-component. Shows expected price impact at three trade sizes — directly
+component. Shows expected price impact at three trade sizes: directly
 useful for traders sizing positions, no other Solana tool surfaces this
 inline.
 ```
@@ -632,7 +632,7 @@ inline.
    - Update **Status snapshot** + per-step status icon in this file
    - Push
 
-Each step is self-contained — fresh Claude doesn't need conversation history beyond reading this file + source-of-truth.md.
+Each step is self-contained: fresh Claude doesn't need conversation history beyond reading this file + source-of-truth.md.
 
 ---
 
@@ -644,7 +644,7 @@ Each step is self-contained — fresh Claude doesn't need conversation history b
 
 ---
 
-## P1 — Chart range-switch smoothness
+## P1: Chart range-switch smoothness
 
 **User-reported friction (PR #4 testing):** clicking a different range button (1D / 1W / 1M / 3M / 1Y) shows a "Loading chart…" state for ~500–1500 ms before the new chart renders. Feels laggy.
 
@@ -663,7 +663,7 @@ Each step is self-contained — fresh Claude doesn't need conversation history b
 
 ---
 
-## P2 — Reload / address-change smoothness
+## P2: Reload / address-change smoothness
 
 **User-reported friction (PR #4 testing):** opening a new token (or refreshing) shows a "Loading token…" full-page state for the full first-fetch duration. App feels less smooth than competitors.
 
@@ -672,7 +672,7 @@ Each step is self-contained — fresh Claude doesn't need conversation history b
 **Fix options:**
 - **(a) Stale-while-revalidate via cache:** session-level `Map<address, lastResult>` keyed by address. When the user opens a token they've seen this session, render cached values immediately; fetch in background and replace silently. Same pattern dashboard uses for token modals (`useTokenChart` already has `ohlcvCache`).
 - **(b) Skeleton instead of "Loading token…":** render the page shell (Identity strip, chart frame, stats grid placeholders) with shimmer instead of a centered spinner. No data dependency for the layout.
-- **(c) Both** — cache for known tokens, skeleton for unknown.
+- **(c) Both**: cache for known tokens, skeleton for unknown.
 
 **Recommendation:** (c). Cache covers repeat visits (most common); skeleton covers cold visits + provides better LCP signal.
 
@@ -683,37 +683,37 @@ Each step is self-contained — fresh Claude doesn't need conversation history b
 
 ---
 
-## P3 — Chart visual polish (match app UI)
+## P3: Chart visual polish (match app UI)
 
-**User-reported (PR #8 testing):** the new evilcharts price chart works correctly but its UI doesn't fully match the app's visual language — line stroke, axis typography, tooltip styling, gridlines, etc.
+**User-reported (PR #8 testing):** the new evilcharts price chart works correctly but its UI doesn't fully match the app's visual language, line stroke, axis typography, tooltip styling, gridlines, etc.
 
 **To investigate when picking up:**
 - Compare against [DESIGN.md](../DESIGN.md): colour tokens (Frost / Hela / Loki), typography (Geist Mono for body, Geist Pixel Square for financial numbers), spacing (8px base), border radii (rounded-sm 2px).
-- Audit: line color (currently `#19549b` light / `#3B7DDD` dark — confirm match against DESIGN.md primary), axis label font (does it inherit Geist Mono via the wrapping `<section>`?), tooltip card (current shadcn-default rounded-lg vs. our app's rounded-sm), gridline color/opacity.
+- Audit: line color (currently `#19549b` light / `#3B7DDD` dark, confirm match against DESIGN.md primary), axis label font (does it inherit Geist Mono via the wrapping `<section>`?), tooltip card (current shadcn-default rounded-lg vs. our app's rounded-sm), gridline color/opacity.
 - Check whether evilcharts' `tooltipVariant="frosted-glass"` or a custom override gives a better fit.
 
 **Out of scope (revisit only if we change libraries):** swapping evilcharts for a different chart lib.
 
 ---
 
-## P4 — Evilcharts loading state polish
+## P4: Evilcharts loading state polish
 
 **User-reported (PR #8 testing):** the built-in `isLoading` shimmer skeleton from `EvilLineChart` doesn't feel as polished as the rest of the app.
 
 **Options to consider:**
-- **(a) Replace with our SpiralLoader** — pass `isLoading={false}` always; render the existing `SpiralLoader` (already used on home + briefly on the chart in P1) inside the chart container instead of evilcharts' shimmer. Simplest, matches the rest of the app.
-- **(b) Customize evilcharts shimmer** — `chart.tsx` exports `LoadingIndicator` and `getLoadingData`. Override the shimmer's color / animation curve to match brand.
-- **(c) Skeleton-shaped placeholder** — render a flat ghost line + grid silhouette in brand muted tones during loading. Closest to high-end fintech apps.
+- **(a) Replace with our SpiralLoader**: pass `isLoading={false}` always; render the existing `SpiralLoader` (already used on home + briefly on the chart in P1) inside the chart container instead of evilcharts' shimmer. Simplest, matches the rest of the app.
+- **(b) Customize evilcharts shimmer**: `chart.tsx` exports `LoadingIndicator` and `getLoadingData`. Override the shimmer's color / animation curve to match brand.
+- **(c) Skeleton-shaped placeholder**: render a flat ghost line + grid silhouette in brand muted tones during loading. Closest to high-end fintech apps.
 
-**Recommendation when implementing:** start with (a) — least change, immediate parity with rest of app. If "looks too plain", layer (c).
+**Recommendation when implementing:** start with (a), least change, immediate parity with rest of app. If "looks too plain", layer (c).
 
 ---
 
-## P5 — NumberFlow coverage on mutating numerics
+## P5: NumberFlow coverage on mutating numerics
 
 **Surfaced during:** number-flow audit, 2026-04-28.
 
-`@number-flow/react ^0.6.0` is installed and wired into [IdentityStrip](../src/components/token/IdentityStrip.tsx) (price + 24h % + ATH delta on the **1.5s** Jupiter ticker) and [TokenModal](../src/components/ui/TokenModal.tsx). Every other shipped surface with mutating numerics still renders pre-formatted strings — they jump on each poll instead of animating, which feels inconsistent next to the live ticker.
+`@number-flow/react ^0.6.0` is installed and wired into [IdentityStrip](../src/components/token/IdentityStrip.tsx) (price + 24h % + ATH delta on the **1.5s** Jupiter ticker) and [TokenModal](../src/components/ui/TokenModal.tsx). Every other shipped surface with mutating numerics still renders pre-formatted strings: they jump on each poll instead of animating, which feels inconsistent next to the live ticker.
 
 **Polling cadences feeding mutating numerics:**
 - `useTokenDetails` (15s) → StatsGrid, EdgeScore inputs, DexCexSpread, PriceDivergenceChip, MetaStrip markets, TopHolders
@@ -734,22 +734,22 @@ Each step is self-contained — fresh Claude doesn't need conversation history b
 **Friction:** format helpers `fmtUsd / fmtPct / fmtNum` return pre-formatted strings. NumberFlow takes a raw number + `Format` object. Each call site needs the swap, e.g. `fmtUsd(x, { compact: true })` → `<NumberFlow value={x} format={{ notation: 'compact', style: 'currency', currency: 'USD' }} />`.
 
 **Tiered options (pick one when implementing):**
-- **(a) Tier 1 — token detail page only.** StatsGrid + EdgeScore score + DexCexSpread + PriceDivergenceChip body. All 15s cadence, all sit next to the already-animated price. ~1h, ~80 LOC across 4 files. **Recommended first ship.**
+- **(a) Tier 1: token detail page only.** StatsGrid + EdgeScore score + DexCexSpread + PriceDivergenceChip body. All 15s cadence, all sit next to the already-animated price. ~1h, ~80 LOC across 4 files. **Recommended first ship.**
 - **(b) Tier 1 + DexCard (home rails).** Adds first-impression surface. 120s cadence is slow but every user lands here first. ~1.5h.
-- **(c) Full sweep — also TopHolders amounts + MetaStrip markets/organicScore.** Diminishing returns: TopHolders rarely shifts within a session, MetaStrip markets is buried. ~2.5h.
+- **(c) Full sweep: also TopHolders amounts + MetaStrip markets/organicScore.** Diminishing returns: TopHolders rarely shifts within a session, MetaStrip markets is buried. ~2.5h.
 
 **Recommendation:** ship (a) as a single PR. Re-audit after; (b) if home-rail jumpiness is still noticeable, (c) only if symmetry-OCD demands it.
 
 **Verify:**
-- Open `/token/So11…112`. Watch StatsGrid for ~30s — values animate (not jump) on 15s polls.
+- Open `/token/So11…112`. Watch StatsGrid for ~30s: values animate (not jump) on 15s polls.
 - EdgeScore "X / 100" digits roll when underlying inputs shift.
 - DexCexSpread + PriceDivergenceChip percentages animate on poll.
 - No layout shift; `tabular-nums` still in effect.
-- Existing IdentityStrip price ticker continues to animate at 1.5s — no regression.
+- Existing IdentityStrip price ticker continues to animate at 1.5s: no regression.
 
 ---
 
-## P6 — Persistent caching + progressive page hydration
+## P6: Persistent caching + progressive page hydration
 
 **Surfaced during:** roadmap planning, 2026-04-28.
 
@@ -770,7 +770,7 @@ Today every token-page load waits for `useTokenDetails` to resolve **all** upstr
 - **(a) HTTP `Cache-Control` on API routes + Vercel CDN.** Cheapest. Set `s-maxage=N, stale-while-revalidate=M` per route by tier (e.g. Helius `getAsset` → 1h SWR; Birdeye `token_overview` → 10s SWR). Browser + edge handle the rest. Zero schema work. Limit: only helps GETs keyed purely on URL; no cross-device warming.
 - **(b) IndexedDB (browser-only).** Per-device durable cache. Static + semi-static fields persist across refreshes / tab closes. Zero server cost. Limit: no cross-device, no popular-token pre-warming.
 - **(c) Supabase `token_cache` table.** Cross-device, sharable. Popular tokens get warmed by other users' visits. Cost: extra DB read on first hit; need `tier`, `fetched_at`, `ttl` columns + a prune cron. Fits existing Supabase pattern.
-- **(d) Hybrid — IndexedDB + Supabase + API.** IDB first (instant), Supabase fallback (warm from others), upstream last (truly fresh). Most complex. Best UX.
+- **(d) Hybrid: IndexedDB + Supabase + API.** IDB first (instant), Supabase fallback (warm from others), upstream last (truly fresh). Most complex. Best UX.
 
 **Progressive hydration (independent of storage choice):**
 Split `useTokenDetails` into per-section hooks (`useTokenIdentity`, `useTokenStats`, `useTokenHolders`, `useTokenEdgeScore`, …). Each section renders the moment its data lands rather than waiting on the same `Promise.all`. Cached values render immediately; spinner only on truly cold sections.
@@ -779,18 +779,18 @@ Split `useTokenDetails` into per-section hooks (`useTokenIdentity`, `useTokenSta
 
 ---
 
-## P7 — Split `src/app/api/birdeye/route.ts`
+## P7: Split `src/app/api/birdeye/route.ts`
 
-**Surfaced during:** D5 prep, 2026-04-29. The file is at **690 LOC** as of the C4 ship — under the 700 cap but with no margin for the next handler.
+**Surfaced during:** D5 prep, 2026-04-29. The file is at **690 LOC** as of the C4 ship: under the 700 cap but with no margin for the next handler.
 
 **What:** the route is a single `GET` that switches on a `type=` query param across 7 handlers (`trending`, `list_v3`, `search`, `token`, `security`, `holders`, `ohlcv`) plus shared adapter logic (`mapBirdeyeTokenToPair`, `extractBirdeyeWindows`) and filter logic (`parseListFilters`, `passesFilters`).
 
 **Proposed split:**
-- `src/app/api/birdeye/route.ts` — thin dispatcher (just the GET + the type switch), ~50 LOC
-- `src/lib/birdeye/handlers.ts` — the handler functions
-- `src/lib/birdeye/adapter.ts` — `mapBirdeyeTokenToPair` + `extractBirdeyeWindows`
-- `src/lib/birdeye/filters.ts` — `parseListFilters` + `passesFilters` + `defaultFilters`
-- `src/lib/birdeye/client.ts` — `birdeyeHeaders` + `fetchBirdeye` + `BIRDEYE_BASE`
+- `src/app/api/birdeye/route.ts`: thin dispatcher (just the GET + the type switch), ~50 LOC
+- `src/lib/birdeye/handlers.ts`: the handler functions
+- `src/lib/birdeye/adapter.ts`: `mapBirdeyeTokenToPair` + `extractBirdeyeWindows`
+- `src/lib/birdeye/filters.ts`: `parseListFilters` + `passesFilters` + `defaultFilters`
+- `src/lib/birdeye/client.ts`: `birdeyeHeaders` + `fetchBirdeye` + `BIRDEYE_BASE`
 
 Each file ~100–250 LOC, single concern. Imports stay tidy.
 
@@ -800,8 +800,8 @@ Each file ~100–250 LOC, single concern. Imports stay tidy.
 
 **Open questions before implementation:**
 - Lock the static / semi-static / volatile field list per source. Some fields look static but mutate (Jupiter `tags`, audit flags after authority change).
-- Cache invalidation when a token's mint/freeze authority changes mid-session — is per-tier TTL enough, or does this need a webhook (ties into the F2/F3 QuickNode work)?
-- Per-section loading-state contract — today components consume `loading` / `chartLoading` booleans; with section-split hooks each section owns its own state. Migration path?
+- Cache invalidation when a token's mint/freeze authority changes mid-session: is per-tier TTL enough, or does this need a webhook (ties into the F2/F3 QuickNode work)?
+- Per-section loading-state contract: today components consume `loading` / `chartLoading` booleans; with section-split hooks each section owns its own state. Migration path?
 - Order of operations vs. P2: P2 ships in-memory session cache + skeleton. P6 assumes P2's cache layer exists and extends it. Decide whether to ship P2 standalone first or bundle the in-memory + section-split work together.
 
 **Verify (when implementing):**
@@ -817,16 +817,16 @@ Each file ~100–250 LOC, single concern. Imports stay tidy.
 
 Not sized or scheduled. Captured here so they don't get lost as we ship Phase A–D + polish.
 
-### F1 — Stablecoin-specific section
+### F1: Stablecoin-specific section
 **Surfaced during:** D2 visual check, 2026-04-28.
 
 Stablecoins have different "interesting" data than volatile tokens. The current page treats them generically (price, volume, liquidity, etc.), but for a stablecoin most users care about:
 
-- **Peg deviation** — `(price - 1.00) / 1.00` with a tight (basis-points) chart. Big alert when off-peg.
-- **Reserves backing** — issuer attestations (Circle for USDC, Tether for USDT, etc.). Probably manual / curated initially.
-- **Issuer info** — who, jurisdiction, last-attestation date.
-- **De-peg history** — recent extremes from the OHLCV data we already pull.
-- **Mint / burn flow** — net issuance over recent windows (if exposed by Helius enhanced tx or Birdeye trade data).
+- **Peg deviation**: `(price - 1.00) / 1.00` with a tight (basis-points) chart. Big alert when off-peg.
+- **Reserves backing**: issuer attestations (Circle for USDC, Tether for USDT, etc.). Probably manual / curated initially.
+- **Issuer info**: who, jurisdiction, last-attestation date.
+- **De-peg history**: recent extremes from the OHLCV data we already pull.
+- **Mint / burn flow**: net issuance over recent windows (if exposed by Helius enhanced tx or Birdeye trade data).
 
 **Trigger:** Jupiter `tags` array includes `"stablecoin"` (already in our `meta.jupiter.tags`). When that tag is present, swap the price chart and stats section for stablecoin-specific equivalents (or render an extra panel above them).
 
@@ -837,10 +837,10 @@ Stablecoins have different "interesting" data than volatile tokens. The current 
 
 ---
 
-### F2 — Live token pulse (real-time activity panel) ⭐
+### F2: Live token pulse (real-time activity panel) ⭐
 **Surfaced during:** QuickNode capability review, 2026-04-28.
 
-Today every panel is a polling snapshot. A real-time activity stream on the token page would be the highest-visible differentiator of any item in this backlog — Birdeye charges for it, DexScreener Pro paywalls it, no free competitor surfaces it inline on a token detail page.
+Today every panel is a polling snapshot. A real-time activity stream on the token page would be the highest-visible differentiator of any item in this backlog: Birdeye charges for it, DexScreener Pro paywalls it, no free competitor surfaces it inline on a token detail page.
 
 **What to show:**
 - Rolling 60s buys vs sells (live counter, no refresh).
@@ -848,48 +848,48 @@ Today every panel is a polling snapshot. A real-time activity stream on the toke
 - "12 buys / 4 sells last min" pulse indicator.
 - Optional: tape-style stream of last 10 swaps with size + side.
 
-**Data source:** QuickNode **Yellowstone Geyser gRPC** — subscribe to the mint's top 1–3 pools (Raydium / Orca / Meteora program-account filters). Server-side stream worker → SSE/WS → client.
+**Data source:** QuickNode **Yellowstone Geyser gRPC**, subscribe to the mint's top 1–3 pools (Raydium / Orca / Meteora program-account filters). Server-side stream worker → SSE/WS → client.
 
 **Why QuickNode (not Helius):** Helius has webhooks but not Geyser gRPC at our tier. Geyser gives filtered, low-latency account/tx streaming.
 
 **Open questions before implementation:**
-- Server architecture: long-lived Node process (separate from Next.js) vs. edge-friendly approach? Vercel doesn't host long-lived gRPC clients — likely needs a separate worker on Railway / Fly / Render.
+- Server architecture: long-lived Node process (separate from Next.js) vs. edge-friendly approach? Vercel doesn't host long-lived gRPC clients: likely needs a separate worker on Railway / Fly / Render.
 - Per-token vs. global subscription model? (Subscribing per token-page-visit doesn't scale; better to subscribe to top-N hot pools globally and filter client-side.)
 - Fallback when stream drops or QuickNode quota exhausted: revert to polling Birdeye, hide the live indicator.
-- Cost ceiling — gRPC streams charge by bandwidth; need to cap to known pools.
+- Cost ceiling: gRPC streams charge by bandwidth; need to cap to known pools.
 
 ---
 
-### F3 — Fresh launches rail (home page)
+### F3: Fresh launches rail (home page)
 **Surfaced during:** QuickNode capability review, 2026-04-28.
 
-A 4th horizontal rail on the home page surfacing newly-created pools (< 1h old) with our **Edge Score** already attached. Photon and GMGN have this; no free Solana research tool does — and our scoring is the moat.
+A 4th horizontal rail on the home page surfacing newly-created pools (< 1h old) with our **Edge Score** already attached. Photon and GMGN have this; no free Solana research tool does: and our scoring is the moat.
 
 **What to show:**
 - Token thumbnail, symbol, mint age ("23m ago"), starting liquidity, Edge Score grade (A–F).
-- Sorted by Edge Score desc within the time window — surfaces "safest fresh launches first" rather than the firehose.
+- Sorted by Edge Score desc within the time window: surfaces "safest fresh launches first" rather than the firehose.
 
-**Data source:** QuickNode **Webhooks / Streams** — filter for Raydium / Pump / Meteora pool-init instructions. Persist to a new Supabase `fresh_pools` table with `(mint, pool_program, created_at, initial_liquidity_usd)`. Run Edge Score scoring on insert.
+**Data source:** QuickNode **Webhooks / Streams**, filter for Raydium / Pump / Meteora pool-init instructions. Persist to a new Supabase `fresh_pools` table with `(mint, pool_program, created_at, initial_liquidity_usd)`. Run Edge Score scoring on insert.
 
 **Why QuickNode:** Streams + filtered webhooks are first-class; Helius webhooks work too but QuickNode's Streams product is more flexible for the multi-program filter.
 
 **Open questions before implementation:**
-- Webhook ingestion endpoint (`/api/webhooks/quicknode/pool-init`) — auth model? HMAC signature verification?
+- Webhook ingestion endpoint (`/api/webhooks/quicknode/pool-init`): auth model? HMAC signature verification?
 - Retention: keep fresh pools 24h then prune, or grow indefinitely?
-- Edge Score on a 30-second-old token has very thin signal (no holders distribution, no volume) — may need a "Fresh-launch Edge Score" variant with different weights.
-- How to handle pump.fun bonding-curve graduations vs. brand-new mints — same rail or separate?
+- Edge Score on a 30-second-old token has very thin signal (no holders distribution, no volume): may need a "Fresh-launch Edge Score" variant with different weights.
+- How to handle pump.fun bonding-curve graduations vs. brand-new mints: same rail or separate?
 
 ---
 
-### F4 — Whale watch (top-holder activity)
+### F4: Whale watch (top-holder activity)
 **Surfaced during:** QuickNode capability review, 2026-04-28.
 
 Pairs with C3 (Top Holders ranked list). Once we render the top-10 holders, layer real-time movement: "Holder #3 sold 2% of supply 14m ago." Turns a static list into an actionable signal.
 
-**Data source:** QuickNode **Yellowstone Geyser gRPC** — once C3 has the top-10 wallet list, subscribe to those 10 accounts for the active token. Diff balance changes against last-known to derive sells/buys.
+**Data source:** QuickNode **Yellowstone Geyser gRPC**, once C3 has the top-10 wallet list, subscribe to those 10 accounts for the active token. Diff balance changes against last-known to derive sells/buys.
 
 **Open questions before implementation:**
-- Subscriptions per token-page-visit again — same scale issue as F2; likely share the F2 worker.
-- Top-10 list shifts as people buy/sell — re-subscribe on every change, or pin to the list at page-load?
+- Subscriptions per token-page-visit again: same scale issue as F2; likely share the F2 worker.
+- Top-10 list shifts as people buy/sell: re-subscribe on every change, or pin to the list at page-load?
 - Privacy / norms: doxxing wallet behavior in real time is an aggressive UX choice. Consider whether to launder the source ("Whale activity detected" vs. "Wallet 7xK...3pQ sold").
 - Depends on C3 shipping first.

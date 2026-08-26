@@ -2,8 +2,9 @@
 
 import { Checkbox as RadixCheckbox } from "radix-ui";
 import { cn } from "@/lib/utils";
+import { IconCheck } from "../icons";
 
-/** Checkbox on Radix — label it from the caller (htmlFor / aria-label). */
+/** Checkbox on Radix: label it from the caller (htmlFor / aria-label). */
 export function Checkbox({
   checked,
   onCheckedChange,
@@ -31,8 +32,8 @@ export function Checkbox({
       )}
       {...rest}
     >
-      <RadixCheckbox.Indicator className="text-[10px] font-bold leading-none text-on-brand">
-        ✓
+      <RadixCheckbox.Indicator className="leading-none text-on-brand">
+        <IconCheck size={10} weight="bold" aria-hidden="true" />
       </RadixCheckbox.Indicator>
     </RadixCheckbox.Root>
   );

@@ -157,7 +157,7 @@ export function useNftEdge(collectionMint: string, sessionWallet: string | null)
     };
   }, [selectedIndex, assets]);
 
-  // "Other Owned" panel — only fetched when we have a session wallet
+  // "Other Owned" panel: only fetched when we have a session wallet
   const [otherOwned, setOtherOwned] = useState<{
     count: number;
     assets: NftAssetSummary[];

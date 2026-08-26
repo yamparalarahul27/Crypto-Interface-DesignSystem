@@ -2,7 +2,7 @@
 
 Status: draft
 Version: 0.9.0
-Async action button — width-stable idle → pending → success|error → idle. Interior loading-button contract, CIDS tokens, no `motion`.
+Async action button: width-stable idle → pending → success|error → idle. Interior loading-button contract, CIDS tokens, no `motion`.
 
 ## Usage
 
@@ -27,26 +27,28 @@ import { LoadingButton } from "@/design-system";
 ```
 ┌─────────────────────────────┐
 │ [spinner|✓|!]  Label        │ ← faces stacked in one grid cell
+                                 (IconSpinner spun by `animate-spin`,
+                                  IconCheck, IconExclamation)
 └─────────────────────────────┘
   idle → pending → success|error → idle (resetAfter)
-  width = max(face) — no layout jump
+  width = max(face): no layout jump
 ```
 
 ## Props
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `onAction` | `() => unknown` | — | Sync throw / rejected promise → error; else success. |
-| `children` | `string` | — | Idle label (also the accessible name base). |
+| `onAction` | `() => unknown` | - | Sync throw / rejected promise → error; else success. |
+| `children` | `string` | - | Idle label (also the accessible name base). |
 | `pendingLabel` | `string` | `children` | In-flight label. |
 | `successLabel` | `string` | `"Done"` | Settled-ok label + check. |
-| `errorLabel` | `string` | `"Try again"` | Settled-fail label + alert — next action, not diagnosis. |
+| `errorLabel` | `string` | `"Try again"` | Settled-fail label + alert: next action, not diagnosis. |
 | `resetAfter` | `number` | `1400` | ms to hold success/error before idle. |
 | `disabled` | `boolean` | `false` | Genuinely unavailable (native `disabled`). Busy ≠ disabled. |
-| `onError` | `(error: unknown) => void` | — | Caller reports the error; button only shows state. |
+| `onError` | `(error: unknown) => void` | - | Caller reports the error; button only shows state. |
 | `variant` | ButtonVariant | `"primary"` | Same surface map as Button. |
 | `size` | ButtonSize | `"md"` | Shared height scale. |
-| `className` | `string` | — | cn-merged. |
+| `className` | `string` | - | cn-merged. |
 
 ## Tokens
 
@@ -56,18 +58,18 @@ import { LoadingButton } from "@/design-system";
 
 ## States
 
-- **idle** — idle label; clickable
-- **pending** — spinner + `pendingLabel`; `aria-busy`; clicks ignored (not native-disabled — focus stays)
-- **success** — check + `successLabel`; auto-resets
-- **error** — alert + `errorLabel`; click runs again (Retry)
-- **disabled** — native attribute, 40% opacity
+- **idle**: idle label; clickable
+- **pending**: spinner + `pendingLabel`; `aria-busy`; clicks ignored (not native-disabled: focus stays)
+- **success**: check + `successLabel`; auto-resets
+- **error**: alert + `errorLabel`; click runs again (Retry)
+- **disabled**: native attribute, 40% opacity
 
 ## Motion
 
-- Label faces: `transition-opacity` 150ms (stacked grid — zero width jump)
+- Label faces: `transition-opacity` 150ms (stacked grid, zero width jump)
 - Press: `active:scale-[0.96]` when idle/settled (suppressed while pending)
 - Spinner: `animate-spin` (global `prefers-reduced-motion` collapses the loop)
-- No `motion` package — portable core
+- No `motion` package: portable core
 
 ## A11y
 

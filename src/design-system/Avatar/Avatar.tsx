@@ -8,7 +8,7 @@ import {
 } from "../identity";
 
 // Shared size scale (CONVENTIONS → Component API contract): string
-// unions, never raw numbers. Diameters per DESIGN.md avatar spec —
+// unions, never raw numbers. Diameters per DESIGN.md avatar spec:
 // xs 20px · sm 28px · md 40px · lg 64px; glyph scales with the disc.
 export type AvatarSize = "xs" | "sm" | "md" | "lg";
 
@@ -19,7 +19,7 @@ export type AvatarSize = "xs" | "sm" | "md" | "lg";
  * group of five collides ~79% of the time, which is fine for a named
  * person in a feed and useless for telling two addresses apart.
  *
- * This is a user setting in most wallets — persist the choice per person,
+ * This is a user setting in most wallets: persist the choice per person,
  * don't vary it per view, or the same account reads as two identities.
  */
 export type AvatarVariant = "initial" | "shards" | "blocks";
@@ -52,8 +52,8 @@ const CONNECTION: Record<
   AvatarConnection,
   { className: string; label: string }
 > = {
-  // Each state differs by shape as well as colour — a filled dot, a ring,
-  // a muted fill — so status never depends on hue alone.
+  // Each state differs by shape as well as colour (a filled dot, a ring,
+  // a muted fill), so status never depends on hue alone.
   active: { className: "bg-success border-success", label: "connected, active" },
   inactive: { className: "bg-surface-page border-success", label: "connected, inactive" },
   offline: { className: "bg-fg-subtle border-fg-subtle", label: "no connection" },
@@ -80,11 +80,11 @@ export function Avatar({
   size?: AvatarSize;
   /** Figure style. `initial` (default) is the v1 hue disc + glyph. */
   variant?: AvatarVariant;
-  /** Signed-in user — forces the reserved --id-tide hue. */
+  /** Signed-in user: forces the reserved --id-tide hue. */
   you?: boolean;
   /** Network marker in the corner. `iconSrc` falls back to the initial. */
   chain?: { name: string; iconSrc?: string };
-  /** Connection status dot. Ignored when `chain` is set — one corner, one marker. */
+  /** Connection status dot. Ignored when `chain` is set: one corner, one marker. */
   connection?: AvatarConnection;
   className?: string;
 }) {
@@ -152,7 +152,7 @@ export function Avatar({
 
 /**
  * The figure. `cls` is applied by the caller so the no-marker case stays a
- * single element — v1's DOM exactly, which AvatarGroup's ring/overlap
+ * single element: v1's DOM exactly, which AvatarGroup's ring/overlap
  * classes and the existing tests target. Module-scope so it isn't
  * redefined (and remounted) on every Avatar render.
  */
@@ -179,7 +179,7 @@ function Disc({
         role={labelled ? "img" : undefined}
         aria-label={labelled ? name : undefined}
         className={cn(
-          "inline-flex items-center justify-center rounded-full font-mono font-semibold text-fg-inverse antialiased",
+          "inline-flex items-center justify-center rounded-full font-mono font-semibold text-id-glyph antialiased",
           cls,
         )}
         style={{ backgroundImage: hueGradient(resolved) }}

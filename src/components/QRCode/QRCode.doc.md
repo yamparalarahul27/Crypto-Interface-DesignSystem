@@ -2,7 +2,7 @@
 
 Status: draft
 Version: 0.9.0
-Receive-address QR — composition tier (`qrcode` npm), not portable core.
+Receive-address QR: composition tier (`qrcode` npm), not portable core.
 
 > Lives in `src/components/QRCode/`, not `src/design-system/`. Same
 > pattern as PriceChart: a real crypto surface that needs a non-allowlisted
@@ -41,14 +41,14 @@ address as the QR payload (never a truncated string).
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `value` | `string` | — | Full address / payload encoded in the matrix. |
+| `value` | `string` | - | Full address / payload encoded in the matrix. |
 | `size` | `number` | `160` | SVG width/height px. |
 | `label` | `string` | `"Scan to send"` | Caption; `""` hides it. |
-| `explorerHref` | `string` | — | Passed to AddressChip. |
-| `className` | `string` | — | cn-merged onto the figure. |
+| `explorerHref` | `string` | - | Passed to AddressChip. |
+| `className` | `string` | - | cn-merged onto the figure. |
 | `aria-label` | `string` | `"QR code for {value}"` | Accessible name. |
 
-`"use client"` — generates SVG in an effect.
+`"use client"`: generates SVG in an effect.
 
 ## Tokens
 
@@ -64,7 +64,7 @@ Theme flips recolor without regenerating (CSS vars on the SVG).
 
 ## Motion
 
-Loading pulse only. Matrix itself is static — never animate QR modules.
+Loading pulse only. Matrix itself is static: never animate QR modules.
 
 ## A11y
 

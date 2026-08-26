@@ -3,7 +3,7 @@
 // per component under <html data-theme="...">, runs axe-core on the live
 // DOM (portals included), and fails on ANY violation.
 //
-// color-contrast is intentionally excluded — jsdom has no layout engine;
+// color-contrast is intentionally excluded: jsdom has no layout engine;
 // contrast is guarded for real by `npm run check:contrast`. `region` is
 // excluded because components are fragments, not full pages.
 import { afterEach, describe, expect, it } from "vitest";

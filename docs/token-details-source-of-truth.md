@@ -1,9 +1,9 @@
-# Token Details — Source of Truth Spec
+# Token Details: Source of Truth Spec
 
 **Branch:** `imp-token-details`
 **Status:** Locked decisions from 2026-04-25 recon. Anchors implementation. Update only on user direction.
 
-> Reference: [token-details-plan.md](./token-details-plan.md) for context, [tmp/recon/sol/MATRIX.md](../tmp/recon/sol/MATRIX.md) for the full capability matrix the decisions are based on (gitignored — local recon only).
+> Reference: [token-details-plan.md](./token-details-plan.md) for context, [tmp/recon/sol/MATRIX.md](../tmp/recon/sol/MATRIX.md) for the full capability matrix the decisions are based on (gitignored, local recon only).
 
 ---
 
@@ -22,7 +22,7 @@ Each section lists the **fields** rendered, the **primary** source, and **fallba
 
 | Field | Primary | Fallback | Render rule |
 |---|---|---|---|
-| Mint, name, symbol, decimals, logo | Jupiter | — | (covered by lookup) |
+| Mint, name, symbol, decimals, logo | Jupiter | - | (covered by lookup) |
 | Token Program ID | Jupiter | Helius DAS | hide if both fail |
 | Mint authority (address when present, else "renounced") | Helius RPC | Helius DAS | hide if both fail |
 | Freeze authority (address when present, else "renounced") | Helius RPC | Helius DAS | hide if both fail |
@@ -34,7 +34,7 @@ Each section lists the **fields** rendered, the **primary** source, and **fallba
 
 | Field | Primary | Notes |
 |---|---|---|
-| Realtime price ticker (live, decimals flickering) | **Jupiter Lite Price API** (`lite-api.jup.ag/price/v3`) | Poll every 1–2s — free, no auth |
+| Realtime price ticker (live, decimals flickering) | **Jupiter Lite Price API** (`lite-api.jup.ag/price/v3`) | Poll every 1–2s: free, no auth |
 | Snapshot price (rest of page) | Birdeye `token_overview` | Refresh every 30–60s |
 | Price block / slot | Jupiter | from `priceBlockId` |
 | All-time high + date | Tokens.xyz `profile` | only source |
@@ -46,56 +46,56 @@ Each section lists the **fields** rendered, the **primary** source, and **fallba
 | Market cap, FDV | Tokens.xyz | |
 | Liquidity USD | Tokens.xyz | |
 | Volume 24h, 7d | Tokens.xyz | 7d is unique to Tokens.xyz |
-| Pools / market count | — | **Skipped per user** |
+| Pools / market count | - | **Skipped per user** |
 
 ### D. Trading activity (multi-window)
 
-**Window strategy:** merge — show every window where ≥1 source has data. Hide windows with no data. Mark which fields populated per window.
+**Window strategy:** merge, show every window where ≥1 source has data. Hide windows with no data. Mark which fields populated per window.
 
 Window inventory:
 - Birdeye: `1m, 5m, 30m, 1h, 2h, 4h, 8h, 24h`
 - Jupiter: `5m, 1h, 6h, 24h`
-- Union shown: **1m, 5m, 30m, 1h, 2h, 4h, 6h, 8h, 24h** (9 windows max — only render windows with data)
+- Union shown: **1m, 5m, 30m, 1h, 2h, 4h, 6h, 8h, 24h** (9 windows max, only render windows with data)
 
 | Field | Primary | Fallback | Skip |
 |---|---|---|---|
-| Volume per window (USD + native) | Birdeye | — | — |
-| Buy / sell volume | Birdeye | — | — |
-| Trade count | Jupiter | Birdeye | — |
-| Unique wallets per window | Birdeye | — | — |
-| Net buyers per window | Jupiter | — | — |
-| Organic buyers per window | Jupiter | — | — |
-| Organic volume (buy/sell) | Jupiter | — | — |
-| % change vs prior window | Birdeye | — | — |
-| Number of traders | — | — | **Skipped** |
-| Per-minute trade pulse | — | — | **Skipped** |
+| Volume per window (USD + native) | Birdeye | - |: |
+| Buy / sell volume | Birdeye | - |: |
+| Trade count | Jupiter | Birdeye | - |
+| Unique wallets per window | Birdeye | - |: |
+| Net buyers per window | Jupiter | - |: |
+| Organic buyers per window | Jupiter | - |: |
+| Organic volume (buy/sell) | Jupiter | - |: |
+| % change vs prior window | Birdeye | - |: |
+| Number of traders | - |: | **Skipped** |
+| Per-minute trade pulse | - |: | **Skipped** |
 
 ### E. Holders
 
 | Field | Primary | Notes |
 |---|---|---|
-| Holder count | Jupiter | (Note: differs from Birdeye by ~2.6M for SOL — different definitions. Pick Jupiter consistently.) |
+| Holder count | Jupiter | (Note: differs from Birdeye by ~2.6M for SOL, different definitions. Pick Jupiter consistently.) |
 | Ranked top holders list (wallet + balance) | Birdeye `token_holder` | only source on free tier |
-| Top-10 concentration % | — | **Skipped** |
+| Top-10 concentration % | - | **Skipped** |
 
 ### F. Chart / OHLCV
 
 | Field | Primary | Fallback | Notes |
 |---|---|---|---|
-| OHLCV candles | Birdeye `/defi/ohlcv` | Tokens.xyz `/price-chart` | Tokens.xyz returned 0 candles for SOL during recon — needs retest on a memecoin to confirm fallback viability. Their data sourced from CoinGecko / aggregator. |
+| OHLCV candles | Birdeye `/defi/ohlcv` | Tokens.xyz `/price-chart` | Tokens.xyz returned 0 candles for SOL during recon: needs retest on a memecoin to confirm fallback viability. Their data sourced from CoinGecko / aggregator. |
 
 ### G. Security & risk
 
 | Field | Primary | Fallback | Skip |
 |---|---|---|---|
-| Mint / freeze authority bool (renounced / not) | Jupiter `audit` | Helius RPC | — |
-| Dev / creator info | Jupiter `audit` | — | — |
-| Organic score 0–100 + label | Jupiter | — | — |
-| isVerified flag | Jupiter | — | — |
-| Tags | Jupiter | — | — |
-| Risk grade A–F | — | — | **Skipped** |
-| Risk score signals (liquidityUsd, vol7d, mintTime, etc.) | Tokens.xyz `marketScoreInput` | — | — |
-| Royalty config | Helius DAS | — | — |
+| Mint / freeze authority bool (renounced / not) | Jupiter `audit` | Helius RPC | - |
+| Dev / creator info | Jupiter `audit` | - |: |
+| Organic score 0–100 + label | Jupiter | - |: |
+| isVerified flag | Jupiter | - |: |
+| Tags | Jupiter | - |: |
+| Risk grade A–F | - |: | **Skipped** |
+| Risk score signals (liquidityUsd, vol7d, mintTime, etc.) | Tokens.xyz `marketScoreInput` | - |: |
+| Royalty config | Helius DAS | - |: |
 
 ### H. Metadata & content
 
@@ -124,20 +124,20 @@ Window inventory:
 | Field | Primary | Notes |
 |---|---|---|
 | First pool address + age | Jupiter `firstPool` | only source |
-| Total markets count | Birdeye `numberMarkets` | (132,804 for SOL — illustrates aggregation scope) |
+| Total markets count | Birdeye `numberMarkets` | (132,804 for SOL: illustrates aggregation scope) |
 | Per-pool list (address, name, base/quote, liquidity, createdAt, price) | Tokens.xyz `includes.markets.data.markets[]` | only source |
-| Pool APY | — | **Skipped** |
+| Pool APY | - | **Skipped** |
 
 ---
 
-## Differentiators (v1 scope — all 5 included)
+## Differentiators (v1 scope: all 5 included)
 
-These are computed signals — no new API keys needed. Each has full attribution shown to the user.
+These are computed signals: no new API keys needed. Each has full attribution shown to the user.
 
 ### 1. Price-source divergence flag
 - **Inputs:** Birdeye, Jupiter (snapshot), Tokens.xyz `stats.price`, Tokens.xyz `canonicalMarket.price`, Helius DAS `token_info.price_info.price_per_token`
 - **Compute:** `max(prices) - min(prices)` / median(prices). Flag if > X% (start at 1%, tunable).
-- **Display:** "5 sources within 0.3% (healthy)" green, or "spread 2.1% — Birdeye $86.3 / CG $84.5" amber
+- **Display:** "5 sources within 0.3% (healthy)" green, or "spread 2.1%, Birdeye $86.3 / CG $84.5" amber
 
 ### 2. DEX vs CEX spread
 - **Inputs:** Birdeye price (DEX-aggregated) vs Tokens.xyz `canonicalMarket.price` (CoinGecko / CEX-aggregated)
@@ -153,7 +153,7 @@ These are computed signals — no new API keys needed. Each has full attribution
 - **Inputs:** chain-truth (Helius mint/freeze authority status, mutable, burnt) + Jupiter `audit` + Tokens.xyz `marketScoreInput` (liquidity / mcap / volume / mintTime)
 - **Compute:** weighted sum of normalized signals. Each contributing signal has its raw value visible to user.
 - **Display:** A–F grade + expandable breakdown ("authorities: ✅ renounced, mutability: ⚠ mutable, liquidity: ✅ high, age: 14 days")
-- **Differentiator:** **fully attributed** — every input visible and traceable. Most competitors show only the score.
+- **Differentiator:** **fully attributed**, every input visible and traceable. Most competitors show only the score.
 
 ### 5. Slippage at size
 - **Inputs:** Jupiter Quote API at sizes $1k, $10k, $100k (sell into SOL or USDC)
@@ -193,6 +193,6 @@ Tracked for future iteration:
 ## Outstanding items
 
 - Retest Tokens.xyz `/price-chart` on a non-canonical token (e.g. JUP, BONK) to confirm chart fallback viability.
-- Confirm Birdeye free-tier per-second rate limit (current pacing uses 1.1s — works, but is it 1 RPS exactly?).
+- Confirm Birdeye free-tier per-second rate limit (current pacing uses 1.1s: works, but is it 1 RPS exactly?).
 - User: remove `SOLSCAN_API_KEY` from Vercel.
 - User: update `BIRDEYE_API_KEY` on Vercel to new account's key.

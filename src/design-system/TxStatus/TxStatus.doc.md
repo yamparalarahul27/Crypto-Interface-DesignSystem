@@ -2,7 +2,7 @@
 
 Status: stable
 Version: 1.0.0
-The transaction lifecycle, always visible (heuristic #1) -- the component no reference library ships.
+The transaction lifecycle, always visible (heuristic #1): the component no reference library ships.
 
 ## Usage
 
@@ -25,9 +25,9 @@ o  Pending confirmation... pending: info pulse
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `state` | `"idle" \| "signing" \| "pending" \| "confirmed" \| "failed"` | -- | The lifecycle. |
-| `detail` | `string` | -- | Mono line under the label (signature, error hint). |
-| `className` | `string` | -- | cn-merged. |
+| `state` | `"idle" \| "signing" \| "pending" \| "confirmed" \| "failed"` | - | The lifecycle. |
+| `detail` | `string` | - | Mono line under the label (signature, error hint). |
+| `className` | `string` | - | cn-merged. |
 
 ## Tokens
 
@@ -43,5 +43,6 @@ Pulse on the in-flight dot only (status indicator, not data; collapses under red
 
 ## A11y
 
-- `role="status"` + `aria-live="polite"`: transitions are announced without stealing focus -- the user acts in the wallet while the UI reports (heuristic #2).
-- Terminal states carry ✓/✕ glyphs + words, never color alone.
+- `role="status"` + `aria-live="polite"`: transitions are announced without stealing focus, the user acts in the wallet while the UI reports (heuristic #2).
+- Terminal states carry an icon (`IconCheck` / `IconCross`) + words, never color alone.
+  The icons are `aria-hidden`, so the live region announces just the word.

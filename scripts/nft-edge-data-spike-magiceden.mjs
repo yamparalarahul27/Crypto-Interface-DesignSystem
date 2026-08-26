@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * NFT Edge data spike — Magic Eden feasibility check
+ * NFT Edge data spike: Magic Eden feasibility check
  *
  * Counterpart to scripts/nft-edge-data-spike.mjs (which probes Helius DAS).
  * Probes Magic Eden's public Solana API against the IslandDAO PERKS
@@ -8,7 +8,7 @@
  * royalty) is reachable without auth and within rate limits.
  *
  * Run:  node scripts/nft-edge-data-spike-magiceden.mjs
- * No env vars needed — ME's read endpoints are public.
+ * No env vars needed: ME's read endpoints are public.
  */
 
 const COLLECTION_MINT = "5XSXoWkcmynUSiwoi7XByRDiV9eomTgZQywgWrpYzKZ8";
@@ -45,20 +45,20 @@ function logRateLimit(rl) {
 
 async function main() {
   console.log("════════════════════════════════════════════════════════════");
-  console.log("  NFT Edge data spike — Magic Eden");
+  console.log("  NFT Edge data spike: Magic Eden");
   console.log("  Collection mint:", COLLECTION_MINT);
   console.log("════════════════════════════════════════════════════════════\n");
 
   /* ──────────────────────────────────────────────────────────
      1. Slug discovery via /tokens/{mint}
      ────────────────────────────────────────────────────────── */
-  console.log("─── 1. /tokens/{mint} — discover collection slug ───");
+  console.log("─── 1. /tokens/{mint}: discover collection slug ───");
   const single = await fetchMe(`/tokens/${SAMPLE_ASSET_ID}`);
   console.log(`  duration:          ${single.dur}ms  status: ${single.status}`);
   logRateLimit(single.rateLimit);
 
   if (single.status !== 200 || !single.json) {
-    console.log("  ❌ failed — cannot continue without the slug");
+    console.log("  ❌ failed: cannot continue without the slug");
     process.exit(1);
   }
 
@@ -75,12 +75,12 @@ async function main() {
   if (single.json.updateAuthority !== COLLECTION_MINT) {
     console.log(
       `  ⚠️  updateAuthority (${single.json.updateAuthority.slice(0, 8)}…) ` +
-        `does NOT match collection mint (${COLLECTION_MINT.slice(0, 8)}…) — investigate`
+        `does NOT match collection mint (${COLLECTION_MINT.slice(0, 8)}…): investigate`
     );
   }
 
   /* ──────────────────────────────────────────────────────────
-     2. Collection stats — floor, listed, volume
+     2. Collection stats: floor, listed, volume
      ────────────────────────────────────────────────────────── */
   console.log("\n─── 2. /collections/{slug}/stats ───");
   const stats = await fetchMe(`/collections/${slug}/stats`);
@@ -96,9 +96,9 @@ async function main() {
   }
 
   /* ──────────────────────────────────────────────────────────
-     3. Trait rarity — THE big win
+     3. Trait rarity: THE big win
      ────────────────────────────────────────────────────────── */
-  console.log("\n─── 3. /collections/{slug}/attributes — trait rarity ───");
+  console.log("\n─── 3. /collections/{slug}/attributes: trait rarity ───");
   const attrs = await fetchMe(`/collections/${slug}/attributes`);
   console.log(`  duration:          ${attrs.dur}ms  status: ${attrs.status}`);
   logRateLimit(attrs.rateLimit);

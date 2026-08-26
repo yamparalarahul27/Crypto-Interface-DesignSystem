@@ -12,7 +12,7 @@ captured: 2026-05-20
 
 Token Edge tells you **what the token is**. Trade Edge tells you **where to trade it cheapest**.
 
-Today the Watchlist concept is scoped only to tokens. Watchlisting whole *trade venues* (a Jupiter route, an Orca pool, a Binance pair) is a strictly bigger surface — and arguably more actionable, because the answer to "where do I get the best fill?" is what users actually have to decide every time they want to move money.
+Today the Watchlist concept is scoped only to tokens. Watchlisting whole *trade venues* (a Jupiter route, an Orca pool, a Binance pair) is a strictly bigger surface: and arguably more actionable, because the answer to "where do I get the best fill?" is what users actually have to decide every time they want to move money.
 
 ## Where it lives in the app
 
@@ -36,9 +36,9 @@ Today the Watchlist concept is scoped only to tokens. Watchlisting whole *trade 
 └──────────────────────────────────────────────┘
 ```
 
-Each row is a candidate venue. Each column is "total fee cost if you'd placed this order *once* at the median price during that window" — a normalised, comparable number. Click a row → venue detail (depth, slippage profile, historical fee, fill stats).
+Each row is a candidate venue. Each column is "total fee cost if you'd placed this order *once* at the median price during that window": a normalised, comparable number. Click a row → venue detail (depth, slippage profile, historical fee, fill stats).
 
-## Sketch — fee semantics (the load-bearing decision)
+## Sketch: fee semantics (the load-bearing decision)
 
 ```
 "Fee for placing a $100 order over 24h" can mean three things:
@@ -74,10 +74,10 @@ Each row is a candidate venue. Each column is "total fee cost if you'd placed th
 - Routing optimization ("split this order across 3 venues"). That's a separate, much harder feature.
 - Order placement from inside the app. Trade Edge is **read-only price discovery**, not a trading terminal.
 - Historical CEX fee changes (most don't publish historical tier changes).
-- L2/cross-chain venues (Arbitrum, Base) — first pass is Solana-only since the app is Solana-first.
+- L2/cross-chain venues (Arbitrum, Base): first pass is Solana-only since the app is Solana-first.
 
 ## Prior art / reference
 
-- [DefiLlama Yield/Swap dashboards](https://defillama.com/yields) — comparable side-by-side cost rendering
-- Jupiter's quote-route UI — shows DEX comparison for a single swap
-- CoinGecko's "Markets" tab on each token page — closest existing analog
+- [DefiLlama Yield/Swap dashboards](https://defillama.com/yields): comparable side-by-side cost rendering
+- Jupiter's quote-route UI: shows DEX comparison for a single swap
+- CoinGecko's "Markets" tab on each token page: closest existing analog

@@ -3,7 +3,7 @@
    Shapes mirror the live app's TokenPair / StableLiveData / NFT types
    so the render functions in app.js can reuse the real markup 1:1.
    imageUrl is intentionally omitted on tokens so TokenIcon's initials
-   fallback renders — keeps the prototype fully offline (no CDN calls).
+   fallback renders: keeps the prototype fully offline (no CDN calls).
    ────────────────────────────────────────────────────────────── */
 (function () {
   function pair(o) {
@@ -78,7 +78,7 @@
         iconUrl: "/stablecoin/pusd.png",
         featured: true,
         learnMoreUrl: "https://www.paypal.com",
-        tagline: "A fully-backed USD stablecoin headed to Solana — peg, depth, and audits coming soon.",
+        tagline: "A fully-backed USD stablecoin headed to Solana: peg, depth, and audits coming soon.",
       },
     ],
     live: [
@@ -178,7 +178,7 @@
         name: "Islander #" + (101 + i),
         owner: owners[i % owners.length],
         description:
-          "Islander #" + (101 + i) + " — a tenured member of the IslandDAO collective.",
+          "Islander #" + (101 + i) + ": a tenured member of the IslandDAO collective.",
         attributes: attrs,
         metadata_url: "https://arweave.net/islander-" + (101 + i) + ".json",
         floorPrice: 1_420_000_000, // lamports (~1.42 SOL)

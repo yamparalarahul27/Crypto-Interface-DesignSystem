@@ -3,7 +3,7 @@
 // Template: the exchange terminal (cids-roadmap Phase 6 / handoff 6b).
 // Built ONLY from design-system exports + the OrderBookPanel composable.
 // Runs at COMPACT density by default (scoped via data-density on the
-// root — the density axis is element-scoped, not global).
+// root: the density axis is element-scoped, not global).
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -57,7 +57,7 @@ function TradeForm() {
   const [venue, setVenue] = useState<string | undefined>("jup");
   return (
     <div className="space-y-2 rounded-card border border-outline-variant bg-surface-container p-3">
-      <div className="text-[10px] uppercase tracking-wider text-fg-subtle">Trade</div>
+      <div className="text-[10px] text-fg-subtle">Trade</div>
       <AmountInput value={pay} onValueChange={setPay} symbol="SOL" onMax={() => setPay("12.4821")} />
       <AmountInput value={recv} onValueChange={setRecv} symbol="USDC" />
       <Select
@@ -112,7 +112,7 @@ export function Exchange() {
               <span className="font-normal text-fg-subtle">template · compact density · DS components only</span>
             </h1>
             <Link href="/design/canvas" className="font-mono text-xs text-fg-muted underline-offset-2 hover:underline">
-              canvas
+              Canvas
             </Link>
           </header>
           <Header />

@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>NFT Edge — light prototype</title>
+<title>NFT Edge: light prototype</title>
 <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
 
 <style>
   /* ============================================================
-     DESIGN.md tokens — light mode
+     DESIGN.md tokens: light mode
      ============================================================ */
   :root {
     /* Frost (blues) */
@@ -166,7 +166,7 @@
     gap: 16px;
   }
   .hero__image {
-    width: calc(100% / 1.4); /* 1.4× smaller than the column — fits first fold */
+    width: calc(100% / 1.4); /* 1.4× smaller than the column: fits first fold */
     max-width: 100%;
     aspect-ratio: 1 / 1;
     margin: 0 auto; /* center within the hero column */
@@ -624,7 +624,7 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     padding: 12px 0;
-    /* Hide scrollbar for cleanliness — arrows handle nav */
+    /* Hide scrollbar for cleanliness: arrows handle nav */
     scrollbar-width: none;
   }
   .rail::-webkit-scrollbar {
@@ -760,7 +760,7 @@
 
   <div class="proto-banner">
     <span class="proto-banner__badge">prototype</span>
-    NFT Edge layout — light mode, DESIGN.md tokens, mock data, gradient placeholder images.
+    NFT Edge layout: light mode, DESIGN.md tokens, mock data, gradient placeholder images.
   </div>
 
   <!-- ────────────────────────────────────────────────────────
@@ -1059,7 +1059,7 @@
     traitsGrid.innerHTML = nft.traits.map((value, i) => `
       <div class="trait">
         <p class="trait__label">${labels[i]}</p>
-        <p class="trait__value">${value || "—"}</p>
+        <p class="trait__value">${value || ": "}</p>
         <div class="trait__rarity">${counts[i]} <span class="trait__rarity-pill">${rarity[i]}</span></div>
       </div>
     `).join("");
@@ -1067,7 +1067,7 @@
 
   function renderOtherOwned() {
     const owned = MOCK.filter((n) => n.owned && n.id !== MOCK[currentIndex].id);
-    // Pretend the user owns 11 — add synthetic entries to fill the grid
+    // Pretend the user owns 11: add synthetic entries to fill the grid
     const synthetic = Array.from({ length: 10 }, (_, i) => ({
       id: 100 + i * 73,
       name: `Perk #${100 + i * 73}`,

@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Chain indicator — ethereum.org heuristic #3: always show the connected
+ * Chain indicator; ethereum.org heuristic #3: always show the connected
  * network. Neutral by design (chains are facts, not states); pass an
  * icon URL (e.g. Logobase network/<slug>) or it renders a dot.
  */

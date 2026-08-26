@@ -15,16 +15,18 @@ import { AddressChip } from "@/design-system";
 ## Anatomy
 
 ```
-[ 7xKt...9fQ2  ⧉  ↗ ]  <- mono truncate - copy (✓ on success) - explorer
+[ 7xKt...9fQ2  ⧉  ↗ ]  <- mono truncate - copy - explorer
+                 │  └ IconExternal (only when `href` is given)
+                 └ IconCopy, swapping to IconCheck for 1.5s on success
 ```
 
 ## Props
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `address` | `string` | -- | Full address; truncated visually (4...4). |
-| `href` | `string` | -- | Explorer URL; renders the link when present. |
-| `className` | `string` | -- | cn-merged. |
+| `address` | `string` | - | Full address; truncated visually (4...4). |
+| `href` | `string` | - | Explorer URL; renders the link when present. |
+| `className` | `string` | - | cn-merged. |
 
 ## Tokens
 
@@ -32,7 +34,7 @@ import { AddressChip } from "@/design-system";
 
 ## States
 
-rest - copy hover - copied (1.5s ✓ confirmation) - with/without explorer.
+rest - copy hover - copied (1.5s IconCheck confirmation) - with/without explorer.
 
 ## Motion
 

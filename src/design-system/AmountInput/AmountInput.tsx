@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Token amount entry: decimal-only string value (never floats — the
+ * Token amount entry: decimal-only string value (never floats, the
  * caller parses with the mint's decimals), symbol anchored right,
  * optional fiat echo + Max. The fiat ⇄ token display pattern nobody
  * documents, componentized.

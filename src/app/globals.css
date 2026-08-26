@@ -11,7 +11,7 @@
 /* [data-theme="dark"] aliases the default so a *nested* element can be
    scoped to dark explicitly (ThemeToggle's swatches show each theme's own
    colors while the page is in another theme). <html> itself never carries
-   data-theme="dark" — absence of the attribute is dark. Selector order
+   data-theme="dark": absence of the attribute is dark. Selector order
    matters to check-contrast.mjs: `:root {` must stay literal for its
    root-block regex, and `[data-theme="dark"],` must NOT touch `{` or the
    theme regex would re-register dark against an empty fallback. */
@@ -20,9 +20,9 @@
   /* ── Dark token layer (market-dark palette) ──────────────────
      Single source of truth for theme colors. Components consume
      these via the @theme utilities below (bg-surface, text-fg,
-     text-brand, …) — never via hardcoded hex. See DESIGN.md. */
+     text-brand, …): never via hardcoded hex. See DESIGN.md. */
 
-  /* Surfaces — near-black, layered by elevation */
+  /* Surfaces: near-black, layered by elevation */
   --surface-dim: #030405;
   --surface-page: #090a0d;
   --surface: #101115;
@@ -40,14 +40,14 @@
   --fg-subtle: #868b95;
   --fg-inverse: #07080a;
 
-  /* Brand — mint-teal identity accent */
+  /* Brand: mint-teal identity accent */
   --brand: #5ad8c4;
   --brand-hover: #78e8d7;
   --brand-bright: #a7fff0;
   --brand-subtle: #c9fbf2;
   --on-brand: #04110f;
 
-  /* Semantic — trading + state */
+  /* Semantic: trading + state */
   --buy: #34d399;
   --buy-strong: #10b981;
   --sell: #f87171;
@@ -69,14 +69,20 @@
   --error-surface: #221114;
   --success-surface: #0f1f1a;
 
-  /* Identity hues — tide social layer. Per-person color for avatars,
-     handle accents, and presence ONLY — never for data or state.
-     Assigned deterministically (hash(wallet) % 8); --id-tide is
-     reserved for the signed-in user. Muted to sit on near-black; every
-     hue is AA-verified as a dark glyph and as accent text on the surface
-     ladder (npm run check:contrast). Avatar fills build a radial gradient
-     from the hue to color-mix(in srgb, <hue> 60%, black) — reference the
-     token, never a hardcoded dark end. See DESIGN.md → Identity hues. */
+  /* Identity hues: per-person color for avatars, handle accents, and
+     presence ONLY: never for data or state. Assigned deterministically
+     (hash(wallet) % 8); --id-tide is reserved for the signed-in user.
+
+     TWO tokens per hue, because the hue has two jobs that pull opposite
+     ways. --id-<hue> is the ACCENT: handle text and presence dots on the
+     near-black surface ladder, so it has to stay light. --id-<hue>-fill
+     is the AVATAR DISC, free to be saturated because nothing reads
+     through it except --id-glyph. Trying to serve both from one token is
+     what made the palette pale and forced a near-black glyph.
+
+     All three paths are AA-verified by npm run check:contrast; avatar
+     fills build a radial gradient from the -fill token, so reference the
+     token and never a hardcoded dark end. See DESIGN.md → Identity. */
   --id-tide: #5ad8c4;
   --id-coral: #e8927c;
   --id-sand: #d9b380;
@@ -86,7 +92,20 @@
   --id-rose: #cf8ca3;
   --id-slate: #93a1b8;
 
-  /* Shape primitives — the radius family (DESIGN.md scale) as tokens, so
+  --id-tide-fill: #2d6c62;
+  --id-coral-fill: #74493e;
+  --id-sand-fill: #6c5a40;
+  --id-lilac-fill: #5a506c;
+  --id-sky-fill: #405a6c;
+  --id-moss-fill: #4a5c45;
+  --id-rose-fill: #684652;
+  --id-slate-fill: #4a505c;
+
+  /* The glyph on an --id-*-fill disc. One value for every theme: every
+     fill is deep, so the letter is always light. 5.96:1 at worst. */
+  --id-glyph: #fbfcfe;
+
+  /* Shape primitives: the radius family (DESIGN.md scale) as tokens, so
      themes and the canvas Theme Studio can reshape every component live.
      Consumed via the rounded-control/chip/card/sheet utilities mapped in
      @theme below. rounded-full (discs) is intentionally not a token. */
@@ -95,7 +114,7 @@
   --radius-card: 8px;
   --radius-sheet: 12px;
 
-  /* Spacing scale — 8px base grid (DESIGN.md → Spacing). Raw vars only,
+  /* Spacing scale: 8px base grid (DESIGN.md → Spacing). Raw vars only,
      deliberately NOT mapped into Tailwind's --spacing-* namespace (that
      would silently retune p-1/p-2 site-wide). Consume via var() in
      component styles; this scale is the density lever (roadmap Phase 5:
@@ -109,14 +128,14 @@
   --space-7: 56px;
   --space-8: 64px;
 
-  /* Data-surface density tokens — the row grid DataTable/StatCell
+  /* Data-surface density tokens: the row grid DataTable/StatCell
      consume. The density axis re-values THESE (plus spacing + the data
      type ramp), so "comfortable" and "compact" are two values of one
      variable set, never two component forks. */
   --row-h: 44px;
   --cell-px: 12px;
 
-  /* Z-index scale — one ladder for the whole system; consume via concrete
+  /* Z-index scale: one ladder for the whole system; consume via concrete
      token utilities like z-[var(--z-raised)] (numeric z-10/20/… are guard-banned in the
      DS). base < raised (popovers, HUD) < sticky (headers, bars) <
      overlay (FABs, floating layers) < modal (sheets, dialogs) < toast. */
@@ -127,11 +146,11 @@
   --z-modal: 50;
   --z-toast: 60;
 
-  /* Elevation — layered dark shadows (DESIGN.md → Depth). Depth comes
+  /* Elevation: layered dark shadows (DESIGN.md → Depth). Depth comes
      from tonal layering first; shadows are secondary and deep/black.
      Consumed via shadow-card / shadow-raised / shadow-overlay utilities
      (@theme below). The brand glows are the ONLY coloured shadows the
-     system allows, and they derive from --brand via color-mix — never a
+     system allows, and they derive from --brand via color-mix: never a
      hardcoded mint. */
   --elevation-1: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
   --elevation-2: 0 4px 12px rgba(0, 0, 0, 0.45), 0 2px 4px rgba(0, 0, 0, 0.35);
@@ -142,7 +161,7 @@
       color-mix(in srgb, var(--brand) 20%, transparent),
     0 12px 24px color-mix(in srgb, var(--brand) 12%, transparent);
 
-  /* Motion primitives — durations and easings as separate tokens, plus
+  /* Motion primitives: durations and easings as separate tokens, plus
      the composite duration+easing pairs components consume via CSS
      (transition: transform var(--motion-fast)). fast = state/hover;
      settle = enter/morph; spring = playful feedback on human actions
@@ -157,7 +176,7 @@
   --motion-settle: var(--duration-settle) var(--ease-settle);
   --motion-spring: var(--duration-spring) var(--ease-spring);
 
-  /* Financial type ramp — sizes as tokens (utilities text-data-* via
+  /* Financial type ramp: sizes as tokens (utilities text-data-* via
      @theme; the .data-* classes below consume the same vars). */
   --text-data-lg-size: 1.125rem;
   --text-data-lg-size-desktop: 1.875rem;
@@ -177,7 +196,7 @@
 }
 
 /* ── Theme: mono ─────────────────────────────────────────────
-   Monochrome variant — pure-neutral surface ladder for depth and a
+   Monochrome variant: pure-neutral surface ladder for depth and a
    white "ink" brand. Functional colors (buy/sell/warning/info/error)
    and identity hues are deliberately KEPT: everything is grayscale
    except the signal. Activate with <html data-theme="mono">; every
@@ -211,7 +230,7 @@
    The adaptability proof (cids-roadmap Phase 3): the same token names,
    re-valued for a white canvas. Cards are white on a cool-gray page;
    depth still comes from tonal layering. Identity hues shift to their
-   dark-jewel equivalents (light surfaces force text-dark hues — both
+   dark-jewel equivalents (light surfaces force text-dark hues: both
    contrast rules point the same way); the avatar glyph inverts to
    near-white via --fg-inverse. Brand becomes deep teal so text-brand
    holds AA on white; on-brand flips to near-white accordingly.
@@ -267,6 +286,17 @@
   --id-rose: #a03354;
   --id-slate: #45536b;
 
+  /* Light theme inverts: the accent hues are already deep enough to be
+     read on white, so the disc reuses them rather than doubling down. */
+  --id-tide-fill: #0c6e63;
+  --id-coral-fill: #a83a10;
+  --id-sand-fill: #7d5405;
+  --id-lilac-fill: #6747a8;
+  --id-sky-fill: #14618f;
+  --id-moss-fill: #3d6636;
+  --id-rose-fill: #a03354;
+  --id-slate-fill: #45536b;
+
   --elevation-1: 0 1px 3px rgba(23, 30, 40, 0.1), 0 1px 2px rgba(23, 30, 40, 0.08);
   --elevation-2: 0 4px 12px rgba(23, 30, 40, 0.12), 0 2px 4px rgba(23, 30, 40, 0.08);
   --elevation-3: 0 24px 80px rgba(23, 30, 40, 0.25);
@@ -276,7 +306,7 @@
 
 /* ── Theme: violet ───────────────────────────────────────────
    White-label demo (cids-roadmap Phase 3): proves re-branding is ONE
-   block — swap the accent family (+ the reserved "you" hue, which
+   block: swap the accent family (+ the reserved "you" hue, which
    follows brand) and touch nothing else. Everything else falls back
    to :root (market-dark). */
 [data-theme="violet"] {
@@ -287,12 +317,13 @@
   --on-brand: #17102b;
 
   --id-tide: #a78bfa;
+  --id-tide-fill: #54467d;
 }
 
 /* ── Density: compact ────────────────────────────────────────
    The terminal axis (cids-roadmap Phase 5). Activate with
    <html data-density="compact"> (canvas Theme Studio has the switch).
-   Orthogonal to themes — it re-values the spacing scale, the financial
+   Orthogonal to themes: it re-values the spacing scale, the financial
    type ramp, and the row grid; token-consuming components follow with
    zero component changes. Touch targets: interactive controls keep
    their own heights (Button/IconButton do not shrink below 28px). */
@@ -360,7 +391,7 @@
   --color-error-surface: var(--error-surface);
   --color-success-surface: var(--success-surface);
 
-  /* Identity hues — flat-fill / text-accent utilities (text-id-lilac,
+  /* Identity hues: flat-fill / text-accent utilities (text-id-lilac,
      bg-id-coral). Avatar gradients reference the raw var() instead. */
   --color-id-tide: var(--id-tide);
   --color-id-coral: var(--id-coral);
@@ -370,6 +401,17 @@
   --color-id-moss: var(--id-moss);
   --color-id-rose: var(--id-rose);
   --color-id-slate: var(--id-slate);
+
+  /* Avatar-disc fills + the glyph that sits on them. */
+  --color-id-tide-fill: var(--id-tide-fill);
+  --color-id-coral-fill: var(--id-coral-fill);
+  --color-id-sand-fill: var(--id-sand-fill);
+  --color-id-lilac-fill: var(--id-lilac-fill);
+  --color-id-sky-fill: var(--id-sky-fill);
+  --color-id-moss-fill: var(--id-moss-fill);
+  --color-id-rose-fill: var(--id-rose-fill);
+  --color-id-slate-fill: var(--id-slate-fill);
+  --color-id-glyph: var(--id-glyph);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -416,7 +458,7 @@ html {
   scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
 }
 
-/* Accessibility — keyboard focus ring.
+/* Accessibility: keyboard focus ring.
    Visible only for keyboard / programmatic focus (:focus-visible), never on
    pointer interaction. Uses the brand accent via `outline` (not box-shadow) so
    it never shifts layout. Component focus styles are additive, not a
@@ -464,10 +506,10 @@ html {
   }
 }
 
-/* Spring-pop — reaction feedback on human actions (DESIGN.md → Motion,
+/* Spring-pop: reaction feedback on human actions (DESIGN.md → Motion,
    budgeted playfulness). Uses --motion-spring (250ms overshoot bezier).
    Neutralized by the prefers-reduced-motion reset below. */
-/* Digit roll — RollingNumber's on-change transition (discrete, never
+/* Digit roll: RollingNumber's on-change transition (discrete, never
    looping; data surfaces stay calm). Neutralized by the reduced-motion
    reset below. */
 @keyframes roll-in {
@@ -528,7 +570,7 @@ html {
   animation: motion-replay-settle var(--motion-settle);
 }
 
-/* Accordion open/close — Radix measures the panel into
+/* Accordion open/close: Radix measures the panel into
    --radix-accordion-content-height; animating height needs the padding
    on an inner element. Neutralized by the reduced-motion reset below. */
 @keyframes accordion-down {
@@ -554,7 +596,7 @@ html {
   animation: accordion-up var(--motion-settle);
 }
 
-/* Indeterminate Progress — the one sanctioned looping animation:
+/* Indeterminate Progress; the one sanctioned looping animation:
    unknown-duration waits only, quiet by design. Neutralized by the
    reduced-motion reset below. */
 @keyframes progress-slide {
@@ -569,7 +611,7 @@ html {
   animation: progress-slide 1.2s var(--ease-settle) infinite;
 }
 
-/* Split-flap tile — the landing hero's letter board. One discrete flip
+/* Split-flap tile: the landing hero's letter board. One discrete flip
    per tile, staggered by index in the component; never loops. `backwards`
    holds the pre-flip state through the delay so the board fills in rather
    than fading in all at once. Neutralized by the reduced-motion reset

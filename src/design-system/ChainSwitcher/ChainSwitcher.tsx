@@ -2,6 +2,7 @@
 
 import { DropdownMenu as RadixMenu } from "radix-ui";
 import { cn } from "@/lib/utils";
+import { IconCheck } from "../icons";
 
 export type Network = {
   id: string;
@@ -20,7 +21,7 @@ function NetworkGlyph({ iconSrc }: { iconSrc?: string }) {
 }
 
 /**
- * Active network + switch menu — NetworkBadge's interactive sibling
+ * Active network + switch menu: NetworkBadge's interactive sibling
  * (ethereum.org heuristic #3: always show the connected network; this
  * adds "and let me change it"). Radio semantics via Radix DropdownMenu.
  */
@@ -44,7 +45,7 @@ export function ChainSwitcher({
     <RadixMenu.Root>
       <RadixMenu.Trigger
         disabled={disabled}
-        aria-label={`Network: ${active?.label ?? "unknown"} — switch`}
+        aria-label={`Network: ${active?.label ?? "unknown"}, switch`}
         className={cn(
           "inline-flex h-9 items-center gap-2 rounded-control border border-outline-variant bg-surface-container px-3 text-sm text-fg",
           "transition-[border-color,background-color] duration-150 hover:bg-surface-container-high",
@@ -79,7 +80,9 @@ export function ChainSwitcher({
               >
                 <NetworkGlyph iconSrc={n.iconSrc} />
                 <span className="flex-1">{n.label}</span>
-                <RadixMenu.ItemIndicator className="text-brand">✓</RadixMenu.ItemIndicator>
+                <RadixMenu.ItemIndicator className="text-brand">
+                  <IconCheck size={12} weight="bold" aria-hidden="true" />
+                </RadixMenu.ItemIndicator>
               </RadixMenu.RadioItem>
             ))}
           </RadixMenu.RadioGroup>

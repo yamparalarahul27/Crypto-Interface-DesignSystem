@@ -1,4 +1,4 @@
-# 02 · Design system — evolving the terminal for social
+# 02 · Design system: evolving the terminal for social
 
 **Position:** evolve, don't replace. The near-black "Fey Dark Wealth"
 system in [DESIGN.md](../../DESIGN.md) stays the base; this doc specifies
@@ -21,25 +21,25 @@ truth and is amended (not rewritten) when phase 0 is approved.
 ## What does NOT change
 
 - Dark-only, near-black surface ladder, semantic tokens via
-  `globals.css` — `check:theme` guard stays.
+  `globals.css`: `check:theme` guard stays.
 - Mint-teal `--brand` as the single identity accent; `text-on-brand`
   on fills.
 - Financial numbers in Geist Pixel Square / IBM Plex Mono.
 - 8px spacing base, 2px radius family, 150ms transition base.
-- WCAG AA on every fg/surface pair — new tokens must be verified,
+- WCAG AA on every fg/surface pair: new tokens must be verified,
   not eyeballed.
 
-## Tone shift — amendment to "Identity"
+## Tone shift: amendment to "Identity"
 
 Current anti-mood words include *Playful*. Amended position:
 
 > **Calm base, playful moments.** The canvas, typography, and data
 > surfaces keep calm authority. Playfulness is budgeted exclusively to
-> *feedback on human actions* — reacting, following, watching,
+> *feedback on human actions*: reacting, following, watching,
 > celebrating. If a static screen looks playful, we overspent.
 
 Anti-mood words that survive unchanged: Flashy · Neon · Cluttered ·
-Bright. *Gamified* is refined to: no mechanics (points/streaks/ranks) —
+Bright. *Gamified* is refined to: no mechanics (points/streaks/ranks),
 celebratory *feedback* is allowed.
 
 ## New foundation: identity hues
@@ -48,7 +48,7 @@ Social UIs need per-person color. One accent (`--brand`) can't carry N
 people, and free hex would break the token system. Proposal: a fixed
 **8-hue identity palette**, muted to sit on near-black, each with an
 AA-verified `on-` pair. Deterministically assigned from the wallet
-address (`hash(wallet) % 8`) — stable, no user picker in v1.
+address (`hash(wallet) % 8`): stable, no user picker in v1.
 
 | Token | Hue direction |
 |---|---|
@@ -63,7 +63,7 @@ address (`hash(wallet) % 8`) — stable, no user picker in v1.
 
 Exact values are a phase-0 deliverable (picked + contrast-verified in
 `globals.css`, consumed as `bg-id-*`/`text-on-id-*`). Identity hues are
-for **avatars, handle accents, and presence** only — never for data
+for **avatars, handle accents, and presence** only: never for data
 (buy/sell/warning stay untouchable).
 
 ## New components (the social kit)
@@ -71,15 +71,15 @@ for **avatars, handle accents, and presence** only — never for data
 | Component | Notes |
 |---|---|
 | `Avatar` | Generated, not uploaded (v1): identity-hue gradient disc + initial/glyph. Sizes 20/28/40. Stacked variant (`AvatarGroup`) with −8px overlap, max 3 + count. |
-| `HandleChip` | `◐ @mira` — avatar + handle, tappable → profile. |
+| `HandleChip` | `◐ @mira`: avatar + handle, tappable → profile. |
 | `PostCard` | Feed unit. `surface-container`, existing card radius/press (`scale 0.98`). Variants: watch / take / milestone. |
 | `TokenChip` | Inline live token: icon + symbol + price + 24h. Reuses `TokenIcon`, Pixel-Square numerals. |
 | `ReactionBar` | Fixed emoji set + counts. The playful budget lives here (see motion). |
 | `CommentThread` | Bottom-sheet; flat with single-level replies in v1. |
-| `SocialProofChip` | `◔ 41 watching` — subtle, `fg-muted`, never louder than the price. |
+| `SocialProofChip` | `◔ 41 watching`: subtle, `fg-muted`, never louder than the price. |
 | `FollowButton` | Brand-filled → outline "Following". Optimistic. |
 | `LaneToggle` | Following/Everyone segmented control (reusable for profile tabs). |
-| `EmptyState` | Designed empties for feed/profile/comments — cold-start is a first-class state. |
+| `EmptyState` | Designed empties for feed/profile/comments: cold-start is a first-class state. |
 
 All new components: built from existing tokens, pass `check:polish`,
 live-rendered in `/design`.
@@ -108,7 +108,7 @@ auto-plays; data surfaces (charts, tickers) never bounce.
 - Warm-precise, never hype: "peg's holding" ✓ / "🚀 TO THE MOON" ✗.
 - Numbers stay unrounded where the terminal DNA demands it; prose stays
   human.
-- Empty states get one playful line each — that's part of the budget.
+- Empty states get one playful line each; that's part of the budget.
 
 ## The `/design` gallery
 
@@ -136,7 +136,7 @@ Unlisted (no nav entry, `robots: noindex`), no auth gate.
 
 Build rules:
 
-- **Imports production components** — never copies. If the gallery
+- **Imports production components**: never copies. If the gallery
   drifts from the app, the gallery is wrong by definition.
 - Each entry: live render + variant switcher + the token names it
   consumes (e.g. `bg-surface-container` · `text-fg-muted`).
@@ -151,4 +151,4 @@ Phase 0 opens a PR that amends DESIGN.md in place: tone paragraph,
 identity-hue table, social-kit component specs, motion additions.
 This plan-pack doc then becomes historical rationale; DESIGN.md stays
 the single source of truth. Per CLAUDE.md, that PR needs explicit
-approval — no silent edits to the system.
+approval: no silent edits to the system.

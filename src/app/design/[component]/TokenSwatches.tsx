@@ -10,7 +10,7 @@ export function isColorToken(name: string): boolean {
 }
 
 /**
- * Live token swatches — resolves `var(--name)` in the active theme so
+ * Live token swatches: resolves `var(--name)` in the active theme so
  * flipping ThemeToggle recolors the panel. Non-color tokens render as
  * mono chips (name only).
  */
@@ -18,11 +18,11 @@ export function TokenSwatches({ tokens }: { tokens: string[] }) {
   if (tokens.length === 0) return null;
   return (
     <section id="token-swatches" className="mb-6 scroll-mt-6">
-      <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+      <h3 className="font-mono text-[11px] font-semibold text-fg-subtle">
         Tokens · live
       </h3>
       <p className="mt-1 text-[11px] text-fg-subtle">
-        Resolves in the active theme — flip the toggle above to verify.
+        Resolves in the active theme: flip the toggle above to verify.
       </p>
       <ul className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
         {tokens.map((name) => {

@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 // V1: per-device only, localStorage-backed.
-// V2 (pending): wallet-scoped server-side storage — see CLAUDE.md § Pending followups.
+// V2 (pending): wallet-scoped server-side storage, see CLAUDE.md § Pending followups.
 
 const STORAGE_KEY = "te.recentSearches";
 const MAX_RECENTS = 10;
@@ -51,7 +51,7 @@ function writeStorage(recents: RecentSearch[]) {
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(recents));
   } catch {
-    // quota or disabled storage — fail silently, recents are non-critical
+    // quota or disabled storage: fail silently, recents are non-critical
   }
 }
 

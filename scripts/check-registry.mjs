@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Registry freshness guard (Phase 7): regenerates public/r/ and fails
-// if the committed output differs from the design-system source — the
+// if the committed output differs from the design-system source: the
 // registry cannot drift from the code it distributes. Mirrors the
 // other check-*.mjs guards (pure Node + git).
 
@@ -13,10 +13,10 @@ try {
     shell: "/bin/bash",
     stdio: "inherit",
   });
-  console.log("✓ check:registry — public/r is in sync with src/design-system");
+  console.log("✓ check:registry, public/r is in sync with src/design-system");
 } catch {
   console.error(
-    "✗ check:registry — registry drifted from source. Run `npm run build:registry` and commit public/r.",
+    "✗ check:registry, registry drifted from source. Run `npm run build:registry` and commit public/r.",
   );
   process.exit(1);
 }

@@ -1,11 +1,12 @@
 "use client";
 
-// Shared doc renderer — the constrained markdown renderer for the
+// Shared doc renderer: the constrained markdown renderer for the
 // CONVENTIONS.md doc shape, used by BOTH the canvas Inspector and the
 // per-component pages (/design/<component>). One renderer, one source
 // of truth for how a .doc.md looks anywhere.
 
 import { useState, type ReactNode } from "react";
+import { IconCheck, IconCopy } from "@/design-system";
 
 export function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
@@ -18,9 +19,15 @@ export function CopyButton({ text }: { text: string }) {
           setTimeout(() => setCopied(false), 1200);
         });
       }}
-      className="rounded-sm border border-outline-variant bg-surface-container px-1.5 py-0.5 font-mono text-[9px] text-fg-muted hover:text-fg"
+      aria-label={copied ? "Copied" : "Copy to clipboard"}
+      className="inline-flex items-center gap-1 rounded-sm border border-outline-variant bg-surface-container px-1.5 py-0.5 font-mono text-[11px] text-fg-muted transition-colors duration-150 hover:text-fg"
     >
-      {copied ? "copied" : "copy"}
+      {copied ? (
+        <IconCheck size={11} weight="bold" aria-hidden="true" className="text-buy" />
+      ) : (
+        <IconCopy size={11} aria-hidden="true" />
+      )}
+      {copied ? "Copied" : "Copy"}
     </button>
   );
 }
@@ -104,7 +111,7 @@ export function renderDoc(md: string): ReactNode[] {
       while (i < lines.length && lines[i].startsWith("|")) {
         // Split on unescaped pipes only. Every Props table types its
         // unions as `"xs" \| "sm"`, and a naive split("|") shredded those
-        // into extra columns — which is why union-typed rows rendered
+        // into extra columns: which is why union-typed rows rendered
         // with their cells shifted out of line.
         const cells = lines[i]
           .split(/(?<!\\)\|/)
@@ -154,7 +161,7 @@ export function renderDoc(md: string): ReactNode[] {
         <h3
           key={key++}
           id={id}
-          className="mt-4 scroll-mt-6 font-mono text-[13px] font-semibold uppercase tracking-[0.14em] text-fg-subtle"
+          className="mt-4 scroll-mt-6 font-mono text-[13px] font-semibold text-fg-subtle"
         >
           {title}
         </h3>,

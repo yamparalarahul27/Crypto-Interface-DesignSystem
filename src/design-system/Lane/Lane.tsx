@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 export type LaneOption<T extends string> = { value: T; label: string };
 
 // Active-segment glow: the tokenized brand halo (--glow-brand, defined in
-// globals.css where it derives from --brand via color-mix — never a
+// globals.css where it derives from --brand via color-mix: never a
 // hardcoded mint rgb), per the tide LaneToggle spec.
 const ACTIVE_SHADOW = "var(--glow-brand)";
 const SEGMENT_TRANSITION =

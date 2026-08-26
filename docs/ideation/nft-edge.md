@@ -6,15 +6,15 @@ captured: 2026-05-20
 
 # NFT Edge tab
 
-> A third top-level tab — iOS-style horizontal NFT rail with a large detail pane, inspired by Pubkey's collection viewer.
+> A third top-level tab: iOS-style horizontal NFT rail with a large detail pane, inspired by Pubkey's collection viewer.
 
 ## What it is
 
-A NFT browsing surface that **stays in motion** — large hero artwork in the centre, a horizontal scroller of thumbnails along the bottom, click a thumbnail and the whole detail pane swaps with a smooth crossfade. Feels more like flipping through a deck than navigating a grid.
+A NFT browsing surface that **stays in motion**: large hero artwork in the centre, a horizontal scroller of thumbnails along the bottom, click a thumbnail and the whole detail pane swaps with a smooth crossfade. Feels more like flipping through a deck than navigating a grid.
 
 The right rail shows owner profile, traits, asset/collection metadata, and a hover-revealed "Other Owned from Collection" panel.
 
-![NFT Edge reference — Pubkey-style PERK detail](./assets/nft-edge-ref.png)
+![NFT Edge reference: Pubkey-style PERK detail](./assets/nft-edge-ref.png)
 
 ## Where it lives in the app
 
@@ -45,7 +45,7 @@ The right rail shows owner profile, traits, asset/collection metadata, and a hov
     [▣ PERK #270] [▣ PERK #575] …
 ```
 
-## Sketch — horizontal rail mechanics
+## Sketch: horizontal rail mechanics
 
 ```
 The rail is the load-bearing interaction.
@@ -72,15 +72,15 @@ The rail is the load-bearing interaction.
 
 - **Scope = collection-wide or wallet-scoped?** The reference shows both modes (you can browse the whole collection AND see which ones you own). v1 = wallet-scoped (your NFTs)? Or collection-wide?
 - **Data source:**
-  - Helius DAS API — best Solana NFT API
-  - Tensor / Magic Eden — collection-floor + listing data
-  - SimpleHash — multi-chain if we ever extend
+  - Helius DAS API: best Solana NFT API
+  - Tensor / Magic Eden: collection-floor + listing data
+  - SimpleHash: multi-chain if we ever extend
 - **Owner profile resolution:** `.sol` name (SNS), Bonfida, civic, custom protocols?
 - **Floor / last sale** shown on thumbnails or only in detail?
-- **Animated NFTs:** mp4, glb (3D), HTML mints — defer to v1.5?
-- **Rarity score** — compute ourselves (HowRare-style) or rely on collection metadata?
-- **Stable URL per NFT** — `/nft/<collection>/<id>`? `/nft/<mint>`?
-- **Empty state** — if the user has no NFTs in their wallet, what shows? Suggested collections? Recent mints?
+- **Animated NFTs:** mp4, glb (3D), HTML mints, defer to v1.5?
+- **Rarity score**: compute ourselves (HowRare-style) or rely on collection metadata?
+- **Stable URL per NFT**: `/nft/<collection>/<id>`? `/nft/<mint>`?
+- **Empty state**: if the user has no NFTs in their wallet, what shows? Suggested collections? Recent mints?
 
 ## Out of scope (first pass)
 
@@ -92,6 +92,6 @@ The rail is the load-bearing interaction.
 
 ## Prior art / reference
 
-- [Pubkey collection viewer](https://pubkey.app/) — direct inspiration; iOS-style horizontal rail
-- [Tensor trade UI](https://www.tensor.trade/) — Solana-native NFT marketplace
-- iOS Photos app — the rail-and-hero pattern itself
+- [Pubkey collection viewer](https://pubkey.app/): direct inspiration; iOS-style horizontal rail
+- [Tensor trade UI](https://www.tensor.trade/): Solana-native NFT marketplace
+- iOS Photos app: the rail-and-hero pattern itself

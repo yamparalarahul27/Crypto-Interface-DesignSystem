@@ -2,7 +2,7 @@
 
 Status: draft
 Version: 0.9.0
-Tx / activity history row — icon · title · time · status · amount.
+Tx / activity history row: icon · title · time · status · amount.
 
 ## Usage
 
@@ -27,7 +27,7 @@ import { ActivityRow } from "@/design-system";
 ```
 
 Best for: wallet activity feeds, exchange order history, notification
-lists. Compose many rows in a `DataTable`-free vertical stack — this
+lists. Compose many rows in a `DataTable`-free vertical stack: this
 is the atom, not the list. Status uses word + tint (never color alone).
 Amount is **preformatted** so sign/fiat discipline stays with the caller
 (guideline #5).
@@ -46,16 +46,16 @@ Amount is **preformatted** so sign/fiat discipline stays with the caller
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `title` | `string` | — | What happened. |
-| `time` | `string` | — | Preformatted ("2m ago"). |
-| `status` | `"pending" \| "confirmed" \| "failed"` | — | Word + tint. |
-| `amount` | `string` | — | Preformatted with sign + unit. |
-| `tokenSymbol` | `string` | — | Drives TokenIcon; omit → diamond placeholder. |
-| `tokenIconSrc` | `string` | — | TokenIcon image. |
-| `onClick` | `() => void` | — | When set, row renders as a `<button>`. |
-| `className` | `string` | — | cn-merged. |
+| `title` | `string` | - | What happened. |
+| `time` | `string` | - | Preformatted ("2m ago"). |
+| `status` | `"pending" \| "confirmed" \| "failed"` | - | Word + tint. |
+| `amount` | `string` | - | Preformatted with sign + unit. |
+| `tokenSymbol` | `string` | - | Drives TokenIcon; omit → diamond placeholder. |
+| `tokenIconSrc` | `string` | - | TokenIcon image. |
+| `onClick` | `() => void` | - | When set, row renders as a `<button>`. |
+| `className` | `string` | - | cn-merged. |
 
-Server-safe (no `"use client"`) unless the caller needs handlers — the
+Server-safe (no `"use client"`) unless the caller needs handlers: the
 component itself has no client-only APIs.
 
 ## Tokens
@@ -67,15 +67,15 @@ component itself has no client-only APIs.
 
 ## States
 
-- **pending / confirmed / failed** — status word + semantic ink.
-- **static** — `<div>` when no `onClick`.
-- **interactive** — `<button>` with hover lift + `active:scale-[0.98]`
-  (card-grade press — the whole row is the target).
+- **pending / confirmed / failed**: status word + semantic ink.
+- **static**: `<div>` when no `onClick`.
+- **interactive**: `<button>` with hover lift + `active:scale-[0.98]`
+  (card-grade press: the whole row is the target).
 
 ## Motion
 
 Interactive only: `duration-150` background + press scale. Status and
-amount updates swap text in place — data surfaces never bounce.
+amount updates swap text in place: data surfaces never bounce.
 
 ## A11y
 

@@ -28,7 +28,7 @@ describe("BottomNav", () => {
     expect(onChange).toHaveBeenCalledWith("portfolio");
   });
 
-  it("icons are decorative — the label names the tab", () => {
+  it("icons are decorative: the label names the tab", () => {
     render(<BottomNav items={ITEMS} value="feed" onValueChange={() => {}} />);
     const btn = screen.getByRole("button", { name: "Feed" });
     const icon = btn.querySelector('[aria-hidden="true"]');

@@ -1,5 +1,5 @@
 ---
-title: Trash throw — Mac 1990s delete animation
+title: Trash throw, Mac 1990s delete animation
 status: captured
 captured: 2026-05-20
 ---
@@ -11,9 +11,9 @@ captured: 2026-05-20
 ## What it is
 
 A destructive-action animation with three things going on at once:
-1. **Skeuomorphic crumple** — the deleted row visually crumples into a paper ball.
-2. **Parabolic throw** — the ball arcs across the screen into a trash bin (like the [parabolic add](./anim-parabolic-add.md), but for delete).
-3. **Bin reaction** — lid lifts, ball goes in, lid wiggles back down. Bin briefly shows a count badge.
+1. **Skeuomorphic crumple**: the deleted row visually crumples into a paper ball.
+2. **Parabolic throw**: the ball arcs across the screen into a trash bin (like the [parabolic add](./anim-parabolic-add.md), but for delete).
+3. **Bin reaction**: lid lifts, ball goes in, lid wiggles back down. Bin briefly shows a count badge.
 
 This is heavier than a fade-out, and it's *intentional*. Destructive actions should feel deliberate. The animation gives the user a beat to undo before the action commits.
 
@@ -25,7 +25,7 @@ Any destructive action:
 - Clear a recent search
 - Future: remove a wallet, delete a saved view, etc.
 
-## Sketch — the throw sequence
+## Sketch: the throw sequence
 
 ```
   Step 1: USER CONFIRMS DELETE
@@ -63,7 +63,7 @@ Any destructive action:
                         re-expands into row.
 ```
 
-## Sketch — total timing budget
+## Sketch: total timing budget
 
 ```
   crumple        0 ─→ 180ms
@@ -79,12 +79,12 @@ Any destructive action:
 ## Open questions
 
 - **Where does the trash bin live on-screen?** Floating bottom-right? Fixed in header? Appears only when a deletion is initiated and disappears when undo window closes?
-- **Persistent trash bin** — Mac-90s style, always visible, shows total deleted-this-session count? Or ephemeral, only shows during the animation?
+- **Persistent trash bin**: Mac-90s style, always visible, shows total deleted-this-session count? Or ephemeral, only shows during the animation?
 - **Reduced-motion behaviour:** users with `prefers-reduced-motion: reduce` get a simple fade + undo toast. Animation is gated and skippable.
 - **Failure path:** if the API call to delete fails after the animation completes, ball flies BACK out of bin, row restores, error toast shown. The animation owns the optimistic-UI semantics.
-- **Multiple rapid deletes:** queue them or play in parallel? Recommend queue (one at a time) — parallel arcs collide visually.
+- **Multiple rapid deletes:** queue them or play in parallel? Recommend queue (one at a time): parallel arcs collide visually.
 - **Trash bin asset:** custom-drawn pixel-art bin to fit the [Geist Pixel Square](../../DESIGN.md) typography vibe? Or 3D-style? Pixel-art matches the brand identity better.
-- **Sound:** a soft "swoosh" + thud? Defer — sound is more invasive than visuals; only add if user-tested favourably.
+- **Sound:** a soft "swoosh" + thud? Defer: sound is more invasive than visuals; only add if user-tested favourably.
 
 ## Out of scope (first pass)
 
@@ -94,7 +94,7 @@ Any destructive action:
 
 ## Prior art / reference
 
-- macOS classic Trash (1984+) — direct inspiration for the bin sprite
-- Gmail / Slack "undo send" — the 5s undo toast pattern
-- [iOS Mail swipe-to-delete](https://support.apple.com/) — micro-animation when an email row collapses
-- This pairs with the [parabolic add](./anim-parabolic-add.md) — same arc primitive, opposite direction.
+- macOS classic Trash (1984+): direct inspiration for the bin sprite
+- Gmail / Slack "undo send": the 5s undo toast pattern
+- [iOS Mail swipe-to-delete](https://support.apple.com/): micro-animation when an email row collapses
+- This pairs with the [parabolic add](./anim-parabolic-add.md): same arc primitive, opposite direction.

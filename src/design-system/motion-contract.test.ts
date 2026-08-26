@@ -1,5 +1,5 @@
 // Motion / reduced-motion contract (cids-roadmap Phase 2): jsdom can't
-// execute CSS, so the *contract* is asserted at the source level — the
+// execute CSS, so the *contract* is asserted at the source level: the
 // tokens exist and the global prefers-reduced-motion reset that every
 // component's motion relies on is present in globals.css.
 import { readFileSync } from "node:fs";

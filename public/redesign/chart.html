@@ -22,7 +22,7 @@
   .press:active { scale: 0.96; }
   /* faint dot grid behind the plot (reference) */
   .dotgrid { background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 22px 22px; }
-  /* crosshair + tooltip fade — specific props only, <200ms */
+  /* crosshair + tooltip fade: specific props only, <200ms */
   .xhair { transition: opacity 120ms ease-out; }
   .tip { transition: opacity 140ms ease-out; }
 </style>
@@ -77,14 +77,14 @@
 
       <!-- floating tooltip -->
       <div id="tip" class="tip opacity-0 pointer-events-none absolute top-2 left-0 z-10 rounded-xl bg-surface-container-high/95 backdrop-blur-md tip-shadow border border-outline-variant px-3.5 py-3 w-[180px]">
-        <div id="tipDate" class="text-[11px] text-fg-subtle mb-2">—</div>
+        <div id="tipDate" class="text-[11px] text-fg-subtle mb-2">: </div>
         <div class="flex items-center justify-between gap-3 mb-1.5">
           <span class="flex items-center gap-2 text-xs text-fg-muted"><span class="w-0.5 h-3.5 rounded-full bg-brand"></span>Price</span>
-          <span id="tipPrice" class="num text-sm font-semibold text-fg">—</span>
+          <span id="tipPrice" class="num text-sm font-semibold text-fg">: </span>
         </div>
         <div class="flex items-center justify-between gap-3">
           <span class="flex items-center gap-2 text-xs text-fg-muted"><span class="w-0.5 h-3.5 rounded-full bg-fg-subtle"></span>Volume</span>
-          <span id="tipVol" class="num text-sm text-fg-muted">—</span>
+          <span id="tipVol" class="num text-sm text-fg-muted">: </span>
         </div>
       </div>
     </div>

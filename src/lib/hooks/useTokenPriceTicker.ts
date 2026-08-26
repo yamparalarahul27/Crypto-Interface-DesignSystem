@@ -38,7 +38,7 @@ export function useTokenPriceTicker(address: string): TokenPriceTicker {
         lastUpdatedAt: Date.now(),
       });
     } catch {
-      // transient — keep prior state
+      // transient: keep prior state
     }
   }, [address]);
 

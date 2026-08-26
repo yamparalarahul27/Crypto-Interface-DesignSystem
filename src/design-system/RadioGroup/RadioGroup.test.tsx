@@ -37,7 +37,7 @@ describe("RadioGroup", () => {
     screen.getByRole("radio", { name: /0\.1%/ }).focus();
     // Hold the key across Radix's deferred focus move (roving-focus uses
     // setTimeout(0); selection-follows-focus only fires while an arrow
-    // key is down — a synchronous press+release never selects in jsdom).
+    // key is down: a synchronous press+release never selects in jsdom).
     await userEvent.keyboard("{ArrowDown>}");
     await new Promise((r) => setTimeout(r, 0));
     await userEvent.keyboard("{/ArrowDown}");

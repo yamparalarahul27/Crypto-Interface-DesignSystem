@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { IconCheck, IconClose } from "@/design-system";
 
-// ── Theme Studio (step 2) — live token editing on the canvas. ────────────
+// ── Theme Studio (step 2): live token editing on the canvas. ────────────
 // Reown-style master knobs: a few controls that retune the entire kit by
 // writing raw tokens as inline overrides on <html> (inline custom
 // properties win over any [data-theme] block, so this layers on top of
@@ -18,7 +19,7 @@ const TYPE_BASE = {
   "text-data-sm-size": 0.75,
 } as const;
 
-// WCAG relative luminance — decides whether on-brand text is dark or light.
+// WCAG relative luminance: decides whether on-brand text is dark or light.
 const lum = (hex: string) => {
   const n = parseInt(hex.slice(1), 16);
   const ch = (c: number) => {
@@ -29,7 +30,7 @@ const lum = (hex: string) => {
     0.2126 * ch((n >> 16) & 255) + 0.7152 * ch((n >> 8) & 255) + 0.0722 * ch(n & 255)
   );
 };
-// Mix a hex toward white by t (0..1) — derives hover/bright/subtle from the accent.
+// Mix a hex toward white by t (0..1): derives hover/bright/subtle from the accent.
 const towardWhite = (hex: string, t: number) => {
   const n = parseInt(hex.slice(1), 16);
   const mix = (c: number) => Math.round(c + (255 - c) * t);
@@ -113,7 +114,7 @@ export function ThemeStudio({ onClose }: { onClose: () => void }) {
         (document.documentElement.dataset.density as "compact")) ||
       "comfortable",
   );
-  // Sync the DOM (external system) from state in an effect — the React
+  // Sync the DOM (external system) from state in an effect: the React
   // Compiler forbids mutating document inside an event handler closure.
   useEffect(() => {
     if (density === "compact")
@@ -163,7 +164,7 @@ export function ThemeStudio({ onClose }: { onClose: () => void }) {
     <div className="pointer-events-auto w-64 rounded-sm border border-outline bg-surface-page/95 p-3 shadow-raised">
       <div className="mb-3 flex items-center justify-between">
         <span className="font-mono text-xs font-semibold text-fg">
-          theme studio
+          Theme studio
         </span>
         <button
           type="button"
@@ -171,7 +172,7 @@ export function ThemeStudio({ onClose }: { onClose: () => void }) {
           aria-label="Close theme studio"
           className="inline-flex h-6 w-6 items-center justify-center rounded-control text-fg-muted hover:bg-surface-container-high hover:text-fg"
         >
-          ×
+          <IconClose size={12} weight="bold" aria-hidden="true" />
         </button>
       </div>
 
@@ -225,7 +226,13 @@ export function ThemeStudio({ onClose }: { onClose: () => void }) {
           disabled={!dirty}
           className="flex-1 rounded-control bg-brand px-2 py-1.5 font-mono text-[11px] font-semibold text-on-brand disabled:opacity-40"
         >
-          {copied ? "copied ✓" : "export css"}
+          {copied ? (
+            <span className="inline-flex items-center gap-1">
+              copied <IconCheck size={11} weight="bold" aria-hidden="true" />
+            </span>
+          ) : (
+            "Export CSS"
+          )}
         </button>
         <button
           type="button"
@@ -233,7 +240,7 @@ export function ThemeStudio({ onClose }: { onClose: () => void }) {
           disabled={!dirty}
           className="rounded-control border border-outline-variant px-2 py-1.5 font-mono text-[11px] text-fg-muted hover:text-fg disabled:opacity-40"
         >
-          reset
+          Reset
         </button>
       </div>
 

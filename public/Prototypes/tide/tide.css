@@ -1,5 +1,5 @@
 /* ──────────────────────────────────────────────────────────────
-   Tide — static mock layer on top of ../assets/theme.css
+   Tide: static mock layer on top of ../assets/theme.css
    Carries only what the shared prototype theme doesn't:
    identity hues, avatars, the data-font classes, the phone
    frame, bottom bar, and the (tap-to-replay) motion demos.

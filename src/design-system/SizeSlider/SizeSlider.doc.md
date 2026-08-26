@@ -24,13 +24,13 @@ import { SizeSlider } from "@/design-system";
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `value` | `number` | -- | 0-100; rounded and clamped. |
-| `onValueChange` | `(value:number)=>void` | -- | Fires on drag, click, keyboard, or stop-label click. |
+| `value` | `number` | - | 0-100; rounded and clamped. |
+| `onValueChange` | `(value:number)=>void` | - | Fires on drag, click, keyboard, or stop-label click. |
 | `stops` | `readonly number[]` | `[0,25,50,75,100]` | Major labelled stops. |
 | `label` | `string` | `Size as percent of balance` | Slider accessible name. |
 | `disabled` | `boolean` | `false` | Removes tab stop and dims the control. |
 | `showSubTicks` | `boolean` | `true` | Three sub-ticks per stop interval. |
-| `className` | `string` | -- | cn-merged. |
+| `className` | `string` | - | cn-merged. |
 
 ## Tokens
 

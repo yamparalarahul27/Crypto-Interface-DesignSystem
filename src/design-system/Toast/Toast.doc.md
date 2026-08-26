@@ -26,9 +26,9 @@ toast({ title: "Watchlist updated", tone: "buy" });
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `ToastProvider` | wraps the app | -- | Renders the Radix provider + viewport. |
-| `useToast()` | `(t) => void` | -- | `{title, description?, tone?}`; throws outside the provider. |
-| `tone` | `"neutral" \| "buy" \| "sell" \| "warning"` | `"neutral"` | Tone bar only -- text stays fg. |
+| `ToastProvider` | wraps the app | - | Renders the Radix provider + viewport. |
+| `useToast()` | `(t) => void` | - | `{title, description?, tone?}`; throws outside the provider. |
+| `tone` | `"neutral" \| "buy" \| "sell" \| "warning"` | `"neutral"` | Tone bar only: text stays fg. |
 
 ## Tokens
 

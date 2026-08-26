@@ -2,7 +2,7 @@
 
 Status: stable
 Version: 1.0.0
-Stablecoin peg health from the SIGNED bps deviation -- tone by magnitude, sign kept visible.
+Stablecoin peg health from the SIGNED bps deviation: tone by magnitude, sign kept visible.
 
 ## Usage
 
@@ -26,8 +26,8 @@ import { PegBadge } from "@/design-system";
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `deviationBps` | `number` | -- | SIGNED deviation (+ above / − below peg). |
-| `className` | `string` | -- | cn-merged. |
+| `deviationBps` | `number` | - | SIGNED deviation (+ above / − below peg). |
+| `className` | `string` | - | cn-merged. |
 
 ## Tokens
 
@@ -43,5 +43,5 @@ None (peg state is data).
 
 ## A11y
 
-- State word + signed figure are real text -- health is never color alone.
+- State word + signed figure are real text: health is never color alone.
 - Guideline #5 encoded: magnitude drives tone (Math.abs), the sign stays in the readout.

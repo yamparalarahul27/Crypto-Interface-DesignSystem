@@ -1,6 +1,6 @@
 ---
-title: Data-fetching performance — cache strategy + Jupiter rate-limit fix
-status: scoped (paused mid-session — resume from "Resume checklist" below)
+title: Data-fetching performance, cache strategy + Jupiter rate-limit fix
+status: scoped (paused mid-session, resume from "Resume checklist" below)
 captured: 2026-05-20
 priority: high (next major engineering focus after NFT Edge)
 ---
@@ -13,11 +13,11 @@ priority: high (next major engineering focus after NFT Edge)
 
 ```
 Paused at:     evidence collected, fix plan drafted, no code change made yet
-Why paused:    too many options to evaluate — user wants to ship NFT Edge first
+Why paused:    too many options to evaluate, user wants to ship NFT Edge first
 Resume from:   "Resume checklist" at the bottom of this doc
 ```
 
-## The evidence (don't re-investigate — read this)
+## The evidence (don't re-investigate: read this)
 
 User reported during local dev (2026-05-20):
 
@@ -49,7 +49,7 @@ Upstash Redis credentials in `.env.local` are invalid:
   Error [UpstashError]: WRONGPASS invalid username-password pair or user is disabled
 ```
 
-[src/lib/rateLimit.ts:103](../../src/lib/rateLimit.ts#L103) fails open (lets the request through without rate-limit protection), so this doesn't break anything — but it means dev has no rate-limit protection, and prod needs the real Upstash creds verified.
+[src/lib/rateLimit.ts:103](../../src/lib/rateLimit.ts#L103) fails open (lets the request through without rate-limit protection), so this doesn't break anything: but it means dev has no rate-limit protection, and prod needs the real Upstash creds verified.
 
 ## User's hypothesis (confirmed)
 
@@ -59,7 +59,7 @@ Right. And worse: the same API (`/api/jupiter`) is hit 3× per home load with di
 
 ## The plan when we resume
 
-### Phase 1 — Cache + Supabase metadata bundled
+### Phase 1: Cache + Supabase metadata bundled
 
 Two interventions, one PR:
 
@@ -71,14 +71,14 @@ Two interventions, one PR:
 │   queries (no per-user data).                             │
 │                                                           │
 │   The route already imports CACHE + cachedJson from       │
-│   src/lib/cacheControl.ts — looks intended but not wired. │
+│   src/lib/cacheControl.ts: looks intended but not wired. │
 │                                                           │
 │   Win: 99% of requests serve from Vercel edge cache.      │
 │        Jupiter only gets hit once per 60s per region.     │
 │        No more 429s.                                      │
 │                                                           │
 │   Effort: ~2 hours                                        │
-│   Risk:   low — opt-in per route, easy to roll back       │
+│   Risk:   low, opt-in per route, easy to roll back       │
 └───────────────────────────────────────────────────────────┘
 
 ┌─ Intervention B: Supabase metadata cache (Pattern A) ─────┐
@@ -119,7 +119,7 @@ Two interventions, one PR:
 │        Long-tail tokens fall back to current upstream.   │
 │                                                           │
 │   Effort: 1-1.5 days                                      │
-│   Risk:   medium — schema migration + new code path      │
+│   Risk:   medium, schema migration + new code path      │
 └───────────────────────────────────────────────────────────┘
 ```
 
@@ -132,7 +132,7 @@ IMMUTABLE (cache in Supabase, ~indefinite TTL):
 QUASI-STABLE (cache in Supabase, ~7-day TTL):
   symbol, name, logo_url, total_supply, description, links
 
-LIVE (always upstream, no cache — or 30s edge cache):
+LIVE (always upstream, no cache; or 30s edge cache):
   price, 24h change %, volume, market cap, FDV, recent txns
 ```
 
@@ -142,24 +142,24 @@ LIVE (always upstream, no cache — or 30s edge cache):
 |---|---|---|
 | C: React Server Components + streaming | 1-2 days | Bigger architectural change; A+B should be enough first |
 | D: Client cache (SWR / React Query) | half day | Helps tab-switches but not cold load; do after A+B if needed |
-| Paid Jupiter tier | $$$ | Wrong order — cache first, pay only if cache doesn't go far enough |
+| Paid Jupiter tier | $$$ | Wrong order: cache first, pay only if cache doesn't go far enough |
 
 ## Decision tree for the Supabase pattern (A vs B vs C)
 
 Already mid-discussion. Three sync patterns proposed:
 
 ```
-Pattern A — Curated seed + cron refresh         (RECOMMENDED START)
+Pattern A: Curated seed + cron refresh         (RECOMMENDED START)
   ▸ Manually curate ~100 tokens
   ▸ One-time seed → Vercel Cron daily
   ▸ Long-tail falls back to current upstream
 
-Pattern B — Cache-on-first-access (lazy)
+Pattern B: Cache-on-first-access (lazy)
   ▸ First fetch writes to Supabase
   ▸ Subsequent fetches read from cache
   ▸ TTL refresh on access if stale
 
-Pattern C — Hybrid (A + B)
+Pattern C: Hybrid (A + B)
   ▸ Seeded curated layer (always-fresh top 100)
   ▸ Auto-cache long-tail with 7-day TTL
 ```
@@ -189,18 +189,18 @@ Pattern C — Hybrid (A + B)
 
 ## Diagnostic toolkit
 
-The `__perf.capture()` console script for measuring baseline/improvement lives in the conversation history (search for "DeFi Triangle perf —"). Paste it into Chrome DevTools console, run before & after each intervention to prove the win.
+The `__perf.capture()` console script for measuring baseline/improvement lives in the conversation history (search for "DeFi Triangle perf: "). Paste it into Chrome DevTools console, run before & after each intervention to prove the win.
 
 ## Out of scope for this work
 
-- App-wide perf observability (logging route durations to DataDog/PostHog) — capture separately later
-- Paid Jupiter tier — only if Phase 1 isn't enough
-- Image / asset optimization (LCP) — defer
-- React rendering perf (memo, lazy) — defer
-- Search query optimization — defer
+- App-wide perf observability (logging route durations to DataDog/PostHog): capture separately later
+- Paid Jupiter tier: only if Phase 1 isn't enough
+- Image / asset optimization (LCP): defer
+- React rendering perf (memo, lazy): defer
+- Search query optimization: defer
 
 ## Prior art / reference
 
-- [SWR with Next.js cache headers](https://nextjs.org/docs/app/api-reference/functions/fetch#optionscache) — what we'd use for intervention A
+- [SWR with Next.js cache headers](https://nextjs.org/docs/app/api-reference/functions/fetch#optionscache): what we'd use for intervention A
 - [Vercel Edge Network caching](https://vercel.com/docs/edge-network/caching)
-- [Supabase TTL patterns](https://supabase.com/docs/guides/database/postgres/triggers) — for the refresh strategy
+- [Supabase TTL patterns](https://supabase.com/docs/guides/database/postgres/triggers): for the refresh strategy

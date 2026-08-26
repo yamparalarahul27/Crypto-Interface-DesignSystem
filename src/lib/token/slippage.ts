@@ -1,4 +1,4 @@
-// Slippage at size — quote $1k / $10k / $100k SELL of the token into USDC
+// Slippage at size: quote $1k / $10k / $100k SELL of the token into USDC
 // via the public Jupiter Quote API (proxied through /api/jupiter?type=quote).
 // Surfaces the realised price impact for traders sizing positions.
 
@@ -45,7 +45,7 @@ export async function fetchSlippageAtSizes(
   ) {
     return null;
   }
-  // Skip if the token IS USDC — degenerate case.
+  // Skip if the token IS USDC: degenerate case.
   if (tokenMint === USDC_MINT) return null;
 
   const sizes = await Promise.all(

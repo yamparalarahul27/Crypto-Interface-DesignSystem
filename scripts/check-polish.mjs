@@ -51,7 +51,7 @@ for (const root of [COMPONENTS, DESIGN_SYSTEM, DESIGN_APP]) {
   }
 }
 
-// File-specific rules — current design-system invariants (the previous
+// File-specific rules: current design-system invariants (the previous
 // list guarded app components deleted in the clean-shell pass).
 const checks = [
   {
@@ -99,7 +99,7 @@ const checks = [
       [/transition-\[background-color,color,box-shadow,transform\]/, "targeted transition (never transition-all)"],
     ],
     refute: [
-      [/from ["']motion/, "portable core — no motion import"],
+      [/from ["']motion/, "portable core: no motion import"],
     ],
   },
   {
@@ -110,7 +110,7 @@ const checks = [
       [/Press and hold/, "sr-only hold instructions"],
     ],
     refute: [
-      [/from ["']motion/, "portable core — no motion import"],
+      [/from ["']motion/, "portable core: no motion import"],
     ],
   },
   {
@@ -120,7 +120,7 @@ const checks = [
       [/role="group"/, "cells grouped for AT"],
     ],
     refute: [
-      [/from ["']motion/, "portable core — no motion import"],
+      [/from ["']motion/, "portable core: no motion import"],
     ],
   },
   {
@@ -130,7 +130,7 @@ const checks = [
       [/h-4/, "reserved message height (no layout jump)"],
     ],
     refute: [
-      [/from ["']motion/, "portable core — no motion import"],
+      [/from ["']motion/, "portable core: no motion import"],
     ],
   },
   {
@@ -140,7 +140,7 @@ const checks = [
       [/inline-grid/, "Next/Finish width-stable"],
     ],
     refute: [
-      [/from ["']motion/, "portable core — no motion import"],
+      [/from ["']motion/, "portable core: no motion import"],
     ],
   },
   {
@@ -181,7 +181,7 @@ const checks = [
   {
     file: "src/design-system/Card/Card.tsx",
     expect: [
-      [/active:scale-\[0\.98\]/, "card-grade press (.98 — softer than controls)"],
+      [/active:scale-\[0\.98\]/, "card-grade press (.98: softer than controls)"],
       [/transition-\[background-color,transform\]/, "targeted transition (never transition-all)"],
     ],
   },
@@ -215,7 +215,7 @@ const checks = [
   {
     file: "src/design-system/Combobox/Combobox.tsx",
     expect: [
-      [/aria-activedescendant/, "ARIA 1.2 combobox — focus stays in the input"],
+      [/aria-activedescendant/, "ARIA 1.2 combobox: focus stays in the input"],
       [/onMouseDown=\{\(e\) => e\.preventDefault\(\)\}/, "option mousedown never blurs the input"],
     ],
   },
@@ -325,19 +325,19 @@ for (const c of checks) {
 // Rule G2 (coverage): every component folder under src/design-system must
 // either carry specific polish assertions above, or be listed here as a
 // conscious "no interaction polish to pin" decision. A new component that
-// is in neither place fails — polish coverage can't be skipped silently.
+// is in neither place fails: polish coverage can't be skipped silently.
 const NO_SPECIFIC_RULES = new Set([
-  "Avatar", // static disc — no interaction states
+  "Avatar", // static disc: no interaction states
   "AvatarGroup", // static composition of Avatar
-  "WalletAvatar", // static seeded disc + badge — no interaction states
+  "WalletAvatar", // static seeded disc + badge: no interaction states
   "TokenIcon", // static image w/ initials fallback
   "SocialProofChip", // static text chip
   "PostCard", // composes covered parts (ReactionBar, TokenChip)
-  "CommentThread", // draft — assertions land with its stable promotion
-  "Onboarding", // draft — assertions land with its stable promotion
+  "CommentThread", // draft: assertions land with its stable promotion
+  "Onboarding", // draft: assertions land with its stable promotion
   "Skeleton", // static shimmer; reduced-motion via the global reset
   "Tooltip", // behavior is Radix Tooltip/Dialog; motion via data-[state] presets
-  "Badge", // static label — no interaction states
+  "Badge", // static label: no interaction states
   "Input", // border transition only; focus ring is the global :focus-visible
   "Dialog", // behavior + motion via Radix data-[state] presets
   "Menu", // behavior via Radix DropdownMenu; instant highlight by design
@@ -356,15 +356,15 @@ const NO_SPECIFIC_RULES = new Set([
   "NetworkBadge", // static fact chip
   "AmountInput", // border transition only; Max is a text affordance
   "TxStatus", // pulse on in-flight dot only (status, not data); terminal states still
-  "Alert", // static in-flow callout — conditions don't animate in
+  "Alert", // static in-flow callout: conditions don't animate in
   "Textarea", // border transition only, Input's grammar; native resize
   "Progress", // width ease + the one sanctioned loop; global reduced-motion resets it
   "RadioGroup", // ring color 150ms targeted; behavior via Radix roving tabindex
-  "AppBar", // static layout row — interaction lives in the slotted components
+  "AppBar", // static layout row: interaction lives in the slotted components
   "Breadcrumbs", // link color 150ms only; structure is the feature
   "Popover", // behavior via Radix Popover; panel fade via presets (Menu's pattern)
   "ChainSwitcher", // Radix DropdownMenu radio; panel fade via presets (Menu's pattern)
-  "GasFee", // static fact row — fee updates swap text, never animate
+  "GasFee", // static fact row: fee updates swap text, never animate
 ]);
 const covered = new Set(
   checks.map((c) => c.file.split("/")[2]) // src/design-system/<Name>/…

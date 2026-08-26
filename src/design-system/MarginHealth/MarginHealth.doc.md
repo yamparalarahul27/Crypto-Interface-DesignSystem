@@ -22,10 +22,10 @@ Margin ratio  [==========..............]  Healthy  37.42%
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `value` | `number` | -- | Percent, clamped to 0-100. |
+| `value` | `number` | - | Percent, clamped to 0-100. |
 | `label` | `string` | `Margin ratio` | Visible label and meter name. |
 | `precision` | `number` | `2` | Percent decimals. |
-| `className` | `string` | -- | cn-merged. |
+| `className` | `string` | - | cn-merged. |
 
 Thresholds are fixed: `<50 healthy`, `50-79.99 caution`, `80-89.99 high`, `>=90 critical`.
 

@@ -2,7 +2,7 @@
 
 Status: draft
 Version: 0.9.0
-Single-choice option list on Radix RadioGroup — all options visible.
+Single-choice option list on Radix RadioGroup: all options visible.
 
 ## Usage
 
@@ -23,7 +23,7 @@ const [slippage, setSlippage] = useState<"0.1" | "0.5" | "1.0">();
 />
 ```
 
-Best for: one-of-N choices where seeing every option matters — slippage
+Best for: one-of-N choices where seeing every option matters, slippage
 presets, network selection, order type. Rule of thumb: ≤5 options →
 RadioGroup; more → Select. For on/off use Switch; for many-of-N use
 Checkbox.
@@ -36,18 +36,18 @@ Checkbox.
 ○  1.0%                    ← unchecked ring (outline)
 ```
 
-Each row is a ≥40px-tall label — the whole row is the hit area.
+Each row is a ≥40px-tall label: the whole row is the hit area.
 
 ## Props
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `options` | `RadioOption<T>[]` | — | `{ value, label, description?, disabled? }`. |
-| `value` | `T \| undefined` | — | Controlled. |
-| `onValueChange` | `(value: T) => void` | — | |
-| `disabled` | `boolean` | — | Disables the whole group. |
-| `aria-label` | `string` | — | Name the group when no visible label precedes it. |
-| `className` | `string` | — | cn-merged onto the root. |
+| `options` | `RadioOption<T>[]` | - | `{ value, label, description?, disabled? }`. |
+| `value` | `T \| undefined` | - | Controlled. |
+| `onValueChange` | `(value: T) => void` | - | |
+| `disabled` | `boolean` | - | Disables the whole group. |
+| `aria-label` | `string` | - | Name the group when no visible label precedes it. |
+| `className` | `string` | - | cn-merged onto the root. |
 
 ## Tokens
 
@@ -57,7 +57,7 @@ Each row is a ≥40px-tall label — the whole row is the hit area.
 ## States
 
 - **Unchecked**: outline ring, empty.
-- **Checked**: `data-state="checked"` — brand ring + brand dot.
+- **Checked**: `data-state="checked"`, brand ring + brand dot.
 - **Hover** (row): surface raises to `surface-container-high`.
 - **Disabled** (item or group): 40% opacity, no pointer.
 
@@ -68,7 +68,7 @@ is instant feedback, not a transition).
 
 ## A11y
 
-Radix wiring: `role="radiogroup"`, roving tabindex — Tab enters the
+Radix wiring: `role="radiogroup"`, roving tabindex, Tab enters the
 group once, ↑/↓/←/→ move selection. Rows are real `<label>`s so
 clicking text selects. Always name the group (`aria-label` or a
 preceding heading); descriptions are part of the label's text content.

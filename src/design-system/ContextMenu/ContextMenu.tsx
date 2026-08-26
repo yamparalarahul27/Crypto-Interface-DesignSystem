@@ -6,10 +6,10 @@ import { cn } from "@/lib/utils";
 import type { MenuItem } from "../Menu";
 
 /**
- * Right-click / long-press menu — Menu's context sibling. Same item
+ * Right-click / long-press menu: Menu's context sibling. Same item
  * data shape as Menu; behavior from Radix ContextMenu (position at
  * pointer, Escape/outside dismiss, arrow keys, typeahead). Wrap the
- * surface that owns the context actions — not the whole page.
+ * surface that owns the context actions: not the whole page.
  */
 export function ContextMenu({
   children,
@@ -18,7 +18,7 @@ export function ContextMenu({
 }: {
   /** Area that receives the context gesture. */
   children: ReactNode;
-  /** Same shape as Menu — `{label, onSelect, …}` or `{kind:"separator"}`. */
+  /** Same shape as Menu: `{label, onSelect, …}` or `{kind:"separator"}`. */
   items: MenuItem[];
   /** Merged onto the menu panel. */
   className?: string;

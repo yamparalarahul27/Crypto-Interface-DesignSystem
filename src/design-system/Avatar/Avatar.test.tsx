@@ -21,12 +21,20 @@ describe("Avatar", () => {
 
   it("`you` forces the reserved tide hue regardless of seed", () => {
     const you = render(<Avatar name="Y" you seed="whatever" />).getByRole("img");
-    expect(bg(you)).toContain("var(--id-tide)");
+    // The disc is drawn from the -fill token, never the pale text accent.
+    expect(bg(you)).toContain("var(--id-tide-fill)");
+    expect(bg(you)).not.toContain("var(--id-tide),");
   });
 
   it("explicit hue overrides hashing", () => {
     const el = render(<Avatar name="R" hue="rose" seed="x" />).getByRole("img");
-    expect(bg(el)).toContain("var(--id-rose)");
+    expect(bg(el)).toContain("var(--id-rose-fill)");
+  });
+
+  it("the glyph rides the light token, not the near-black one", () => {
+    const el = render(<Avatar name="M" />).getByRole("img");
+    expect(el.className).toContain("text-id-glyph");
+    expect(el.className).not.toContain("text-fg-inverse");
   });
 
   it("sizes map to their diameter classes", () => {

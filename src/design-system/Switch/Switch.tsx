@@ -3,7 +3,7 @@
 import { Switch as RadixSwitch } from "radix-ui";
 import { cn } from "@/lib/utils";
 
-/** On/off toggle on Radix Switch — label it from the caller. */
+/** On/off toggle on Radix Switch: label it from the caller. */
 export function Switch({
   checked,
   onCheckedChange,

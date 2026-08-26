@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Throwaway reconnaissance spike: query every integrated API for one token
-// and dump raw responses. Used to build the capability matrix — not production.
+// and dump raw responses. Used to build the capability matrix: not production.
 // Run: node scripts/token-recon.mjs [mint] [symbol]
 
 import { mkdirSync, writeFileSync } from "node:fs";
@@ -162,5 +162,5 @@ writeFileSync(
   JSON.stringify({ mint: MINT, symbol: SYMBOL, ok, fail, skip, results }, null, 2)
 );
 
-console.log(`\nDone — ok: ${ok}, fail: ${fail}, skip: ${skip}`);
+console.log(`\nDone; ok: ${ok}, fail: ${fail}, skip: ${skip}`);
 console.log(`Raw responses in: ${OUT_DIR}`);

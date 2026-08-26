@@ -2,7 +2,7 @@
 
 Status: stable
 Version: 1.0.0
-Compact inline token reference — icon, symbol, live price, signed 24h change.
+Compact inline token reference: icon, symbol, live price, signed 24h change.
 
 ## Usage
 
@@ -13,7 +13,7 @@ import { TokenChip } from "@/design-system";
   symbol="JUP"
   iconSrc={logoUrl}
   price="$0.8123"        // preformatted by the caller
-  change24h={4.2}        // SIGNED — drives arrow/prefix/color
+  change24h={4.2}        // SIGNED: drives arrow/prefix/color
 />
 ```
 
@@ -33,29 +33,29 @@ import { TokenChip } from "@/design-system";
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `symbol` | `string` | — | Ticker; also the icon fallback initials. |
-| `iconSrc` | `string?` | — | Token logo; falls back to initials disc. |
-| `price` | `string` | — | Preformatted (e.g. `"$0.8123"`) — formatting is the caller's job. |
-| `change24h` | `number` | — | **Signed** percent. Positive/zero → ▲ `+` buy; negative → ▼ `−` sell. |
-| `className` | `string` | — | Merged via `cn`. |
+| `symbol` | `string` | - | Ticker; also the icon fallback initials. |
+| `iconSrc` | `string?` | - | Token logo; falls back to initials disc. |
+| `price` | `string` | - | Preformatted (e.g. `"$0.8123"`): formatting is the caller's job. |
+| `change24h` | `number` | - | **Signed** percent. Positive/zero → `IconPriceUp` `+` buy; negative → `IconPriceDown` `−` sell. |
+| `className` | `string` | - | Merged via `cn`. |
 
 ## Tokens
 
-- `--color-surface`, `--color-outline-variant` — chip surface + hairline border.
-- `--color-fg` — symbol + price text.
-- `--color-buy` / `--color-sell` — 24h direction only (never identity hues for data).
-- `.data-sm` — Geist Pixel Square number ramp.
-- `--radius-chip` (`rounded-chip`) — chip corner.
+- `--color-surface`, `--color-outline-variant`: chip surface + hairline border.
+- `--color-fg`: symbol + price text.
+- `--color-buy` / `--color-sell`: 24h direction only (never identity hues for data).
+- `.data-sm`: Geist Pixel Square number ramp.
+- `--radius-chip` (`rounded-chip`): chip corner.
 
 ## States
 
-- **Up / flat** (`change24h >= 0`) — `▲ +N%` in `text-buy`.
-- **Down** (`change24h < 0`) — `▼ −N%` in `text-sell`.
-- **No icon** — `TokenIcon` renders the initials disc.
+- **Up / flat** (`change24h >= 0`): `IconPriceUp` + `+N%` in `text-buy`.
+- **Down** (`change24h < 0`): `IconPriceDown` + `−N%` in `text-sell`.
+- **No icon**: `TokenIcon` renders the initials disc.
 
 ## Motion
 
-None. Prices update by value, not animation — terminal calm (DESIGN.md → Motion).
+None. Prices update by value, not animation: terminal calm (DESIGN.md → Motion).
 
 ## A11y
 

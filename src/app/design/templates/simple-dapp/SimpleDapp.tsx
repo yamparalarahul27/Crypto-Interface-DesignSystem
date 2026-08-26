@@ -1,6 +1,6 @@
 "use client";
 
-// Template: the simple dApp (cids-roadmap Phase 6 / handoff 6b) — the
+// Template: the simple dApp (cids-roadmap Phase 6 / handoff 6b), the
 // consumer end of the range claim. Mobile-first, comfortable density,
 // built ONLY from design-system exports. Mock data, mock wallet.
 
@@ -12,13 +12,14 @@ import {
   Button,
   Dialog,
   EmptyState,
+  IconArrowRight,
   NetworkBadge,
   PriceChange,
   StatCell,
   ToastProvider,
   TxStatus,
-  useToast,
   type TxState,
+  useToast,
 } from "@/design-system";
 
 const WALLET = "7xKtF3aB9cD2eF4gH6jK8mN1pQ5rS7tU9vW2xY4z9fQ2";
@@ -46,7 +47,7 @@ function Dapp() {
 
   return (
     <div className="mx-auto flex min-h-dvh max-w-[430px] flex-col gap-4 bg-surface-page p-4 text-fg">
-      {/* header: connect is a session, not a signature — verb table */}
+      {/* header: connect is a session, not a signature, verb table */}
       <header className="flex items-center justify-between">
         <span className="font-mono text-sm font-semibold">
           simple dapp <span className="text-brand">~</span>
@@ -67,7 +68,7 @@ function Dapp() {
         <EmptyState
           className="flex-1"
           title="Nothing here yet"
-          hint="Connect to see your balances — reading is free."
+          hint="Connect to see your balances: reading is free."
           action={
             <Button variant="primary" onClick={() => setConnected(true)}>
               Connect
@@ -84,7 +85,7 @@ function Dapp() {
 
           {/* send card */}
           <div className="space-y-3 rounded-card border border-outline-variant bg-surface-container p-4">
-            <div className="text-[10px] uppercase tracking-wider text-fg-subtle">Send</div>
+            <div className="text-[10px] text-fg-subtle">Send</div>
             <AmountInput
               value={amt}
               onValueChange={setAmt}
@@ -124,7 +125,7 @@ function Dapp() {
           >
             <div className="flex flex-wrap items-center gap-2 text-sm">
               <span className="data-md text-fg">{amt} SOL</span>
-              <span className="text-fg-subtle">→</span>
+              <IconArrowRight size={13} className="text-fg-subtle" aria-hidden="true" />
               <AddressChip address={WALLET} />
             </div>
           </Dialog>

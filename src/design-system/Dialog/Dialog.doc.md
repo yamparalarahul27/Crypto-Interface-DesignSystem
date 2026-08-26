@@ -2,7 +2,7 @@
 
 Status: stable
 Version: 1.0.0
-Centered modal — Sheet's desktop-centered sibling. Behavior is Radix Dialog; the title prop is required because a dialog must name itself.
+Centered modal: Sheet's desktop-centered sibling. Behavior is Radix Dialog; the title prop is required because a dialog must name itself.
 
 ## Usage
 
@@ -36,12 +36,12 @@ import { Dialog, Button } from "@/design-system";
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `open` / `onOpenChange` | controlled pair | — | Caller owns state. |
+| `open` / `onOpenChange` | controlled pair | - | Caller owns state. |
 | `title` | `string` | **required** | Radix Title → accessible name. |
-| `description` | `string` | — | Radix Description → `aria-describedby`. |
-| `children` | `ReactNode` | — | Body. |
-| `footer` | `ReactNode` | — | Action row (destructive actions confirm here). |
-| `className` | `string` | — | cn-merged onto the panel. |
+| `description` | `string` | - | Radix Description → `aria-describedby`. |
+| `children` | `ReactNode` | - | Body. |
+| `footer` | `ReactNode` | - | Action row (destructive actions confirm here). |
+| `className` | `string` | - | cn-merged onto the panel. |
 
 ## Tokens
 

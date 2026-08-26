@@ -1,5 +1,5 @@
 /* ──────────────────────────────────────────────────────────────
-   DeFi Triangle — static prototype theme layer
+   DeFi Triangle: static prototype theme layer
    Mirrors src/app/globals.css design tokens. The colour utilities
    themselves (bg-surface-container, text-fg, text-brand …) are
    produced by the Tailwind Play CDN config in each HTML file;

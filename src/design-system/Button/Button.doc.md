@@ -2,7 +2,7 @@
 
 Status: stable
 Version: 1.0.0
-The action primitive — four variants on the semantic tokens, three heights on the shared scale.
+The action primitive: four variants on the semantic tokens, three heights on the shared scale.
 
 ## Usage
 
@@ -29,7 +29,7 @@ import { Button } from "@/design-system";
 |---|---|---|---|
 | `variant` | `"primary" \| "secondary" \| "ghost" \| "destructive"` | `"secondary"` | Destructive pairs with a confirm step (Dialog). |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` | Heights 28 / 36 / 44 px (shared scale). |
-| `className` | `string` | — | cn-merged. |
+| `className` | `string` | - | cn-merged. |
 | …rest | `ButtonHTMLAttributes` | `type="button"` | Native pass-through (onClick, disabled…). |
 
 ## Tokens
@@ -47,7 +47,7 @@ import { Button } from "@/design-system";
 
 ## A11y
 
-- Native `<button type="button">` — space/enter, focusability for free.
+- Native `<button type="button">`: space/enter, focusability for free.
 - Disabled uses the native attribute (removed from tab order).
 - `text-white` on destructive is deliberate: sell-strong is dark in every theme.
-- Label is the accessible name — icon-only use belongs to IconButton.
+- Label is the accessible name: icon-only use belongs to IconButton.

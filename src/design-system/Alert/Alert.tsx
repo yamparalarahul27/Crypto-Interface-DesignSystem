@@ -3,10 +3,10 @@ import type { ReactNode } from "react";
 
 export type AlertTone = "info" | "success" | "warning" | "error";
 
-// Inline callout on the tinted-surface pairs — the states-catalog
+// Inline callout on the tinted-surface pairs: the states-catalog
 // pattern's hand-rolled error row / offline strip, made canonical.
 // Word + tint together (never color alone); in-flow, next to what it
-// describes — Toast is for events, Alert is for conditions.
+// describes: Toast is for events, Alert is for conditions.
 const TONE = {
   info: { box: "bg-info-surface", text: "text-info", word: "note" },
   success: { box: "bg-success-surface", text: "text-success", word: "ok" },
@@ -25,7 +25,7 @@ export function Alert({
   title: string;
   /** Supporting line(s). */
   children?: ReactNode;
-  /** Right-aligned affordance — typically a small Button (e.g. Retry). */
+  /** Right-aligned affordance: typically a small Button (e.g. Retry). */
   action?: ReactNode;
   className?: string;
 }) {
@@ -42,7 +42,7 @@ export function Alert({
     >
       <div className="min-w-0">
         <p className={cn("text-sm font-medium", t.text)}>
-          <span className="mr-1.5 font-mono text-[10px] uppercase tracking-wider opacity-70">
+          <span className="mr-1.5 font-mono text-[10px] opacity-70">
             {t.word}
           </span>
           {title}

@@ -13,9 +13,9 @@ export type ComboboxOption<T extends string> = {
 };
 
 /**
- * Typeahead select — an Input that filters a listbox as you type.
+ * Typeahead select: an Input that filters a listbox as you type.
  * Pick-from-list only: the value is always a known option (validate-free
- * for consumers). Hand-rolled ARIA 1.2 combobox on Radix Popover — no
+ * for consumers). Hand-rolled ARIA 1.2 combobox on Radix Popover: no
  * cmdk dependency, so the component stays registry-portable.
  * Select is for short closed lists; Combobox is for lists worth searching.
  */
@@ -62,7 +62,7 @@ export function Combobox<T extends string>({
   };
   const closeList = () => {
     setOpen(false);
-    setQuery(null); // revert to the selected label — free text never sticks
+    setQuery(null); // revert to the selected label: free text never sticks
   };
   const select = (opt: ComboboxOption<T>) => {
     if (opt.disabled) return;

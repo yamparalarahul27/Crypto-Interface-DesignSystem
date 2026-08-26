@@ -18,7 +18,7 @@ export type TokenOption = {
 };
 
 /**
- * Token picker — the swap/send atom every DeFi UI rebuilds by hand.
+ * Token picker: the swap/send atom every DeFi UI rebuilds by hand.
  * Trigger shows the selected token (icon + symbol); Dialog hosts a
  * searchable list with optional balances. Presentational: you own the
  * token list and selection; open state is ephemeral UI only.
@@ -34,7 +34,7 @@ export function TokenSelect({
   "aria-label": ariaLabel = "Select token",
 }: {
   tokens: TokenOption[];
-  /** Selected token id — undefined means none chosen yet. */
+  /** Selected token id: undefined means none chosen yet. */
   value: string | undefined;
   onValueChange: (id: string) => void;
   placeholder?: string;

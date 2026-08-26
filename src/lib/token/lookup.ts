@@ -8,7 +8,7 @@ export type LookupResult =
  *   2. Helius DAS getAsset fallback
  *   3. Both miss → not indexed
  *
- * Determines whether a token is real before showing data — separate from the
+ * Determines whether a token is real before showing data: separate from the
  * stat fetches (Birdeye, Tokens.xyz), which can return null without meaning
  * the token doesn't exist.
  */

@@ -1,4 +1,4 @@
-# 00 · Product — what Tide is
+# 00 · Product: what Tide is
 
 ## One-liner
 
@@ -8,10 +8,10 @@ they watch, react to their calls, and read the market through your circle.
 
 ## Why "Tide"
 
-- Markets move together — a tide is the shared movement, not one wave.
+- Markets move together: a tide is the shared movement, not one wave.
 - Ocean/teal imagery fits the existing mint-teal (`--brand #5ad8c4`)
   identity without a redesign.
-- Short, calm, premium — matches the system's mood words
+- Short, calm, premium: matches the system's mood words
   (*calm authority, precise, cinematic*), and gives natural product
   vocabulary: *the tide today*, *tide is turning*, *high tide*.
 
@@ -23,11 +23,11 @@ design-system phase, not here.
 
 | Who | What they need | What Tide gives |
 |---|---|---|
-| **Customers** — crypto-curious social traders on mobile | Market info that doesn't feel lonely or terminal-cold | A feed of people + live data, zero-friction browsing |
-| **Design evaluators** — clients/recruiters assessing B2C craft | Proof of real product design, not dribbble shots | A polished working app + `/design` system gallery |
+| **Customers**: crypto-curious social traders on mobile | Market info that doesn't feel lonely or terminal-cold | A feed of people + live data, zero-friction browsing |
+| **Design evaluators**: clients/recruiters assessing B2C craft | Proof of real product design, not dribbble shots | A polished working app + `/design` system gallery |
 
 The second audience never dilutes the first: `/design` is unlisted, and the
-app is designed for customers — evaluators judge exactly that.
+app is designed for customers: evaluators judge exactly that.
 
 ## The core loop
 
@@ -43,11 +43,11 @@ app is designed for customers — evaluators judge exactly that.
 
 1. **Discover** a token in Markets (engine rails: attraction / long-term /
    high-risk / stablecoins).
-2. **Watch** it — the existing watchlist becomes a *public signal*
+2. **Watch** it: the existing watchlist becomes a *public signal*
    ("47 people watch PYUSD · 12 added today").
 3. **Follow** the people whose watches/takes keep being right.
 4. **Feed** shows what your circle is watching, saying, reacting to.
-5. **React/comment** — the social pulse feeds back into discovery.
+5. **React/comment**: the social pulse feeds back into discovery.
 
 Watching is the atomic social act. It already exists in the engine
 (`useWatchlist`), it's low-stakes (not financial advice), and aggregating it
@@ -67,16 +67,16 @@ creates the social-proof rails that make the feed interesting on day one.
 - `/design` living component gallery (hidden URL)
 - ~12 seeded personas so the app is alive at launch
 
-**Out (designed for, not built) — see 04-roadmap.md:**
-- Chat (token rooms / DMs) — phase 4
+**Out (designed for, not built); see 04-roadmap.md:**
+- Chat (token rooms / DMs): phase 4
 - Notifications/push
 - Leaderboards, streaks-as-mechanics (only visual flair in v1)
-- Trading execution of any kind — Tide never touches funds
+- Trading execution of any kind: Tide never touches funds
 - NFT Edge tab (engine kept; surface deferred)
 
 ## Product principles
 
-1. **Numbers are the hero; people are the plot.** Data density stays —
+1. **Numbers are the hero; people are the plot.** Data density stays:
    the social layer explains *why you care*, it never hides the number.
 2. **Watching ≠ advising.** All social objects are observations
    (watch, take, reaction). No "buy" buttons, no PnL bragging mechanics
@@ -88,5 +88,5 @@ creates the social-proof rails that make the feed interesting on day one.
    the *interactions* are alive (reaction pops, tasteful celebration when
    a watched token runs). Fun is spent sparingly, like the brand color.
 5. **The engine is the floor.** Every market surface plugs into the
-   existing hooks per engine-contract.md — no new market-data plumbing
+   existing hooks per engine-contract.md: no new market-data plumbing
    in v1.

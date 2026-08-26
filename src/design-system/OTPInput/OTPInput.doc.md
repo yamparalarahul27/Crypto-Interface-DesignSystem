@@ -34,14 +34,14 @@ hint / error (shared reserved line)
 | `length` | `number` | `6` | Cell count. |
 | `mode` | `"numeric" \| "alphanumeric"` | `"numeric"` | Allowed chars + `inputMode`. |
 | `defaultValue` | `string` | `""` | Seed, filtered + truncated. |
-| `onChange` | `(value: string) => void` | — | Every accepted edit. |
-| `onComplete` | `(value: string) => void` | — | When every cell is filled. |
+| `onChange` | `(value: string) => void` | - | Every accepted edit. |
+| `onComplete` | `(value: string) => void` | - | When every cell is filled. |
 | `error` | `boolean` | `false` | `aria-invalid` on cells. |
-| `errorMessage` / `hint` | `string` | — | Shared status line (no jump). |
+| `errorMessage` / `hint` | `string` | - | Shared status line (no jump). |
 | `label` | `string` | `"Verification code"` | Group + per-cell names. |
 | `groupEvery` | `number` | `3` | Visual gap every N cells. |
-| `disabled` / `autoFocus` | `boolean` | `false` | — |
-| `className` | `string` | — | cn-merged. |
+| `disabled` / `autoFocus` | `boolean` | `false` | - |
+| `className` | `string` | - | cn-merged. |
 
 ## Tokens
 

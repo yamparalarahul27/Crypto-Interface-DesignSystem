@@ -1,9 +1,9 @@
 "use client";
 
-// Order book — lifted from the Phase-5 canvas demo into a composable
+// Order book: lifted from the Phase-5 canvas demo into a composable
 // panel (used by the exchange template AND the canvas Data zone).
 // Rows are fixed to the density tokens with tabular numerals: ticks
-// change text and depth-bar widths only — zero layout shift.
+// change text and depth-bar widths only: zero layout shift.
 
 import { useEffect, useState } from "react";
 
@@ -79,7 +79,7 @@ export function OrderBookPanel({ base = 184.2 }: { base?: number }) {
   return (
     <div className="rounded-card border border-outline-variant bg-surface-container">
       <div
-        className="flex items-center justify-between border-b border-outline-variant text-[10px] uppercase tracking-wider text-fg-subtle"
+        className="flex items-center justify-between border-b border-outline-variant text-[10px] text-fg-subtle"
         style={{ height: "var(--row-h)", padding: "0 var(--cell-px)" }}
       >
         <span>Bids</span>

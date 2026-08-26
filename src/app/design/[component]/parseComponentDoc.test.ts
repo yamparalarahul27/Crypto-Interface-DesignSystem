@@ -12,7 +12,7 @@ const SAMPLE = `# Button
 
 Status: stable
 Version: 1.0.0
-The action primitive — four variants on the semantic tokens.
+The action primitive: four variants on the semantic tokens.
 
 ## Usage
 
@@ -51,7 +51,7 @@ none
 describe("parseComponentDoc", () => {
   it("extracts purpose, best-for, usage, tokens, states, TOC", () => {
     const p = parseComponentDoc(SAMPLE);
-    expect(p.purpose).toBe("The action primitive — four variants on the semantic tokens.");
+    expect(p.purpose).toBe("The action primitive: four variants on the semantic tokens.");
     expect(p.bestFor).toContain("primary actions");
     expect(p.usageCode).toContain('<Button variant="primary">');
     expect(p.tokens).toEqual(

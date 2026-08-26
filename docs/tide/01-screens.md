@@ -1,4 +1,4 @@
-# 01 · Screens — navigation, wireframes, seam map
+# 01 · Screens: navigation, wireframes, seam map
 
 Mobile-first (customer audience is on phones). Desktop is the same
 column, centered, max-w ~28rem, gutters on `--surface-dim`.
@@ -15,12 +15,12 @@ column, centered, max-w ~28rem, gutters on `--surface-dim`.
 └──────────────────────────────┘
 ```
 
-- **Feed** — social home (default tab for identified users)
-- **Markets** — discovery rails (default for logged-out visitors)
-- **Search** — opens the search overlay (existing `useTokenSearch` +
+- **Feed**: social home (default tab for identified users)
+- **Markets**: discovery rails (default for logged-out visitors)
+- **Search**: opens the search overlay (existing `useTokenSearch` +
   recents + recommended), extended with people results later
-- **Profile ("Me")** — own profile, or wallet-connect entry if logged out
-- **Token detail** — pushed route `/token/[address]`, not a tab
+- **Profile ("Me")**: own profile, or wallet-connect entry if logged out
+- **Token detail**: pushed route `/token/[address]`, not a tab
 - Other pushed routes: `/u/[handle]`, `/design`, system pages
 
 ## Screen inventory
@@ -52,7 +52,7 @@ column, centered, max-w ~28rem, gutters on `--surface-dim`.
 │   the real signal this week  │
 │   🔥 8  💬 5                 │
 ├──────────────────────────────┤
-│ ▲ JUP ran +14% — 5 people    │
+│ ▲ JUP ran +14%: 5 people    │
 │   you follow watch it        │ ← milestone card
 └──────────────────────────────┘
 ```
@@ -67,7 +67,7 @@ column, centered, max-w ~28rem, gutters on `--surface-dim`.
 
 ## S2 · Markets
 
-Re-skin of the proven home rails — same hooks, new clothes, plus social
+Re-skin of the proven home rails: same hooks, new clothes, plus social
 proof:
 
 ```
@@ -84,7 +84,7 @@ proof:
 └──────────────────────────────┘
 ```
 
-Watchlist lives here too (a "Yours" rail at top when identified) — the
+Watchlist lives here too (a "Yours" rail at top when identified): the
 Watchlist *tab* from the old app dissolves into Markets + Profile.
 
 ## S4 · Token detail
@@ -124,7 +124,7 @@ Comments open a bottom-sheet thread (same component as feed threads).
 ```
 
 Own profile adds: edit profile, sign out. Public watchlist is the
-follow-decision surface — you follow someone because of what they watch.
+follow-decision surface: you follow someone because of what they watch.
 
 ## S7 · Onboarding (identity)
 
@@ -147,26 +147,26 @@ browse freely (no wallet)
 ## S8 · `/design` gallery
 
 Spec in [02-design-system.md](./02-design-system.md#the-design-gallery).
-Unlisted (no nav link, `noindex`), but not secret — no auth gate.
+Unlisted (no nav link, `noindex`), but not secret: no auth gate.
 
-## Seam map — screen → engine hook
+## Seam map: screen → engine hook
 
 | Screen | Existing hooks (contract §3) | New hooks needed |
 |---|---|---|
 | Feed | `useTokenPriceTicker` (chips) | `useFeed`, `useReactions`, `useComments` |
 | Markets | `useHomeJupiterPairs`, `useStablecoins`, `useWatchlist` | `useWatcherCounts` |
-| Search | `useTokenSearch`, `useRecentSearches`, `useRecommendedTokens` | — (people search later) |
+| Search | `useTokenSearch`, `useRecentSearches`, `useRecommendedTokens` |: (people search later) |
 | Token detail | `useTokenDetails`, `useTokenPriceTicker`, `useTokenSecurity`, `useWatchlist` | `useTokenSocial` (watchers, comments) |
 | Profile | `useWalletAuth` / `useSession` | `useProfile`, `useFollows` |
 | Onboarding | `useWalletAuth` | `useProfile` (claim/update) |
-| `/design` | — (static + live components) | — |
+| `/design` |: (static + live components) | - |
 
 New hooks follow the exact conventions of the existing 14 (return-shape
 documented in engine-contract.md **in the same PR that adds them**).
 
 ## Engine-contract obligations (before any deletion/build)
 
-From contract §6 — these are build-phase gates, recorded here so they
+From contract §6; these are build-phase gates, recorded here so they
 don't get lost:
 
 1. Move `OnChainData` + `HolderRow` types into `src/lib/token/` before

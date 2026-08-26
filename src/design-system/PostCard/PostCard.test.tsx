@@ -29,20 +29,20 @@ describe("PostCard", () => {
     expect(screen.getByText("JUP")).toBeTruthy();
   });
 
-  it("milestone up: no author, ▲ glyph, buy left border", () => {
+  it("milestone up: no author, up icon, buy left border", () => {
     const { container } = render(
       <PostCard kind="milestone" direction="up" time="1h" body="BONK ran" />,
     );
     expect(screen.queryByText(/@/)).toBeNull();
-    expect(screen.getByText("▲")).toBeTruthy();
+    expect(container.querySelector('[data-direction="up"] svg')).toBeTruthy();
     expect((container.firstChild as HTMLElement).className).toContain("border-l-buy");
   });
 
-  it("milestone down: ▼ glyph, sell left border", () => {
+  it("milestone down: down icon, sell left border", () => {
     const { container } = render(
       <PostCard kind="milestone" direction="down" time="1h" body="broke floor" />,
     );
-    expect(screen.getByText("▼")).toBeTruthy();
+    expect(container.querySelector('[data-direction="down"] svg')).toBeTruthy();
     expect((container.firstChild as HTMLElement).className).toContain("border-l-sell");
   });
 

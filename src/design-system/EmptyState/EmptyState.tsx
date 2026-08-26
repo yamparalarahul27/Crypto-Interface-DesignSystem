@@ -1,19 +1,20 @@
 import { cn } from "@/lib/utils";
+import { IconEmpty } from "../icons";
 import type { ReactNode } from "react";
 
 /**
- * Designed empty — cold-start is a first-class state (tide DS spec).
+ * Designed empty: cold-start is a first-class state (tide DS spec).
  * One quiet glyph, a title, one playful-budget hint line, optional action.
  */
 export function EmptyState({
-  glyph = "◍",
+  glyph = <IconEmpty size={28} />,
   title,
   hint,
   action,
   className,
 }: {
-  /** Decorative marker (emoji/char); aria-hidden. */
-  glyph?: string;
+  /** Decorative marker: an icon, emoji, or char; aria-hidden. */
+  glyph?: ReactNode;
   title: string;
   /** One line; this is where the playful budget lives. */
   hint?: string;
@@ -28,7 +29,7 @@ export function EmptyState({
         className,
       )}
     >
-      <span aria-hidden="true" className="mb-1 text-2xl text-fg-subtle">
+      <span aria-hidden="true" className="mb-1 inline-flex text-2xl text-fg-subtle">
         {glyph}
       </span>
       <p className="text-sm font-medium text-fg">{title}</p>

@@ -14,7 +14,7 @@ describe("categorize", () => {
     expect([...listed].sort()).toEqual([...componentNames].sort());
   });
 
-  it("leaves nothing uncategorized — a new component needs a canvas zone", () => {
+  it("leaves nothing uncategorized: a new component needs a canvas zone", () => {
     const other = categorize(componentNames).find(
       (c) => c.id === UNCATEGORIZED_ID,
     );

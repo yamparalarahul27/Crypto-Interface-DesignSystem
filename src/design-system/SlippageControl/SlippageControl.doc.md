@@ -2,7 +2,7 @@
 
 Status: draft
 Version: 0.9.0
-Slippage tolerance — presets + custom %, with risk tone bands.
+Slippage tolerance: presets + custom %, with risk tone bands.
 
 ## Usage
 
@@ -16,7 +16,7 @@ import { SlippageControl } from "@/design-system";
 Best for: directly above the confirm button in swap/trade flows,
 next to `GasFee`. Value is **basis points** (50 = 0.5%) so callers
 never float-multiply; the UI shows percent. Prefer keeping Auto/smart
-routing upstream — this component is the explicit user override.
+routing upstream: this component is the explicit user override.
 
 ## Anatomy
 
@@ -32,15 +32,15 @@ Slippage                         0.5% LOW
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `value` | `number` | — | Tolerance in **bps** (50 = 0.5%). |
-| `onValueChange` | `(bps: number) => void` | — | Controlled. |
+| `value` | `number` | - | Tolerance in **bps** (50 = 0.5%). |
+| `onValueChange` | `(bps: number) => void` | - | Controlled. |
 | `presets` | `number[]` | `[10, 50, 100]` | Preset chips in bps. |
 | `maxBps` | `number` | `5000` | Cap for custom input (50%). |
 | `label` | `string` | `"Slippage"` | Row label. |
-| `disabled` | `boolean` | — | Disables chips + input. |
-| `className` | `string` | — | cn-merged onto the root. |
+| `disabled` | `boolean` | - | Disables chips + input. |
+| `className` | `string` | - | cn-merged onto the root. |
 
-`"use client"` — owns ephemeral custom-mode + draft string; domain
+`"use client"`: owns ephemeral custom-mode + draft string; domain
 value is controlled.
 
 Also exports `slippageLevel(bps)` and `DEFAULT_SLIPPAGE_PRESETS`.
@@ -54,16 +54,16 @@ Also exports `slippageLevel(bps)` and `DEFAULT_SLIPPAGE_PRESETS`.
 
 ## States
 
-- **preset selected** — matching chip `aria-pressed` + brand fill.
-- **custom** — Custom chip pressed; percent input visible.
-- **level** — low (≤50bps) · normal (≤100) · elevated (≤200) · high (>200);
+- **preset selected**: matching chip `aria-pressed` + brand fill.
+- **custom**: Custom chip pressed; percent input visible.
+- **level**: low (≤50bps) · normal (≤100) · elevated (≤200) · high (>200);
   word + tint together (mono-safe).
-- **disabled** — opacity 40 on chips/input.
+- **disabled**: opacity 40 on chips/input.
 
 ## Motion
 
 Chip press: `active:scale-[0.96]` + `duration-150` color/bg. Level
-word swaps instantly with the value — never animate risk readouts.
+word swaps instantly with the value: never animate risk readouts.
 
 ## A11y
 

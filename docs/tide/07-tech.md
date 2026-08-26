@@ -1,4 +1,4 @@
-# 07 · Tech blueprint — architecture, hooks, SQL, payloads
+# 07 · Tech blueprint: architecture, hooks, SQL, payloads
 
 Full engineering blueprint so phases 1–3 are execution, not design.
 Engine rules from [engine-contract.md](../engine-contract.md) and
@@ -41,7 +41,7 @@ src/
   └ hooks/              ← new hooks join the 14
 ```
 
-## Data fetching — the recommendation
+## Data fetching: the recommendation
 
 **Adopt TanStack Query (React Query) v5 for the *new social* hooks
 only.** Existing 14 engine hooks stay hand-rolled and untouched.
@@ -59,7 +59,7 @@ Why Query over SWR / more hand-rolling:
 This also resolves half of the CLAUDE.md pending
 `set-state-in-effect` decision: new data code never triggers the rule;
 the existing hooks migrate (or the rule gets scoped) in the already
-planned separate task — **no piecemeal fixes**, per the backlog note.
+planned separate task: **no piecemeal fixes**, per the backlog note.
 
 Cost: +~12–13 kB gz, well-audited dep. Requires the standard dependency
 proposal + `npm audit` gate at phase-2 start. `QueryClientProvider`
@@ -259,7 +259,7 @@ Following lane requires JWT (401 otherwise). Server unions
 capped at 1000 follows in v1), orders by `created_at desc`, keyset
 cursor `(created_at, id)`. Milestones: computed per request from the
 viewer's followed watch-set vs. 24h moves (existing price routes),
-cached 5 min in-memory per token — never stored.
+cached 5 min in-memory per token: never stored.
 </details>
 
 <details><summary><b>/api/posts · /api/comments · /api/reactions</b></summary>
@@ -280,7 +280,7 @@ GET  /api/reactions ?type=post&id=…               // batched: ids=a,b,c
 POST /api/reactions { subjectType, subjectId, emoji } (JWT, toggles)
 → { success, data: { added: boolean } }
 ```
-Feed/comment reads embed reaction summaries server-side (one join) —
+Feed/comment reads embed reaction summaries server-side (one join):
 the GET /reactions batch route exists only for revalidation.
 </details>
 
@@ -292,7 +292,7 @@ GET → { success, data: {
   previewProfiles: ProfileLite[],   // ≤3, followed-by-viewer first (JWT optional)
   commentCount: number } }
 ```
-One round-trip for the social strip. `s-maxage=30` — counts may lag
+One round-trip for the social strip. `s-maxage=30`: counts may lag
 30s, acceptable.
 </details>
 
@@ -330,15 +330,15 @@ Idempotent (`on conflict do nothing`).
 | 2 | route-handler tests: claim (taken/invalid/reserved), follow idempotency, IDOR attempts (wallet in payload ignored) |
 | 3 | feed cursor stability under concurrent inserts; optimistic rollback paths (kill network mid-mutation); seed idempotency |
 
-Test cases still get proposed per-PR for approval (CLAUDE.md policy) —
+Test cases still get proposed per-PR for approval (CLAUDE.md policy):
 this table is the floor, not the ceiling.
 
 ## Explicitly deferred
 
-- Realtime (chat, live comment streams) — phase 4; nothing in 0–3 may
+- Realtime (chat, live comment streams): phase 4; nothing in 0–3 may
   assume a socket exists.
 - People search in the search overlay (needs `pg_trgm` index on
-  handle/display_name — trivial to add later, noted here so the search
+  handle/display_name: trivial to add later, noted here so the search
   overlay component keeps a results-section abstraction).
 - Notifications (schema unaffected: all social objects carry
   `created_at` + author, a notifications table can derive later).

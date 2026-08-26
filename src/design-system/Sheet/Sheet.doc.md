@@ -2,7 +2,7 @@
 
 Status: stable
 Version: 1.0.0
-Bottom sheet chrome — backdrop, grab handle, drag-to-dismiss, pinned footer. The base for CommentThread / Onboarding.
+Bottom sheet chrome: backdrop, grab handle, drag-to-dismiss, pinned footer. The base for CommentThread / Onboarding.
 
 ## Usage
 
@@ -35,25 +35,25 @@ const [open, setOpen] = useState(false);
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `open` | `boolean` | — | Controlled visibility. |
-| `onOpenChange` | `(open: boolean) => void` | — | Fired by backdrop tap, Escape, close button, and drag-dismiss. |
-| `title` | `ReactNode` | — | Header + accessible `Dialog.Title`. |
-| `children` | `ReactNode` | — | Scrolling body. |
-| `footer` | `ReactNode` | — | Optional pinned-bottom region. |
-| `className` | `string` | — | Extra classes on the panel. |
+| `open` | `boolean` | - | Controlled visibility. |
+| `onOpenChange` | `(open: boolean) => void` | - | Fired by backdrop tap, Escape, close button, and drag-dismiss. |
+| `title` | `ReactNode` | - | Header + accessible `Dialog.Title`. |
+| `children` | `ReactNode` | - | Scrolling body. |
+| `footer` | `ReactNode` | - | Optional pinned-bottom region. |
+| `className` | `string` | - | Extra classes on the panel. |
 
 ## Tokens
 
 - `--color-surface` panel · `--color-outline-variant` hairlines · `--color-outline` grab handle.
-- `--motion-settle` — drag spring-back transition.
+- `--motion-settle`: drag spring-back transition.
 - Enter/exit slide via `tw-animate-css` (`slide-in-from-bottom` / `fade`).
-- `--radius-sheet` (`rounded-t-sheet`) — top corners; `--radius-control` close button.
+- `--radius-sheet` (`rounded-t-sheet`): top corners; `--radius-control` close button.
 
 ## States
 
-- **Open / closed** — Radix `data-[state]`, slide + fade.
-- **Dragging** — panel follows the finger downward (transition disabled).
-- **Release** — `> 120px` closes; otherwise springs back on `--motion-settle`.
+- **Open / closed**: Radix `data-[state]`, slide + fade.
+- **Dragging**: panel follows the finger downward (transition disabled).
+- **Release**: `> 120px` closes; otherwise springs back on `--motion-settle`.
 
 ## Motion
 

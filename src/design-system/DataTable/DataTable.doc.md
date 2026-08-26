@@ -30,12 +30,12 @@ SOL      $184.26        <- numeric: right + data-md + tabular
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `columns` | `Column<T>[]` | -- | `{key, header, cell, align?, sortable?, sortValue?, width?}`. |
-| `rows` | `T[]` | -- | Data. |
-| `rowKey` | `(row) => string` | -- | Stable identity (streaming-safe). |
-| `caption` | `string` | -- | Visually-hidden table name (required). |
-| `maxHeight` | `string` | -- | Scroll container + sticky header. |
-| `className` | `string` | -- | cn-merged onto the frame. |
+| `columns` | `Column<T>[]` | - | `{key, header, cell, align?, sortable?, sortValue?, width?}`. |
+| `rows` | `T[]` | - | Data. |
+| `rowKey` | `(row) => string` | - | Stable identity (streaming-safe). |
+| `caption` | `string` | - | Visually-hidden table name (required). |
+| `maxHeight` | `string` | - | Scroll container + sticky header. |
+| `className` | `string` | - | cn-merged onto the frame. |
 
 **Virtualization recipe:** not shipped by design (no reference system ships it). Past ~200 streaming rows, wrap rows with TanStack Virtual: keep this table for layout/semantics, virtualize `<tbody>` children, preserve `rowKey` stability.
 

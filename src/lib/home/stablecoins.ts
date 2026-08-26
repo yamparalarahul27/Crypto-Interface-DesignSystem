@@ -2,7 +2,7 @@
  * Curated Solana stablecoin list for the "Park Your Money" home rail.
  *
  * Mints are checked into git so the rail surface is deterministic. To add or
- * remove an entry, edit this file in its own PR — never via runtime config.
+ * remove an entry, edit this file in its own PR: never via runtime config.
  *
  * `pendingListing: true` means the project is recognised but does not yet have
  * Jupiter-quotable liquidity on Solana. The card renders a brand-pitch tile
@@ -19,7 +19,7 @@ export type StablecoinEntry = {
   name: string;
   /**
    * Key into STABLECOIN_ISSUERS. Drives the "Issued by …" label and link in
-   * the StableTokenModal. Optional — the modal hides the row if absent.
+   * the StableTokenModal. Optional: the modal hides the row if absent.
    */
   issuerKey?: string;
   /** Marketing tagline shown on the pending tile. Required when pendingListing. */
@@ -33,7 +33,7 @@ export type StablecoinEntry = {
   /**
    * Set to true if the mint has not been verified against Jupiter from this
    * environment yet. Visual check on the Vercel preview is the gate. The flag
-   * is informational only — it does not change runtime behaviour.
+   * is informational only: it does not change runtime behaviour.
    */
   unverifiedFromSandbox?: boolean;
   /**
@@ -50,9 +50,9 @@ export type StablecoinEntry = {
 
 export const STABLECOINS: StablecoinEntry[] = [
   {
-    // Palm USD — featured per product decision. Mint confirmed by Palm USD docs
+    // Palm USD: featured per product decision. Mint confirmed by Palm USD docs
     // (https://www.palmusd.com/pages/developers.html) and PUSD_INTEGRATION.md.
-    // No Jupiter liquidity at the time of writing — pending tile.
+    // No Jupiter liquidity at the time of writing: pending tile.
     mint: "CZzgUBvxaMLwMhVSLgqJn3npmxoTo6nzMNQPAnwtHF3s",
     symbol: "PUSD",
     name: "Palm USD",
@@ -91,7 +91,7 @@ export const STABLECOINS: StablecoinEntry[] = [
     unverifiedFromSandbox: true,
   },
   {
-    // USDG — Global Dollar Network, Paxos-issued. Solana SPL mint provided by
+    // USDG: Global Dollar Network, Paxos-issued. Solana SPL mint provided by
     // user. Replaces Ethena USDe in the v1 list.
     mint: "2u1tszSeqZ3qBWF3uNGPFc8TzMk2tdiwknnRMWGWjGWH",
     symbol: "USDG",

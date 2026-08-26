@@ -10,7 +10,7 @@ const SIZE: Record<AmountSize, string> = {
 
 // Magnitude-aware defaults: ≥1 gets 2dp + thousands separators; <1 gets
 // 4 significant digits (dust like 0.00002314 stays readable). Explicit
-// `decimals` overrides. Locale pinned to en-US — server and client must
+// `decimals` overrides. Locale pinned to en-US: server and client must
 // format identically (hydration).
 function format(abs: number, decimals?: number): string {
   if (decimals !== undefined) {
@@ -29,11 +29,11 @@ function format(abs: number, decimals?: number): string {
 }
 
 /**
- * Read-only formatted token amount — AmountInput's display sibling.
+ * Read-only formatted token amount: AmountInput's display sibling.
  * Renders in the financial type ramp (Geist Pixel Square via data-*).
  * Sign discipline (guideline #5): direction from the signed value
  * (− prefix), magnitude formatted from Math.abs. For signed *changes*
- * with color, use PriceChange — Amount is a fact, not a movement.
+ * with color, use PriceChange: Amount is a fact, not a movement.
  */
 export function Amount({
   value,
@@ -47,7 +47,7 @@ export function Amount({
   symbol?: string;
   /** data-sm · data-md · data-lg type ramp. */
   size?: AmountSize;
-  /** Fixed fraction digits — overrides the magnitude-aware default. */
+  /** Fixed fraction digits: overrides the magnitude-aware default. */
   decimals?: number;
   className?: string;
 }) {

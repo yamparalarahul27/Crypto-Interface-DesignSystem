@@ -1,4 +1,4 @@
-// tide design system — public entry.
+// tide design system: public entry.
 // See CONVENTIONS.md for the authoring + doc contract.
 export { Avatar, type AvatarSize } from "./Avatar";
 export { AvatarGroup, type AvatarGroupMember } from "./AvatarGroup";
@@ -117,3 +117,5 @@ export { AccountMenu } from "./AccountMenu";
 export { ActivityRow, type ActivityStatus } from "./ActivityRow";
 export { WalletAvatar } from "./WalletAvatar";
 export { ID_HUES, hueFor, hueGradient, shardsFor, blocksFor, type IdHue } from "./identity";
+// Icon layer: Phosphor behind intent names. See icons.ts for the seam.
+export * from "./icons";

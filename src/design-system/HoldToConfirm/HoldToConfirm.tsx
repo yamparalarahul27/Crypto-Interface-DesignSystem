@@ -12,6 +12,7 @@ import {
   type ReactNode,
 } from "react";
 import { cn } from "@/lib/utils";
+import { IconCheck } from "../icons";
 
 export type HoldPhase = "idle" | "holding" | "releasing" | "committed";
 
@@ -26,7 +27,7 @@ type UseHoldToConfirmOptions = {
 
 /**
  * Press-and-hold confirm. Progress fills while held, drains on release
- * (faster than fill). Commits once at full duration — a click never fires
+ * (faster than fill). Commits once at full duration: a click never fires
  * onConfirm. CSS-only fill (no `motion`).
  */
 function useHoldToConfirm({
@@ -194,7 +195,7 @@ export type HoldToConfirmProps = {
 
 /**
  * Irreversible-action control: hold to commit. For revoke / disconnect
- * forever / delete — never for reversible toggles (use Switch / Dialog).
+ * forever / delete: never for reversible toggles (use Switch / Dialog).
  */
 export function HoldToConfirm({
   onConfirm,
@@ -263,15 +264,7 @@ export function HoldToConfirm({
               committed ? "opacity-100" : "opacity-0",
             )}
           >
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-              <path
-                d="M2.5 6.4 4.7 8.6 9.5 3.5"
-                stroke="currentColor"
-                strokeWidth="1.7"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <IconCheck size={12} weight="bold" aria-hidden="true" />
             {confirmLabel}
           </span>
         </span>

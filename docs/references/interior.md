@@ -1,11 +1,11 @@
-# Reference — [interior.dev](https://www.interior.dev/docs)
+# Reference: [interior.dev](https://www.interior.dev/docs)
 
 > Micro-interactions for React (“the half-second after a click”).
 > Copy-in source · headless hook + styled example · **depends on
 > [`motion`](https://motion.dev)** · ~54 files in
 > [`ddoemonn/interior`](https://github.com/ddoemonn/interior).
 >
-> **Role for CIDS:** a *motion / interaction* reference — not a crypto
+> **Role for CIDS:** a *motion / interaction* reference, not a crypto
 > inventory, not a drop-in replacement for Radix. Check here **before
 > inventing** feedback, async, gesture, or overlay micro-UX.
 
@@ -17,27 +17,27 @@ self. Therefore:
 
 | Path | When |
 |---|---|
-| **Reimplement CIDS-native** (Radix + CSS tokens) | Default — steal *behavior contracts*, not files |
+| **Reimplement CIDS-native** (Radix + CSS tokens) | Default: steal *behavior contracts*, not files |
 | **Composition tier** (`src/components/…` + `motion`) | Only with an explicit dep approval (PriceChart / QRCode pattern) |
-| **Copy Interior file into `src/design-system/`** | **Never** — breaks portability + DESIGN.md token rules |
+| **Copy Interior file into `src/design-system/`** | **Never**: breaks portability + DESIGN.md token rules |
 
 Also: CIDS budgets playfulness to human-action feedback
 (DESIGN.md / tide amendment). Interior’s denser motion set must be
-filtered through that budget — data surfaces stay calm.
+filtered through that budget: data surfaces stay calm.
 
 ## The three failures (always apply)
 
-Interior’s north star — encode these in every new interactive CIDS
+Interior’s north star: encode these in every new interactive CIDS
 component (polish / a11y / tests):
 
-1. **No layout jump** — every reachable state reserves its width first
+1. **No layout jump**: every reachable state reserves its width first
    (label Save → Saving must not shove the row).
-2. **Interruptible motion** — a second click resumes from *now*, never
+2. **Interruptible motion**: a second click resumes from *now*, never
    restarts or queues blindly.
-3. **Reduced-motion still informs** — destination arrives; only the trip
+3. **Reduced-motion still informs**: destination arrives; only the trip
    is optional (`prefers-reduced-motion`).
 
-## Mapping — Interior → CIDS
+## Mapping: Interior → CIDS
 
 ### Already covered (study Interior for polish, don’t duplicate)
 
@@ -47,25 +47,25 @@ component (polish / a11y / tests):
 | `context-menu` | ContextMenu (open PR) | open-origin awareness |
 | `copy-button` | AddressChip (copy) | width-stable “Copied” swap |
 | `drawer` / `modal` / `popover` / `dropdown` | Drawer · Dialog · Popover · Menu | focus return, origin |
-| `pagination` | Pagination | — |
+| `pagination` | Pagination | - |
 | `progress-bar` | Progress | determinate vs shimmer honesty |
 | `tabs` / `segmented-control` | Tabs · Lane | direction-aware panel |
 | `skeleton-swap` | Skeleton · SectionSkeleton | zero-shift swap |
-| `presence-avatars` | AvatarGroup | — |
+| `presence-avatars` | AvatarGroup | - |
 | `value-flash` | RollingNumber · PriceChange | flash on *which* cell changed |
 | `tooltip-group` | Tooltip | coordinated delay |
 | `slider-detents` | SizeSlider | detent physics (if ever reworked) |
 | `command-palette` | Canvas ⌘K search | denser keyboard UX ideas |
 
-### High value for Web3 — consider next (CIDS-native reimplement)
+### High value for Web3: consider next (CIDS-native reimplement)
 
 | Interior | Why it fits crypto / CIDS | Suggested home |
 |---|---|---|
-| `hold-to-confirm` / `long-press` | **HoldToConfirm** (shipped) | — |
-| `loading-button` | **LoadingButton** (shipped) | — |
-| `inline-validation` | **InlineValidation** (shipped) | — |
-| `otp-input` | **OTPInput** (shipped) | — |
-| `wizard-steps` / `task-steps` | **WizardSteps** (shipped) | — |
+| `hold-to-confirm` / `long-press` | **HoldToConfirm** (shipped) | - |
+| `loading-button` | **LoadingButton** (shipped) | - |
+| `inline-validation` | **InlineValidation** (shipped) | - |
+| `otp-input` | **OTPInput** (shipped) | - |
+| `wizard-steps` / `task-steps` | **WizardSteps** (shipped) | - |
 | `live-activity` | Tx lifecycle strip ideas next to TxStatus | Pattern / TxStatus polish |
 | `streaming-text` | Agent / status copy that arrives over time | Composition if motion needed |
 | `new-items-pill` | Feed / activity “N new” | DS or feed pattern |
@@ -79,7 +79,7 @@ component (polish / a11y / tests):
 
 `logo-marquee`, `text-reveal`, `blur-up-image`, `lightbox`, `ripple`,
 `press-depth`, `like-burst`, `icon-morph`, `reading-progress`,
-`scroll-spy`, `hide-on-scroll`, `snap-carousel`, `filter-grid` —
+`scroll-spy`, `hide-on-scroll`, `snap-carousel`, `filter-grid`:
 marketing / editorial motion. Revisit only if a CIDS surface needs them;
 most fight the terminal calm aesthetic.
 
@@ -90,7 +90,7 @@ most fight the terminal calm aesthetic.
 3. Check generic refs: Radix/Base UI · shadcn · Carbon.
 4. **Check Interior** ([docs](https://www.interior.dev/docs) ·
    [repo](https://github.com/ddoemonn/interior)) for the *interaction*
-   — especially Action Feedback · Async · Overlay · Gesture · Data.
+: especially Action Feedback · Async · Overlay · Gesture · Data.
 5. Prefer Radix + tokens. If Interior’s hook is the only honest
    implementation, **stop and propose** `motion` as composition-tier
    (do not silently add it to the portable core).

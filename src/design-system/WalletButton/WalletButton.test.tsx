@@ -24,7 +24,7 @@ describe("WalletButton", () => {
 
   it("connected: truncated address visually, FULL address in the accessible name", () => {
     render(<WalletButton status="connected" address={ADDR} onClick={() => {}} />);
-    const btn = screen.getByRole("button", { name: `Wallet ${ADDR} — open account` });
+    const btn = screen.getByRole("button", { name: `Wallet ${ADDR}: open account` });
     expect(btn.textContent).toContain("7xKt…Q2rM");
     expect(btn.textContent).not.toContain(ADDR);
   });

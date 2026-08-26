@@ -1,9 +1,11 @@
 import { cn } from "@/lib/utils";
+import { IconPriceDown, IconPriceUp } from "../icons";
 
 /**
- * Signed change readout — the sign-discipline primitive (DESIGN.md
+ * Signed change readout: the sign-discipline primitive (DESIGN.md
  * guideline #5, hard-coded): direction comes from the SIGNED value
- * (▲/▼ + +/−, buy/sell tone), magnitude is always Math.abs. Callers
+ * (IconPriceUp/Down + +/−, buy/sell tone), magnitude is always
+ * Math.abs. Callers
  * can never render "-−4.2%" or a green loss.
  */
 export function PriceChange({
@@ -29,7 +31,13 @@ export function PriceChange({
         className,
       )}
     >
-      <span aria-hidden="true">{up ? "▲" : "▼"}</span>
+      <span aria-hidden="true" data-direction={up ? "up" : "down"} className="inline-flex">
+        {up ? (
+          <IconPriceUp size={10} weight="fill" />
+        ) : (
+          <IconPriceDown size={10} weight="fill" />
+        )}
+      </span>
       <span>
         {up ? "+" : "−"}
         {magnitude}

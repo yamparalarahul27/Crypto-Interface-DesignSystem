@@ -11,7 +11,7 @@ export type MenuItem =
 /**
  * Dropdown menu. Behavior is Radix DropdownMenu: typeahead, arrow-key
  * navigation, Escape/outside-click dismiss, focus return to the trigger.
- * Trigger renders asChild — pass a focusable element (e.g. IconButton).
+ * Trigger renders asChild: pass a focusable element (e.g. IconButton).
  */
 export function Menu({
   trigger,

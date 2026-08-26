@@ -10,11 +10,16 @@ describe("TxStatus", () => {
     expect(el.textContent).toContain("Pending confirmation…");
   });
 
-  it("terminal states carry glyph + word, not color alone", () => {
-    const { rerender } = render(<TxStatus state="confirmed" />);
-    expect(screen.getByRole("status").textContent).toContain("✓ Confirmed");
+  it("terminal states carry icon + word, not color alone", () => {
+    const { container, rerender } = render(<TxStatus state="confirmed" />);
+    expect(screen.getByRole("status").textContent).toContain("Confirmed");
+    expect(container.querySelector("svg")).toBeTruthy();
     rerender(<TxStatus state="failed" />);
-    expect(screen.getByRole("status").textContent).toContain("✕ Failed");
+    expect(screen.getByRole("status").textContent).toContain("Failed");
+    expect(container.querySelector("svg")).toBeTruthy();
+    // …and in-flight states are not marked: the icon means "terminal".
+    rerender(<TxStatus state="pending" />);
+    expect(container.querySelector("svg")).toBeNull();
   });
 
   it("in-flight states pulse; terminal states are still", () => {

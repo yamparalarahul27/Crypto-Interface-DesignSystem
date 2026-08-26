@@ -18,7 +18,7 @@ export type StateCell = { label: string; node: ReactNode };
 
 /**
  * Curated live state matrices for primitives where forcing states in a
- * grid is honest (not every component — overlays stay in the hero demo).
+ * grid is honest (not every component: overlays stay in the hero demo).
  * Missing entry → doc state chips only.
  */
 export const STATE_MATRICES: Record<string, StateCell[]> = {
@@ -99,12 +99,12 @@ export function StateMatrix({
 
   return (
     <section id="states-live" className="mb-6 scroll-mt-6">
-      <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+      <h3 className="font-mono text-[11px] font-semibold text-fg-subtle">
         States · {cells ? "live" : "from doc"}
       </h3>
       <p className="mt-1 text-[11px] text-fg-subtle">
         {cells
-          ? "Forced instances — hover/focus still work on the live demo above."
+          ? "Forced instances: hover/focus still work on the live demo above."
           : "Parsed from the doc. Interact with the live demo for hover/active."}
       </p>
       <div className="mt-3">
@@ -116,7 +116,7 @@ export function StateMatrix({
                 key={c.label}
                 className="rounded-control border border-outline-variant bg-surface-container p-3"
               >
-                <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-fg-subtle">
+                <p className="mb-2 font-mono text-[10px] text-fg-subtle">
                   {c.label}
                 </p>
                 {c.node}

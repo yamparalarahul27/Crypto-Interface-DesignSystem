@@ -2,7 +2,7 @@
 
 Status: stable
 Version: 1.0.0
-Checkbox on Radix -- brand fill when checked.
+Checkbox on Radix: brand fill when checked.
 
 ## Usage
 
@@ -23,10 +23,10 @@ import { Checkbox } from "@/design-system";
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `checked` / `onCheckedChange` | controlled pair | -- | Indeterminate not supported in v1. |
-| `disabled` | `boolean` | -- | |
-| `className` | `string` | -- | cn-merged. |
-| ...rest | Radix Checkbox props | -- | `aria-label`, `name`... |
+| `checked` / `onCheckedChange` | controlled pair | - | Indeterminate not supported in v1. |
+| `disabled` | `boolean` | - | |
+| `className` | `string` | - | cn-merged. |
+| ...rest | Radix Checkbox props | - | `aria-label`, `name`... |
 
 ## Tokens
 
@@ -43,4 +43,4 @@ Fill/border 150ms targeted; no check-draw animation (data surfaces stay calm).
 ## A11y
 
 - Radix Checkbox: `role="checkbox"`, `aria-checked`, Space toggles.
-- 16px visual -- pair with a clickable label for the 40px hit-area rule.
+- 16px visual: pair with a clickable label for the 40px hit-area rule.

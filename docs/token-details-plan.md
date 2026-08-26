@@ -1,10 +1,10 @@
-# Token Details Page — Planning & Recon
+# Token Details Page: Planning & Recon
 
 Branch: `imp-token-details`
 
 ## Goal
 
-Build the **best token information experience on Solana** — a token-details page that shows data no competitor (DexScreener, Birdeye, GMGN, Solscan, CoinGecko) surfaces in one place. Users should prefer our app because it gives them info they can't easily get elsewhere.
+Build the **best token information experience on Solana**: a token-details page that shows data no competitor (DexScreener, Birdeye, GMGN, Solscan, CoinGecko) surfaces in one place. Users should prefer our app because it gives them info they can't easily get elsewhere.
 
 ## Existing data sources (already wired)
 
@@ -20,10 +20,10 @@ Unified into `TokenPair` via adapters in [src/lib/jupiter/adapters.ts](../src/li
 
 | API | Auth env | Purpose |
 |---|---|---|
-| Solscan Pro | `SOLSCAN_API_KEY` | Plan: Free Level 1 — holders, transfers, DeFi activities per token |
+| Solscan Pro | `SOLSCAN_API_KEY` | Plan: Free Level 1, holders, transfers, DeFi activities per token |
 | Helius | `HELIUS_API_KEY` | DAS (metadata), RPC (supply/accounts), Enhanced Tx |
 
-## Reconnaissance spike — 2026-04-24
+## Reconnaissance spike: 2026-04-24
 
 Ran [scripts/token-recon.mjs](../scripts/token-recon.mjs) against SOL (mint `So11111111111111111111111111111111111111112`). Raw responses in `tmp/recon/sol/` (gitignored).
 
@@ -33,14 +33,14 @@ Ran [scripts/token-recon.mjs](../scripts/token-recon.mjs) against SOL (mint `So1
 - `jupiter-search` (15 KB)
 - `birdeye-token_overview` (10 KB)
 - `birdeye-ohlcv_1h_24h` (8.5 KB)
-- `tokensxyz-asset` (99 KB — includes profile, risk, markets)
+- `tokensxyz-asset` (99 KB: includes profile, risk, markets)
 - `tokensxyz-price_chart` (5.5 KB)
 
-**Failed — blockers to resolve before resuming**
+**Failed: blockers to resolve before resuming**
 
 1. **Helius: all 4 calls 401 "invalid api key"**
    - Root cause: `HELIUS_API_KEY` in `.env.local` holds a **full URL** (`https://beta.helius-rpc.com/?api-key=<UUID>`), not just the UUID. Script concatenated it into the final URL and broke.
-   - **Action**: update `.env.local` so `HELIUS_API_KEY` is only the UUID (no `https://…` prefix). Script already deletes disk leak of URL for security — resume-safe.
+   - **Action**: update `.env.local` so `HELIUS_API_KEY` is only the UUID (no `https://…` prefix). Script already deletes disk leak of URL for security: resume-safe.
    - **Mitigation idea**: next iteration of script should auto-strip a URL prefix if present, so either format works.
 
 2. **Solscan Free L1: all 6 token endpoints return 401 "Please upgrade your api key level"**
@@ -54,15 +54,15 @@ Ran [scripts/token-recon.mjs](../scripts/token-recon.mjs) against SOL (mint `So1
 
 ### Security hygiene
 - Leaked Helius URL files (`tmp/recon/sol/helius-*.json`) deleted from disk. `tmp/` is gitignored so never reached remote.
-- Going forward: store only the bare API key (UUID/token) in env vars — never a full URL.
+- Going forward: store only the bare API key (UUID/token) in env vars, never a full URL.
 
-## Where to resume — superseded
+## Where to resume: superseded
 
 This planning doc is preserved as a record of the recon spike. The actionable plan has moved on:
 
 - **Locked decisions** → [token-details-source-of-truth.md](./token-details-source-of-truth.md)
 - **Step-by-step implementation roadmap** → [token-details-roadmap.md](./token-details-roadmap.md)
 
-All blockers from the recon were resolved (2026-04-25 session): Solscan dropped, Helius key format fixed and integration verified, Birdeye unblocked on a fresh account with 1.1s pacing. Recon confirmed 11/13 endpoints viable on free-tier; full capability matrix in `tmp/recon/sol/MATRIX.md` (gitignored — re-run `scripts/token-recon.mjs` to regenerate).
+All blockers from the recon were resolved (2026-04-25 session): Solscan dropped, Helius key format fixed and integration verified, Birdeye unblocked on a fresh account with 1.1s pacing. Recon confirmed 11/13 endpoints viable on free-tier; full capability matrix in `tmp/recon/sol/MATRIX.md` (gitignored: re-run `scripts/token-recon.mjs` to regenerate).
 
-**To resume work, start with [token-details-roadmap.md](./token-details-roadmap.md)** — it has the current Status snapshot, Phase A–D ladder, and per-step instructions.
+**To resume work, start with [token-details-roadmap.md](./token-details-roadmap.md)**; it has the current Status snapshot, Phase A–D ladder, and per-step instructions.

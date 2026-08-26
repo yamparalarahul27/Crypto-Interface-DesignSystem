@@ -1,8 +1,8 @@
-# Patterns — composition recipes
+# Patterns: composition recipes
 
 > The layer above components (cids-roadmap Phase 6). A **pattern** is a
 > documented way to compose production components into a screen-sized
-> behavior — the difference between owning components and shipping an
+> behavior: the difference between owning components and shipping an
 > exchange. References: Carbon Patterns, HIG Patterns, shadcn Blocks.
 >
 > **Contract:** every pattern here ships a live frame on the canvas
@@ -14,8 +14,8 @@
 
 ## P1 · States catalog
 
-**Problem.** Every data surface has four lives — loading, empty, error,
-offline — and defaulting any of them (spinner-only pages, blank divs,
+**Problem.** Every data surface has four lives (loading, empty, error,
+offline) and defaulting any of them (spinner-only pages, blank divs,
 alert() errors) is where products feel broken first. Cold-start is a
 first-class state.
 
@@ -24,13 +24,13 @@ action) · error row = `Badge tone="sell"` + message + `Button` retry ·
 offline = `Badge tone="warning"` strip above the surface.
 
 **States.** loading → loaded | empty | error (+retry) | offline overlay.
-Loading skeletons match the loaded card's `height` — zero shift on
+Loading skeletons match the loaded card's `height`: zero shift on
 resolve.
 
 **Do / Don't.**
 - ✓ Do give every empty one factual line + one hint line (the playful
   budget) + one action.
-- ✗ Don't show a spinner with no skeleton shape — layout jumps when
+- ✗ Don't show a spinner with no skeleton shape: layout jumps when
   content lands.
 - ✓ Do keep the retry next to the error message.
 - ✗ Don't toast an error for a surface the user is looking at.
@@ -61,23 +61,23 @@ in the UI but confirms in the wallet (ethereum.org heuristic #2), and
 the chain answers later (heuristic #1). The status must be visible at
 every step, and the words must be exact.
 
-**Composition.** `AmountInput` (entry) · `Dialog` (review — the explicit
+**Composition.** `AmountInput` (entry) · `Dialog` (review: the explicit
 confirm step for anything that moves funds) · `TxStatus` (idle → signing
 → pending → confirmed/failed, visible throughout) · `Toast` (terminal
 announcement) · `AddressChip` + `NetworkBadge` in the review body.
 
-**States.** entering → reviewing → signing (wallet has focus — the UI
+**States.** entering → reviewing → signing (wallet has focus: the UI
 waits, visibly) → pending → confirmed | failed (+ retry path back to
 review).
 
 **Do / Don't.**
-- ✓ Do keep `TxStatus` mounted through the whole flow — never blank
+- ✓ Do keep `TxStatus` mounted through the whole flow: never blank
   between steps.
 - ✗ Don't declare success at submission; "Confirmed" waits for the
   chain.
 - ✓ Do disable the confirm while signing (visible + disabled), with the
   reason next to it.
-- ✗ Don't hide the button — layouts that reshuffle mid-flow read as
+- ✗ Don't hide the button: layouts that reshuffle mid-flow read as
   errors.
 
 **Code.**
@@ -109,7 +109,7 @@ disabled.
 **Do / Don't.**
 - ✓ Do put the message directly under the field and link it with
   `aria-describedby`.
-- ✗ Don't rely on border color alone — say what's wrong.
+- ✗ Don't rely on border color alone: say what's wrong.
 - ✗ Don't block paste, ever (CLAUDE.md rule; `AmountInput` filters
   instead).
 
@@ -131,12 +131,12 @@ on every tick.
 symbol · `PriceChange` (sign discipline) · `Sparkline` (trend) ·
 `AddressChip` (identity). Compact density via `data-density="compact"`.
 
-**States.** sorted (aria-sort) · streaming ticks (text changes only —
+**States.** sorted (aria-sort) · streaming ticks (text changes only:
 zero layout shift) · row hover · comfortable/compact.
 
 **Do / Don't.**
 - ✓ Do right-align numerals in the tabular pixel ramp.
-- ✗ Don't let color carry direction — `PriceChange` pairs ▲/▼ + sign
+- ✗ Don't let color carry direction: `PriceChange` pairs ▲/▼ + sign
   with the tone.
 - ✗ Don't animate rows on data ticks; the order book moves numbers,
   not boxes.
@@ -163,7 +163,7 @@ when status changes.
 `AmountInput` · `SlippageControl` · `LoadingButton` (or `Button` →
 `Dialog` review) · `TxStatus` · `GasFee` · **Receive:** `NetworkBadge` ·
 `AddressChip` (copy). Optional companion outside this pattern:
-`QRCode` composition (`src/components/`) — not portable-registry, so it
+`QRCode` composition (`src/components/`): not portable-registry, so it
 stays off the Patterns zone contract.
 
 **States.**
@@ -171,9 +171,9 @@ stays off the Patterns zone contract.
 - Receive: idle (address visible) · copied (AddressChip confirmation)
 
 **Do / Don't.**
-- ✓ Do keep Swap and Receive as one ticket with a mode switch — users
+- ✓ Do keep Swap and Receive as one ticket with a mode switch: users
   learn one surface.
-- ✗ Don't put QR in the portable pattern — pair QRCode only in
+- ✗ Don't put QR in the portable pattern: pair QRCode only in
   product/composition layers.
 - ✓ Do put Slippage above the confirm control; use LoadingButton for
   the async face (Sign → Signing… → Signed).
@@ -210,7 +210,7 @@ stays off the Patterns zone contract.
 
 ---
 
-## Content guidelines — the action verbs
+## Content guidelines: the action verbs
 
 In crypto, wording is a **security surface** (Polaris-style exactness,
 Reown/wallet conventions). One verb per meaning, never mixed:
@@ -218,10 +218,10 @@ Reown/wallet conventions). One verb per meaning, never mixed:
 | Verb | Means | Never use for |
 |---|---|---|
 | **Connect** | open a wallet session (read-only identity) | anything that signs |
-| **Sign** | sign a message — proves identity, moves nothing | transactions |
+| **Sign** | sign a message: proves identity, moves nothing | transactions |
 | **Approve** | grant a token allowance (spending permission) | generic "OK" buttons |
 | **Confirm** | submit the transaction in the wallet | soft acknowledgments |
-| **Send / Swap / Watch** | the domain action itself — label buttons with it | — |
+| **Send / Swap / Watch** | the domain action itself: label buttons with it | - |
 | **Cancel** | user backs out of the UI flow | **Reject** (that's the wallet's word) |
 
 Voice: sentence case; verbs over nouns ("Watch", not "Add to

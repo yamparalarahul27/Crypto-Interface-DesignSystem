@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Inline trend line — pure SVG, no chart library. Tone follows the
+ * Inline trend line: pure SVG, no chart library. Tone follows the
  * series direction by default (first vs last, sign discipline), or set
  * it explicitly. Decorative unless a label is given.
  */

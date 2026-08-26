@@ -1,6 +1,6 @@
 // Identity-hue assignment for the tide social layer.
 // Maps a person (wallet address / handle) to one of the 8 --id-* hues
-// defined in globals.css. Deterministic and stable — no user picker in v1.
+// defined in globals.css. Deterministic and stable: no user picker in v1.
 // Consumed by Avatar / AvatarGroup only; never for data or state.
 
 export const ID_HUES = [
@@ -27,12 +27,15 @@ export function hueFor(seed: string): IdHue {
 
 /**
  * Avatar radial-gradient fill for a hue. References the --id-* token and
- * derives the dark end via color-mix — never a hardcoded hex. Mirrors
+ * derives the dark end via color-mix: never a hardcoded hex. Mirrors
  * DESIGN.md → Identity hues.
  */
 export function hueGradient(hue: IdHue): string {
-  const v = `var(--id-${hue})`;
-  return `radial-gradient(120% 120% at 30% 20%, ${v}, color-mix(in srgb, ${v} 60%, black))`;
+  // Built from --id-<hue>-fill, not --id-<hue>: the plain hue is the text
+  // accent and is far too light to carry a glyph. The dark end is a gentle
+  // 78%: the fill is already deep, so the old 60% collapsed to near-black.
+  const v = `var(--id-${hue}-fill)`;
+  return `radial-gradient(120% 120% at 30% 20%, ${v}, color-mix(in srgb, ${v} 78%, black))`;
 }
 
 
@@ -40,7 +43,7 @@ export function hueGradient(hue: IdHue): string {
 // Seeded art for wallet-style avatars. Lives here beside hueFor so
 // every identity figure derives from one hash family and one palette.
 
-/** djb2 — same hash family as identity.hueFor, widened for a PRNG seed. */
+/** djb2: same hash family as identity.hueFor, widened for a PRNG seed. */
 function hashOf(seed: string): number {
   let h = 5381;
   for (let i = 0; i < seed.length; i++) {
@@ -49,7 +52,7 @@ function hashOf(seed: string): number {
   return h;
 }
 
-/** mulberry32 — tiny deterministic PRNG so one address always draws once. */
+/** mulberry32: tiny deterministic PRNG so one address always draws once. */
 function prng(seed: number): () => number {
   let a = seed >>> 0;
   return () => {
@@ -61,7 +64,7 @@ function prng(seed: number): () => number {
 }
 
 /**
- * `mix` is the hue's share in a color-mix toward black — the identity
+ * `mix` is the hue's share in a color-mix toward black: the identity
  * hues are deliberately muted ("muted to sit on near-black", DESIGN.md),
  * so hue alone barely separates one shard from the next. Varying value
  * per shard is what makes the disc read as faceted, and it reuses the

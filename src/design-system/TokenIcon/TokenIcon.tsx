@@ -28,7 +28,7 @@ export function TokenIcon({
   size?: Size;
   className?: string;
 }) {
-  // Track WHICH src errored — a new src is automatically un-errored,
+  // Track WHICH src errored: a new src is automatically un-errored,
   // no reset-on-prop-change effect needed.
   const [erroredSrc, setErroredSrc] = useState<string | null>(null);
   const errored = erroredSrc === src;

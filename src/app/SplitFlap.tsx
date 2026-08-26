@@ -2,22 +2,23 @@
 
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { cn } from "@/lib/utils";
+import { IconPause, IconPlay } from "@/design-system";
 
 /**
  * The landing hero: a split-flap board that cycles the system's theses.
- * Fixed 15×3 grid so the layout never shifts between messages — shorter
+ * Fixed 15×3 grid so the layout never shifts between messages: shorter
  * lines just leave blank tiles, the way a real departure board does.
  *
  * Motion: one `flap` per tile (--motion-settle), staggered by index.
  * Under prefers-reduced-motion the flip is neutralized globally AND the
- * board stops cycling on its own — content that changes under you is
+ * board stops cycling on its own: content that changes under you is
  * motion too, timer or not. The play/pause control works either way.
  */
 
 const COLS = 15;
 const ROWS = 3;
 const HOLD_MS = 5600; // time a message stays up before the next flip
-const STAGGER_MS = 22; // per-tile delay — 45 tiles ≈ 1s to fill the board
+const STAGGER_MS = 22; // per-tile delay: 45 tiles ≈ 1s to fill the board
 
 export const MESSAGES = [
   "CIDS IS AN OPEN DESIGN SYSTEM FOR CRYPTO UIS",
@@ -27,7 +28,7 @@ export const MESSAGES = [
 ] as const;
 
 /**
- * The bottom-right flap is the play/pause control, not a letter — so no
+ * The bottom-right flap is the play/pause control, not a letter: so no
  * message may reach it. SplitFlap.test.ts asserts every message leaves
  * this cell blank; if you add a longer one, that test is where it fails.
  */
@@ -35,7 +36,7 @@ export const CONTROL_CELL = COLS * ROWS - 1;
 
 /**
  * Greedy word-wrap into ROWS lines of COLS characters, flattened to one
- * cell per tile. Always returns exactly COLS*ROWS cells — over-long
+ * cell per tile. Always returns exactly COLS*ROWS cells: over-long
  * messages are clipped rather than allowed to resize the board.
  */
 export function toCells(message: string, cols = COLS, rows = ROWS): string[] {
@@ -60,7 +61,7 @@ export function toCells(message: string, cols = COLS, rows = ROWS): string[] {
   return cells;
 }
 
-// prefers-reduced-motion as an external store — the ThemeToggle pattern.
+// prefers-reduced-motion as an external store: the ThemeToggle pattern.
 // Reading it in render (not an effect) keeps the first paint honest for
 // people who set the preference.
 const REDUCED = "(prefers-reduced-motion: reduce)";
@@ -72,26 +73,11 @@ const subscribeMotion = (cb: () => void) => {
 const getMotionSnapshot = () => window.matchMedia(REDUCED).matches;
 const getMotionServerSnapshot = () => false;
 
-// Drawn, not typed — "❙❙" and "▶" render at wildly different weights and
-// baselines across platforms, which is visible when they share a flap.
+// From the icon family, not typed: "❙❙" and "▶" render at wildly
+// different weights and baselines across platforms, which is visible when
+// they share a flap. Phosphor draws both on one optical grid. Sized as a
+// share of the flap: the % class overrides the width/height the icon sets.
 const GLYPH = "h-[22%] w-[22%] fill-current";
-
-function PauseGlyph() {
-  return (
-    <svg viewBox="0 0 12 14" className={GLYPH} aria-hidden="true">
-      <rect x="1" y="0" width="3.5" height="14" rx="1" />
-      <rect x="7.5" y="0" width="3.5" height="14" rx="1" />
-    </svg>
-  );
-}
-
-function PlayGlyph() {
-  return (
-    <svg viewBox="0 0 12 14" className={GLYPH} aria-hidden="true">
-      <path d="M1 1.2a1 1 0 0 1 1.5-.87l8 5.8a1 1 0 0 1 0 1.74l-8 5.8A1 1 0 0 1 1 12.8Z" />
-    </svg>
-  );
-}
 
 export function SplitFlap({
   messages = MESSAGES,
@@ -150,7 +136,11 @@ export function SplitFlap({
                   "background-color var(--motion-fast), color var(--motion-fast)",
               }}
             >
-              {playing ? <PauseGlyph /> : <PlayGlyph />}
+              {playing ? (
+                <IconPause weight="fill" className={GLYPH} aria-hidden="true" />
+              ) : (
+                <IconPlay weight="fill" className={GLYPH} aria-hidden="true" />
+              )}
             </button>
           ) : (
           <span
@@ -161,7 +151,7 @@ export function SplitFlap({
             {ch !== " " && (
               <span
                 // Re-keying on the message remounts the letter, which
-                // replays the flip — same trick as MotionReplay.
+                // replays the flip: same trick as MotionReplay.
                 key={`${index}-${i}`}
                 // leading-none is load-bearing: at this font-size the
                 // default line-height (~1.5) makes a lettered tile taller
@@ -171,7 +161,7 @@ export function SplitFlap({
                 style={{
                   animationDelay: `${i * STAGGER_MS}ms`,
                   fontFamily: "var(--font-geist-mono), monospace",
-                  // ≈70% of tile height at every width — the board reads
+                  // ≈70% of tile height at every width: the board reads
                   // as letters on flaps, not letters floating in boxes.
                   fontSize: "clamp(0.6rem, 4vw, 2.9rem)",
                 }}

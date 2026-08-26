@@ -1,4 +1,4 @@
-// Price-source divergence — checks whether the prices we pull from
+// Price-source divergence: checks whether the prices we pull from
 // independent sources agree. Healthy when they agree closely; flagged
 // when they spread (data quality issue, arbitrage, or stale cache).
 

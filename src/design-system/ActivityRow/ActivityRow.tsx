@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { IconTokenFallback } from "../icons";
 import { TokenIcon } from "../TokenIcon";
 
 export type ActivityStatus = "pending" | "confirmed" | "failed";
@@ -10,7 +11,7 @@ const STATUS: Record<ActivityStatus, { word: string; text: string }> = {
 };
 
 /**
- * Transaction / activity list row — the history atom every wallet and
+ * Transaction / activity list row: the history atom every wallet and
  * exchange rebuilds. Icon · title · time · status word · amount. Status
  * is word + tint (mono-safe); amount is a preformatted string so the
  * caller keeps sign/fiat discipline upstream.
@@ -47,16 +48,16 @@ export function ActivityRow({
       ) : (
         <span
           aria-hidden="true"
-          className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-surface-bright text-[10px] text-fg-muted"
+          className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-surface-bright text-fg-muted"
         >
-          ◇
+          <IconTokenFallback size={11} />
         </span>
       )}
       <span className="min-w-0 flex-1">
         <span className="block truncate text-sm font-medium text-fg">{title}</span>
         <span className="mt-0.5 flex items-center gap-2 text-[11px]">
           <span className="text-fg-subtle">{time}</span>
-          <span className={cn("font-medium uppercase tracking-wider", s.text)}>
+          <span className={cn("font-medium", s.text)}>
             {s.word}
           </span>
         </span>

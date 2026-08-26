@@ -1,4 +1,4 @@
-// Pure parser for the CONVENTIONS.md doc shape — used by the
+// Pure parser for the CONVENTIONS.md doc shape: used by the
 // per-component page chrome so it can surface purpose / install /
 // best-for / tokens / states without duplicating content out of .doc.md.
 
@@ -161,7 +161,7 @@ export function parseComponentDoc(doc: string): {
 
 /**
  * Split a doc body into its `## ` sections. The component page renders
- * these as accordions — the full doc in one flow was a wall of text, and
+ * these as accordions: the full doc in one flow was a wall of text, and
  * Anatomy/Props/Tokens/States/Motion/A11y are reference material people
  * scan for, not prose they read top to bottom.
  */

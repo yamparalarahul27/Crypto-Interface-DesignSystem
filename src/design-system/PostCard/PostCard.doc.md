@@ -39,32 +39,33 @@ Standard (watched / take)          Milestone
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `kind` | `"watched" \| "take" \| "milestone"` | — | Drives the badge tint; `milestone` switches layout. |
-| `author` | `{ name, handle, seed?, you? }` | — | Required for watched/take; omit for milestone. |
-| `time` | `string` | — | Preformatted relative time. |
-| `body` | `ReactNode` | — | Take/note text, or system copy for milestone. |
-| `token` | `{ symbol, iconSrc?, price, change24h }` | — | Optional tagged token → renders a `TokenChip`. |
-| `reactions` / `onReact` | `Reaction[]` / `(emoji) => void` | — | Optional; both required to show the `ReactionBar`. |
-| `direction` | `"up" \| "down"` | `"up"` | Milestone only — glyph + left-border color. |
-| `className` | `string` | — | Merged via `cn`. |
+| `kind` | `"watched" \| "take" \| "milestone"` | - | Drives the badge tint; `milestone` switches layout. |
+| `author` | `{ name, handle, seed?, you? }` | - | Required for watched/take; omit for milestone. |
+| `time` | `string` | - | Preformatted relative time. |
+| `body` | `ReactNode` | - | Take/note text, or system copy for milestone. |
+| `token` | `{ symbol, iconSrc?, price, change24h }` | - | Optional tagged token → renders a `TokenChip`. |
+| `reactions` / `onReact` | `Reaction[]` / `(emoji) => void` | - | Optional; both required to show the `ReactionBar`. |
+| `direction` | `"up" \| "down"` | `"up"` | Milestone only: glyph + left-border color. |
+| `className` | `string` | - | Merged via `cn`. |
 
 ## Tokens
 
-- `--color-surface-container`, `--color-outline-variant` — card surface + hairline.
+- `--color-surface-container`, `--color-outline-variant`: card surface + hairline.
 - Kind badge: `--color-brand` / `--color-fg-muted` / `--color-info` (+ their surfaces).
-- `--color-buy` / `--color-sell` — milestone glyph + left border (direction).
+- `--color-buy` / `--color-sell`: milestone glyph + left border (direction).
 - Composes the tokens of `Avatar`, `TokenChip`, `ReactionBar`.
-- `--radius-card` / `--radius-control` — card and badge corners.
+- `--radius-card` / `--radius-control`: card and badge corners.
 
 ## States
 
-- **watched / take** — author row + badge; optional token + reactions.
-- **milestone** — no author; leading ▲/▼ in buy/sell; `border-l-2` same color; body is system copy.
-- **With / without token** and **with / without reactions** — each block is conditional.
+- **watched / take**: author row + badge; optional token + reactions.
+- **milestone**: no author; leading `IconPriceUp`/`IconPriceDown` in buy/sell
+  (`data-direction` on the wrapper); `border-l-2` same color; body is system copy.
+- **With / without token** and **with / without reactions**: each block is conditional.
 
 ## Motion
 
-None of its own. Motion lives in the embedded `ReactionBar` (spring-pop). Card-level press `scale(0.98)` is intentionally **not** applied here — the card holds interactive children; wrap in a link at the call site if the whole card should navigate.
+None of its own. Motion lives in the embedded `ReactionBar` (spring-pop). Card-level press `scale(0.98)` is intentionally **not** applied here: the card holds interactive children; wrap in a link at the call site if the whole card should navigate.
 
 ## A11y
 

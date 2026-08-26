@@ -5,7 +5,7 @@ const COLS = 15;
 const ROWS = 3;
 
 describe("toCells", () => {
-  it("always fills the fixed board — no layout shift between messages", () => {
+  it("always fills the fixed board: no layout shift between messages", () => {
     for (const m of MESSAGES) {
       expect(toCells(m)).toHaveLength(COLS * ROWS);
     }
@@ -17,7 +17,7 @@ describe("toCells", () => {
   });
 
   it("fits every authored message in the board", () => {
-    // A message that needs a 4th line would be silently clipped — catch it here.
+    // A message that needs a 4th line would be silently clipped: catch it here.
     for (const m of MESSAGES) {
       const flat = chunk(toCells(m)).join(" ").split(/\s+/).filter(Boolean);
       expect(flat.join(" ")).toBe(m);

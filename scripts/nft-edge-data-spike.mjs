@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * NFT Edge data spike — Helius DAS feasibility check
+ * NFT Edge data spike: Helius DAS feasibility check
  *
  * Probes the IslandDAO PERKS collection to confirm we can get the data
  * the prototype assumes. Writes a brief findings line per UI element.
@@ -52,12 +52,12 @@ function check(label, fn) {
 
 async function main() {
   console.log("════════════════════════════════════════════════════════════");
-  console.log("  NFT Edge data spike — Helius DAS");
+  console.log("  NFT Edge data spike: Helius DAS");
   console.log("  Collection:", COLLECTION);
   console.log("════════════════════════════════════════════════════════════\n");
 
   /* ──────────────────────────────────────────────────────────
-     1. searchAssets — page 1 of the collection
+     1. searchAssets: page 1 of the collection
      ────────────────────────────────────────────────────────── */
   console.log("─── 1. searchAssets by collection (limit 5) ───");
   const t1 = Date.now();
@@ -80,7 +80,7 @@ async function main() {
   console.log(`  returned this page:  ${items.length}`);
 
   if (items.length === 0) {
-    console.log("  ❌ no items returned — cannot continue spike");
+    console.log("  ❌ no items returned: cannot continue spike");
     process.exit(1);
   }
 
@@ -116,7 +116,7 @@ async function main() {
   }
 
   /* ──────────────────────────────────────────────────────────
-     2. getAsset — full shape for one item
+     2. getAsset: full shape for one item
      ────────────────────────────────────────────────────────── */
   console.log("\n─── 2. getAsset (full shape) for first item ───");
   const t2 = Date.now();
@@ -129,11 +129,11 @@ async function main() {
   if (r.plugins) console.log(`  plugins.* keys:     ${Object.keys(r.plugins).join(", ")}`);
 
   /* ──────────────────────────────────────────────────────────
-     3. getAssetsByOwner — does this answer "Other Owned in Collection"?
+     3. getAssetsByOwner: does this answer "Other Owned in Collection"?
      ────────────────────────────────────────────────────────── */
   const owner = first.ownership?.owner;
   if (!owner) {
-    console.log("\n  ⚠️ no owner on first item — skipping owner check");
+    console.log("\n  ⚠️ no owner on first item: skipping owner check");
   } else {
     console.log(`\n─── 3. getAssetsByOwner for ${owner.slice(0, 4)}…${owner.slice(-4)} ───`);
     const t3 = Date.now();
@@ -163,10 +163,10 @@ async function main() {
   }
 
   /* ──────────────────────────────────────────────────────────
-     4. Try a bigger searchAssets page — can we cheaply load the
+     4. Try a bigger searchAssets page: can we cheaply load the
         whole collection for the bottom rail?
      ────────────────────────────────────────────────────────── */
-  console.log("\n─── 4. searchAssets (page 1, limit 100) — for the rail ───");
+  console.log("\n─── 4. searchAssets (page 1, limit 100): for the rail ───");
   const t4 = Date.now();
   const big = await rpc("searchAssets", {
     grouping: ["collection", COLLECTION],

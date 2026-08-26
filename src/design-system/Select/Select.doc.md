@@ -24,12 +24,12 @@ import { Select } from "@/design-system";
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `options` | `SelectOption<T>[]` | -- | `{value,label,disabled?}`. |
-| `value` / `onValueChange` | controlled pair | -- | |
+| `options` | `SelectOption<T>[]` | - | `{value,label,disabled?}`. |
+| `value` / `onValueChange` | controlled pair | - | |
 | `placeholder` | `string` | `"Select..."` | Shown via `data-placeholder`. |
-| `disabled` | `boolean` | -- | |
-| `className` | `string` | -- | cn-merged onto the trigger. |
-| `aria-label` | `string` | -- | Name the control when no visible label. |
+| `disabled` | `boolean` | - | |
+| `className` | `string` | - | cn-merged onto the trigger. |
+| `aria-label` | `string` | - | Name the control when no visible label. |
 
 ## Tokens
 

@@ -427,7 +427,7 @@ export function useTokenDetails(address: string): UseTokenDetailsResult {
     return computeEdgeScore({ chainTruth, audit, riskInputs });
   }, [renderableAsset, onChainForAddress, meta, response]);
 
-  // Per-section loading flags — true while initial fetch is in flight (no data
+  // Per-section loading flags: true while initial fetch is in flight (no data
   // for the current address has arrived yet). These let cards distinguish
   // "still loading, show skeleton" from "loaded but empty, hide".
   const statsLoading = addressValid && loading && !realData;

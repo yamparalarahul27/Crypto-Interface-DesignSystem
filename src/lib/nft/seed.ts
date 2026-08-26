@@ -86,7 +86,7 @@ export async function seedCollection(collectionMint: string): Promise<SeedResult
 
   if (meAsset.updateAuthority !== collectionMint) {
     throw new Error(
-      `ME updateAuthority mismatch — expected ${collectionMint}, got ${meAsset.updateAuthority}`
+      `ME updateAuthority mismatch: expected ${collectionMint}, got ${meAsset.updateAuthority}`
     );
   }
   const slug = meAsset.collection;

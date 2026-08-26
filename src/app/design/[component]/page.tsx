@@ -4,9 +4,9 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ComponentPage } from "./ComponentPage";
 
-// /design/<Component> — one page per component (roadmap §6), statically
+// /design/<Component>: one page per component (roadmap §6), statically
 // generated from the design-system folders. The doc + source are read
-// from disk at build time — the same files the canvas Inspector renders,
+// from disk at build time: the same files the canvas Inspector renders,
 // so the page cannot drift from the code it documents.
 
 const DS = join(process.cwd(), "src/design-system");

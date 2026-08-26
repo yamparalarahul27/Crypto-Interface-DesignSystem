@@ -1,4 +1,4 @@
-# 04 · Roadmap — phases, flags, verification
+# 04 · Roadmap: phases, flags, verification
 
 Agreed order: **plan → design system → real coding.** Each phase is one
 or a few small PRs to `main`, each tested on its Vercel preview before
@@ -18,7 +18,7 @@ merge policy (test cases proposed + approved per PR).
                        notifications
 ```
 
-## Phase 0 — design system (no product screens)
+## Phase 0: design system (no product screens)
 
 The foundation phase the whole plan hinges on.
 
@@ -31,10 +31,10 @@ The foundation phase the whole plan hinges on.
 | DESIGN.md amendment PR (tone, hues, kit, motion) | explicit user approval |
 
 Exit: every kit component visible and correct in `/design` on a phone.
-The gallery ships **first** — it becomes the review tool for everything
+The gallery ships **first**; it becomes the review tool for everything
 after.
 
-## Phase 1 — shell + markets (engine-ready surfaces)
+## Phase 1: shell + markets (engine-ready surfaces)
 
 | Deliverable | Notes |
 |---|---|
@@ -43,11 +43,11 @@ after.
 | S3 Search overlay re-skinned | existing three search hooks |
 | S4 Token detail re-skin (13 sections, no social strip yet) | ⚠ move `OnChainData`/`HolderRow` types to `src/lib/token/` first; delete dormant tabs + `useTabPairs` in the same pass |
 | 404 / error / global-error designed | fresh (not in prototype) |
-| Decision: Jupiter-v2 API consolidation before or after | contract §6 recommends **before** — decide at phase-1 kickoff |
+| Decision: Jupiter-v2 API consolidation before or after | contract §6 recommends **before**, decide at phase-1 kickoff |
 
 Exit: a logged-out visitor has a complete, polished market-browsing app.
 
-## Phase 2 — identity
+## Phase 2: identity
 
 | Deliverable | Notes |
 |---|---|
@@ -57,9 +57,9 @@ Exit: a logged-out visitor has a complete, polished market-browsing app.
 | Follow/unfollow end-to-end | optimistic UI |
 | Flag: `NEXT_PUBLIC_FF_SOCIAL` | preview=1, prod=0 until phase 3 completes |
 
-Exit: on preview — connect, claim a handle, follow a seeded profile.
+Exit: on preview, connect, claim a handle, follow a seeded profile.
 
-## Phase 3 — social (Tide becomes Tide)
+## Phase 3: social (Tide becomes Tide)
 
 | Deliverable | Notes |
 |---|---|
@@ -73,7 +73,7 @@ Exit: on preview — connect, claim a handle, follow a seeded profile.
 Exit: the core loop (discover → watch → follow → feed → react) works
 with real persistence on prod.
 
-## Phase 4 — chat + beyond (vision, deliberately unbuilt)
+## Phase 4: chat + beyond (vision, deliberately unbuilt)
 
 Token rooms on Supabase Realtime → DMs → notifications → people search →
 reporting/moderation tooling → possible NFT Edge return. Each gets its
@@ -84,7 +84,7 @@ dependency on phase-4 shapes.
 
 - In-sandbox verify: `npx tsc --noEmit` · `npm run lint` ·
   `npm run check:theme` · `npm run check:polish`.
-- Every PR reviewed on its **Vercel preview on a phone** before merge —
+- Every PR reviewed on its **Vercel preview on a phone** before merge:
   never merge-to-test.
 - Test cases proposed and user-approved before merge per CLAUDE.md.
 - 700-LOC cap; new hooks documented in engine-contract.md in the same

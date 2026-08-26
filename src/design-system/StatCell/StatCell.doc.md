@@ -16,7 +16,7 @@ import { StatCell, PriceChange, RollingNumber } from "@/design-system";
 ## Anatomy
 
 ```
-MARKET CAP          <- 10px uppercase fg-muted
+Market cap          <- 10px fg-muted
 $1.09B  ▲ +3.60%    <- data-md value + optional delta
 ```
 
@@ -24,10 +24,10 @@ $1.09B  ▲ +3.60%    <- data-md value + optional delta
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `label` | `string` | -- | Uppercase micro-label. |
-| `value` | `ReactNode` | -- | Pre-formatted figure or RollingNumber. |
-| `change` | `ReactNode` | -- | Pass a PriceChange to keep sign discipline. |
-| `className` | `string` | -- | cn-merged. |
+| `label` | `string` | - | Sentence-case micro-label. |
+| `value` | `ReactNode` | - | Pre-formatted figure or RollingNumber. |
+| `change` | `ReactNode` | - | Pass a PriceChange to keep sign discipline. |
+| `className` | `string` | - | cn-merged. |
 
 ## Tokens
 

@@ -24,11 +24,11 @@ import { Sparkline } from "@/design-system";
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `data` | `number[]` | -- | Oldest -> newest; needs >= 2 points (else renders nothing). |
+| `data` | `number[]` | - | Oldest -> newest; needs >= 2 points (else renders nothing). |
 | `tone` | `"buy" \| "sell" \| "neutral"` | direction | Default: last >= first -> buy. |
-| `label` | `string` | -- | Sets `role="img"` + name; omitted = `aria-hidden` decorative. |
+| `label` | `string` | - | Sets `role="img"` + name; omitted = `aria-hidden` decorative. |
 | `width` / `height` | `number` | 84 / 28 | Viewbox + rendered size. |
-| `className` | `string` | -- | cn-merged. |
+| `className` | `string` | - | cn-merged. |
 
 ## Tokens
 
@@ -45,4 +45,4 @@ None (data surfaces never bounce).
 ## A11y
 
 - Decorative by default (`aria-hidden`); pass `label` to name it as an image.
-- Never the only carrier of direction -- pair with a signed value.
+- Never the only carrier of direction: pair with a signed value.

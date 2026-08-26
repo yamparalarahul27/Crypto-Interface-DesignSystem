@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * Stablecoin peg health from the SIGNED deviation in bps. Health tone
- * comes from the magnitude (Math.abs — guideline #5), the readout keeps
+ * comes from the magnitude (Math.abs: guideline #5), the readout keeps
  * the sign so above/below peg stays visible. Thresholds: <25bps on peg ·
  * 25–200 drifting · ≥200 depegged (≈ the old 0.98 break).
  */

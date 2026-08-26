@@ -28,9 +28,9 @@ import { Tabs } from "@/design-system";
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `tabs` | `Tab<T>[]` | -- | `{value,label,content}`. |
-| `value` / `onValueChange` | controlled pair | -- | |
-| `className` | `string` | -- | cn-merged onto the root. |
+| `tabs` | `Tab<T>[]` | - | `{value,label,content}`. |
+| `value` / `onValueChange` | controlled pair | - | |
+| `className` | `string` | - | cn-merged onto the root. |
 
 Use **Lane** for a pure value switch (no panels); **Tabs** when segments own content.
 

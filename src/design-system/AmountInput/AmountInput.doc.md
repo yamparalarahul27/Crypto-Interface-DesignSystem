@@ -2,7 +2,7 @@
 
 Status: stable
 Version: 1.0.0
-Token amount entry: decimal string (never floats), symbol anchored, fiat echo + Max -- the undocumented fiat/token pattern, componentized.
+Token amount entry: decimal string (never floats), symbol anchored, fiat echo + Max, the undocumented fiat/token pattern, componentized.
 
 ## Usage
 
@@ -23,14 +23,14 @@ import { AmountInput } from "@/design-system";
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `value` / `onValueChange` | `string` pair | -- | Decimal STRING; sanitized to digits + one dot. Parse with mint decimals downstream. |
-| `symbol` | `string` | -- | Right-anchored token symbol. |
-| `fiatValue` | `string` | -- | Pre-formatted echo line. |
-| `onMax` | `() => void` | -- | Renders the Max affordance. |
+| `value` / `onValueChange` | `string` pair | - | Decimal STRING; sanitized to digits + one dot. Parse with mint decimals downstream. |
+| `symbol` | `string` | - | Right-anchored token symbol. |
+| `fiatValue` | `string` | - | Pre-formatted echo line. |
+| `onMax` | `() => void` | - | Renders the Max affordance. |
 | `invalid` | `boolean` | `false` | aria-invalid + sell border. |
-| `disabled` | `boolean` | -- | |
+| `disabled` | `boolean` | - | |
 | `aria-label` | `string` | `"Amount in <symbol>"` | |
-| `className` | `string` | -- | cn-merged. |
+| `className` | `string` | - | cn-merged. |
 
 ## Tokens
 
@@ -47,4 +47,4 @@ Border transition 150ms.
 ## A11y
 
 - `inputMode="decimal"` for the right mobile keyboard; sanitization never blocks paste (it filters).
-- Labelled by default from the symbol; `aria-invalid` on error -- put the message next to the field.
+- Labelled by default from the symbol; `aria-invalid` on error: put the message next to the field.

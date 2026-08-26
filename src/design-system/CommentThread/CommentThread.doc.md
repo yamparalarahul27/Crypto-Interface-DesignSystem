@@ -36,10 +36,10 @@ import { CommentThread, type Comment } from "@/design-system";
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `open` / `onOpenChange` | `boolean` / `(b) => void` | — | Controlled, forwarded to `Sheet`. |
-| `comments` | `Comment[]` | — | `{ author, time, body, likes, liked?, replies? }`. Replies are one level. |
-| `onLike` | `(index, replyIndex?) => void` | — | `replyIndex` set when a reply's ♥ is tapped. |
-| `onSubmit` | `(text: string) => void` | — | Composer send (trimmed, non-empty). |
+| `open` / `onOpenChange` | `boolean` / `(b) => void` | - | Controlled, forwarded to `Sheet`. |
+| `comments` | `Comment[]` | - | `{ author, time, body, likes, liked?, replies? }`. Replies are one level. |
+| `onLike` | `(index, replyIndex?) => void` | - | `replyIndex` set when a reply's ♥ is tapped. |
+| `onSubmit` | `(text: string) => void` | - | Composer send (trimmed, non-empty). |
 
 ## Tokens
 
@@ -47,14 +47,14 @@ import { CommentThread, type Comment } from "@/design-system";
 - `--color-surface-container` composer field · `--color-brand`/`--color-on-brand` send disc.
 - `--color-outline-variant` row dividers + reply border · `--color-sell` over-limit counter.
 - `.data-sm` like counts.
-- `--radius-control` (`rounded-control`) — composer field corner.
+- `--radius-control` (`rounded-control`): composer field corner.
 
 ## States
 
-- **Empty vs N** — title pluralizes.
-- **Reply** — indented 36px with a left border, single level.
-- **Liked** — ♥ + count in `text-brand`.
-- **Composer** — send disabled until non-empty; counter appears at ≤ 40 remaining, turns `sell` if negative (input is hard-capped at 280).
+- **Empty vs N**: title pluralizes.
+- **Reply**: indented 36px with a left border, single level.
+- **Liked**: ♥ + count in `text-brand`.
+- **Composer**: send disabled until non-empty; counter appears at ≤ 40 remaining, turns `sell` if negative (input is hard-capped at 280).
 
 ## Motion
 

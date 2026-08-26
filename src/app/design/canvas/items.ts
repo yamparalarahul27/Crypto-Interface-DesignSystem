@@ -1,4 +1,4 @@
-// Curated canvas layout — world coordinates (px at scale 1).
+// Curated canvas layout: world coordinates (px at scale 1).
 // Zones flow left→right: Foundations → Components → Screens → Mocks.
 
 export type CanvasItemDef =
@@ -44,7 +44,7 @@ export const CANVAS_ITEMS: CanvasItemDef[] = [
   { kind: "demo", id: "Tooltip", title: "Tooltip", x: CX + COL, y: CY + 1093, w: 300 },
 
   // ── Zone: Primitives (Phase 4 core atoms) ────────────────────
-  { kind: "label", id: "z-primitives", title: "Primitives — core atoms", x: CX, y: CY + 1367 },
+  { kind: "label", id: "z-primitives", title: "Primitives: core atoms", x: CX, y: CY + 1367 },
   { kind: "demo", id: "Button", title: "Button", x: CX, y: CY + 1427, w: 380 },
   { kind: "demo", id: "LoadingButton", title: "LoadingButton", x: CX + COL + 40, y: CY + 1427, w: 340 },
   { kind: "demo", id: "IconButton", title: "IconButton", x: CX + COL * 2 + 40, y: CY + 1427, w: 300 },
@@ -61,7 +61,7 @@ export const CANVAS_ITEMS: CanvasItemDef[] = [
   { kind: "demo", id: "EmptyState", title: "EmptyState", x: CX + COL * 2, y: CY + 2107, w: 380 },
 
   // ── Zone: Data (Phase 5 terminal-grade layer) ────────────────
-  { kind: "label", id: "z-data", title: "Data — terminal grade", x: CX, y: CY + 2410 },
+  { kind: "label", id: "z-data", title: "Data: terminal grade", x: CX, y: CY + 2410 },
   { kind: "demo", id: "RollingNumber", title: "RollingNumber", x: CX, y: CY + 2470, w: 340 },
   { kind: "demo", id: "PriceChange", title: "PriceChange", x: CX + COL, y: CY + 2470, w: 300 },
   { kind: "demo", id: "StatCell", title: "StatCell", x: CX + COL * 2, y: CY + 2470, w: 380 },
@@ -69,28 +69,28 @@ export const CANVAS_ITEMS: CanvasItemDef[] = [
   { kind: "demo", id: "DataTable", title: "DataTable", x: CX, y: CY + 2710, w: 560 },
 
   // ── Zone: Crypto (the whitespace no reference system ships) ──
-  { kind: "label", id: "z-crypto", title: "Crypto — the vertical", x: CX, y: CY + 3090 },
+  { kind: "label", id: "z-crypto", title: "Crypto: the vertical", x: CX, y: CY + 3090 },
   { kind: "demo", id: "AddressChip", title: "AddressChip", x: CX, y: CY + 3150, w: 340 },
   { kind: "demo", id: "PegBadge", title: "PegBadge", x: CX + COL, y: CY + 3150, w: 340 },
   { kind: "demo", id: "NetworkBadge", title: "NetworkBadge", x: CX + COL * 2, y: CY + 3150, w: 300 },
   { kind: "demo", id: "TxStatus", title: "TxStatus", x: CX + COL * 3, y: CY + 3150, w: 340 },
   { kind: "demo", id: "AmountInput", title: "AmountInput", x: CX, y: CY + 3390, w: 340 },
-  { kind: "demo", id: "ExchangeOrderBook", title: "Order book — exchange density (demo)", x: CX, y: CY + 3590, w: 460 },
+  { kind: "demo", id: "ExchangeOrderBook", title: "Order book: exchange density (demo)", x: CX, y: CY + 3590, w: 460 },
 
-  // ── Zone: Patterns (PATTERNS.md — composition recipes, live) ─
-  { kind: "label", id: "z-patterns", title: "Patterns — composition recipes", x: CX, y: CY + 4408 },
+  // ── Zone: Patterns (PATTERNS.md, composition recipes, live) ─
+  { kind: "label", id: "z-patterns", title: "Patterns: composition recipes", x: CX, y: CY + 4408 },
   { kind: "demo", id: "PatternStates", title: "P1 · States catalog", x: CX, y: CY + 4468, w: 420 },
   { kind: "demo", id: "PatternTxFlow", title: "P2 · Transaction flow", x: CX + COL + 80, y: CY + 4468, w: 420 },
   { kind: "demo", id: "PatternFormRow", title: "P3 · Form row", x: CX + COL * 2 + 160, y: CY + 4468, w: 380 },
   { kind: "demo", id: "PatternMarketList", title: "P4 · Market list", x: CX, y: CY + 4888, w: 520 },
   { kind: "demo", id: "PatternSwapReceive", title: "P5 · Swap / receive ticket", x: CX + COL + 140, y: CY + 4888, w: 440 },
 
-  // Templates (Phase 6b) — the range claim, framed live
-  { kind: "iframe", id: "tpl-dapp", title: "Template — simple dApp", x: CX + COL * 2 + 200, y: CY + 4888, w: 400, h: 640, src: "/design/templates/simple-dapp" },
-  { kind: "iframe", id: "tpl-exchange", title: "Template — exchange (compact)", x: CX + COL * 3 + 280, y: CY + 4888, w: 560, h: 640, src: "/design/templates/exchange" },
+  // Templates (Phase 6b): the range claim, framed live
+  { kind: "iframe", id: "tpl-dapp", title: "Template: simple dApp", x: CX + COL * 2 + 200, y: CY + 4888, w: 400, h: 640, src: "/design/templates/simple-dapp" },
+  { kind: "iframe", id: "tpl-exchange", title: "Template: exchange (compact)", x: CX + COL * 3 + 280, y: CY + 4888, w: 560, h: 640, src: "/design/templates/exchange" },
 
   // ── Zone: Primitives batch 2 (component-gaps pass) ───────────
-  { kind: "label", id: "z-primitives-2", title: "Primitives — containment & forms", x: CX, y: CY + 5608 },
+  { kind: "label", id: "z-primitives-2", title: "Primitives: containment & forms", x: CX, y: CY + 5608 },
   { kind: "demo", id: "Card", title: "Card", x: CX, y: CY + 5668, w: 340 },
   { kind: "demo", id: "Accordion", title: "Accordion", x: CX + COL, y: CY + 5668, w: 380 },
   { kind: "demo", id: "Alert", title: "Alert", x: CX + COL * 2 + 40, y: CY + 5668, w: 420 },
@@ -110,16 +110,16 @@ export const CANVAS_ITEMS: CanvasItemDef[] = [
   { kind: "demo", id: "ContextMenu", title: "ContextMenu", x: CX + COL + 80, y: CY + 6848, w: 340 },
 
   // ── Zone: Crypto round 2 (component-gaps batch 3) ────────────
-  { kind: "label", id: "z-crypto-2", title: "Crypto — round 2", x: CX, y: CY + 7148 },
+  { kind: "label", id: "z-crypto-2", title: "Crypto: round 2", x: CX, y: CY + 7148 },
   { kind: "demo", id: "WalletButton", title: "WalletButton", x: CX, y: CY + 7208, w: 340 },
   { kind: "demo", id: "ChainSwitcher", title: "ChainSwitcher", x: CX + COL, y: CY + 7208, w: 340 },
   { kind: "demo", id: "Amount", title: "Amount", x: CX + COL * 2, y: CY + 7208, w: 300 },
   { kind: "demo", id: "GasFee", title: "GasFee", x: CX + COL * 3, y: CY + 7208, w: 380 },
-  { kind: "demo", id: "PriceChart", title: "PriceChart — via EvilCharts", x: CX, y: CY + 7508, w: 520 },
-  { kind: "demo", id: "QRCode", title: "QRCode — via qrcode", x: CX + COL + 160, y: CY + 7508, w: 300 },
+  { kind: "demo", id: "PriceChart", title: "PriceChart: via EvilCharts", x: CX, y: CY + 7508, w: 520 },
+  { kind: "demo", id: "QRCode", title: "QRCode: via qrcode", x: CX + COL + 160, y: CY + 7508, w: 300 },
 
   // ── Zone: Trading interface imports (DeFi-Triangle-Learn) ───
-  { kind: "label", id: "z-trading-learn", title: "Trading interface — Learn imports", x: CX, y: CY + 7999 },
+  { kind: "label", id: "z-trading-learn", title: "Trading interface: Learn imports", x: CX, y: CY + 7999 },
   { kind: "demo", id: "OrderTypeTabs", title: "OrderTypeTabs", x: CX, y: CY + 8059, w: 460 },
   { kind: "demo", id: "SizeSlider", title: "SizeSlider", x: CX + COL + 120, y: CY + 8059, w: 420 },
   { kind: "demo", id: "MarketTabs", title: "MarketTabs", x: CX, y: CY + 8259, w: 560 },
@@ -127,7 +127,7 @@ export const CANVAS_ITEMS: CanvasItemDef[] = [
   { kind: "demo", id: "OrderBook", title: "OrderBook", x: CX, y: CY + 8519, w: 520 },
 
   // ── Zone: Crypto round 3 (component-gaps Batch 5) ────────────
-  { kind: "label", id: "z-crypto-3", title: "Crypto — round 3", x: CX, y: CY + 9337 },
+  { kind: "label", id: "z-crypto-3", title: "Crypto: round 3", x: CX, y: CY + 9337 },
   { kind: "demo", id: "TokenSelect", title: "TokenSelect", x: CX, y: CY + 9397, w: 340 },
   { kind: "demo", id: "SlippageControl", title: "SlippageControl", x: CX + COL, y: CY + 9397, w: 380 },
   { kind: "demo", id: "AccountMenu", title: "AccountMenu", x: CX + COL * 2, y: CY + 9397, w: 340 },
@@ -142,7 +142,7 @@ export const CANVAS_ITEMS: CanvasItemDef[] = [
   { kind: "demo", id: "WizardSteps", title: "WizardSteps", x: CX, y: CY + 10437, w: 440 },
 
   // ── Zone: Screens (live build vs HTML mock, side by side) ────
-  { kind: "label", id: "z-screens", title: "Screens — mock vs build", x: 1780, y: 60 },
+  { kind: "label", id: "z-screens", title: "Screens: mock vs build", x: 1780, y: 60 },
   {
     kind: "iframe",
     id: "mock-feed",

@@ -1,4 +1,4 @@
-# CIDS CI — the contract, enforced on every push/PR.
+# CIDS CI: the contract, enforced on every push/PR.
 # Mirrors the local gate: types, lint, all four guards, tests.
 name: ci
 
@@ -28,19 +28,19 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Guard — theme (no hardcoded hex utilities)
+      - name: Guard, theme (no hardcoded hex utilities)
         run: npm run check:theme
 
-      - name: Guard — contrast (WCAG AA per theme)
+      - name: Guard, contrast (WCAG AA per theme)
         run: npm run check:contrast
 
-      - name: Guard — polish (interaction rules)
+      - name: Guard, polish (interaction rules)
         run: npm run check:polish
 
-      - name: Guard — portable (DS imports + doc completeness)
+      - name: Guard, portable (DS imports + doc completeness)
         run: npm run check:portable
 
-      - name: Guard — registry (public/r in sync with source)
+      - name: Guard, registry (public/r in sync with source)
         run: npm run check:registry
 
       - name: Tests

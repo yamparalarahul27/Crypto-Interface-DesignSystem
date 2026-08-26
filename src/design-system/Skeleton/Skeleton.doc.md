@@ -2,7 +2,7 @@
 
 Status: stable
 Version: 1.0.0
-Shimmering placeholder for content that is still loading — a block (`Skeleton`) and a labelled card-shaped region (`SectionSkeleton`).
+Shimmering placeholder for content that is still loading: a block (`Skeleton`) and a labelled card-shaped region (`SectionSkeleton`).
 
 ## Usage
 
@@ -17,7 +17,7 @@ import { Skeleton, SectionSkeleton } from "@/design-system";
 
 ```
 ┌ SectionSkeleton (rounded-card) ─┐
-│ LABEL (uppercase, fg-muted)     │
+│ Label (fg-muted)                │
 │ ▬▬▬▬▬▬▬▬▬▬▬  ← Skeleton rows   │
 │ ▬▬▬▬▬▬▬                        │
 │ ▬▬▬▬▬▬▬▬▬                      │
@@ -28,10 +28,10 @@ import { Skeleton, SectionSkeleton } from "@/design-system";
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `className` | `string` | — | cn-merged; shape the block with `w-*`/`h-*`. |
-| `style` | `CSSProperties` | — | Escape hatch for computed dimensions. |
-| `height` | `number` | — | SectionSkeleton only — `minHeight` in px, matches the loaded card to prevent layout shift. |
-| `label` | `string` | — | SectionSkeleton only — section name; becomes the aria-label. |
+| `className` | `string` | - | cn-merged; shape the block with `w-*`/`h-*`. |
+| `style` | `CSSProperties` | - | Escape hatch for computed dimensions. |
+| `height` | `number` | - | SectionSkeleton only: `minHeight` in px, matches the loaded card to prevent layout shift. |
+| `label` | `string` | - | SectionSkeleton only: section name; becomes the aria-label. |
 
 ## Tokens
 
@@ -40,7 +40,7 @@ import { Skeleton, SectionSkeleton } from "@/design-system";
 
 ## States
 
-- Static shimmer via `animate-pulse` — there is no interactive state.
+- Static shimmer via `animate-pulse`; there is no interactive state.
 - SectionSkeleton announces itself with `aria-busy="true"`.
 
 ## Motion
@@ -50,6 +50,6 @@ import { Skeleton, SectionSkeleton } from "@/design-system";
 
 ## A11y
 
-- `Skeleton` is `aria-hidden` — screen readers skip decorative shimmer.
+- `Skeleton` is `aria-hidden`: screen readers skip decorative shimmer.
 - `SectionSkeleton` carries `aria-busy` + an `aria-label` ("<label> loading")
   so the loading region is announced once, not per row.

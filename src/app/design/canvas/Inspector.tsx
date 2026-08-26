@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CANVAS_ITEMS } from "./items";
 import { CopyButton, renderDoc } from "../docRenderer";
 import { DEMO_STATE_OPTIONS } from "./demoStates";
+import { IconClose } from "@/design-system";
 
 // ── panel ─────────────────────────────────────────────────────────────
 
@@ -32,7 +33,7 @@ export function Inspector({
     <div className="pointer-events-auto flex max-h-[calc(100dvh-96px)] w-80 flex-col rounded-sm border border-outline bg-surface-page/95">
       <div className="flex flex-none items-center justify-between border-b border-outline-variant px-3 py-2">
         <div className="flex items-center gap-2">
-          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+          <span className="font-mono text-[11px] font-semibold text-fg-subtle">
             Inspect
           </span>
           {doc && source && (
@@ -61,12 +62,12 @@ export function Inspector({
           aria-label="Close inspector"
           className="inline-flex h-6 w-6 items-center justify-center rounded-sm text-fg-muted hover:bg-surface-container-high hover:text-fg"
         >
-          ×
+          <IconClose size={12} weight="bold" aria-hidden="true" />
         </button>
       </div>
       {states && onDemoStateChange && (
         <div className="flex flex-none flex-wrap gap-1 border-b border-outline-variant px-3 py-2">
-          <span className="mr-1 self-center font-mono text-[9px] uppercase tracking-wider text-fg-subtle">
+          <span className="mr-1 self-center font-mono text-[9px] text-fg-subtle">
             State
           </span>
           {states.map((s) => (
@@ -117,7 +118,7 @@ export function Inspector({
           <>
             <h2 className="font-mono text-sm font-bold text-fg">{item?.title ?? selected}</h2>
             <p className="text-xs leading-relaxed text-fg-muted">
-              Foundation swatch — values live in <code className="text-brand">globals.css</code>{" "}
+              Foundation swatch: values live in <code className="text-brand">globals.css</code>{" "}
               and are documented in DESIGN.md. Component docs appear here when a
               component is selected.
             </p>

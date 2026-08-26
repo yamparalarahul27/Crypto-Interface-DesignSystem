@@ -2,7 +2,7 @@
 
 Status: draft
 Version: 0.9.0
-Path navigation — where am I, with links back up the tree.
+Path navigation: where am I, with links back up the tree.
 
 ## Usage
 
@@ -13,12 +13,12 @@ import { Breadcrumbs } from "@/design-system";
   items={[
     { label: "Design", href: "/design" },
     { label: "Components", href: "/design#components" },
-    { label: "Accordion" }, // current page — no href
+    { label: "Accordion" }, // current page, no href
   ]}
 />
 ```
 
-Best for: hierarchical surfaces ≥3 levels deep — docs, console/settings
+Best for: hierarchical surfaces ≥3 levels deep, docs, console/settings
 trees, registry browsers. A two-level app doesn't need breadcrumbs; a
 back button in the AppBar is clearer.
 
@@ -35,8 +35,8 @@ Design / Components / Accordion
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `items` | `Crumb[]` | — | `{ label, href? }`; last item is the current page. |
-| `className` | `string` | — | cn-merged onto the nav. |
+| `items` | `Crumb[]` | - | `{ label, href? }`; last item is the current page. |
+| `className` | `string` | - | cn-merged onto the nav. |
 
 ## Tokens
 
@@ -55,7 +55,7 @@ Design / Components / Accordion
 
 ## A11y
 
-`<nav aria-label="Breadcrumb">` wrapping an ordered list — order is the
+`<nav aria-label="Breadcrumb">` wrapping an ordered list: order is the
 hierarchy. Separators are `aria-hidden` (screen readers read the list
-structure, not the slashes). Renders plain anchors for portability —
+structure, not the slashes). Renders plain anchors for portability:
 document-level navigation works in any framework.

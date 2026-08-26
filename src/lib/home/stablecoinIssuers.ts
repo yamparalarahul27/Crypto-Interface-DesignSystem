@@ -4,7 +4,7 @@
  * across multiple mints if we ever ship more than one of theirs.
  *
  * Edit this file directly to add or correct an issuer. Avoid runtime fetches
- * for issuer info — these are stable strings and shouldn't depend on the
+ * for issuer info: these are stable strings and shouldn't depend on the
  * network.
  */
 
@@ -13,7 +13,7 @@ export type StablecoinIssuer = {
   name: string;
   /**
    * Compact label used as the card subtitle (under the symbol). Falls back to
-   * `name` if absent. Keep this short — the card is 260px wide on mobile.
+   * `name` if absent. Keep this short: the card is 260px wide on mobile.
    */
   shortName?: string;
   /** Canonical website. Opens in a new tab from the modal. */

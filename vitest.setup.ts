@@ -1,4 +1,4 @@
-// jsdom gaps that Radix + user-event rely on. Standard stubs — no behavior,
+// jsdom gaps that Radix + user-event rely on. Standard stubs: no behavior,
 // just presence, so pointer interactions don't throw in tests.
 
 if (!Element.prototype.hasPointerCapture) {

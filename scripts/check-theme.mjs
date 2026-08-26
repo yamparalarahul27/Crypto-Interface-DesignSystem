@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Static guard for the dark token layer (Fey/market-dark theme).
 // Asserts colors flow through semantic tokens in globals.css instead of
-// hardcoded Tailwind hex classes — so the 600+ hex debt we removed can't
+// hardcoded Tailwind hex classes: so the 600+ hex debt we removed can't
 // silently creep back. Pure Node, no deps. Mirrors check-polish.mjs.
 
 import { readFileSync, readdirSync, statSync } from "node:fs";
@@ -28,7 +28,7 @@ function walk(dir, acc = []) {
 
 // Rule T1: no hardcoded hex in Tailwind utility classes (bg-[#..], text-[#..], …).
 // Inline `style={{ ... }}` gradients on standalone branded pages (404 / global-error /
-// OG image) are allowed — they aren't theme surfaces and use the style attribute, not
+// OG image) are allowed: they aren't theme surfaces and use the style attribute, not
 // utility classes. This regex only matches the `prefix-[#hex]` class form.
 const HEX_CLASS =
   /\b(?:bg|text|border|ring|ring-offset|from|via|to|fill|stroke|divide|placeholder|caret|accent|outline|decoration|shadow)-\[#[0-9a-fA-F]{3,8}\]/;
@@ -38,11 +38,11 @@ for (const f of walk(SRC)) {
   const lines = src.split("\n");
   lines.forEach((line, i) => {
     const m = line.match(HEX_CLASS);
-    if (m) fail(f, `hardcoded hex class "${m[0]}" at line ${i + 1} — use a semantic token`);
+    if (m) fail(f, `hardcoded hex class "${m[0]}" at line ${i + 1}: use a semantic token`);
   });
   // Rule T2: filled brand surfaces must use dark on-brand text, not white.
   if (/bg-brand\s+text-white|text-white\s+bg-brand/.test(src)) {
-    fail(f, "filled brand button uses text-white — use text-on-brand (mint needs dark text)");
+    fail(f, "filled brand button uses text-white: use text-on-brand (mint needs dark text)");
   }
 }
 
@@ -86,7 +86,7 @@ for (const tok of REQUIRED) {
 }
 
 // Rule T4 (Phase-1 gate): inside the design system and the design app,
-// elevation and stacking must flow through tokens — no Tailwind default
+// elevation and stacking must flow through tokens: no Tailwind default
 // shadow utilities, no numeric z-index utilities, no literal box-shadow
 // values. Use shadow-card/raised/overlay/glow-brand* and concrete z token
 // utilities such as z-[var(--z-raised)].
@@ -100,11 +100,11 @@ for (const dir of TOKENED_DIRS) {
     const src = readFileSync(f, "utf8");
     let m;
     if ((m = src.match(RAW_SHADOW)))
-      fail(f, `raw Tailwind shadow "${m[0]}" — use shadow-card/raised/overlay (elevation tokens)`);
+      fail(f, `raw Tailwind shadow "${m[0]}": use shadow-card/raised/overlay (elevation tokens)`);
     if ((m = src.match(RAW_Z)))
-      fail(f, `raw z-index "${m[0]}" — use z-[var(--z-raised)] or another stacking token`);
+      fail(f, `raw z-index "${m[0]}": use z-[var(--z-raised)] or another stacking token`);
     if ((m = src.match(RAW_BOXSHADOW)))
-      fail(f, `literal boxShadow value — use an elevation/glow token`);
+      fail(f, `literal boxShadow value: use an elevation/glow token`);
   }
 }
 

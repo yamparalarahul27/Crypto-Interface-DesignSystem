@@ -77,7 +77,7 @@ export interface OnChainData {
   accountInfo: OnChainAccountInfo | null;
   asset: OnChainAsset | null;
   /** Price reported by Helius DAS getAsset.token_info.price_info.price_per_token.
-   * Not rendered in the panel — exposed for the price-divergence flag (D2). */
+   * Not rendered in the panel: exposed for the price-divergence flag (D2). */
   dasPrice: number | null;
 }
 

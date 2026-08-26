@@ -2,7 +2,7 @@
 
 Status: draft
 Version: 0.9.0
-Active network + switch menu — NetworkBadge's interactive sibling.
+Active network + switch menu: NetworkBadge's interactive sibling.
 
 ## Usage
 
@@ -22,10 +22,10 @@ const [chain, setChain] = useState("solana");
 />
 ```
 
-Best for: multi-chain apps where the network is a user decision —
+Best for: multi-chain apps where the network is a user decision,
 bridges, multi-chain wallets, deploy consoles. ethereum.org heuristic
 #3 says *always show the connected network*; this adds "and let me
-change it". Single-chain surface? Use NetworkBadge — a switcher with
+change it". Single-chain surface? Use NetworkBadge: a switcher with
 one option is a lie.
 
 ## Anatomy
@@ -43,11 +43,11 @@ one option is a lie.
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `networks` | `Network[]` | — | `{ id, label, iconSrc? }` — Logobase URLs for icons; dot fallback. |
-| `value` | `string` | — | Active network id. |
-| `onValueChange` | `(id: string) => void` | — | Fire your adapter's switch here. |
-| `disabled` | `boolean` | — | E.g. while a transaction is pending. |
-| `className` | `string` | — | Merged onto the trigger. |
+| `networks` | `Network[]` | - | `{ id, label, iconSrc? }`: Logobase URLs for icons; dot fallback. |
+| `value` | `string` | - | Active network id. |
+| `onValueChange` | `(id: string) => void` | - | Fire your adapter's switch here. |
+| `disabled` | `boolean` | - | E.g. while a transaction is pending. |
+| `className` | `string` | - | Merged onto the trigger. |
 
 ## Tokens
 
@@ -56,15 +56,15 @@ one option is a lie.
 
 ## States
 
-- **Closed**: trigger shows the active network — always visible.
+- **Closed**: trigger shows the active network, always visible.
 - **Open**: radio list; the active item carries the brand ✓.
-- **Disabled**: 40% opacity — disable during pending transactions so
+- **Disabled**: 40% opacity, disable during pending transactions so
   users can't switch mid-sign.
 
 ## Motion
 
 Panel fades via `animate-in fade-in-0` (Menu's preset). The trigger
-label swaps instantly on selection — network changes must read as
+label swaps instantly on selection: network changes must read as
 immediate facts.
 
 ## A11y
@@ -72,4 +72,4 @@ immediate facts.
 Radix DropdownMenu radio semantics: trigger has `aria-haspopup` +
 `aria-expanded` and an explicit label naming the current network;
 items are `role="menuitemradio"` with `aria-checked`; typeahead and
-arrow keys work. Icons are decorative — labels carry the meaning.
+arrow keys work. Icons are decorative: labels carry the meaning.

@@ -23,7 +23,7 @@ export function AvatarGroup({
   members: AvatarGroupMember[];
   /** Max avatars before collapsing to a +N disc. */
   max?: number;
-  /** xs 20px · sm 28px (shared scale — see CONVENTIONS API contract). */
+  /** xs 20px · sm 28px (shared scale: see CONVENTIONS API contract). */
   size?: "xs" | "sm";
   className?: string;
 }) {

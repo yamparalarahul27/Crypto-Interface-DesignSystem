@@ -32,23 +32,23 @@ const [following, setFollowing] = useState(false);
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `following` | `boolean` | — | Controlled state. Flip optimistically at the call site; roll back on failure. |
-| `onToggle` | `() => void` | — | Fired on tap. |
-| `className` | `string` | — | Merged via `cn`. |
+| `following` | `boolean` | - | Controlled state. Flip optimistically at the call site; roll back on failure. |
+| `onToggle` | `() => void` | - | Fired on tap. |
+| `className` | `string` | - | Merged via `cn`. |
 
 ## Tokens
 
-- `--color-brand`, `--color-on-brand` — the Follow (filled) state.
-- `--color-outline`, `--color-fg-muted` — the Following (outline) state.
-- `--motion-settle` — the fill→outline morph; `--motion-fast` — press scale.
-- `--radius-control` (`rounded-control`) — button corner.
+- `--color-brand`, `--color-on-brand`: the Follow (filled) state.
+- `--color-outline`, `--color-fg-muted`: the Following (outline) state.
+- `--motion-settle`: the fill→outline morph; `--motion-fast`: press scale.
+- `--radius-control` (`rounded-control`): button corner.
 
 ## States
 
-- **Follow** (`following=false`) — filled brand, dark on-brand text.
-- **Following** (`following=true`) — transparent, outline border, muted text.
-- **Press** — `scale(0.96)`.
-- **Optimistic/pending** — caller's concern: set `following` immediately, revert on error.
+- **Follow** (`following=false`): filled brand, dark on-brand text.
+- **Following** (`following=true`): transparent, outline border, muted text.
+- **Press**: `scale(0.96)`.
+- **Optimistic/pending**; caller's concern: set `following` immediately, revert on error.
 
 ## Motion
 

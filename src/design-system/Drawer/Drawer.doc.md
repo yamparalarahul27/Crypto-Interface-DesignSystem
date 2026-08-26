@@ -2,7 +2,7 @@
 
 Status: draft
 Version: 0.9.0
-Side sheet on Radix Dialog — slides from an edge; Sheet's desktop sibling.
+Side sheet on Radix Dialog: slides from an edge; Sheet's desktop sibling.
 
 ## Usage
 
@@ -23,7 +23,7 @@ const [open, setOpen] = useState(false);
 ```
 
 Best for: supporting tasks and detail views that shouldn't leave the
-page — order details, filters, settings panels. Rule of thumb by
+page: order details, filters, settings panels. Rule of thumb by
 pointer: thumbs get Sheet (bottom), pointers get Drawer (edge),
 decisions get Dialog (center). Content scrolls; header and footer pin.
 
@@ -44,13 +44,13 @@ decisions get Dialog (center). Content scrolls; header and footer pin.
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `open` / `onOpenChange` | `boolean` / `(open) => void` | — | Controlled. |
-| `title` | `string` | — | Required — a drawer must name itself. |
-| `description` | `string` | — | Wired to `aria-describedby`. |
+| `open` / `onOpenChange` | `boolean` / `(open) => void` | - | Controlled. |
+| `title` | `string` | - | Required: a drawer must name itself. |
+| `description` | `string` | - | Wired to `aria-describedby`. |
 | `side` | `"right" \| "left"` | `"right"` | Edge it slides from. |
-| `children` | `ReactNode` | — | Scrollable body. |
-| `footer` | `ReactNode` | — | Pinned action row. |
-| `className` | `string` | — | Merged onto the panel. |
+| `children` | `ReactNode` | - | Scrollable body. |
+| `footer` | `ReactNode` | - | Pinned action row. |
+| `className` | `string` | - | Merged onto the panel. |
 
 ## Tokens
 
@@ -60,7 +60,7 @@ decisions get Dialog (center). Content scrolls; header and footer pin.
 
 - **Closed**: nothing rendered.
 - **Open**: overlay + panel; Escape, overlay click, or the × closes.
-- No half-open state — that's Sheet's drag territory.
+- No half-open state; that's Sheet's drag territory.
 
 ## Motion
 

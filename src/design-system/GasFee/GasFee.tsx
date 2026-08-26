@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 export type FeeLevel = "low" | "normal" | "elevated" | "high";
 
 // Word + tint together (mono-safe, same rule as Alert/PegBadge). Fee
-// severity is congestion pricing, not danger — warning tones only at
+// severity is congestion pricing, not danger: warning tones only at
 // the top of the scale.
 const LEVEL: Record<FeeLevel, { word: string; text: string }> = {
   low: { word: "low", text: "text-success" },
@@ -13,9 +13,9 @@ const LEVEL: Record<FeeLevel, { word: string; text: string }> = {
 };
 
 /**
- * Network-fee row — the gas/fee communication component no generic
+ * Network-fee row: the gas/fee communication component no generic
  * system ships. Label left; amount (financial ramp) + optional
- * congestion level right. Put it directly above the confirm button —
+ * congestion level right. Put it directly above the confirm button:
  * fees users discover after signing are the #1 web3 trust killer.
  */
 export function GasFee({
@@ -29,7 +29,7 @@ export function GasFee({
   amount: string;
   /** Fiat approximation (e.g. "≈ $0.0009"). */
   usd?: string;
-  /** Congestion level — omit when the chain has flat fees. */
+  /** Congestion level: omit when the chain has flat fees. */
   level?: FeeLevel;
   label?: string;
   className?: string;
@@ -41,7 +41,7 @@ export function GasFee({
         <span className="data-sm text-fg">{amount}</span>
         {usd && <span className="text-fg-subtle">{usd}</span>}
         {level && (
-          <span className={cn("font-medium uppercase tracking-wider text-[10px]", LEVEL[level].text)}>
+          <span className={cn("font-medium text-[10px]", LEVEL[level].text)}>
             {LEVEL[level].word}
           </span>
         )}

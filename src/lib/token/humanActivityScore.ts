@@ -1,4 +1,4 @@
-// Real-human activity score — filters wash-trading bots from genuine user
+// Real-human activity score: filters wash-trading bots from genuine user
 // activity. Two normalized signals combined:
 //   - uniqueWallets: log-scaled (more distinct wallets = harder to fake; each
 //     bot needs separate funding)
@@ -16,7 +16,7 @@ const ORGANIC_WEIGHT = 0.4;
 const UNIQUE_BOTTOM = 10;
 const UNIQUE_TOP = 100_000;
 
-// Organic ratio target — Jupiter classifies a small slice of trades as
+// Organic ratio target: Jupiter classifies a small slice of trades as
 // "organic" (filters out MMs / bots / arbs). Major tokens like SOL hover
 // around 1–2% even in healthy conditions because automated trading dominates
 // volume. Treat 2% as full credit so major tokens score fairly while

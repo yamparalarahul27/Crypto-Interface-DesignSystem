@@ -1,4 +1,4 @@
-# 03 · Data model — Supabase, APIs, auth, seeding
+# 03 · Data model: Supabase, APIs, auth, seeding
 
 Everything follows the established patterns in CLAUDE.md §Auth & API:
 server-side Supabase via service-role key, wallet **from JWT never
@@ -47,7 +47,7 @@ One table for all feed-authored objects:
 |---|---|---|
 | `id` | uuid PK | |
 | `author_wallet` | text FK→profiles | from JWT |
-| `kind` | enum `take \| watch_note` | milestones are **not** rows — derived at read time |
+| `kind` | enum `take \| watch_note` | milestones are **not** rows: derived at read time |
 | `body` | text | ≤ 280 chars; plain text only (React-escaped; no HTML ever) |
 | `token_address` | text null | validated mint if present |
 | `created_at` | timestamptz | |
@@ -74,16 +74,16 @@ One table for all feed-authored objects:
 | `emoji` | enum fixed set (`♥ 🔥 👀 🧠 😅 📈`) | not free-form |
 | `created_at` | timestamptz | |
 
-PK `(author_wallet, subject_type, subject_id, emoji)` — toggle =
+PK `(author_wallet, subject_type, subject_id, emoji)`: toggle =
 insert/delete.
 
-### `watchlist` (exists) — additive changes only
+### `watchlist` (exists): additive changes only
 
 Add `is_public bool default true` (profile privacy toggle later) and
 `note text null ≤140` (the "watch with a note" feed card). Existing
 GET/POST/DELETE contract for the current UI must not break.
 
-## Feed generation — v1 is a query, not infrastructure
+## Feed generation: v1 is a query, not infrastructure
 
 No fan-out, no queues, no materialized feeds:
 
@@ -125,7 +125,7 @@ screens consume.
   flow. Zero changes to `/api/auth/*`.
 - Deletes (post/comment, unfollow is exempt) get the confirmation-step
   treatment per CLAUDE.md destructive-action rule.
-- User text: length-capped server-side, plain text, React-escaped —
+- User text: length-capped server-side, plain text, React-escaped,
   `dangerouslySetInnerHTML` remains banned. Links render as plain text
   in v1 (no unfurl surface, no phishing surface).
 - RLS: enabled on all new tables as defense-in-depth (service-role
@@ -133,7 +133,7 @@ screens consume.
 - Moderation in v1 = a `hidden_at` column on posts/comments + manual
   flip. Real reporting flows are phase-4 scope with chat.
 
-## Seeding — the app must feel alive on day one
+## Seeding: the app must feel alive on day one
 
 - **~12 personas**, `is_seed = true`, each with a designed identity:
   handle, bio, avatar hue, a coherent "taste" (stables maxi, memecoin

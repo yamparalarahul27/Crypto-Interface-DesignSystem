@@ -6,7 +6,7 @@ import { ID_HUES, shardsFor, blocksFor } from "../identity";
 const WALLET = "7xKXtg2CW3hqPzKZ4rE9mQvNbYd1sVfLpR8aUj5nHmTc";
 
 describe("shardsFor", () => {
-  it("is deterministic — one address always draws the same figure", () => {
+  it("is deterministic: one address always draws the same figure", () => {
     expect(shardsFor(WALLET)).toEqual(shardsFor(WALLET));
   });
 
@@ -17,7 +17,7 @@ describe("shardsFor", () => {
   });
 
   it("reads the whole address, not a prefix", () => {
-    // Two addresses sharing the first 8 chars must not collide — the
+    // Two addresses sharing the first 8 chars must not collide: the
     // truncated display form is exactly what users see side by side.
     const a = shardsFor("7xKXtg2CAAAAAAAAAAAA");
     const b = shardsFor("7xKXtg2CBBBBBBBBBBBB");
@@ -73,7 +73,7 @@ describe("WalletAvatar", () => {
 });
 
 describe("blocksFor", () => {
-  it("mirrors horizontally — symmetry is what makes it read as a face", () => {
+  it("mirrors horizontally: symmetry is what makes it read as a face", () => {
     const n = 5;
     const { cells } = blocksFor(WALLET, n);
     for (let y = 0; y < n; y++) {
@@ -90,7 +90,7 @@ describe("blocksFor", () => {
 
   it("draws a different figure than shards for the same address", () => {
     // Switching style must actually change the art, not just the geometry
-    // primitive — otherwise the user setting looks broken.
+    // primitive: otherwise the user setting looks broken.
     const blocks = blocksFor(WALLET);
     expect(blocks.cells.some(Boolean)).toBe(true);
   });

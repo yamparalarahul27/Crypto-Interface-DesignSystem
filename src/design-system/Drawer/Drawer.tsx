@@ -3,12 +3,13 @@
 import { Dialog as RadixDialog } from "radix-ui";
 import { useId, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { IconClose } from "../icons";
 
 /**
- * Side sheet on Radix Dialog — Sheet's desktop sibling (Sheet slides
+ * Side sheet on Radix Dialog: Sheet's desktop sibling (Sheet slides
  * from the bottom for thumbs; Drawer slides from an edge for pointers).
- * Focus trap, Escape + overlay dismiss, focus restore — all Radix.
- * Title is required — a drawer must name itself.
+ * Focus trap, Escape + overlay dismiss, focus restore: all Radix.
+ * Title is required: a drawer must name itself.
  */
 export function Drawer({
   open,
@@ -27,7 +28,7 @@ export function Drawer({
   description?: string;
   side?: "right" | "left";
   children?: ReactNode;
-  /** Action row — pinned to the bottom edge. */
+  /** Action row: pinned to the bottom edge. */
   footer?: ReactNode;
   /** Merged onto the panel. */
   className?: string;
@@ -62,7 +63,7 @@ export function Drawer({
               aria-label="Close"
               className="-mr-1 -mt-1 inline-flex h-7 w-7 flex-none items-center justify-center rounded-control text-fg-muted transition-colors hover:bg-surface-container-high hover:text-fg"
             >
-              ×
+              <IconClose size={14} weight="bold" aria-hidden="true" />
             </RadixDialog.Close>
           </div>
           {children && <div className="min-h-0 flex-1 overflow-y-auto text-sm text-fg">{children}</div>}

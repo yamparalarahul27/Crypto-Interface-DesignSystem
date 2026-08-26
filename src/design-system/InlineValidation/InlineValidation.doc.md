@@ -24,6 +24,8 @@ import { InlineValidation } from "@/design-system";
 Label
 ┌──────────────────────────── ✓/! ┐
 │ value                           │ ← Input + status icon
+                                     (IconCheck / IconExclamation,
+                                      cross-faded in one grid cell)
 └─────────────────────────────────┘
 hint ⟷ error   ← same grid cell, fixed height
 ```
@@ -32,14 +34,14 @@ hint ⟷ error   ← same grid cell, fixed height
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `label` | `string` | — | Visible label (`htmlFor`). |
-| `value` / `onChange` | controlled | — | Field owns no text. |
-| `validate` | `(v: string) => string \| null` | — | Message or `null` if ok. |
-| `hint` | `string` | — | Resting help; crossfades with error. |
+| `label` | `string` | - | Visible label (`htmlFor`). |
+| `value` / `onChange` | controlled | - | Field owns no text. |
+| `validate` | `(v: string) => string \| null` | - | Message or `null` if ok. |
+| `hint` | `string` | - | Resting help; crossfades with error. |
 | `debounce` | `number` | `400` | ms before invalid message updates. |
 | `type` | input types | `"text"` | Native type. |
-| `required` / `disabled` | `boolean` | `false` | — |
-| `className` | `string` | — | cn-merged. |
+| `required` / `disabled` | `boolean` | `false` | - |
+| `className` | `string` | - | cn-merged. |
 
 ## Tokens
 

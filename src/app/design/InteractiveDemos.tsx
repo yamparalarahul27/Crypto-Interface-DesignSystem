@@ -17,7 +17,7 @@ const SAMPLE_COMMENTS: Comment[] = [
   {
     author: { name: "Kip", handle: "kip", seed: "wallet-kip" },
     time: "6m",
-    body: "Agreed — the retest held cleanly. Watching the 0.80 shelf.",
+    body: "Agreed: the retest held cleanly. Watching the 0.80 shelf.",
     likes: 3,
     liked: true,
     replies: [
@@ -49,7 +49,7 @@ const INITIAL: Reaction[] = [
   { emoji: "🧠", count: 4 },
 ];
 
-// Toggle own-reaction and bump the count — the caller-owned logic the
+// Toggle own-reaction and bump the count: the caller-owned logic the
 // component leaves to us. Reused by the bare bar and the PostCard demo.
 function toggleReaction(prev: Reaction[], emoji: string): Reaction[] {
   const found = prev.find((r) => r.emoji === emoji);

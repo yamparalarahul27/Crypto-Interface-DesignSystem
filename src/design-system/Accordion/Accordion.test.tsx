@@ -26,7 +26,7 @@ describe("Accordion", () => {
     await userEvent.click(route);
     expect(fees.getAttribute("aria-expanded")).toBe("false");
     expect(route.getAttribute("aria-expanded")).toBe("true");
-    await userEvent.click(route); // collapsible — all closed is legal
+    await userEvent.click(route); // collapsible: all closed is legal
     expect(route.getAttribute("aria-expanded")).toBe("false");
   });
 

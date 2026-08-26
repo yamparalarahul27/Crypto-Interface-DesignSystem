@@ -4,7 +4,7 @@ import type { ButtonVariant } from "../Button/Button";
 export type IconButtonSize = "sm" | "md" | "lg";
 
 // Square hit areas: sm 28 (dense rows only) · md 36 · lg 44. Icon-only
-// controls at ≥40px are the DESIGN.md touch-target rule — prefer lg on
+// controls at ≥40px are the DESIGN.md touch-target rule: prefer lg on
 // primary surfaces.
 const SIZE: Record<IconButtonSize, string> = {
   sm: "h-7 w-7 text-sm",
@@ -28,7 +28,7 @@ export function IconButton({
   className,
   ...rest
 }: React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  /** Required — icon-only controls must name themselves. */
+  /** Required: icon-only controls must name themselves. */
   "aria-label": string;
   variant?: ButtonVariant;
   /** sm 28 · md 36 · lg 44 px square (shared scale). */

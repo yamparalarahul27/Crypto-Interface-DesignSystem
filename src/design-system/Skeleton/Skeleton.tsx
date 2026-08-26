@@ -43,7 +43,7 @@ export function SectionSkeleton({
       style={{ minHeight: height }}
     >
       {label ? (
-        <div className="mb-3 text-[10px] uppercase tracking-wider text-fg-muted">
+        <div className="mb-3 text-[10px] text-fg-muted">
           {label}
         </div>
       ) : null}

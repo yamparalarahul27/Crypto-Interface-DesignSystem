@@ -26,11 +26,11 @@ const [type, setType] = useState<OrderType>("limit");
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `value` | `OrderType` | -- | Controlled active order type. |
-| `onValueChange` | `(value: OrderType) => void` | -- | Fires on click or keyboard selection. |
+| `value` | `OrderType` | - | Controlled active order type. |
+| `onValueChange` | `(value: OrderType) => void` | - | Fires on click or keyboard selection. |
 | `options` | `OrderTypeOption[]` | `DEFAULT_ORDER_TYPE_OPTIONS` | Use to hide/disable unsupported engine types. |
 | `aria-label` | `string` | `Order type` | Names the tablist. |
-| `className` | `string` | -- | cn-merged. |
+| `className` | `string` | - | cn-merged. |
 
 `OrderTypeOption` has `value`, `label`, optional `description`, `group`, `disabled`, and `icon`.
 

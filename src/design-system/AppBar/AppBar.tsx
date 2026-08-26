@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * Page header — the three-slot row (leading · title · actions) every
+ * Page header: the three-slot row (leading · title · actions) every
  * screen was hand-rolling. Pure composition: put an IconButton back
  * arrow in `leading`, IconButtons/Menu in `actions`. `sticky` pins it
  * on the --z-sticky rung.
@@ -15,9 +15,9 @@ export function AppBar({
   className,
 }: {
   title: string;
-  /** Left slot — back button, logo. */
+  /** Left slot: back button, logo. */
   leading?: ReactNode;
-  /** Right slot — IconButtons, Menu triggers. */
+  /** Right slot: IconButtons, Menu triggers. */
   actions?: ReactNode;
   /** Pin to the top of the scroll container. */
   sticky?: boolean;

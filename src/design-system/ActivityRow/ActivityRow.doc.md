@@ -1,7 +1,7 @@
 # ActivityRow
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Tx / activity history row: icon · title · time · status · amount.
 
 ## Usage

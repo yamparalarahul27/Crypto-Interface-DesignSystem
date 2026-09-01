@@ -38,6 +38,18 @@ bullets under the release's buckets, prefixed with the component name.
 
 ## [Unreleased]
 
+### Changed
+
+- **Promotion cohort → stable @ 1.0.0**: ten bake-ready drafts after
+  Interior + Batch 5 + ContextMenu landed. API frozen (additive props
+  only from here). Docs, colocated tests, and dark/mono poses already
+  met the CONVENTIONS ladder.
+  - Interior: **LoadingButton**, **HoldToConfirm**, **OTPInput**,
+    **InlineValidation**, **WizardSteps**
+  - Crypto ticket: **TokenSelect**, **SlippageControl**, **AccountMenu**,
+    **ActivityRow**
+  - Overlay: **ContextMenu**
+
 ### Added
 
 - **Canvas state switcher**: selecting a demo that opts into

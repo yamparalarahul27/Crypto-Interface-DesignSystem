@@ -1,7 +1,7 @@
 # ContextMenu
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Right-click / long-press menu: Menu's context sibling on Radix ContextMenu.
 
 ## Usage

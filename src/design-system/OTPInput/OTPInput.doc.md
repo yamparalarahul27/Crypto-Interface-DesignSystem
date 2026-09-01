@@ -1,7 +1,7 @@
 # OTPInput
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 One-time code cells for wallet connect / verify. Paste fills from any cell; width reserved on first paint. Interior otp-input contract, CSS-only.
 
 ## Usage

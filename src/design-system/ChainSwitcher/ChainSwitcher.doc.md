@@ -1,7 +1,7 @@
 # ChainSwitcher
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Active network + switch menu: NetworkBadge's interactive sibling.
 
 ## Usage

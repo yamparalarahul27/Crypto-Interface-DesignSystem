@@ -1,7 +1,7 @@
 # OrderBook
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Bid/ask depth table for trading terminals: tick aggregation, side view modes, cumulative depth, and stale-feed states.
 
 ## Usage

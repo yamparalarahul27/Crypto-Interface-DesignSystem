@@ -40,10 +40,17 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Changed
 
+<<<<<<< HEAD
 - **Batch 2 → stable @ 1.0.0**: navigation & overlays cohort —
   **AppBar**, **BottomNav**, **Combobox**, **Popover**, **Drawer**,
   **Breadcrumbs**, **Pagination**. ContextMenu already stable via the
   Interior/Batch-5 promotion.
+=======
+- **Batch 1 → stable @ 1.0.0**: containment & forms cohort after bake —
+  **Alert**, **Card**, **RadioGroup**, **Textarea**, **Progress**.
+  Accordion stays draft pending `defaultValue` (#115); CommentThread /
+  Onboarding remain draft by design.
+>>>>>>> origin/main
 
 - **Promotion cohort → stable @ 1.0.0**: ten bake-ready drafts after
   Interior + Batch 5 + ContextMenu landed. API frozen (additive props
@@ -56,6 +63,10 @@ bullets under the release's buckets, prefixed with the component name.
   - Overlay: **ContextMenu**
 
 ### Added
+
+- **Accordion `defaultValue`**: uncontrolled initially-open panel(s)
+  (`string` for single, `string[]` for multiple). Component pages open
+  **Props** by default so the primary read isn't buried collapsed.
 
 - **Canvas state switcher**: selecting a demo that opts into
   `DEMO_STATE_OPTIONS` shows Inspector chips (default / disabled /

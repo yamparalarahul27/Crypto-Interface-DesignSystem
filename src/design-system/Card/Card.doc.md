@@ -1,7 +1,7 @@
 # Card
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 The generic container primitive: outlined surface, card radius, base padding.
 
 ## Usage

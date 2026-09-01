@@ -1,7 +1,7 @@
 # Alert
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Inline callout for conditions (info, success, warning, error) on the tinted state surfaces.
 
 ## Usage

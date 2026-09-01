@@ -136,13 +136,11 @@ function TxFlowInner({ state: external }: DemoOpts = {}) {
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
 
   const wrongNetwork = external === "wrong-network";
-  useEffect(() => {
-    if (external === "failed") setTx("failed");
-    else if (external === "default" || external === "wrong-network") setTx("idle");
-  }, [external]);
+  // Inspector chip forces the face; no setState-in-effect sync.
+  const shownTx: TxState = external === "failed" ? "failed" : tx;
 
   const amtInvalid = !amt || Number(amt) <= 0;
-  const busy = tx === "signing" || tx === "pending";
+  const busy = shownTx === "signing" || shownTx === "pending";
 
   const sign = () => {
     if (wrongNetwork) return;
@@ -158,7 +156,7 @@ function TxFlowInner({ state: external }: DemoOpts = {}) {
   };
 
   const explorer =
-    tx === "pending" || tx === "confirmed"
+    shownTx === "pending" || shownTx === "confirmed"
       ? "https://solscan.io/tx/demo"
       : undefined;
 
@@ -176,17 +174,17 @@ function TxFlowInner({ state: external }: DemoOpts = {}) {
       />
       <div className="flex items-center justify-between gap-3">
         <TxStatus
-          state={tx}
+          state={shownTx}
           detail={
-            tx === "pending" || tx === "confirmed"
+            shownTx === "pending" || shownTx === "confirmed"
               ? "5D3k…Wq"
-              : tx === "failed"
+              : shownTx === "failed"
                 ? "User rejected"
                 : undefined
           }
           detailHref={explorer}
           action={
-            tx === "failed" ? (
+            shownTx === "failed" ? (
               <Button size="sm" variant="ghost" onClick={() => setTx("idle")}>
                 Retry
               </Button>
@@ -194,7 +192,7 @@ function TxFlowInner({ state: external }: DemoOpts = {}) {
           }
         />
         <span className="flex gap-2">
-          {tx === "confirmed" || tx === "failed" ? (
+          {shownTx === "confirmed" || shownTx === "failed" ? (
             <Button size="sm" onClick={() => setTx("idle")}>Reset</Button>
           ) : (
             <Button
@@ -335,32 +333,25 @@ function SwapReceiveInner({ state: external }: DemoOpts = {}) {
   const [bps, setBps] = useState(50);
   const [tx, setTx] = useState<TxState>("idle");
   const [review, setReview] = useState(false);
-  const [feeReady, setFeeReady] = useState(false);
+  // Quote key: when inputs change, readyKey lags until the timeout fires.
+  const quoteKey = `${from ?? ""}:${to ?? ""}:${amt}`;
+  const [readyKey, setReadyKey] = useState<string | null>(null);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
 
   const quoting = external === "quoting";
   const wrongNetwork = external === "wrong-network";
   const feeError = external === "fee-error";
+  const shownTx: TxState = external === "failed" ? "failed" : tx;
 
   useEffect(() => {
-    if (external === "failed") setTx("failed");
-    else if (external === "default" || quoting || wrongNetwork || feeError) setTx("idle");
-  }, [external, quoting, wrongNetwork, feeError]);
-
-  // Default pose: brief quote load so GasFee loading face is visible.
-  useEffect(() => {
-    if (quoting || feeError) {
-      setFeeReady(false);
-      return;
-    }
-    setFeeReady(false);
-    const t = setTimeout(() => setFeeReady(true), 700);
+    if (quoting || feeError) return;
+    const t = setTimeout(() => setReadyKey(quoteKey), 700);
     return () => clearTimeout(t);
-  }, [quoting, feeError, from, to, amt]);
+  }, [quoteKey, quoting, feeError]);
 
   const amtInvalid = !amt || Number(amt) <= 0;
-  const feeLoading = quoting || (!feeReady && !feeError);
+  const feeLoading = quoting || (!feeError && readyKey !== quoteKey);
 
   const submit = async () => {
     if (wrongNetwork || feeError || amtInvalid) return;
@@ -382,7 +373,7 @@ function SwapReceiveInner({ state: external }: DemoOpts = {}) {
   };
 
   const explorer =
-    tx === "pending" || tx === "confirmed"
+    shownTx === "pending" || shownTx === "confirmed"
       ? "https://solscan.io/tx/demo"
       : undefined;
 
@@ -450,25 +441,25 @@ function SwapReceiveInner({ state: external }: DemoOpts = {}) {
                 wrongNetwork ||
                 feeError ||
                 feeLoading ||
-                tx === "signing" ||
-                tx === "pending"
+                shownTx === "signing" ||
+                shownTx === "pending"
               }
             >
               Swap
             </LoadingButton>
           </div>
           <TxStatus
-            state={tx}
+            state={shownTx}
             detail={
-              tx === "idle"
+              shownTx === "idle"
                 ? undefined
-                : tx === "failed"
+                : shownTx === "failed"
                   ? "Simulation failed"
                   : "5D3k…Wq"
             }
             detailHref={explorer}
             action={
-              tx === "failed" ? (
+              shownTx === "failed" ? (
                 <Button size="sm" variant="ghost" onClick={() => setTx("idle")}>
                   Retry
                 </Button>

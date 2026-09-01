@@ -113,6 +113,8 @@ export type LoadingButtonProps = {
   resetAfter?: number;
   /** Genuinely unavailable (not busy). Sets the native disabled attribute. */
   disabled?: boolean;
+  /** Native button type — use `submit` inside forms. */
+  type?: "button" | "submit" | "reset";
   onError?: (error: unknown) => void;
   variant?: ButtonVariant;
   size?: ButtonSize;
@@ -132,6 +134,7 @@ export function LoadingButton({
   errorLabel = "Try again",
   resetAfter = 1400,
   disabled = false,
+  type = "button",
   onError,
   variant = "primary",
   size = "md",
@@ -178,7 +181,7 @@ export function LoadingButton({
   return (
     <>
       <button
-        type="button"
+        type={type}
         disabled={disabled}
         aria-label={label}
         aria-busy={pending || undefined}

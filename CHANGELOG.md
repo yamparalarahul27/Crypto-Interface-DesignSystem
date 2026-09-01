@@ -38,7 +38,21 @@ bullets under the release's buckets, prefixed with the component name.
 
 ## [Unreleased]
 
+### Added
+
+- **Canvas iframe theme bridge**: frames get `?theme=` from the parent
+  canvas theme; `ThemeSync` applies it inside `/design/*` without
+  clobbering the parent's localStorage. Closes the dark/mono iframe gap.
+
+- **Canvas state switcher**: selecting a demo that opts into
+  `DEMO_STATE_OPTIONS` shows Inspector chips (default / disabled /
+  loading / empty / error / …). Hover stays live CSS; compositional
+  states are switched. Unselected frames keep their multi-pose showcase.
+
 ### Changed
+
+- **LoadingButton** `1.1.0` — `type` prop (`button` \| `submit` \| `reset`)
+  for form tickets.
 
 - **Promotion cohort → stable @ 1.0.0**: ten bake-ready drafts after
   Interior + Batch 5 + ContextMenu landed. API frozen (additive props
@@ -49,13 +63,6 @@ bullets under the release's buckets, prefixed with the component name.
   - Crypto ticket: **TokenSelect**, **SlippageControl**, **AccountMenu**,
     **ActivityRow**
   - Overlay: **ContextMenu**
-
-### Added
-
-- **Canvas state switcher**: selecting a demo that opts into
-  `DEMO_STATE_OPTIONS` shows Inspector chips (default / disabled /
-  loading / empty / error / …). Hover stays live CSS; compositional
-  states are switched. Unselected frames keep their multi-pose showcase.
 
 - **P5 · Swap / receive ticket pattern**: live canvas frame composing
   Lane (Swap | Receive) with TokenSelect, AmountInput, SlippageControl,

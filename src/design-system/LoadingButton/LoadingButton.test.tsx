@@ -124,4 +124,15 @@ describe("LoadingButton", () => {
     await user.click(screen.getByRole("button")).catch(() => {});
     expect(action).not.toHaveBeenCalled();
   });
+
+  it("forwards type=submit for forms", () => {
+    render(
+      <LoadingButton onAction={() => {}} type="submit">
+        Save
+      </LoadingButton>,
+    );
+    expect(screen.getByRole("button", { name: "Save" }).getAttribute("type")).toBe(
+      "submit",
+    );
+  });
 });

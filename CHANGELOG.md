@@ -52,6 +52,10 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Added
 
+- **Accordion `defaultValue`**: uncontrolled initially-open panel(s)
+  (`string` for single, `string[]` for multiple). Component pages open
+  **Props** by default so the primary read isn't buried collapsed.
+
 - **Canvas state switcher**: selecting a demo that opts into
   `DEMO_STATE_OPTIONS` shows Inspector chips (default / disabled /
   loading / empty / error / …). Hover stays live CSS; compositional

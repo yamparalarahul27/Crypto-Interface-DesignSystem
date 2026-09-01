@@ -15,4 +15,13 @@ describe("NetworkBadge", () => {
     );
     expect(container.querySelector("img")!.getAttribute("alt")).toBe("");
   });
+
+  it("warning/error tones use tinted surfaces (wrong-network)", () => {
+    const { rerender } = render(<NetworkBadge name="Ethereum" tone="warning" />);
+    expect(screen.getByText("Ethereum").className).toContain("bg-warning-surface");
+    expect(screen.getByText("Ethereum").className).toContain("text-warning");
+    rerender(<NetworkBadge name="Unsupported" tone="error" />);
+    expect(screen.getByText("Unsupported").className).toContain("bg-error-surface");
+    expect(screen.getByText("Unsupported").className).toContain("text-error");
+  });
 });

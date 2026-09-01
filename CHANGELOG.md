@@ -40,6 +40,10 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Changed
 
+- **Production harden P2:**
+  - **TxStatus** `1.1.0` — `detailHref` explorer link + `action` slot (Retry)
+  - **NetworkBadge** `1.1.0` — `tone` warning/error for wrong-network
+
 - **Promotion cohort → stable @ 1.0.0**: ten bake-ready drafts after
   Interior + Batch 5 + ContextMenu landed. API frozen (additive props
   only from here). Docs, colocated tests, and dark/mono poses already

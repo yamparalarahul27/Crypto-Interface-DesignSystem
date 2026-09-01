@@ -17,6 +17,22 @@
 > components enter as `draft @ 0.9.0` and are promoted per the
 > CONVENTIONS.md ladder.
 
+## Production → finish ladder
+
+> Locked 2026-09-01. Promotions alone do not make the system shippable.
+
+```
+1 Public prod     you · Vercel SSO off + live URL
+2 Harden ticket   swap path P0/P1
+3 Stable core     promote only after harden
+4 Finish DS       remaining drafts, Batch 6, SeedPhrase if needed
+```
+
+**Harden progress:** P0 (#118) AmountInput · AddressChip · WalletButton ·
+GasFee. **P1 (this):** TokenSelect Combobox ARIA + loading · Slippage
+≥40 · AccountMenu clipboard. **Next:** TxStatus detail/action ·
+NetworkBadge wrong-network.
+
 ## Batch 1: containment & forms (PR in flight)
 
 The "every generic system has this" tier. All Radix-backed or trivial.

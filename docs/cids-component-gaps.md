@@ -24,14 +24,15 @@
 
 ```
 1 Public prod     you · Vercel SSO off + live URL
-2 Harden ticket   swap path P0/P1 (this track)
+2 Harden ticket   swap path P0/P1/P2
 3 Stable core     promote only after harden
 4 Finish DS       remaining drafts, Batch 6, SeedPhrase if needed
 ```
 
-**Ticket harden pack (in flight):** AmountInput · AddressChip ·
-WalletButton · GasFee · (next) TokenSelect a11y · Slippage hits ·
-AccountMenu clipboard · TxStatus detail/action · NetworkBadge mismatch.
+**Harden progress:** P0 (#118) AmountInput · AddressChip · WalletButton ·
+GasFee. P1 (#119) TokenSelect Combobox ARIA + loading · Slippage ≥40 ·
+AccountMenu clipboard. P2 (#120) TxStatus detail/action · NetworkBadge
+wrong-network. **Next:** wire hardened APIs into P5/P2 pattern frames.
 
 ## Batch 1: containment & forms (PR in flight)
 

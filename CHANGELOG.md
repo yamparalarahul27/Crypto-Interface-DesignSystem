@@ -50,6 +50,13 @@ bullets under the release's buckets, prefixed with the component name.
   - Ladder recorded in `docs/cids-component-gaps.md` (public prod →
     harden → promote → finish)
 
+- **Production harden P1 (swap ticket):**
+  - **TokenSelect** `1.1.0` — Combobox ARIA on search, skip-disabled
+    arrows, `loading` / `catalogEmptyText`, trigger ≥40
+  - **SlippageControl** `1.0.1` — preset/custom chips `h-10` (≥40)
+  - **AccountMenu** `1.0.1` — clipboard failure label, trigger ≥40
+
+
 - **Promotion cohort → stable @ 1.0.0**: ten bake-ready drafts after
   Interior + Batch 5 + ContextMenu landed. API frozen (additive props
   only from here). Docs, colocated tests, and dark/mono poses already

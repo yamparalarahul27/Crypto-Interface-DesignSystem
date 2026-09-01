@@ -56,6 +56,9 @@ bullets under the release's buckets, prefixed with the component name.
   - **SlippageControl** `1.0.1` — preset/custom chips `h-10` (≥40)
   - **AccountMenu** `1.0.1` — clipboard failure label, trigger ≥40
 
+- **Production harden P2:**
+  - **TxStatus** `1.1.0` — `detailHref` explorer link + `action` slot (Retry)
+  - **NetworkBadge** `1.1.0` — `tone` warning/error for wrong-network
 
 - **Promotion cohort → stable @ 1.0.0**: ten bake-ready drafts after
   Interior + Batch 5 + ContextMenu landed. API frozen (additive props

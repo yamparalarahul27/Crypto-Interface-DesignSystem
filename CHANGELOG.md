@@ -40,6 +40,16 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Changed
 
+- **Production harden P0 (swap ticket):**
+  - **AmountInput** `1.1.0` — `errorMessage` + `aria-describedby`,
+    `maxDecimals`, Max ≥40×40
+  - **AddressChip** `1.0.1` — copy/explorer ≥40×40, clipboard failure
+    label, `rel="noopener noreferrer"`
+  - **WalletButton** `0.9.1` — connected without address never falls
+    through to "Connect wallet"
+  - Ladder recorded in `docs/cids-component-gaps.md` (public prod →
+    harden → promote → finish)
+
 - **Promotion cohort → stable @ 1.0.0**: ten bake-ready drafts after
   Interior + Batch 5 + ContextMenu landed. API frozen (additive props
   only from here). Docs, colocated tests, and dark/mono poses already
@@ -51,6 +61,9 @@ bullets under the release's buckets, prefixed with the component name.
   - Overlay: **ContextMenu**
 
 ### Added
+
+- **GasFee `loading` / `error`**: async faces for fee quotes (`Fetching…`,
+  alert on failure) so tickets aren't stuck with a silent stale amount.
 
 - **Canvas state switcher**: selecting a demo that opts into
   `DEMO_STATE_OPTIONS` shows Inspector chips (default / disabled /

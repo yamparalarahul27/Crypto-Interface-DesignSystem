@@ -49,7 +49,7 @@
       "name": "alert",
       "type": "registry:ui",
       "title": "Alert",
-      "description": "CIDS Alert v0.9.0 (draft): docs ship with the code (Alert.doc.md)."
+      "description": "CIDS Alert v1.0.0 (stable): docs ship with the code (Alert.doc.md)."
     },
     {
       "name": "amount",
@@ -109,7 +109,7 @@
       "name": "card",
       "type": "registry:ui",
       "title": "Card",
-      "description": "CIDS Card v0.9.0 (draft): docs ship with the code (Card.doc.md)."
+      "description": "CIDS Card v1.0.0 (stable): docs ship with the code (Card.doc.md)."
     },
     {
       "name": "chain-switcher",
@@ -301,13 +301,13 @@
       "name": "progress",
       "type": "registry:ui",
       "title": "Progress",
-      "description": "CIDS Progress v0.9.0 (draft): docs ship with the code (Progress.doc.md)."
+      "description": "CIDS Progress v1.0.0 (stable): docs ship with the code (Progress.doc.md)."
     },
     {
       "name": "radio-group",
       "type": "registry:ui",
       "title": "RadioGroup",
-      "description": "CIDS RadioGroup v0.9.0 (draft): docs ship with the code (RadioGroup.doc.md)."
+      "description": "CIDS RadioGroup v1.0.0 (stable): docs ship with the code (RadioGroup.doc.md)."
     },
     {
       "name": "reaction-bar",
@@ -385,7 +385,7 @@
       "name": "textarea",
       "type": "registry:ui",
       "title": "Textarea",
-      "description": "CIDS Textarea v0.9.0 (draft): docs ship with the code (Textarea.doc.md)."
+      "description": "CIDS Textarea v1.0.0 (stable): docs ship with the code (Textarea.doc.md)."
     },
     {
       "name": "toast",

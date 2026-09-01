@@ -40,6 +40,11 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Changed
 
+- **Batch 1 → stable @ 1.0.0**: containment & forms cohort after bake —
+  **Alert**, **Card**, **RadioGroup**, **Textarea**, **Progress**.
+  Accordion stays draft pending `defaultValue` (#115); CommentThread /
+  Onboarding remain draft by design.
+
 - **Promotion cohort → stable @ 1.0.0**: ten bake-ready drafts after
   Interior + Batch 5 + ContextMenu landed. API frozen (additive props
   only from here). Docs, colocated tests, and dark/mono poses already

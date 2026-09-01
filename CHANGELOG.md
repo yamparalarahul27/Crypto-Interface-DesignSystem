@@ -40,6 +40,16 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Changed
 
+- **Spacing / hit-target polish (swap spine vs top DS):** bring ticket
+  controls to DESIGN ≥40 and 8px rhythm, aligned with Carbon/CDS/shadcn
+  density expectations:
+  - **SlippageControl** `1.0.1` — presets/Custom `h-10`, chip `gap-2`
+  - **TokenSelect** `1.0.1` — trigger `h-10` / `px-3`
+  - **AmountInput** `1.0.1` — Max `h-10 min-w-10`
+  - **AddressChip** `1.0.1` — copy/explorer `h-10 w-10`, `noopener`
+  - **Dialog** `1.0.1` — panel `p-6` (24px), close `h-10`, header/footer
+    gaps on the 8px scale
+
 - **Promotion cohort → stable @ 1.0.0**: ten bake-ready drafts after
   Interior + Batch 5 + ContextMenu landed. API frozen (additive props
   only from here). Docs, colocated tests, and dark/mono poses already

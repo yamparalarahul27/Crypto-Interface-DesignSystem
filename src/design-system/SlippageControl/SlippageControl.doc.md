@@ -1,7 +1,7 @@
 # SlippageControl
 
 Status: stable
-Version: 1.0.0
+Version: 1.0.1
 Slippage tolerance: presets + custom %, with risk tone bands.
 
 ## Usage
@@ -69,5 +69,4 @@ word swaps instantly with the value: never animate risk readouts.
 
 `role="group"` labelled by the row label. Preset/Custom chips use
 `aria-pressed`. Custom field has its own `aria-label`. Level word
-doubles as the non-color risk cue. Hit area: chips h-8 (≥32; pair
-with surrounding row padding for comfortable tap).
+doubles as the non-color risk cue. Hit area: chips `h-10` (≥40).

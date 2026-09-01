@@ -1,7 +1,7 @@
 # AmountInput
 
 Status: stable
-Version: 1.0.0
+Version: 1.0.1
 Token amount entry: decimal string (never floats), symbol anchored, fiat echo + Max, the undocumented fiat/token pattern, componentized.
 
 ## Usage
@@ -48,3 +48,4 @@ Border transition 150ms.
 
 - `inputMode="decimal"` for the right mobile keyboard; sanitization never blocks paste (it filters).
 - Labelled by default from the symbol; `aria-invalid` on error: put the message next to the field.
+- Max control is `h-10` / `min-w-10` (≥40 hit area).

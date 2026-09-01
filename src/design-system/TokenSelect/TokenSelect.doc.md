@@ -1,7 +1,7 @@
 # TokenSelect
 
 Status: stable
-Version: 1.0.0
+Version: 1.0.1
 Searchable token picker: icon + symbol trigger, Dialog list with balances.
 
 ## Usage
@@ -87,4 +87,4 @@ Trigger: `aria-haspopup="dialog"`, `aria-expanded`, label includes the
 selected symbol when set. Dialog: Radix focus trap + Escape + overlay
 dismiss. Search: ArrowUp/Down/Home/End move `aria-activedescendant`
 through the listbox; Enter selects. Options expose `aria-selected` /
-`aria-disabled`. Hit area: trigger h-9 (≥36) · rows py-2.
+`aria-disabled`. Hit area: trigger `h-10` (≥40) · rows py-2.

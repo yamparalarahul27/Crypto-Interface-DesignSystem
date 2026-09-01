@@ -1,7 +1,7 @@
 # AddressChip
 
 Status: stable
-Version: 1.0.0
+Version: 1.0.1
 Truncated address with one-tap copy + optional explorer link; the full address is always the accessible name.
 
 ## Usage
@@ -44,3 +44,4 @@ Color transition 150ms on the affordances; nothing else.
 
 - Truncation is visual only: the text span carries the full address as `aria-label`, and the copy button names it ("Copy address <full>").
 - Copy confirmation is a label change ("Copied"), not color alone.
+- Copy / explorer controls are `h-10 w-10` (≥40); explorer uses `rel="noopener noreferrer"`.

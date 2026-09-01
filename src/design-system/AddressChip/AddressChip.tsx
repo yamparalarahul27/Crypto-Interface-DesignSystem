@@ -46,7 +46,7 @@ export function AddressChip({
         onClick={copy}
         aria-label={copied ? "Copied" : `Copy address ${address}`}
         className={cn(
-          "inline-flex h-6 w-6 items-center justify-center rounded-control text-xs transition-colors duration-150",
+          "inline-flex h-10 w-10 items-center justify-center rounded-control text-xs transition-colors duration-150",
           copied ? "text-buy" : "text-fg-muted hover:text-fg",
         )}
       >
@@ -60,9 +60,9 @@ export function AddressChip({
         <a
           href={href}
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           aria-label="View on explorer"
-          className="inline-flex h-6 w-6 items-center justify-center rounded-control text-xs text-fg-muted transition-colors duration-150 hover:text-fg"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-control text-xs text-fg-muted transition-colors duration-150 hover:text-fg"
         >
           <IconExternal size={13} aria-hidden="true" />
         </a>

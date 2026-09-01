@@ -61,7 +61,7 @@ export function AmountInput({
           <button
             type="button"
             onClick={onMax}
-            className="rounded-control px-1.5 py-0.5 text-[11px] font-semibold text-brand transition-colors duration-150 hover:bg-surface-container-high"
+            className="inline-flex h-10 min-w-10 items-center justify-center rounded-control px-2 text-xs font-semibold text-brand transition-colors duration-150 hover:bg-surface-container-high"
           >
             Max
           </button>

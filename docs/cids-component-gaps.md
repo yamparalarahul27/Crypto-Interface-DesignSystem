@@ -196,11 +196,11 @@ also PR docs when merged). Steal contracts; reimplement CIDS-native
 
 **Adjacent, surfaced while building the above:**
 
-- [ ] **Accordion `defaultValue`.** The component page now renders every
+- [x] **Accordion `defaultValue`.** The component page now renders every
       doc section as an accordion, but `Accordion` cannot open one by
       default: so Props, the section people actually come for, starts
       collapsed. Accordion's own doc warns against burying primary
-      content. Small addition; benefits every consumer.
+      content. Small addition; benefits every consumer. Shipped 2026-09-01.
 
 ## History
 

@@ -40,6 +40,11 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Changed
 
+- **Pattern frames exercise harden APIs:** P2 Tx flow + P5 Swap/receive
+  canvas demos now use AmountInput `errorMessage`/`maxDecimals`, GasFee
+  `loading`/`error`, TxStatus `detailHref`/`action`, NetworkBadge `tone`.
+  Inspector chips: `PatternTxFlow` · `PatternSwapReceive`.
+
 - **Production harden P0 (swap ticket):**
   - **AmountInput** `1.1.0` — `errorMessage` + `aria-describedby`,
     `maxDecimals`, Max ≥40×40

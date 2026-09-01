@@ -32,7 +32,8 @@
 **Harden progress:** P0 (#118) AmountInput · AddressChip · WalletButton ·
 GasFee. P1 (#119) TokenSelect Combobox ARIA + loading · Slippage ≥40 ·
 AccountMenu clipboard. P2 (#120) TxStatus detail/action · NetworkBadge
-wrong-network. **Next:** wire hardened APIs into P5/P2 pattern frames.
+wrong-network. **Pattern wire:** P5/P2 frames + Inspector chips exercise
+those APIs (this track).
 
 ## Batch 1: containment & forms (PR in flight)
 

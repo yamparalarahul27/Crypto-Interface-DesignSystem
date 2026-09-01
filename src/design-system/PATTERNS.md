@@ -87,11 +87,25 @@ review).
   title="Review send" description="Confirm in your wallet after this step."
   footer={<>
     <Button onClick={backToEntry}>Cancel</Button>
-    <Button variant="primary" onClick={sign}>Confirm</Button>
+    <Button variant="primary" disabled={wrongNetwork} onClick={sign}>Confirm</Button>
   </>}>
-  <AddressChip address={to} /> <NetworkBadge name="Solana" />
+  <AddressChip address={to} />
+  <NetworkBadge name={wrongNetwork ? "Ethereum" : "Solana"} tone={wrongNetwork ? "warning" : "neutral"} />
 </Dialog>
-<TxStatus state={txState} detail={signature} />
+<AmountInput
+  value={amt}
+  onValueChange={setAmt}
+  symbol="SOL"
+  maxDecimals={9}
+  invalid={amtInvalid}
+  errorMessage={amtInvalid ? "Enter an amount greater than zero" : undefined}
+/>
+<TxStatus
+  state={txState}
+  detail={signature}
+  detailHref={explorerUrl}
+  action={txState === "failed" ? <Button size="sm" onClick={retry}>Retry</Button> : undefined}
+/>
 ```
 
 ## P3 · Form row
@@ -193,16 +207,29 @@ stays off the Patterns zone contract.
   <>
     <TokenSelect tokens={list} value={from} onValueChange={setFrom} aria-label="You pay" />
     <TokenSelect tokens={list} value={to} onValueChange={setTo} aria-label="You receive" />
-    <AmountInput symbol="SOL" value={amt} onValueChange={setAmt} />
+    <AmountInput
+      symbol="SOL"
+      value={amt}
+      onValueChange={setAmt}
+      maxDecimals={9}
+      invalid={amtInvalid}
+      errorMessage={amtInvalid ? "Enter an amount greater than zero" : undefined}
+    />
     <SlippageControl value={bps} onValueChange={setBps} />
+    <GasFee amount={fee} usd={feeUsd} loading={quoting} error={feeError} />
     <LoadingButton onAction={submit} pendingLabel="Signing…" successLabel="Submitted">
       Swap
     </LoadingButton>
-    <TxStatus state={tx} />
+    <TxStatus
+      state={tx}
+      detail={sig}
+      detailHref={explorerUrl}
+      action={tx === "failed" ? <Button size="sm" onClick={retry}>Retry</Button> : undefined}
+    />
   </>
 ) : (
   <>
-    <NetworkBadge name="Solana" />
+    <NetworkBadge name={chain} tone={wrongNetwork ? "warning" : "neutral"} />
     <AddressChip address={wallet} />
   </>
 )}

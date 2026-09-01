@@ -404,10 +404,7 @@ export function CanvasApp({
             <IconArrowLeft size={13} weight="bold" aria-hidden="true" /> back
           </Link>
           <span className="h-5 w-px bg-outline-variant" aria-hidden="true" />
-          <span
-            className="text-sm font-semibold text-fg"
-            style={{ fontFamily: "var(--font-geist-mono), monospace" }}
-          >
+          <span className="font-display text-sm font-semibold text-fg">
             cids <span className="text-brand">~</span>{" "}
             <span className="text-fg-subtle">canvas</span>
           </span>

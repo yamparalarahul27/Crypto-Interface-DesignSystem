@@ -72,10 +72,7 @@ export default function DesignGalleryPage() {
   return (
     <main className="mx-auto min-h-dvh w-full max-w-6xl bg-surface-page px-5 pb-24 pt-8 text-fg">
       <header className="mb-8">
-        <h1
-          className="text-xl font-bold text-fg"
-          style={{ fontFamily: "var(--font-geist-mono), monospace" }}
-        >
+        <h1 className="font-display text-xl font-bold text-fg">
           cids <span className="text-brand">~</span>{" "}
           <span className="text-fg-subtle">/ design</span>
         </h1>

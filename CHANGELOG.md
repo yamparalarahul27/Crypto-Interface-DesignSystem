@@ -40,6 +40,11 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Changed
 
+- **Typography mix**: replace Geist / Geist Mono with a versatile three-role
+  stack — **Satoshi** (UI sans, self-hosted Fontshare), **Space Grotesk**
+  (`font-display` for brand/hero), **JetBrains Mono** (`font-mono`). Geist
+  Pixel Square stays for financial `.data-*`. See DESIGN.md → Typography.
+
 - **Promotion cohort → stable @ 1.0.0**: ten bake-ready drafts after
   Interior + Batch 5 + ContextMenu landed. API frozen (additive props
   only from here). Docs, colocated tests, and dark/mono poses already

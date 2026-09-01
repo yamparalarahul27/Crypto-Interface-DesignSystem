@@ -159,10 +159,7 @@ export function FeedScreen() {
     <div className="relative mx-auto flex min-h-dvh max-w-[430px] flex-col bg-surface-page text-fg">
       {/* header */}
       <header className="sticky top-0 z-[var(--z-sticky)] flex h-12 items-center justify-between border-b border-outline-variant bg-surface-page/90 px-4 backdrop-blur">
-        <span
-          className="text-sm font-semibold text-fg"
-          style={{ fontFamily: "var(--font-geist-mono), monospace" }}
-        >
+        <span className="font-display text-sm font-semibold text-fg">
           tide <span className="text-brand">~</span>
         </span>
         <Avatar name="You" you size="sm" />

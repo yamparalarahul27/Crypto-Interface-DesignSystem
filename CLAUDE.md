@@ -399,7 +399,7 @@ Rules:
 ## Design system
 
 - **The design system IS the product** (see "Product" at the top). Components live in `src/design-system/` under the `CONVENTIONS.md` contract: every component ships its `.doc.md`, consumes tokens only, and appears in the canvas/gallery.
-- Follow [DESIGN.md](./DESIGN.md) for all UI work: semantic colour tokens in `globals.css` (surface / fg / brand / buy / sell / warning / identity hues / motion), typography (Geist Mono / IBM Plex / Geist Pixel Square), spacing (8px base), components (rounded-sm 2px, 150ms transitions).
+- Follow [DESIGN.md](./DESIGN.md) for all UI work: semantic colour tokens in `globals.css` (surface / fg / brand / buy / sell / warning / identity hues / motion), typography (Satoshi / Space Grotesk / JetBrains Mono / Geist Pixel Square), spacing (8px base), components (rounded-sm 2px, 150ms transitions).
 - The system is **dark-family, multi-theme**: `:root` = `dark` (market-dark), plus `[data-theme]` overrides (`mono`). No light mode. Consume colour via semantic Tailwind utilities (`bg-surface-container`, `text-fg`, `text-brand`): **never hardcode `bg-[#hex]`**. `npm run check:theme` enforces this; `npm run check:contrast` verifies AA per theme.
 - Financial numbers: **Geist Pixel Square** via `.data-lg/md/sm` (fallback IBM Plex Mono). Never serif or variable-weight. Sign discipline per guideline #5: direction from the signed value, number from `Math.abs`.
 - Identity accent is **mint-teal** `--brand #5ad8c4` in the default theme; consume the token, never the hex (mono resolves it to white ink). Filled brand surfaces use `text-on-brand`, never `text-white`.

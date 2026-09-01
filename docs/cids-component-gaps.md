@@ -218,3 +218,4 @@ also PR docs when merged). Steal contracts; reimplement CIDS-native
 | 2026-08-01 | Batch 5 crypto ticket atoms: TokenSelect, SlippageControl, AccountMenu, ActivityRow. SeedPhrase remains deferred. |
 | 2026-08-25 | Batch 6 opened (identity system). Avatar gained variant/chain/connection; WalletAvatar shipped. Size scale + generative palette blocked on a decision. |
 | 2026-09-01 | Promotion cohort → stable @ 1.0.0: LoadingButton, HoldToConfirm, OTPInput, InlineValidation, WizardSteps, ContextMenu, TokenSelect, SlippageControl, AccountMenu, ActivityRow. |
+| 2026-09-01 | Batch 2 → stable @ 1.0.0: AppBar, BottomNav, Combobox, Popover, Drawer, Breadcrumbs, Pagination. |

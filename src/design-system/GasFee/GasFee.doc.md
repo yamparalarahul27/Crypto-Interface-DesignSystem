@@ -1,7 +1,7 @@
 # GasFee
 
-Status: draft
-Version: 0.9.1
+Status: stable
+Version: 1.0.0
 Network-fee row: amount + optional congestion level, mono-safe.
 
 ## Usage

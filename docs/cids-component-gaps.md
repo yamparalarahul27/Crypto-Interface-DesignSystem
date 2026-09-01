@@ -24,15 +24,14 @@
 
 ```
 1 Public prod     you · Vercel SSO off + live URL
-2 Harden ticket   swap path P0/P1 (this track)
-3 Stable core     promote only after harden
+2 Harden ticket   swap path P0/P1/P2
+3 Stable core     WalletButton + GasFee promoted (this); more after P1/P2
 4 Finish DS       remaining drafts, Batch 6, SeedPhrase if needed
 ```
 
-**Ticket harden pack (in flight):** AmountInput · AddressChip ·
-WalletButton · GasFee · (next) TokenSelect a11y · Slippage hits ·
-AccountMenu clipboard · TxStatus detail/action · NetworkBadge mismatch.
-
+**Harden → promote:** P0 (#118) AmountInput · AddressChip · WalletButton ·
+GasFee — **WalletButton + GasFee now stable @ 1.0.0**. P1/P2 and pattern
+wire stay on their PRs.
 ## Batch 1: containment & forms (PR in flight)
 
 The "every generic system has this" tier. All Radix-backed or trivial.

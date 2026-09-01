@@ -1,7 +1,7 @@
 # WalletButton
 
-Status: draft
-Version: 0.9.1
+Status: stable
+Version: 1.0.0
 The connect-wallet atom: one button, three states (disconnected · connecting · connected).
 
 ## Usage

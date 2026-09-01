@@ -1,7 +1,7 @@
 # Combobox
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Typeahead select: an input that filters a listbox as you type. Pick-from-list only.
 
 ## Usage

@@ -1,7 +1,7 @@
 # WizardSteps
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Multi-step flow rail + fixed-height panel for send / onboarding. Visited steps jumpable; Next/Finish width-stable. Interior wizard-steps contract, CSS-only.
 
 ## Usage

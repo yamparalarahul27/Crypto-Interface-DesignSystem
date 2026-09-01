@@ -1,7 +1,7 @@
 # AccountMenu
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Connected-wallet menu: address, copy, explorer, disconnect.
 
 ## Usage

@@ -1,7 +1,7 @@
 # LoadingButton
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Async action button: width-stable idle → pending → success|error → idle. Interior loading-button contract, CIDS tokens, no `motion`.
 
 ## Usage

@@ -1,7 +1,7 @@
 # HoldToConfirm
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Press-and-hold control for irreversible actions. Progress fills while held; early release cancels. Interior hold-to-confirm contract, CSS-only.
 
 ## Usage

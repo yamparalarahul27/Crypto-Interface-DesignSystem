@@ -1,7 +1,7 @@
 # InlineValidation
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Labeled field with reserved-height hint ↔ error swap. Validates on blur / debounce. Interior inline-validation contract on CIDS Input.
 
 ## Usage

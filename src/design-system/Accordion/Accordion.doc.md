@@ -1,7 +1,7 @@
 # Accordion
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Collapsible sections on Radix Accordion: one open (default) or many.
 
 ## Usage

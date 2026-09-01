@@ -25,7 +25,7 @@
       "name": "accordion",
       "type": "registry:ui",
       "title": "Accordion",
-      "description": "CIDS Accordion v0.9.0 (draft): docs ship with the code (Accordion.doc.md)."
+      "description": "CIDS Accordion v1.0.0 (stable): docs ship with the code (Accordion.doc.md)."
     },
     {
       "name": "account-menu",

@@ -40,6 +40,9 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Changed
 
+- **Accordion** → `stable @ 1.0.0`: includes `defaultValue` (uncontrolled
+  initially-open) from #115. API frozen (additive props only).
+
 - **Promotion cohort → stable @ 1.0.0**: ten bake-ready drafts after
   Interior + Batch 5 + ContextMenu landed. API frozen (additive props
   only from here). Docs, colocated tests, and dark/mono poses already

@@ -26,6 +26,17 @@ describe("AccountMenu", () => {
     expect(await screen.findByRole("menuitem", { name: "Copied" })).toBeTruthy();
   });
 
+  it("clipboard rejection surfaces Copy failed", async () => {
+    const writeText = vi.fn().mockRejectedValue(new Error("denied"));
+    Object.assign(navigator, { clipboard: { writeText } });
+    render(<AccountMenu address={ADDR} />);
+    await userEvent.click(
+      screen.getByRole("button", { name: `Wallet ${ADDR}: open account` }),
+    );
+    await userEvent.click(screen.getByRole("menuitem", { name: "Copy address" }));
+    expect(await screen.findByRole("menuitem", { name: "Copy failed" })).toBeTruthy();
+  });
+
   it("Disconnect calls onDisconnect", async () => {
     const user = userEvent.setup();
     const onDisconnect = vi.fn();

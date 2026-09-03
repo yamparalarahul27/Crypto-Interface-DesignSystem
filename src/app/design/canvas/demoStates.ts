@@ -25,6 +25,8 @@ export const DEMO_STATE_OPTIONS: Record<string, readonly string[]> = {
   EmptyState: ["default", "no-action"],
   Skeleton: ["loading"],
   PatternStates: ["loading", "loaded", "empty", "error", "offline"],
+  PatternTxFlow: ["default", "wrong-network", "failed"],
+  PatternSwapReceive: ["default", "quoting", "fee-error", "failed", "wrong-network"],
 };
 
 export function defaultDemoState(id: string): string | undefined {

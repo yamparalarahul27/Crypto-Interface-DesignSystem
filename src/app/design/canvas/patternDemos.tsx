@@ -127,7 +127,7 @@ function StatesCatalogDemo({ state: external }: DemoOpts = {}) {
 }
 
 // ── P2 · Transaction flow ────────────────────────────────────────────
-function TxFlowInner() {
+function TxFlowInner({ state: external }: DemoOpts = {}) {
   const toast = useToast();
   const [amt, setAmt] = useState("1.25");
   const [step, setStep] = useState<"entering" | "review">("entering");
@@ -135,7 +135,15 @@ function TxFlowInner() {
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
 
+  const wrongNetwork = external === "wrong-network";
+  // Inspector chip forces the face; no setState-in-effect sync.
+  const shownTx: TxState = external === "failed" ? "failed" : tx;
+
+  const amtInvalid = !amt || Number(amt) <= 0;
+  const busy = shownTx === "signing" || shownTx === "pending";
+
   const sign = () => {
+    if (wrongNetwork) return;
     setStep("entering");
     setTx("signing");
     timers.current.push(
@@ -147,6 +155,11 @@ function TxFlowInner() {
     );
   };
 
+  const explorer =
+    shownTx === "pending" || shownTx === "confirmed"
+      ? "https://solscan.io/tx/demo"
+      : undefined;
+
   return (
     <div className="space-y-3">
       <AmountInput
@@ -154,18 +167,38 @@ function TxFlowInner() {
         onValueChange={setAmt}
         symbol="SOL"
         fiatValue={`≈ $${(Number(amt || 0) * 184.26).toFixed(2)}`}
-        disabled={tx === "signing" || tx === "pending"}
+        maxDecimals={9}
+        invalid={amtInvalid}
+        errorMessage={amtInvalid ? "Enter an amount greater than zero" : undefined}
+        disabled={busy}
       />
       <div className="flex items-center justify-between gap-3">
-        <TxStatus state={tx} detail={tx === "pending" ? "5D3k…Wq signature" : undefined} />
+        <TxStatus
+          state={shownTx}
+          detail={
+            shownTx === "pending" || shownTx === "confirmed"
+              ? "5D3k…Wq"
+              : shownTx === "failed"
+                ? "User rejected"
+                : undefined
+          }
+          detailHref={explorer}
+          action={
+            shownTx === "failed" ? (
+              <Button size="sm" variant="ghost" onClick={() => setTx("idle")}>
+                Retry
+              </Button>
+            ) : undefined
+          }
+        />
         <span className="flex gap-2">
-          {tx === "confirmed" || tx === "failed" ? (
+          {shownTx === "confirmed" || shownTx === "failed" ? (
             <Button size="sm" onClick={() => setTx("idle")}>Reset</Button>
           ) : (
             <Button
               size="sm"
               variant="primary"
-              disabled={tx === "signing" || tx === "pending" || !Number(amt)}
+              disabled={busy || amtInvalid || wrongNetwork}
               onClick={() => setStep("review")}
             >
               Send
@@ -181,7 +214,9 @@ function TxFlowInner() {
         footer={
           <>
             <Button onClick={() => setStep("entering")}>Cancel</Button>
-            <Button variant="primary" onClick={sign}>Confirm</Button>
+            <Button variant="primary" disabled={wrongNetwork} onClick={sign}>
+              Confirm
+            </Button>
           </>
         }
       >
@@ -189,20 +224,27 @@ function TxFlowInner() {
           <span className="data-md text-fg">{amt} SOL</span>
           <IconArrowRight size={13} className="text-fg-subtle" aria-hidden="true" />
           <AddressChip address="7xKtF3aB9cD2eF4gH6jK8mN1pQ5rS7tU9vW2xY4z9fQ2" />
-          <NetworkBadge name="Solana" />
+          <NetworkBadge
+            name={wrongNetwork ? "Ethereum" : "Solana"}
+            tone={wrongNetwork ? "warning" : "neutral"}
+          />
         </div>
       </Dialog>
       <DoDont
-        dos={["keep TxStatus mounted through the flow", "disable (don't hide) the action while signing"]}
+        dos={[
+          "keep TxStatus mounted through the flow",
+          "detailHref for explorer + Retry action on failed",
+          "NetworkBadge tone when the chain is wrong",
+        ]}
         donts={["declare success at submission", "reshuffle the layout mid-flow"]}
       />
     </div>
   );
 }
-function TxFlowDemo() {
+function TxFlowDemo(opts?: DemoOpts) {
   return (
     <ToastProvider>
-      <TxFlowInner />
+      <TxFlowInner {...opts} />
     </ToastProvider>
   );
 }
@@ -282,7 +324,7 @@ const TICKET_TOKENS: TokenOption[] = [
   { id: "jup", symbol: "JUP", name: "Jupiter", balance: "880.2" },
 ];
 
-function SwapReceiveInner() {
+function SwapReceiveInner({ state: external }: DemoOpts = {}) {
   const toast = useToast();
   const [mode, setMode] = useState<"swap" | "receive">("swap");
   const [from, setFrom] = useState<string | undefined>("sol");
@@ -291,10 +333,28 @@ function SwapReceiveInner() {
   const [bps, setBps] = useState(50);
   const [tx, setTx] = useState<TxState>("idle");
   const [review, setReview] = useState(false);
+  // Quote key: when inputs change, readyKey lags until the timeout fires.
+  const quoteKey = `${from ?? ""}:${to ?? ""}:${amt}`;
+  const [readyKey, setReadyKey] = useState<string | null>(null);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
 
+  const quoting = external === "quoting";
+  const wrongNetwork = external === "wrong-network";
+  const feeError = external === "fee-error";
+  const shownTx: TxState = external === "failed" ? "failed" : tx;
+
+  useEffect(() => {
+    if (quoting || feeError) return;
+    const t = setTimeout(() => setReadyKey(quoteKey), 700);
+    return () => clearTimeout(t);
+  }, [quoteKey, quoting, feeError]);
+
+  const amtInvalid = !amt || Number(amt) <= 0;
+  const feeLoading = quoting || (!feeError && readyKey !== quoteKey);
+
   const submit = async () => {
+    if (wrongNetwork || feeError || amtInvalid) return;
     setReview(false);
     setTx("signing");
     await new Promise<void>((r) => {
@@ -311,6 +371,11 @@ function SwapReceiveInner() {
       tone: "buy",
     });
   };
+
+  const explorer =
+    shownTx === "pending" || shownTx === "confirmed"
+      ? "https://solscan.io/tx/demo"
+      : undefined;
 
   return (
     <div>
@@ -341,15 +406,27 @@ function SwapReceiveInner() {
               className="min-w-[7.5rem]"
             />
           </div>
-          <AmountInput symbol="SOL" value={amt} onValueChange={setAmt} />
+          <AmountInput
+            symbol="SOL"
+            value={amt}
+            onValueChange={setAmt}
+            maxDecimals={9}
+            invalid={amtInvalid}
+            errorMessage={amtInvalid ? "Enter an amount greater than zero" : undefined}
+          />
           <SlippageControl value={bps} onValueChange={setBps} />
-          <GasFee amount="0.000005 SOL" usd="≈ $0.0009" />
+          <GasFee
+            amount="0.000005 SOL"
+            usd="≈ $0.0009"
+            loading={feeLoading}
+            error={feeError ? "Fee unavailable" : undefined}
+          />
           <div className="flex flex-wrap items-center gap-2">
             <Button
               variant="secondary"
               size="sm"
               onClick={() => setReview(true)}
-              disabled={!from || !to || !amt}
+              disabled={!from || !to || amtInvalid || wrongNetwork || feeError || feeLoading}
             >
               Review
             </Button>
@@ -357,12 +434,38 @@ function SwapReceiveInner() {
               onAction={submit}
               pendingLabel="Signing…"
               successLabel="Submitted"
-              disabled={!from || !to || !amt || tx === "signing" || tx === "pending"}
+              disabled={
+                !from ||
+                !to ||
+                amtInvalid ||
+                wrongNetwork ||
+                feeError ||
+                feeLoading ||
+                shownTx === "signing" ||
+                shownTx === "pending"
+              }
             >
               Swap
             </LoadingButton>
           </div>
-          <TxStatus state={tx} detail={tx === "idle" ? undefined : "5D3k…Wq"} />
+          <TxStatus
+            state={shownTx}
+            detail={
+              shownTx === "idle"
+                ? undefined
+                : shownTx === "failed"
+                  ? "Simulation failed"
+                  : "5D3k…Wq"
+            }
+            detailHref={explorer}
+            action={
+              shownTx === "failed" ? (
+                <Button size="sm" variant="ghost" onClick={() => setTx("idle")}>
+                  Retry
+                </Button>
+              ) : undefined
+            }
+          />
           <Dialog
             open={review}
             onOpenChange={setReview}
@@ -373,6 +476,7 @@ function SwapReceiveInner() {
                 <Button onClick={() => setReview(false)}>Cancel</Button>
                 <Button
                   variant="primary"
+                  disabled={wrongNetwork}
                   onClick={() => {
                     setReview(false);
                     void submit();
@@ -388,13 +492,19 @@ function SwapReceiveInner() {
                 {amt} {from?.toUpperCase()} → {to?.toUpperCase()}
               </p>
               <p>Slippage {bps / 100}%</p>
-              <NetworkBadge name="Solana" />
+              <NetworkBadge
+                name={wrongNetwork ? "Ethereum" : "Solana"}
+                tone={wrongNetwork ? "warning" : "neutral"}
+              />
             </div>
           </Dialog>
         </div>
       ) : (
         <div className="mt-3 space-y-3">
-          <NetworkBadge name="Solana" />
+          <NetworkBadge
+            name={wrongNetwork ? "Ethereum" : "Solana"}
+            tone={wrongNetwork ? "warning" : "neutral"}
+          />
           <AddressChip address="7xKtF2mPqR8vN3wLbJd5cYhT6gAeS4uZ1oXnE9fQ2rM" />
           <p className="text-[11px] text-fg-muted">
             Copy the address to receive. Pair with the QRCode composition in product
@@ -403,17 +513,21 @@ function SwapReceiveInner() {
         </div>
       )}
       <DoDont
-        dos={["one ticket, two modes (Lane)", "Slippage above confirm; LoadingButton for async"]}
+        dos={[
+          "GasFee loading/error before confirm",
+          "TxStatus detailHref + Retry on failed",
+          "NetworkBadge tone on wrong-network",
+        ]}
         donts={["QR inside the portable pattern", "call it Swapped before TxStatus confirmed"]}
       />
     </div>
   );
 }
 
-function SwapReceiveDemo() {
+function SwapReceiveDemo(opts?: DemoOpts) {
   return (
     <ToastProvider>
-      <SwapReceiveInner />
+      <SwapReceiveInner {...opts} />
     </ToastProvider>
   );
 }

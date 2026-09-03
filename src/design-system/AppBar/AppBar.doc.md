@@ -1,7 +1,7 @@
 # AppBar
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Page header: leading · title · actions, optionally sticky.
 
 ## Usage

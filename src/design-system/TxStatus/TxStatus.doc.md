@@ -1,7 +1,7 @@
 # TxStatus
 
 Status: stable
-Version: 1.0.0
+Version: 1.1.0
 The transaction lifecycle, always visible (heuristic #1): the component no reference library ships.
 
 ## Usage
@@ -9,16 +9,16 @@ The transaction lifecycle, always visible (heuristic #1): the component no refer
 ```tsx
 import { TxStatus } from "@/design-system";
 
-<TxStatus state="pending" detail="5D3k...Wq signature" />
-<TxStatus state="confirmed" />
+<TxStatus state="pending" detail="5D3k...Wq" detailHref="https://solscan.io/tx/…" />
+<TxStatus state="failed" detail="User rejected" action={<Button size="sm">Retry</Button>} />
 ```
 
 ## Anatomy
 
 ```
 o  Waiting for wallet...   signing: warning pulse
-o  Pending confirmation... pending: info pulse
-✓  Confirmed               buy   |  ✕ Failed  sell
+o  Pending confirmation... pending: info pulse + optional detail link
+✓  Confirmed               buy   |  ✕ Failed  sell  [Retry]
 ```
 
 ## Props
@@ -27,6 +27,8 @@ o  Pending confirmation... pending: info pulse
 |---|---|---|---|
 | `state` | `"idle" \| "signing" \| "pending" \| "confirmed" \| "failed"` | - | The lifecycle. |
 | `detail` | `string` | - | Mono line under the label (signature, error hint). |
+| `detailHref` | `string` | - | When set, `detail` is an explorer link (`noopener`). |
+| `action` | `ReactNode` | - | Right-side affordance (typically Retry on failed). |
 | `className` | `string` | - | cn-merged. |
 
 ## Tokens

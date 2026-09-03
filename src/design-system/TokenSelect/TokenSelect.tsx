@@ -17,6 +17,21 @@ export type TokenOption = {
   disabled?: boolean;
 };
 
+function firstEnabledIndex(list: TokenOption[]): number {
+  const i = list.findIndex((t) => !t.disabled);
+  return i < 0 ? 0 : i;
+}
+
+function stepEnabled(list: TokenOption[], from: number, dir: 1 | -1): number {
+  if (list.length === 0) return 0;
+  let i = from;
+  for (let n = 0; n < list.length; n++) {
+    i = (i + dir + list.length) % list.length;
+    if (!list[i].disabled) return i;
+  }
+  return from;
+}
+
 /**
  * Token picker: the swap/send atom every DeFi UI rebuilds by hand.
  * Trigger shows the selected token (icon + symbol); Dialog hosts a
@@ -29,6 +44,8 @@ export function TokenSelect({
   onValueChange,
   placeholder = "Select token",
   emptyText = "No tokens found",
+  catalogEmptyText = "No tokens available",
+  loading = false,
   disabled,
   className,
   "aria-label": ariaLabel = "Select token",
@@ -38,7 +55,12 @@ export function TokenSelect({
   value: string | undefined;
   onValueChange: (id: string) => void;
   placeholder?: string;
+  /** Shown when a search yields no matches. */
   emptyText?: string;
+  /** Shown when `tokens` is empty (catalog not loaded / no assets). */
+  catalogEmptyText?: string;
+  /** Catalog fetch in flight. */
+  loading?: boolean;
   disabled?: boolean;
   className?: string;
   "aria-label"?: string;
@@ -66,7 +88,7 @@ export function TokenSelect({
   const openPicker = () => {
     if (disabled) return;
     setQuery("");
-    setActive(0);
+    setActive(firstEnabledIndex(tokens));
     setOpen(true);
   };
 
@@ -77,12 +99,13 @@ export function TokenSelect({
   };
 
   const onSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (loading || matches.length === 0) return;
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      setActive((i) => Math.min(i + 1, Math.max(matches.length - 1, 0)));
+      setActive((i) => stepEnabled(matches, i, 1));
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      setActive((i) => Math.max(i - 1, 0));
+      setActive((i) => stepEnabled(matches, i, -1));
     } else if (e.key === "Enter") {
       if (matches[active] && !matches[active].disabled) {
         e.preventDefault();
@@ -90,12 +113,19 @@ export function TokenSelect({
       }
     } else if (e.key === "Home") {
       e.preventDefault();
-      setActive(0);
+      setActive(firstEnabledIndex(matches));
     } else if (e.key === "End") {
       e.preventDefault();
-      setActive(Math.max(matches.length - 1, 0));
+      for (let i = matches.length - 1; i >= 0; i--) {
+        if (!matches[i].disabled) {
+          setActive(i);
+          return;
+        }
+      }
     }
   };
+
+  const emptyMessage = tokens.length === 0 ? catalogEmptyText : emptyText;
 
   return (
     <>
@@ -109,7 +139,7 @@ export function TokenSelect({
         }
         onClick={openPicker}
         className={cn(
-          "inline-flex h-9 items-center gap-2 rounded-control border border-outline-variant bg-surface-container px-2.5 text-sm font-medium text-fg",
+          "inline-flex h-10 items-center gap-2 rounded-control border border-outline-variant bg-surface-container px-2.5 text-sm font-medium text-fg",
           "transition-[background-color,border-color,transform] duration-150",
           "hover:bg-surface-container-high active:scale-[0.96]",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40",
@@ -138,17 +168,30 @@ export function TokenSelect({
         className="p-4"
       >
         <Input
+          role="combobox"
+          aria-autocomplete="list"
+          aria-expanded={open}
           value={query}
           onChange={(e) => {
-            setQuery(e.target.value);
-            setActive(0);
+            const next = e.target.value;
+            setQuery(next);
+            const nq = next.trim().toLowerCase();
+            const nextMatches = nq
+              ? tokens.filter(
+                  (t) =>
+                    t.symbol.toLowerCase().includes(nq) ||
+                    t.name.toLowerCase().includes(nq) ||
+                    t.id.toLowerCase().includes(nq),
+                )
+              : tokens;
+            setActive(firstEnabledIndex(nextMatches));
           }}
           onKeyDown={onSearchKeyDown}
           placeholder="Search tokens…"
           aria-label="Search tokens"
           aria-controls={listId}
           aria-activedescendant={
-            matches[active] ? optId(active) : undefined
+            !loading && matches[active] ? optId(active) : undefined
           }
           autoComplete="off"
           spellCheck={false}
@@ -158,10 +201,15 @@ export function TokenSelect({
           role="listbox"
           id={listId}
           aria-label="Tokens"
+          aria-busy={loading || undefined}
           className="max-h-64 overflow-y-auto rounded-chip border border-outline-variant bg-surface-container p-1"
         >
-          {matches.length === 0 ? (
-            <p className="px-2.5 py-3 text-xs text-fg-subtle">{emptyText}</p>
+          {loading ? (
+            <p role="status" className="px-2.5 py-3 text-xs text-fg-subtle">
+              Loading tokens…
+            </p>
+          ) : matches.length === 0 ? (
+            <p className="px-2.5 py-3 text-xs text-fg-subtle">{emptyMessage}</p>
           ) : (
             matches.map((token, i) => {
               const isSelected = token.id === value;
@@ -186,7 +234,7 @@ export function TokenSelect({
                   <TokenIcon src={token.iconSrc} symbol={token.symbol} size="md" />
                   <span className="min-w-0 flex-1">
                     <span className="block font-mono leading-tight">{token.symbol}</span>
-                    <span className="block truncate text-[11px] font-normal text-fg-muted">
+                    <span className="block truncate text-xs font-normal text-fg-muted">
                       {token.name}
                     </span>
                   </span>

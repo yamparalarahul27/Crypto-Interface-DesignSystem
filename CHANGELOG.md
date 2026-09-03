@@ -54,6 +54,73 @@ bullets under the release's buckets, prefixed with the component name.
 - **LoadingButton** `1.1.0` — `type` prop (`button` \| `submit` \| `reset`)
   for form tickets.
 
+- **Spacing / hit-target polish (swap spine vs top DS):** bring ticket
+  controls to DESIGN ≥40 and 8px rhythm, aligned with Carbon/CDS/shadcn
+  density expectations:
+  - **SlippageControl** `1.0.1` — presets/Custom `h-10`, chip `gap-2`
+  - **TokenSelect** `1.0.1` — trigger `h-10` / `px-3`
+  - **AmountInput** `1.0.1` — Max `h-10 min-w-10`
+  - **AddressChip** `1.0.1` — copy/explorer `h-10 w-10`, `noopener`
+  - **Dialog** `1.0.1` — panel `p-6` (24px), close `h-10`, header/footer
+    gaps on the 8px scale
+
+- **Batch 3–4 → stable @ 1.0.0**: crypto round 2 + trading imports —
+  **Amount**, **ChainSwitcher** (trigger `h-10` ≥40 hit area),
+  **OrderBook**, **OrderTypeTabs**, **SizeSlider**, **MarketTabs**,
+  **MarginHealth**. WalletButton / GasFee promoted separately (#125).
+
+- **Accordion** → `stable @ 1.0.0`: includes `defaultValue` (uncontrolled
+  initially-open) from #115. API frozen (additive props only).
+
+- **WalletButton** + **GasFee** → `stable @ 1.0.0`: ticket atoms after
+  P0 harden (connected-without-address guard; fee `loading`/`error`).
+  API frozen (additive props only). Docs + colocated tests already met
+  the CONVENTIONS ladder.
+
+- **Pattern frames exercise harden APIs:** P2 Tx flow + P5 Swap/receive
+  canvas demos now use AmountInput `errorMessage`/`maxDecimals`, GasFee
+  `loading`/`error`, TxStatus `detailHref`/`action`, NetworkBadge `tone`.
+  Inspector chips: `PatternTxFlow` · `PatternSwapReceive`.
+
+- **Production harden P2:**
+  - **TxStatus** `1.1.0` — `detailHref` explorer link + `action` slot (Retry)
+  - **NetworkBadge** `1.1.0` — `tone` warning/error for wrong-network
+
+- **Production harden P1 (swap ticket):**
+  - **TokenSelect** `1.1.0` — Combobox ARIA on search, skip-disabled
+    arrows, `loading` / `catalogEmptyText`, trigger ≥40
+  - **SlippageControl** `1.0.1` — preset/custom chips `h-10` (≥40)
+  - **AccountMenu** `1.0.1` — clipboard failure label, trigger ≥40
+
+- **Production harden P0 (swap ticket):**
+  - **AmountInput** `1.1.0` — `errorMessage` + `aria-describedby`,
+    `maxDecimals`, Max ≥40×40
+  - **AddressChip** `1.0.1` — copy/explorer ≥40×40, clipboard failure
+    label, `rel="noopener noreferrer"`
+  - **WalletButton** `0.9.1` → promoted `1.0.0` (see above)
+  - Ladder recorded in `docs/cids-component-gaps.md` (public prod →
+    harden → promote → finish)
+
+- **Production harden P1 (swap ticket):**
+  - **TokenSelect** `1.1.0` — Combobox ARIA on search, skip-disabled
+    arrows, `loading` / `catalogEmptyText`, trigger ≥40
+  - **SlippageControl** `1.0.1` — preset/custom chips `h-10` (≥40)
+  - **AccountMenu** `1.0.1` — clipboard failure label, trigger ≥40
+
+- **Production harden P2:**
+  - **TxStatus** `1.1.0` — `detailHref` explorer link + `action` slot (Retry)
+  - **NetworkBadge** `1.1.0` — `tone` warning/error for wrong-network
+
+- **Batch 2 → stable @ 1.0.0**: navigation & overlays cohort —
+  **AppBar**, **BottomNav**, **Combobox**, **Popover**, **Drawer**,
+  **Breadcrumbs**, **Pagination**. ContextMenu already stable via the
+  Interior/Batch-5 promotion.
+
+- **Batch 1 → stable @ 1.0.0**: containment & forms cohort after bake —
+  **Alert**, **Card**, **RadioGroup**, **Textarea**, **Progress**.
+  Accordion stays draft pending `defaultValue` (#115); CommentThread /
+  Onboarding remain draft by design.
+
 - **Promotion cohort → stable @ 1.0.0**: ten bake-ready drafts after
   Interior + Batch 5 + ContextMenu landed. API frozen (additive props
   only from here). Docs, colocated tests, and dark/mono poses already
@@ -64,6 +131,21 @@ bullets under the release's buckets, prefixed with the component name.
     **ActivityRow**
   - Overlay: **ContextMenu**
 
+
+
+### Added
+
+- **GasFee `loading` / `error`**: async faces for fee quotes (`Fetching…`,
+  alert on failure) so tickets aren't stuck with a silent stale amount.
+
+- **Accordion `defaultValue`**: uncontrolled initially-open panel(s)
+  (`string` for single, `string[]` for multiple). Component pages open
+  **Props** by default so the primary read isn't buried collapsed.
+
+- **Canvas state switcher**: selecting a demo that opts into
+  `DEMO_STATE_OPTIONS` shows Inspector chips (default / disabled /
+  loading / empty / error / …). Hover stays live CSS; compositional
+  states are switched. Unselected frames keep their multi-pose showcase.
 - **P5 · Swap / receive ticket pattern**: live canvas frame composing
   Lane (Swap | Receive) with TokenSelect, AmountInput, SlippageControl,
   GasFee, LoadingButton, Dialog review, TxStatus, NetworkBadge, and

@@ -1,7 +1,7 @@
 # WalletButton
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 The connect-wallet atom: one button, three states (disconnected · connecting · connected).
 
 ## Usage
@@ -54,7 +54,9 @@ Inherits Button's tokens (`--brand`/`--on-brand`, surfaces, outline) ·
 - **Connecting**: disabled + pulsing warning dot; the wallet popup owns
   the interaction now.
 - **Connected**: quiet secondary pill, a status, not a call to action.
-  Dot + mono address are the dual cue (color + glyph).
+  Dot + mono address are the dual cue (color + glyph). If `address` is
+  missing while connected, renders a disabled "Address unavailable"
+  state — never the Connect CTA.
 
 ## Motion
 

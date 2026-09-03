@@ -24,6 +24,16 @@ describe("AddressChip", () => {
     const { rerender } = render(<AddressChip address={ADDR} />);
     expect(screen.queryByRole("link")).toBeNull();
     rerender(<AddressChip address={ADDR} href="https://solscan.io/x" />);
-    expect(screen.getByRole("link", { name: "View on explorer" }).getAttribute("rel")).toContain("noreferrer");
+    expect(screen.getByRole("link", { name: "View on explorer" }).getAttribute("rel")).toContain(
+      "noopener",
+    );
+  });
+
+  it("clipboard rejection surfaces Copy failed", async () => {
+    const writeText = vi.fn().mockRejectedValue(new Error("denied"));
+    Object.assign(navigator, { clipboard: { writeText } });
+    render(<AddressChip address={ADDR} />);
+    await userEvent.click(screen.getByRole("button", { name: `Copy address ${ADDR}` }));
+    expect(await screen.findByRole("button", { name: "Copy failed" })).toBeTruthy();
   });
 });

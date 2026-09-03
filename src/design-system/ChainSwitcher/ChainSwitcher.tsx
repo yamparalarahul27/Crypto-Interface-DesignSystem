@@ -47,7 +47,7 @@ export function ChainSwitcher({
         disabled={disabled}
         aria-label={`Network: ${active?.label ?? "unknown"}, switch`}
         className={cn(
-          "inline-flex h-9 items-center gap-2 rounded-control border border-outline-variant bg-surface-container px-3 text-sm text-fg",
+          "inline-flex h-10 items-center gap-2 rounded-control border border-outline-variant bg-surface-container px-3 text-sm text-fg",
           "transition-[border-color,background-color] duration-150 hover:bg-surface-container-high",
           "disabled:pointer-events-none disabled:opacity-40",
           className,

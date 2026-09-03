@@ -28,4 +28,14 @@ describe("WalletButton", () => {
     expect(btn.textContent).toContain("7xKt…Q2rM");
     expect(btn.textContent).not.toContain(ADDR);
   });
+
+  it("connected without address: never shows Connect wallet", () => {
+    render(<WalletButton status="connected" />);
+    expect(screen.queryByRole("button", { name: "Connect wallet" })).toBeNull();
+    const btn = screen.getByRole("button", {
+      name: "Wallet connected, address unavailable",
+    }) as HTMLButtonElement;
+    expect(btn.disabled).toBe(true);
+    expect(btn.textContent).toContain("Address unavailable");
+  });
 });

@@ -1,7 +1,7 @@
 # Popover
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Anchored floating panel on Radix Popover: free-form content near its trigger.
 
 ## Usage

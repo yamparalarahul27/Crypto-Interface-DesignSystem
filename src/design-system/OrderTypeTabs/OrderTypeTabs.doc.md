@@ -1,7 +1,7 @@
 # OrderTypeTabs
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Scrollable order-type selector for trading forms: market, limit, and advanced order modes in one compact strip.
 
 ## Usage

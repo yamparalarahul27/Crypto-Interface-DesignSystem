@@ -671,6 +671,14 @@ function TxStatusDemo({ state: external }: DemoOpts = {}) {
             ? "User rejected"
             : undefined
       }
+      detailHref={shown === "pending" ? "https://solscan.io/tx/demo" : undefined}
+      action={
+        shown === "failed" ? (
+          <Button size="sm" variant="ghost" onClick={() => setState("idle")}>
+            Retry
+          </Button>
+        ) : undefined
+      }
     />
   );
 }
@@ -1143,9 +1151,11 @@ export const DEMOS: Record<string, DemoFn> = {
       </div>
     ),
   NetworkBadge: () => (
-    <div className="flex gap-2">
+    <div className="flex flex-wrap gap-2">
       <NetworkBadge name="Solana" iconSrc="https://cdn.defitriangle.xyz/logos/network/solana/32.png" />
       <NetworkBadge name="Base" />
+      <NetworkBadge name="Wrong network" tone="warning" />
+      <NetworkBadge name="Unsupported" tone="error" />
     </div>
   ),
   TxStatus: TxStatusDemo,

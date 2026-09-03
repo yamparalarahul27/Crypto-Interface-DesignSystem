@@ -241,7 +241,7 @@
       "name": "network-badge",
       "type": "registry:ui",
       "title": "NetworkBadge",
-      "description": "CIDS NetworkBadge v1.0.0 (stable): docs ship with the code (NetworkBadge.doc.md)."
+      "description": "CIDS NetworkBadge v1.1.0 (stable): docs ship with the code (NetworkBadge.doc.md)."
     },
     {
       "name": "otpinput",
@@ -421,7 +421,7 @@
       "name": "tx-status",
       "type": "registry:ui",
       "title": "TxStatus",
-      "description": "CIDS TxStatus v1.0.0 (stable): docs ship with the code (TxStatus.doc.md)."
+      "description": "CIDS TxStatus v1.1.0 (stable): docs ship with the code (TxStatus.doc.md)."
     },
     {
       "name": "wallet-avatar",

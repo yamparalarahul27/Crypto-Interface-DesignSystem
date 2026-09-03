@@ -66,7 +66,7 @@ export { StatCell } from "./StatCell";
 export { Sparkline } from "./Sparkline";
 export { AddressChip } from "./AddressChip";
 export { PegBadge } from "./PegBadge";
-export { NetworkBadge } from "./NetworkBadge";
+export { NetworkBadge, type NetworkBadgeTone } from "./NetworkBadge";
 export { TxStatus, type TxState } from "./TxStatus";
 export { AmountInput } from "./AmountInput";
 export { Skeleton, SectionSkeleton } from "./Skeleton";

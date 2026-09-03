@@ -40,6 +40,10 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Changed
 
+- **Production harden P2:**
+  - **TxStatus** `1.1.0` — `detailHref` explorer link + `action` slot (Retry)
+  - **NetworkBadge** `1.1.0` — `tone` warning/error for wrong-network
+
 - **Production harden P1 (swap ticket):**
   - **TokenSelect** `1.1.0` — Combobox ARIA on search, skip-disabled
     arrows, `loading` / `catalogEmptyText`, trigger ≥40

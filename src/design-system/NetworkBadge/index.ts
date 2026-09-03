@@ -1,1 +1,1 @@
-export { NetworkBadge } from "./NetworkBadge";
+export { NetworkBadge, type NetworkBadgeTone } from "./NetworkBadge";

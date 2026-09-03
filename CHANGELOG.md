@@ -50,6 +50,16 @@ bullets under the release's buckets, prefixed with the component name.
   - Ladder recorded in `docs/cids-component-gaps.md` (public prod →
     harden → promote → finish)
 
+- **Batch 2 → stable @ 1.0.0**: navigation & overlays cohort —
+  **AppBar**, **BottomNav**, **Combobox**, **Popover**, **Drawer**,
+  **Breadcrumbs**, **Pagination**. ContextMenu already stable via the
+  Interior/Batch-5 promotion.
+
+- **Batch 1 → stable @ 1.0.0**: containment & forms cohort after bake —
+  **Alert**, **Card**, **RadioGroup**, **Textarea**, **Progress**.
+  Accordion stays draft pending `defaultValue` (#115); CommentThread /
+  Onboarding remain draft by design.
+
 - **Promotion cohort → stable @ 1.0.0**: ten bake-ready drafts after
   Interior + Batch 5 + ContextMenu landed. API frozen (additive props
   only from here). Docs, colocated tests, and dark/mono poses already
@@ -64,6 +74,10 @@ bullets under the release's buckets, prefixed with the component name.
 
 - **GasFee `loading` / `error`**: async faces for fee quotes (`Fetching…`,
   alert on failure) so tickets aren't stuck with a silent stale amount.
+
+- **Accordion `defaultValue`**: uncontrolled initially-open panel(s)
+  (`string` for single, `string[]` for multiple). Component pages open
+  **Props** by default so the primary read isn't buried collapsed.
 
 - **Canvas state switcher**: selecting a demo that opts into
   `DEMO_STATE_OPTIONS` shows Inspector chips (default / disabled /

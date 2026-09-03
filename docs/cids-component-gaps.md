@@ -17,6 +17,23 @@
 > components enter as `draft @ 0.9.0` and are promoted per the
 > CONVENTIONS.md ladder.
 
+## Production → finish ladder
+
+> Locked 2026-09-01. Promotions alone do not make the system shippable.
+> Sequence: **production-ready core** first, then finish the catalog.
+
+```
+1 Public prod     you · Vercel SSO off + live URL
+2 Harden ticket   swap path P0/P1 (this track)
+3 Stable core     promote only after harden
+4 Finish DS       remaining drafts, Batch 6, SeedPhrase if needed
+```
+
+**Harden progress:** P0 (#118) AmountInput · AddressChip · WalletButton ·
+GasFee. **P1 (this):** TokenSelect Combobox ARIA + loading · Slippage
+≥40 · AccountMenu clipboard. **Next:** TxStatus detail/action ·
+NetworkBadge wrong-network.
+
 ## Batch 1: containment & forms (PR in flight)
 
 The "every generic system has this" tier. All Radix-backed or trivial.
@@ -196,11 +213,11 @@ also PR docs when merged). Steal contracts; reimplement CIDS-native
 
 **Adjacent, surfaced while building the above:**
 
-- [ ] **Accordion `defaultValue`.** The component page now renders every
+- [x] **Accordion `defaultValue`.** The component page now renders every
       doc section as an accordion, but `Accordion` cannot open one by
       default: so Props, the section people actually come for, starts
       collapsed. Accordion's own doc warns against burying primary
-      content. Small addition; benefits every consumer.
+      content. Small addition; benefits every consumer. Shipped 2026-09-01.
 
 ## History
 
@@ -218,3 +235,5 @@ also PR docs when merged). Steal contracts; reimplement CIDS-native
 | 2026-08-01 | Batch 5 crypto ticket atoms: TokenSelect, SlippageControl, AccountMenu, ActivityRow. SeedPhrase remains deferred. |
 | 2026-08-25 | Batch 6 opened (identity system). Avatar gained variant/chain/connection; WalletAvatar shipped. Size scale + generative palette blocked on a decision. |
 | 2026-09-01 | Promotion cohort → stable @ 1.0.0: LoadingButton, HoldToConfirm, OTPInput, InlineValidation, WizardSteps, ContextMenu, TokenSelect, SlippageControl, AccountMenu, ActivityRow. |
+| 2026-09-01 | Batch 1 → stable @ 1.0.0: Alert, Card, RadioGroup, Textarea, Progress (Accordion deferred to #115). |
+| 2026-09-01 | Batch 2 → stable @ 1.0.0: AppBar, BottomNav, Combobox, Popover, Drawer, Breadcrumbs, Pagination. |

@@ -23,27 +23,45 @@ export function GasFee({
   usd,
   level,
   label = "Network fee",
+  loading = false,
+  error,
   className,
 }: {
   /** Fee in native units, preformatted (e.g. "0.000005 SOL"). */
-  amount: string;
+  amount?: string;
   /** Fiat approximation (e.g. "≈ $0.0009"). */
   usd?: string;
   /** Congestion level: omit when the chain has flat fees. */
   level?: FeeLevel;
   label?: string;
+  /** Quote in flight: shows Fetching… instead of amount. */
+  loading?: boolean;
+  /** Quote failed: replaces amount with the message (sell ink). */
+  error?: string;
   className?: string;
 }) {
   return (
-    <div className={cn("flex items-baseline justify-between gap-3 text-xs", className)}>
+    <div
+      className={cn("flex items-baseline justify-between gap-3 text-xs", className)}
+      aria-busy={loading || undefined}
+      role={error ? "alert" : loading ? "status" : undefined}
+    >
       <span className="text-fg-muted">{label}</span>
       <span className="flex items-baseline gap-2 text-right">
-        <span className="data-sm text-fg">{amount}</span>
-        {usd && <span className="text-fg-subtle">{usd}</span>}
-        {level && (
-          <span className={cn("font-medium text-[10px]", LEVEL[level].text)}>
-            {LEVEL[level].word}
-          </span>
+        {loading ? (
+          <span className="animate-pulse text-fg-subtle">Fetching…</span>
+        ) : error ? (
+          <span className="text-sell">{error}</span>
+        ) : (
+          <>
+            {amount && <span className="data-sm text-fg">{amount}</span>}
+            {usd && <span className="text-fg-subtle">{usd}</span>}
+            {level && (
+              <span className={cn("text-[10px] font-medium", LEVEL[level].text)}>
+                {LEVEL[level].word}
+              </span>
+            )}
+          </>
         )}
       </span>
     </div>

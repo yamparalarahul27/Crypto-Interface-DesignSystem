@@ -1382,7 +1382,8 @@ export const DEMOS: Record<string, DemoFn> = {
     <div className="space-y-2">
       <GasFee amount="0.000005 SOL" usd="≈ $0.0009" level="low" />
       <GasFee amount="0.0021 SOL" usd="≈ $0.39" level="elevated" label="Priority fee" />
-      <GasFee amount="0.000005 SOL" usd="≈ $0.0009" />
+      <GasFee loading />
+      <GasFee error="Fee unavailable" />
     </div>
   ),
   WalletButton: WalletButtonDemo,

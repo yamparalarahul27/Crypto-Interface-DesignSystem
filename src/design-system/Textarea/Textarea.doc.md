@@ -1,7 +1,7 @@
 # Textarea
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Multi-line text entry: Input's sibling, same border/focus/invalid grammar.
 
 ## Usage

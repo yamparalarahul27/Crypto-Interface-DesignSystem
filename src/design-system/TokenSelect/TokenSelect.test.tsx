@@ -68,8 +68,53 @@ describe("TokenSelect", () => {
 
     await user.click(screen.getByRole("button", { name: "Select token" }));
     const search = screen.getByLabelText("Search tokens");
+    expect(search.getAttribute("role")).toBe("combobox");
+    expect(search.getAttribute("aria-autocomplete")).toBe("list");
     await user.type(search, "{ArrowDown}{Enter}");
-    // ArrowDown from 0 → 1 (USDC); Enter selects it
+    // starts on first enabled (SOL); ArrowDown skips to USDC (JUP disabled later)
     expect(onValueChange).toHaveBeenCalledWith("usdc");
+  });
+
+  it("ArrowDown skips disabled options", async () => {
+    const user = userEvent.setup();
+    const onValueChange = vi.fn();
+    const list: TokenOption[] = [
+      { id: "jup", symbol: "JUP", name: "Jupiter", disabled: true },
+      { id: "sol", symbol: "SOL", name: "Solana" },
+      { id: "bonk", symbol: "BONK", name: "Bonk", disabled: true },
+      { id: "usdc", symbol: "USDC", name: "USD Coin" },
+    ];
+    render(
+      <TokenSelect tokens={list} value={undefined} onValueChange={onValueChange} />,
+    );
+    await user.click(screen.getByRole("button", { name: "Select token" }));
+    const search = screen.getByLabelText("Search tokens");
+    // first enabled = SOL; ArrowDown → USDC
+    await user.type(search, "{ArrowDown}{Enter}");
+    expect(onValueChange).toHaveBeenCalledWith("usdc");
+  });
+
+  it("loading shows status and hides options", async () => {
+    const user = userEvent.setup();
+    render(
+      <TokenSelect tokens={TOKENS} value={undefined} onValueChange={() => {}} loading />,
+    );
+    await user.click(screen.getByRole("button", { name: "Select token" }));
+    expect(screen.getByRole("status").textContent).toContain("Loading tokens");
+    expect(screen.queryByRole("option")).toBeNull();
+  });
+
+  it("empty catalog uses catalogEmptyText", async () => {
+    const user = userEvent.setup();
+    render(
+      <TokenSelect
+        tokens={[]}
+        value={undefined}
+        onValueChange={() => {}}
+        catalogEmptyText="No assets yet"
+      />,
+    );
+    await user.click(screen.getByRole("button", { name: "Select token" }));
+    expect(screen.getByText("No assets yet")).toBeTruthy();
   });
 });

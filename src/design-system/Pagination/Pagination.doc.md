@@ -1,7 +1,7 @@
 # Pagination
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Page controls for long tables: windowed numbers with ellipses.
 
 ## Usage

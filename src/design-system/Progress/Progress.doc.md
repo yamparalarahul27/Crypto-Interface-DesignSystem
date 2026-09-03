@@ -1,7 +1,7 @@
 # Progress
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Progress bar on Radix Progress: determinate (0–100) or indeterminate shimmer.
 
 ## Usage

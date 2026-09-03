@@ -1,7 +1,7 @@
 # SizeSlider
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Percent-of-balance slider for trading forms, with major stops, sub-ticks, keyboard support, and a fixed value readout.
 
 ## Usage

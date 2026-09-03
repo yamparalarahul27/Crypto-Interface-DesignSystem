@@ -3,7 +3,7 @@
   "name": "margin-health",
   "type": "registry:ui",
   "title": "MarginHealth",
-  "description": "CIDS MarginHealth v0.9.0 (draft): docs ship with the code (MarginHealth.doc.md).",
+  "description": "CIDS MarginHealth v1.0.0 (stable): docs ship with the code (MarginHealth.doc.md).",
   "dependencies": [],
   "registryDependencies": [
     "@cids/tokens"
@@ -19,7 +19,7 @@
       "path": "cids/MarginHealth/MarginHealth.doc.md",
       "type": "registry:file",
       "target": "components/cids/MarginHealth/MarginHealth.doc.md",
-      "content": "# MarginHealth\n\nStatus: draft\nVersion: 0.9.0\nMargin-ratio meter for trading accounts, with tiered risk labels and semantic buy/warning/sell/error tones.\n\n## Usage\n\n```tsx\nimport { MarginHealth } from \"@/design-system\";\n\n<MarginHealth value={37.42} />\n```\n\n## Anatomy\n\n```\nMargin ratio  [==========..............]  Healthy  37.42%\n```\n\n## Props\n\n| Prop | Type | Default | Notes |\n|---|---|---|---|\n| `value` | `number` | - | Percent, clamped to 0-100. |\n| `label` | `string` | `Margin ratio` | Visible label and meter name. |\n| `precision` | `number` | `2` | Percent decimals. |\n| `className` | `string` | - | cn-merged. |\n\nThresholds are fixed: `<50 healthy`, `50-79.99 caution`, `80-89.99 high`, `>=90 critical`.\n\n## Tokens\n\n- `--surface-container`, `--surface-bright`\n- `--outline-variant`, `--fg-subtle`\n- `--buy`, `--warning`, `--sell`, `--error`\n- `--radius-card`, `--motion-fast`\n\n## States\n\nhealthy, caution, high, critical, zero, clamped overflow.\n\n## Motion\n\nBar width transitions over 300ms. The label and value change immediately so risk is never hidden behind animation.\n\n## A11y\n\n- Uses `role=\"meter\"` with `aria-valuemin`, `aria-valuemax`, `aria-valuenow`, and tiered `aria-valuetext`.\n- Risk is not color-only: tier text and exact percent are visible.\n- The meter is read-only and has no keyboard interaction.\n"
+      "content": "# MarginHealth\n\nStatus: stable\nVersion: 1.0.0\nMargin-ratio meter for trading accounts, with tiered risk labels and semantic buy/warning/sell/error tones.\n\n## Usage\n\n```tsx\nimport { MarginHealth } from \"@/design-system\";\n\n<MarginHealth value={37.42} />\n```\n\n## Anatomy\n\n```\nMargin ratio  [==========..............]  Healthy  37.42%\n```\n\n## Props\n\n| Prop | Type | Default | Notes |\n|---|---|---|---|\n| `value` | `number` | - | Percent, clamped to 0-100. |\n| `label` | `string` | `Margin ratio` | Visible label and meter name. |\n| `precision` | `number` | `2` | Percent decimals. |\n| `className` | `string` | - | cn-merged. |\n\nThresholds are fixed: `<50 healthy`, `50-79.99 caution`, `80-89.99 high`, `>=90 critical`.\n\n## Tokens\n\n- `--surface-container`, `--surface-bright`\n- `--outline-variant`, `--fg-subtle`\n- `--buy`, `--warning`, `--sell`, `--error`\n- `--radius-card`, `--motion-fast`\n\n## States\n\nhealthy, caution, high, critical, zero, clamped overflow.\n\n## Motion\n\nBar width transitions over 300ms. The label and value change immediately so risk is never hidden behind animation.\n\n## A11y\n\n- Uses `role=\"meter\"` with `aria-valuemin`, `aria-valuemax`, `aria-valuenow`, and tiered `aria-valuetext`.\n- Risk is not color-only: tier text and exact percent are visible.\n- The meter is read-only and has no keyboard interaction.\n"
     }
   ]
 }

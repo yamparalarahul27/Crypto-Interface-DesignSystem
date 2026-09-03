@@ -35,4 +35,16 @@ describe("GasFee", () => {
     render(<GasFee amount="0.0021 SOL" label="Priority fee" />);
     expect(screen.getByText("Priority fee")).toBeTruthy();
   });
+
+  it("loading: Fetching… with aria-busy, hides amount", () => {
+    render(<GasFee amount="0.001 SOL" loading />);
+    expect(screen.getByText("Fetching…")).toBeTruthy();
+    expect(screen.queryByText("0.001 SOL")).toBeNull();
+    expect(screen.getByRole("status").getAttribute("aria-busy")).toBe("true");
+  });
+
+  it("error: message replaces amount", () => {
+    render(<GasFee error="Fee unavailable" />);
+    expect(screen.getByRole("alert").textContent).toContain("Fee unavailable");
+  });
 });

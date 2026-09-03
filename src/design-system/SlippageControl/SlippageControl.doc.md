@@ -69,4 +69,5 @@ word swaps instantly with the value: never animate risk readouts.
 
 `role="group"` labelled by the row label. Preset/Custom chips use
 `aria-pressed`. Custom field has its own `aria-label`. Level word
-doubles as the non-color risk cue. Hit area: chips `h-10` (≥40).
+doubles as the non-color risk cue. Hit area: chips and custom field
+are `h-10` (≥40).

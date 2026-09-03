@@ -1,7 +1,7 @@
 # Breadcrumbs
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Path navigation: where am I, with links back up the tree.
 
 ## Usage

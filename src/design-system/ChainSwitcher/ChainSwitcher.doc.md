@@ -1,7 +1,7 @@
 # ChainSwitcher
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Active network + switch menu: NetworkBadge's interactive sibling.
 
 ## Usage
@@ -73,3 +73,4 @@ Radix DropdownMenu radio semantics: trigger has `aria-haspopup` +
 `aria-expanded` and an explicit label naming the current network;
 items are `role="menuitemradio"` with `aria-checked`; typeahead and
 arrow keys work. Icons are decorative: labels carry the meaning.
+Trigger height is `h-10` (≥40px hit area).

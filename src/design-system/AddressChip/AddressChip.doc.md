@@ -34,7 +34,7 @@ import { AddressChip } from "@/design-system";
 
 ## States
 
-rest - copy hover - copied (1.5s IconCheck confirmation) - with/without explorer.
+rest - copy hover - copied (1.5s IconCheck) - copy failed (label + sell ink) - with/without explorer.
 
 ## Motion
 
@@ -43,5 +43,5 @@ Color transition 150ms on the affordances; nothing else.
 ## A11y
 
 - Truncation is visual only: the text span carries the full address as `aria-label`, and the copy button names it ("Copy address <full>").
-- Copy confirmation is a label change ("Copied"), not color alone.
+- Copy confirmation is a label change ("Copied"); rejection becomes "Copy failed" (not color alone).
 - Copy / explorer controls are `h-10 w-10` (≥40); explorer uses `rel="noopener noreferrer"`.

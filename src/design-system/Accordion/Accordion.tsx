@@ -20,10 +20,16 @@ export type AccordionItem = {
 export function Accordion({
   items,
   type = "single",
+  defaultValue,
   className,
 }: {
   items: AccordionItem[];
   type?: "single" | "multiple";
+  /**
+   * Uncontrolled initially-open value(s). Pass a `string` for
+   * `type="single"`, a `string[]` for `type="multiple"`.
+   */
+  defaultValue?: string | string[];
   /** Merged onto the root. */
   className?: string;
 }) {
@@ -63,11 +69,20 @@ export function Accordion({
   ));
 
   return type === "single" ? (
-    <RadixAccordion.Root type="single" collapsible {...shared}>
+    <RadixAccordion.Root
+      type="single"
+      collapsible
+      defaultValue={typeof defaultValue === "string" ? defaultValue : undefined}
+      {...shared}
+    >
       {children}
     </RadixAccordion.Root>
   ) : (
-    <RadixAccordion.Root type="multiple" {...shared}>
+    <RadixAccordion.Root
+      type="multiple"
+      defaultValue={Array.isArray(defaultValue) ? defaultValue : undefined}
+      {...shared}
+    >
       {children}
     </RadixAccordion.Root>
   );

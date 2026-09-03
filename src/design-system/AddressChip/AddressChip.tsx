@@ -22,19 +22,37 @@ export function AddressChip({
   href?: string;
   className?: string;
 }) {
-  const [copied, setCopied] = useState(false);
+  const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">("idle");
 
   const copy = () => {
-    navigator.clipboard.writeText(address).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    });
+    const write = navigator.clipboard?.writeText?.(address);
+    if (!write) {
+      setCopyState("failed");
+      setTimeout(() => setCopyState("idle"), 1500);
+      return;
+    }
+    write
+      .then(() => {
+        setCopyState("copied");
+        setTimeout(() => setCopyState("idle"), 1500);
+      })
+      .catch(() => {
+        setCopyState("failed");
+        setTimeout(() => setCopyState("idle"), 1500);
+      });
   };
+
+  const copyLabel =
+    copyState === "copied"
+      ? "Copied"
+      : copyState === "failed"
+        ? "Copy failed"
+        : `Copy address ${address}`;
 
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1 rounded-chip border border-outline-variant bg-surface-container px-1.5 py-0.5",
+        "inline-flex items-center gap-0.5 rounded-chip border border-outline-variant bg-surface-container py-0.5 pl-2 pr-0.5",
         className,
       )}
     >
@@ -44,13 +62,17 @@ export function AddressChip({
       <button
         type="button"
         onClick={copy}
-        aria-label={copied ? "Copied" : `Copy address ${address}`}
+        aria-label={copyLabel}
         className={cn(
           "inline-flex h-10 w-10 items-center justify-center rounded-control text-xs transition-colors duration-150",
-          copied ? "text-buy" : "text-fg-muted hover:text-fg",
+          copyState === "copied"
+            ? "text-buy"
+            : copyState === "failed"
+              ? "text-sell"
+              : "text-fg-muted hover:text-fg",
         )}
       >
-        {copied ? (
+        {copyState === "copied" ? (
           <IconCheck size={13} weight="bold" aria-hidden="true" />
         ) : (
           <IconCopy size={13} aria-hidden="true" />

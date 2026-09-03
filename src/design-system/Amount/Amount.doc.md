@@ -1,7 +1,7 @@
 # Amount
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Read-only formatted token amount: AmountInput's display sibling, financial type ramp.
 
 ## Usage

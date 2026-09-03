@@ -40,17 +40,15 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Changed
 
-<<<<<<< HEAD
 - **Batch 2 → stable @ 1.0.0**: navigation & overlays cohort —
   **AppBar**, **BottomNav**, **Combobox**, **Popover**, **Drawer**,
   **Breadcrumbs**, **Pagination**. ContextMenu already stable via the
   Interior/Batch-5 promotion.
-=======
+
 - **Batch 1 → stable @ 1.0.0**: containment & forms cohort after bake —
   **Alert**, **Card**, **RadioGroup**, **Textarea**, **Progress**.
   Accordion stays draft pending `defaultValue` (#115); CommentThread /
   Onboarding remain draft by design.
->>>>>>> origin/main
 
 - **Promotion cohort → stable @ 1.0.0**: ten bake-ready drafts after
   Interior + Batch 5 + ContextMenu landed. API frozen (additive props

@@ -38,7 +38,21 @@ bullets under the release's buckets, prefixed with the component name.
 
 ## [Unreleased]
 
+### Added
+
+- **Canvas iframe theme bridge**: frames get `?theme=` from the parent
+  canvas theme; `ThemeSync` applies it inside `/design/*` without
+  clobbering the parent's localStorage. Closes the dark/mono iframe gap.
+
+- **Canvas state switcher**: selecting a demo that opts into
+  `DEMO_STATE_OPTIONS` shows Inspector chips (default / disabled /
+  loading / empty / error / …). Hover stays live CSS; compositional
+  states are switched. Unselected frames keep their multi-pose showcase.
+
 ### Changed
+
+- **LoadingButton** `1.1.0` — `type` prop (`button` \| `submit` \| `reset`)
+  for form tickets.
 
 - **Spacing / hit-target polish (swap spine vs top DS):** bring ticket
   controls to DESIGN ≥40 and 8px rhythm, aligned with Carbon/CDS/shadcn
@@ -117,6 +131,8 @@ bullets under the release's buckets, prefixed with the component name.
     **ActivityRow**
   - Overlay: **ContextMenu**
 
+
+
 ### Added
 
 - **GasFee `loading` / `error`**: async faces for fee quotes (`Fetching…`,
@@ -130,7 +146,6 @@ bullets under the release's buckets, prefixed with the component name.
   `DEMO_STATE_OPTIONS` shows Inspector chips (default / disabled /
   loading / empty / error / …). Hover stays live CSS; compositional
   states are switched. Unselected frames keep their multi-pose showcase.
-
 - **P5 · Swap / receive ticket pattern**: live canvas frame composing
   Lane (Swap | Receive) with TokenSelect, AmountInput, SlippageControl,
   GasFee, LoadingButton, Dialog review, TxStatus, NetworkBadge, and

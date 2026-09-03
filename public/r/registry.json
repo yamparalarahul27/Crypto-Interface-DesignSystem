@@ -217,7 +217,7 @@
       "name": "loading-button",
       "type": "registry:ui",
       "title": "LoadingButton",
-      "description": "CIDS LoadingButton v1.0.0 (stable): docs ship with the code (LoadingButton.doc.md)."
+      "description": "CIDS LoadingButton v1.1.0 (stable): docs ship with the code (LoadingButton.doc.md)."
     },
     {
       "name": "margin-health",

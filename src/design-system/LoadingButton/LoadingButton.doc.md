@@ -1,7 +1,7 @@
 # LoadingButton
 
 Status: stable
-Version: 1.0.0
+Version: 1.1.0
 Async action button: width-stable idle → pending → success|error → idle. Interior loading-button contract, CIDS tokens, no `motion`.
 
 ## Usage
@@ -45,6 +45,7 @@ import { LoadingButton } from "@/design-system";
 | `errorLabel` | `string` | `"Try again"` | Settled-fail label + alert: next action, not diagnosis. |
 | `resetAfter` | `number` | `1400` | ms to hold success/error before idle. |
 | `disabled` | `boolean` | `false` | Genuinely unavailable (native `disabled`). Busy ≠ disabled. |
+| `type` | `"button" \| "submit" \| "reset"` | `"button"` | Native button type for forms. |
 | `onError` | `(error: unknown) => void` | - | Caller reports the error; button only shows state. |
 | `variant` | ButtonVariant | `"primary"` | Same surface map as Button. |
 | `size` | ButtonSize | `"md"` | Shared height scale. |
@@ -73,7 +74,7 @@ import { LoadingButton } from "@/design-system";
 
 ## A11y
 
-- Native `<button type="button">`; `aria-label` tracks the visible face
+- Native `<button type={type}>` (default `button`); `aria-label` tracks the visible face
 - `aria-busy` while pending; `aria-disabled` while pending (not native disabled)
 - Polite live region announces success / error labels
 - Hit area follows Button size (md 36 · lg 44)

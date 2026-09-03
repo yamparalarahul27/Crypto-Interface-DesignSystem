@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import { cn } from "@/lib/utils";
 import { CANVAS_ITEMS } from "./items";
 import { ThemeToggle } from "../ThemeToggle";
@@ -12,6 +12,12 @@ import { Inspector } from "./Inspector";
 import { DEMOS } from "./demos";
 import { CanvasSearch } from "./CanvasSearch";
 import { defaultDemoState } from "./demoStates";
+import {
+  getServerCidsTheme,
+  getStoredCidsTheme,
+  subscribeCidsTheme,
+  withThemeParam,
+} from "../theme";
 import { IconArrowLeft } from "@/design-system";
 
 type View = { x: number; y: number; s: number };
@@ -42,6 +48,11 @@ export function CanvasApp({
 
   const [selected, setSelected] = useState<string | null>(null);
   const [demoState, setDemoState] = useState<string | undefined>();
+  const theme = useSyncExternalStore(
+    subscribeCidsTheme,
+    getStoredCidsTheme,
+    getServerCidsTheme,
+  );
   const [layersOpen, setLayersOpen] = useState(true);
   const [studioOpen, setStudioOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -348,7 +359,7 @@ export function CanvasApp({
               >
                 <div className={cn("mb-1.5 font-mono text-[11px]", selected === item.id ? "text-brand" : "text-fg-subtle")}>{item.title}</div>
                 <iframe
-                  src={item.src}
+                  src={withThemeParam(item.src, theme)}
                   title={item.title}
                   width={item.w}
                   height={item.h}

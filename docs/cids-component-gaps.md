@@ -29,9 +29,10 @@
 4 Finish DS       remaining drafts, Batch 6, SeedPhrase if needed
 ```
 
-**Ticket harden pack (in flight):** AmountInput · AddressChip ·
-WalletButton · GasFee · (next) TokenSelect a11y · Slippage hits ·
-AccountMenu clipboard · TxStatus detail/action · NetworkBadge mismatch.
+**Harden progress:** P0 (#118) AmountInput · AddressChip · WalletButton ·
+GasFee. **P1 (this):** TokenSelect Combobox ARIA + loading · Slippage
+≥40 · AccountMenu clipboard. **Next:** TxStatus detail/action ·
+NetworkBadge wrong-network.
 
 ## Batch 1: containment & forms (PR in flight)
 

@@ -40,6 +40,12 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Changed
 
+- **Production harden P1 (swap ticket):**
+  - **TokenSelect** `1.1.0` — Combobox ARIA on search, skip-disabled
+    arrows, `loading` / `catalogEmptyText`, trigger ≥40
+  - **SlippageControl** `1.0.1` — preset/custom chips `h-10` (≥40)
+  - **AccountMenu** `1.0.1` — clipboard failure label, trigger ≥40
+
 - **Production harden P0 (swap ticket):**
   - **AmountInput** `1.1.0` — `errorMessage` + `aria-describedby`,
     `maxDecimals`, Max ≥40×40

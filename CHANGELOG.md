@@ -40,6 +40,11 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Changed
 
+- **Batch 3–4 → stable @ 1.0.0**: crypto round 2 + trading imports —
+  **Amount**, **ChainSwitcher** (trigger `h-10` ≥40 hit area),
+  **OrderBook**, **OrderTypeTabs**, **SizeSlider**, **MarketTabs**,
+  **MarginHealth**. WalletButton / GasFee promoted separately (#125).
+
 - **Accordion** → `stable @ 1.0.0`: includes `defaultValue` (uncontrolled
   initially-open) from #115. API frozen (additive props only).
 

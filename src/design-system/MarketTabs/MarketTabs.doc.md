@@ -1,7 +1,7 @@
 # MarketTabs
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Browser-like open-market tabs for trading workspaces: symbol, token icon, live price, optional change, close, and add.
 
 ## Usage

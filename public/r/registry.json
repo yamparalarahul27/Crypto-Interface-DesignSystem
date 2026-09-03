@@ -55,7 +55,7 @@
       "name": "amount",
       "type": "registry:ui",
       "title": "Amount",
-      "description": "CIDS Amount v0.9.0 (draft): docs ship with the code (Amount.doc.md)."
+      "description": "CIDS Amount v1.0.0 (stable): docs ship with the code (Amount.doc.md)."
     },
     {
       "name": "amount-input",
@@ -115,7 +115,7 @@
       "name": "chain-switcher",
       "type": "registry:ui",
       "title": "ChainSwitcher",
-      "description": "CIDS ChainSwitcher v0.9.0 (draft): docs ship with the code (ChainSwitcher.doc.md)."
+      "description": "CIDS ChainSwitcher v1.0.0 (stable): docs ship with the code (ChainSwitcher.doc.md)."
     },
     {
       "name": "checkbox",
@@ -223,13 +223,13 @@
       "name": "margin-health",
       "type": "registry:ui",
       "title": "MarginHealth",
-      "description": "CIDS MarginHealth v0.9.0 (draft): docs ship with the code (MarginHealth.doc.md)."
+      "description": "CIDS MarginHealth v1.0.0 (stable): docs ship with the code (MarginHealth.doc.md)."
     },
     {
       "name": "market-tabs",
       "type": "registry:ui",
       "title": "MarketTabs",
-      "description": "CIDS MarketTabs v0.9.0 (draft): docs ship with the code (MarketTabs.doc.md)."
+      "description": "CIDS MarketTabs v1.0.0 (stable): docs ship with the code (MarketTabs.doc.md)."
     },
     {
       "name": "menu",
@@ -259,13 +259,13 @@
       "name": "order-book",
       "type": "registry:ui",
       "title": "OrderBook",
-      "description": "CIDS OrderBook v0.9.0 (draft): docs ship with the code (OrderBook.doc.md)."
+      "description": "CIDS OrderBook v1.0.0 (stable): docs ship with the code (OrderBook.doc.md)."
     },
     {
       "name": "order-type-tabs",
       "type": "registry:ui",
       "title": "OrderTypeTabs",
-      "description": "CIDS OrderTypeTabs v0.9.0 (draft): docs ship with the code (OrderTypeTabs.doc.md)."
+      "description": "CIDS OrderTypeTabs v1.0.0 (stable): docs ship with the code (OrderTypeTabs.doc.md)."
     },
     {
       "name": "pagination",
@@ -337,7 +337,7 @@
       "name": "size-slider",
       "type": "registry:ui",
       "title": "SizeSlider",
-      "description": "CIDS SizeSlider v0.9.0 (draft): docs ship with the code (SizeSlider.doc.md)."
+      "description": "CIDS SizeSlider v1.0.0 (stable): docs ship with the code (SizeSlider.doc.md)."
     },
     {
       "name": "skeleton",

@@ -1,7 +1,7 @@
 # AccountMenu
 
 Status: stable
-Version: 1.0.0
+Version: 1.0.1
 Connected-wallet menu: address, copy, explorer, disconnect.
 
 ## Usage
@@ -70,6 +70,7 @@ via `you`).
 - **open**: Radix panel; highlight follows keyboard/pointer.
 - **copied**: "Copy address" label flips to "Copied" for ~1.5s
   (menu kept open via `preventDefault` on select).
+- **copy failed**: label "Copy failed" + sell ink when clipboard rejects.
 - **disabled**: trigger opacity 40.
 
 ## Motion

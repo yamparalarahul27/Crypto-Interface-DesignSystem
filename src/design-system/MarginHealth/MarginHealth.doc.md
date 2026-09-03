@@ -1,7 +1,7 @@
 # MarginHealth
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Margin-ratio meter for trading accounts, with tiered risk labels and semantic buy/warning/sell/error tones.
 
 ## Usage

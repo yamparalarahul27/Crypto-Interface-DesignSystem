@@ -105,7 +105,7 @@ export function SlippageControl({
       <div
         role="group"
         aria-label={label}
-        className="flex flex-wrap items-center gap-1.5"
+        className="flex flex-wrap items-center gap-2"
       >
         {presets.map((bps) => {
           const active = !showCustom && value === bps;
@@ -117,7 +117,7 @@ export function SlippageControl({
               aria-pressed={active}
               onClick={() => pickPreset(bps)}
               className={cn(
-                "inline-flex h-8 min-w-12 items-center justify-center rounded-control px-2.5 text-xs font-medium",
+                "inline-flex h-10 min-w-12 items-center justify-center rounded-control px-2.5 text-xs font-medium",
                 "transition-[background-color,color,transform] duration-150 active:scale-[0.96]",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40",
                 "disabled:pointer-events-none disabled:opacity-40",
@@ -136,7 +136,7 @@ export function SlippageControl({
           aria-pressed={showCustom}
           onClick={openCustom}
           className={cn(
-            "inline-flex h-8 items-center justify-center rounded-control px-2.5 text-xs font-medium",
+            "inline-flex h-10 items-center justify-center rounded-control px-2.5 text-xs font-medium",
             "transition-[background-color,color,transform] duration-150 active:scale-[0.96]",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40",
             "disabled:pointer-events-none disabled:opacity-40",
@@ -148,7 +148,7 @@ export function SlippageControl({
           Custom
         </button>
         {showCustom && (
-          <label className="flex h-8 items-center gap-1 rounded-control border border-outline-variant bg-surface-container px-2">
+          <label className="flex h-10 items-center gap-1 rounded-control border border-outline-variant bg-surface-container px-2">
             <input
               value={draft}
               disabled={disabled}

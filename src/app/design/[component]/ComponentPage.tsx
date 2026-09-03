@@ -242,6 +242,7 @@ export function ComponentPage({
       {/* ── doc from disk, one accordion per section ─────────── */}
       <Accordion
         type="multiple"
+        defaultValue={["props"]}
         items={[
           ...(tokens.length
             ? [

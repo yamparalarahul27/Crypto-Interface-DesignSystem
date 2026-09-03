@@ -2,36 +2,15 @@
 
 import { useEffect, useSyncExternalStore } from "react";
 import { cn } from "@/lib/utils";
-
-const THEMES = ["dark", "mono", "light", "violet"] as const;
-type Theme = (typeof THEMES)[number];
-const STORAGE_KEY = "cids-theme";
-
-// localStorage is the theme store (same-tab changes via a local emitter,
-// cross-tab via the storage event): mirrors Tooltip.tsx's
-// useSyncExternalStore house pattern.
-const listeners = new Set<() => void>();
-const emit = () => listeners.forEach((l) => l());
-const subscribe = (cb: () => void) => {
-  listeners.add(cb);
-  window.addEventListener("storage", cb);
-  return () => {
-    listeners.delete(cb);
-    window.removeEventListener("storage", cb);
-  };
-};
-const getSnapshot = (): Theme => {
-  const stored = localStorage.getItem(STORAGE_KEY);
-  return (THEMES as readonly string[]).includes(stored ?? "")
-    ? (stored as Theme)
-    : "dark";
-};
-const getServerSnapshot = (): Theme => "dark";
-
-const setStoredTheme = (t: Theme) => {
-  localStorage.setItem(STORAGE_KEY, t);
-  emit();
-};
+import {
+  applyCidsTheme,
+  CIDS_THEMES,
+  getServerCidsTheme,
+  getStoredCidsTheme,
+  setStoredCidsTheme,
+  subscribeCidsTheme,
+  type CidsTheme,
+} from "./theme";
 
 /**
  * Theme switch across all [data-theme] value-sets. Stamps
@@ -44,12 +23,14 @@ const setStoredTheme = (t: Theme) => {
  * [data-theme="dark"] to :root for this).
  */
 export function ThemeToggle({ className }: { className?: string }) {
-  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const theme = useSyncExternalStore(
+    subscribeCidsTheme,
+    getStoredCidsTheme,
+    getServerCidsTheme,
+  );
 
-  // Sync the DOM (external system) from React state.
   useEffect(() => {
-    if (theme === "dark") delete document.documentElement.dataset.theme;
-    else document.documentElement.dataset.theme = theme;
+    applyCidsTheme(theme);
   }, [theme]);
 
   return (
@@ -58,7 +39,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       aria-label="Theme"
       className={cn("inline-flex items-center", className)}
     >
-      {THEMES.map((t) => (
+      {CIDS_THEMES.map((t: CidsTheme) => (
         <button
           key={t}
           type="button"
@@ -66,7 +47,7 @@ export function ThemeToggle({ className }: { className?: string }) {
           aria-checked={theme === t}
           aria-label={t}
           title={t}
-          onClick={() => setStoredTheme(t)}
+          onClick={() => setStoredCidsTheme(t)}
           // The button carries the ≥40px hit area (CONVENTIONS.md); the
           // swatch inside stays small. Selection is a ring on the swatch
           // itself, not the button, so selected and unselected circles

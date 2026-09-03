@@ -1,3 +1,4 @@
+import { useId } from "react";
 import { cn } from "@/lib/utils";
 
 /**
@@ -13,6 +14,8 @@ export function AmountInput({
   fiatValue,
   onMax,
   invalid = false,
+  errorMessage,
+  maxDecimals,
   disabled,
   "aria-label": ariaLabel,
   className,
@@ -27,14 +30,24 @@ export function AmountInput({
   /** Renders a Max affordance when provided. */
   onMax?: () => void;
   invalid?: boolean;
+  /** Visible error; sets aria-describedby. Prefer with `invalid`. */
+  errorMessage?: string;
+  /** Clamp fractional digits to the mint's decimals (e.g. 9 for SOL). */
+  maxDecimals?: number;
   disabled?: boolean;
   "aria-label"?: string;
   className?: string;
 }) {
+  const errorId = useId();
+
   const sanitize = (raw: string) => {
     const cleaned = raw.replace(/[^0-9.]/g, "");
     const [head, ...rest] = cleaned.split(".");
-    return rest.length ? `${head}.${rest.join("")}` : cleaned;
+    if (!rest.length) return cleaned;
+    const frac = rest.join("");
+    const clipped =
+      typeof maxDecimals === "number" ? frac.slice(0, Math.max(0, maxDecimals)) : frac;
+    return `${head}.${clipped}`;
   };
 
   return (
@@ -55,22 +68,27 @@ export function AmountInput({
           disabled={disabled}
           aria-label={ariaLabel ?? `Amount in ${symbol}`}
           aria-invalid={invalid || undefined}
+          aria-describedby={errorMessage ? errorId : undefined}
           className="data-md h-11 w-full min-w-0 bg-transparent text-fg placeholder:text-fg-subtle focus:outline-none"
         />
         {onMax && (
           <button
             type="button"
             onClick={onMax}
-            className="rounded-control px-1.5 py-0.5 text-[11px] font-semibold text-brand transition-colors duration-150 hover:bg-surface-container-high"
+            className="inline-flex h-10 min-w-10 items-center justify-center rounded-control px-2 text-xs font-semibold text-brand transition-colors duration-150 hover:bg-surface-container-high"
           >
             Max
           </button>
         )}
         <span className="font-mono text-sm text-fg-muted">{symbol}</span>
       </div>
-      {fiatValue && (
+      {errorMessage ? (
+        <p id={errorId} role="alert" className="mt-1 px-3 text-xs text-sell">
+          {errorMessage}
+        </p>
+      ) : fiatValue ? (
         <div className="data-sm mt-1 px-3 text-fg-subtle">{fiatValue}</div>
-      )}
+      ) : null}
     </div>
   );
 }

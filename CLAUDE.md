@@ -343,7 +343,9 @@ Rules:
   gate) and replace the `<your-cids-deployment>` placeholder in
   `docs/cids-quickstart.md`.
 
-- **Iframe theme bridge.** Canvas iframe frames (live feed, HTML mocks) don't inherit the parent's `data-theme`: flipping dark/mono leaves them dark. Fix via a URL param or postMessage the embedded pages honor. (Known limitation since the mono-theme PR #68.)
+- **Iframe theme bridge.** ~~Canvas iframe frames don't inherit `data-theme`.~~
+  **Shipped** (`?theme=` + `ThemeSync` under `/design`). HTML prototypes under
+  `public/Prototypes/` may still need the same param if they aren't Next routes.
 - **Mobile canvas gestures.** The canvas is desktop-first by decision. Pinch-zoom + touch pan tuning for mobile Safari is deferred to a local-desktop session (needs fast iteration).
 - **More themes.** The `mono` pattern makes each theme one `[data-theme]` block + `check:contrast` pass. Candidates when wanted: light-terminal, high-contrast.
 - **Inspector v2.** Variant matrices per component, px measurements, computed-token readout on hover.

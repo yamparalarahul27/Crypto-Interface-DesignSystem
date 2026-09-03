@@ -43,13 +43,13 @@
       "name": "address-chip",
       "type": "registry:ui",
       "title": "AddressChip",
-      "description": "CIDS AddressChip v1.0.0 (stable): docs ship with the code (AddressChip.doc.md)."
+      "description": "CIDS AddressChip v1.0.1 (stable): docs ship with the code (AddressChip.doc.md)."
     },
     {
       "name": "alert",
       "type": "registry:ui",
       "title": "Alert",
-      "description": "CIDS Alert v0.9.0 (draft): docs ship with the code (Alert.doc.md)."
+      "description": "CIDS Alert v1.0.0 (stable): docs ship with the code (Alert.doc.md)."
     },
     {
       "name": "amount",
@@ -61,13 +61,13 @@
       "name": "amount-input",
       "type": "registry:ui",
       "title": "AmountInput",
-      "description": "CIDS AmountInput v1.0.0 (stable): docs ship with the code (AmountInput.doc.md)."
+      "description": "CIDS AmountInput v1.1.0 (stable): docs ship with the code (AmountInput.doc.md)."
     },
     {
       "name": "app-bar",
       "type": "registry:ui",
       "title": "AppBar",
-      "description": "CIDS AppBar v0.9.0 (draft): docs ship with the code (AppBar.doc.md)."
+      "description": "CIDS AppBar v1.0.0 (stable): docs ship with the code (AppBar.doc.md)."
     },
     {
       "name": "avatar",
@@ -91,13 +91,13 @@
       "name": "bottom-nav",
       "type": "registry:ui",
       "title": "BottomNav",
-      "description": "CIDS BottomNav v0.9.0 (draft): docs ship with the code (BottomNav.doc.md)."
+      "description": "CIDS BottomNav v1.0.0 (stable): docs ship with the code (BottomNav.doc.md)."
     },
     {
       "name": "breadcrumbs",
       "type": "registry:ui",
       "title": "Breadcrumbs",
-      "description": "CIDS Breadcrumbs v0.9.0 (draft): docs ship with the code (Breadcrumbs.doc.md)."
+      "description": "CIDS Breadcrumbs v1.0.0 (stable): docs ship with the code (Breadcrumbs.doc.md)."
     },
     {
       "name": "button",
@@ -109,7 +109,7 @@
       "name": "card",
       "type": "registry:ui",
       "title": "Card",
-      "description": "CIDS Card v0.9.0 (draft): docs ship with the code (Card.doc.md)."
+      "description": "CIDS Card v1.0.0 (stable): docs ship with the code (Card.doc.md)."
     },
     {
       "name": "chain-switcher",
@@ -127,7 +127,7 @@
       "name": "combobox",
       "type": "registry:ui",
       "title": "Combobox",
-      "description": "CIDS Combobox v0.9.0 (draft): docs ship with the code (Combobox.doc.md)."
+      "description": "CIDS Combobox v1.0.0 (stable): docs ship with the code (Combobox.doc.md)."
     },
     {
       "name": "comment-thread",
@@ -163,7 +163,7 @@
       "name": "drawer",
       "type": "registry:ui",
       "title": "Drawer",
-      "description": "CIDS Drawer v0.9.0 (draft): docs ship with the code (Drawer.doc.md)."
+      "description": "CIDS Drawer v1.0.0 (stable): docs ship with the code (Drawer.doc.md)."
     },
     {
       "name": "empty-state",
@@ -181,7 +181,7 @@
       "name": "gas-fee",
       "type": "registry:ui",
       "title": "GasFee",
-      "description": "CIDS GasFee v0.9.0 (draft): docs ship with the code (GasFee.doc.md)."
+      "description": "CIDS GasFee v0.9.1 (draft): docs ship with the code (GasFee.doc.md)."
     },
     {
       "name": "hold-to-confirm",
@@ -271,7 +271,7 @@
       "name": "pagination",
       "type": "registry:ui",
       "title": "Pagination",
-      "description": "CIDS Pagination v0.9.0 (draft): docs ship with the code (Pagination.doc.md)."
+      "description": "CIDS Pagination v1.0.0 (stable): docs ship with the code (Pagination.doc.md)."
     },
     {
       "name": "peg-badge",
@@ -283,7 +283,7 @@
       "name": "popover",
       "type": "registry:ui",
       "title": "Popover",
-      "description": "CIDS Popover v0.9.0 (draft): docs ship with the code (Popover.doc.md)."
+      "description": "CIDS Popover v1.0.0 (stable): docs ship with the code (Popover.doc.md)."
     },
     {
       "name": "post-card",
@@ -301,13 +301,13 @@
       "name": "progress",
       "type": "registry:ui",
       "title": "Progress",
-      "description": "CIDS Progress v0.9.0 (draft): docs ship with the code (Progress.doc.md)."
+      "description": "CIDS Progress v1.0.0 (stable): docs ship with the code (Progress.doc.md)."
     },
     {
       "name": "radio-group",
       "type": "registry:ui",
       "title": "RadioGroup",
-      "description": "CIDS RadioGroup v0.9.0 (draft): docs ship with the code (RadioGroup.doc.md)."
+      "description": "CIDS RadioGroup v1.0.0 (stable): docs ship with the code (RadioGroup.doc.md)."
     },
     {
       "name": "reaction-bar",
@@ -385,7 +385,7 @@
       "name": "textarea",
       "type": "registry:ui",
       "title": "Textarea",
-      "description": "CIDS Textarea v0.9.0 (draft): docs ship with the code (Textarea.doc.md)."
+      "description": "CIDS Textarea v1.0.0 (stable): docs ship with the code (Textarea.doc.md)."
     },
     {
       "name": "toast",
@@ -433,7 +433,7 @@
       "name": "wallet-button",
       "type": "registry:ui",
       "title": "WalletButton",
-      "description": "CIDS WalletButton v0.9.0 (draft): docs ship with the code (WalletButton.doc.md)."
+      "description": "CIDS WalletButton v0.9.1 (draft): docs ship with the code (WalletButton.doc.md)."
     },
     {
       "name": "wizard-steps",

@@ -18,6 +18,29 @@ describe("Accordion", () => {
     expect(screen.getByText("fee detail")).toBeTruthy();
   });
 
+  it("defaultValue (single): matching panel starts open", () => {
+    render(<Accordion items={ITEMS} defaultValue="route" />);
+    expect(screen.getByRole("button", { name: "Route" }).getAttribute("aria-expanded")).toBe(
+      "true",
+    );
+    expect(screen.getByRole("button", { name: "Fees" }).getAttribute("aria-expanded")).toBe(
+      "false",
+    );
+    expect(screen.getByText("route detail")).toBeTruthy();
+  });
+
+  it("defaultValue (multiple): listed panels start open", () => {
+    render(<Accordion type="multiple" items={ITEMS} defaultValue={["fees", "route"]} />);
+    expect(screen.getByRole("button", { name: "Fees" }).getAttribute("aria-expanded")).toBe(
+      "true",
+    );
+    expect(screen.getByRole("button", { name: "Route" }).getAttribute("aria-expanded")).toBe(
+      "true",
+    );
+    expect(screen.getByText("fee detail")).toBeTruthy();
+    expect(screen.getByText("route detail")).toBeTruthy();
+  });
+
   it("single (default): opening one closes the other, and it can fully close", async () => {
     render(<Accordion items={ITEMS} />);
     const fees = screen.getByRole("button", { name: "Fees" });

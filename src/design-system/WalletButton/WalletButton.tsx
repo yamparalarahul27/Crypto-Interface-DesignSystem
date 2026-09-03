@@ -26,7 +26,22 @@ export function WalletButton({
   onClick?: () => void;
   className?: string;
 }) {
-  if (status === "connected" && address) {
+  if (status === "connected") {
+    // Never fall through to "Connect wallet": a connected session
+    // without an address is a caller bug, not a disconnect CTA.
+    if (!address) {
+      return (
+        <Button
+          variant="secondary"
+          disabled
+          aria-label="Wallet connected, address unavailable"
+          className={cn("font-mono", className)}
+        >
+          <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-warning" />
+          Address unavailable
+        </Button>
+      );
+    }
     return (
       <Button
         variant="secondary"

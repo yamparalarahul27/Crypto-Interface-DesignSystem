@@ -17,6 +17,10 @@ import { Accordion } from "@/design-system";
 />
 
 <Accordion type="multiple" items={items} />
+
+{/* Open one section on mount (uncontrolled) */}
+<Accordion defaultValue="fees" items={items} />
+<Accordion type="multiple" defaultValue={["fees", "route"]} items={items} />
 ```
 
 Best for: progressive disclosure of secondary detail, FAQ blocks, fee
@@ -24,7 +28,8 @@ breakdowns, advanced settings, transaction route details. `single`
 (default, collapsible) keeps the reading focused; `multiple` when
 sections are independent and users compare across them. Don't bury
 primary content in an accordion: if users always open it, it shouldn't
-collapse.
+collapse. Prefer `defaultValue` when one section is the primary read
+(e.g. Props on a docs page).
 
 ## Anatomy
 
@@ -42,6 +47,7 @@ collapse.
 |---|---|---|---|
 | `items` | `AccordionItem[]` | - | `{ value, title, content }` per section. |
 | `type` | `"single" \| "multiple"` | `"single"` | Single is collapsible (all can close). |
+| `defaultValue` | `string \| string[]` | - | Uncontrolled initially-open. `string` for single; `string[]` for multiple. |
 | `className` | `string` | - | cn-merged onto the root. |
 
 ## Tokens
@@ -51,8 +57,8 @@ collapse.
 
 ## States
 
-- **Closed** (default): title row only, chevron down.
-- **Open**: `data-state="open"`, content revealed, chevron rotated 180°.
+- **Closed** (default when no `defaultValue`): title row only, chevron down.
+- **Open**: `data-state="open"`, content revealed, chevron rotated 180°. With `defaultValue`, matching panel(s) start open.
 - **Hover** (trigger): surface raises to `surface-container-high`.
 
 ## Motion

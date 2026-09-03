@@ -35,4 +35,33 @@ describe("AmountInput", () => {
     rerender(<AmountInput value="99" onValueChange={() => {}} symbol="SOL" invalid />);
     expect(screen.getByRole("textbox").getAttribute("aria-invalid")).toBe("true");
   });
+
+  it("errorMessage wires aria-describedby and is announced", () => {
+    render(
+      <AmountInput
+        value="99"
+        onValueChange={() => {}}
+        symbol="SOL"
+        invalid
+        errorMessage="Exceeds balance"
+      />,
+    );
+    const input = screen.getByRole("textbox");
+    const err = screen.getByRole("alert");
+    expect(err.textContent).toBe("Exceeds balance");
+    expect(input.getAttribute("aria-describedby")).toBe(err.id);
+  });
+
+  it("maxDecimals clamps fractional digits", async () => {
+    function Clamped() {
+      const [v, setV] = useState("");
+      return (
+        <AmountInput value={v} onValueChange={setV} symbol="USDC" maxDecimals={2} />
+      );
+    }
+    render(<Clamped />);
+    const el = screen.getByRole("textbox");
+    await userEvent.type(el, "1.2399");
+    expect((el as HTMLInputElement).value).toBe("1.23");
+  });
 });

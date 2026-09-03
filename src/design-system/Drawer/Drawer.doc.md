@@ -1,7 +1,7 @@
 # Drawer
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Side sheet on Radix Dialog: slides from an edge; Sheet's desktop sibling.
 
 ## Usage

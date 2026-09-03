@@ -1,7 +1,7 @@
 # GasFee
 
 Status: draft
-Version: 0.9.0
+Version: 0.9.1
 Network-fee row: amount + optional congestion level, mono-safe.
 
 ## Usage
@@ -11,13 +11,16 @@ import { GasFee } from "@/design-system";
 
 <GasFee amount="0.000005 SOL" usd="≈ $0.0009" level="low" />
 <GasFee amount="0.0021 SOL" usd="≈ $0.39" level="elevated" label="Priority fee" />
+<GasFee loading label="Network fee" />
+<GasFee error="Fee unavailable" />
 ```
 
 Best for: directly above the confirm button in any transaction flow,
 fees users discover *after* signing are the #1 web3 trust killer
 (ethereum.org heuristic: show costs up front). No generic design
 system ships this; it's pure crypto whitespace. Omit `level` on
-flat-fee chains: a permanent "low" is noise.
+flat-fee chains: a permanent "low" is noise. Use `loading` while the
+quote refreshes; `error` when the fee endpoint fails.
 
 ## Anatomy
 
@@ -31,10 +34,12 @@ Network fee     0.000005 SOL ≈ $0.0009 LOW
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `amount` | `string` | - | Preformatted native units ("0.000005 SOL"). |
+| `amount` | `string` | - | Preformatted native units ("0.000005 SOL"). Optional when `loading`/`error`. |
 | `usd` | `string` | - | Fiat approximation ("≈ $0.0009"). |
 | `level` | `"low" \| "normal" \| "elevated" \| "high"` | - | Congestion; omit for flat-fee chains. |
 | `label` | `string` | `"Network fee"` | E.g. "Priority fee", "Bridge fee". |
+| `loading` | `boolean` | `false` | Shows Fetching… (`aria-busy`); hides amount. |
+| `error` | `string` | - | Replaces amount; `role="alert"`. |
 | `className` | `string` | - | cn-merged. |
 
 ## Tokens
@@ -44,10 +49,11 @@ Network fee     0.000005 SOL ≈ $0.0009 LOW
 
 ## States
 
-The four levels are the states; each pairs an ink with its **word**
-(LOW/NORMAL/ELEVATED/HIGH), never color alone (mono theme). Severity
-maps to congestion pricing, not danger: success ink only at "low",
-error ink only at "high".
+- **Ready**: amount (+ optional usd/level).
+- **Loading**: `Fetching…` with `aria-busy` while the quote refreshes.
+- **Error**: message replaces amount (`role="alert"`).
+- Levels pair ink with a **word** (never color alone; mono-safe). Severity
+  maps to congestion pricing, not danger.
 
 ## Motion
 

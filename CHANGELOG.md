@@ -40,6 +40,11 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Changed
 
+- **WalletButton** + **GasFee** → `stable @ 1.0.0`: ticket atoms after
+  P0 harden (connected-without-address guard; fee `loading`/`error`).
+  API frozen (additive props only). Docs + colocated tests already met
+  the CONVENTIONS ladder.
+
 - **Pattern frames exercise harden APIs:** P2 Tx flow + P5 Swap/receive
   canvas demos now use AmountInput `errorMessage`/`maxDecimals`, GasFee
   `loading`/`error`, TxStatus `detailHref`/`action`, NetworkBadge `tone`.
@@ -60,8 +65,7 @@ bullets under the release's buckets, prefixed with the component name.
     `maxDecimals`, Max ≥40×40
   - **AddressChip** `1.0.1` — copy/explorer ≥40×40, clipboard failure
     label, `rel="noopener noreferrer"`
-  - **WalletButton** `0.9.1` — connected without address never falls
-    through to "Connect wallet"
+  - **WalletButton** `0.9.1` → promoted `1.0.0` (see above)
   - Ladder recorded in `docs/cids-component-gaps.md` (public prod →
     harden → promote → finish)
 

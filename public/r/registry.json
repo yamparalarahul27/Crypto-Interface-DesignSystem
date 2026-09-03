@@ -181,7 +181,7 @@
       "name": "gas-fee",
       "type": "registry:ui",
       "title": "GasFee",
-      "description": "CIDS GasFee v0.9.1 (draft): docs ship with the code (GasFee.doc.md)."
+      "description": "CIDS GasFee v1.0.0 (stable): docs ship with the code (GasFee.doc.md)."
     },
     {
       "name": "hold-to-confirm",
@@ -433,7 +433,7 @@
       "name": "wallet-button",
       "type": "registry:ui",
       "title": "WalletButton",
-      "description": "CIDS WalletButton v0.9.1 (draft): docs ship with the code (WalletButton.doc.md)."
+      "description": "CIDS WalletButton v1.0.0 (stable): docs ship with the code (WalletButton.doc.md)."
     },
     {
       "name": "wizard-steps",

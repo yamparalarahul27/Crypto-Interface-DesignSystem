@@ -44,4 +44,4 @@ Color transition 150ms on the affordances; nothing else.
 
 - Truncation is visual only: the text span carries the full address as `aria-label`, and the copy button names it ("Copy address <full>").
 - Copy confirmation is a label change ("Copied"); rejection becomes "Copy failed" (not color alone).
-- Copy and explorer controls are ≥40×40 hit targets.
+- Copy / explorer controls are `h-10 w-10` (≥40); explorer uses `rel="noopener noreferrer"`.

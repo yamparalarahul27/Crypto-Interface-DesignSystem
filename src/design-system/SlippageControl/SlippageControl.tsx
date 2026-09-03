@@ -105,7 +105,7 @@ export function SlippageControl({
       <div
         role="group"
         aria-label={label}
-        className="flex flex-wrap items-center gap-1.5"
+        className="flex flex-wrap items-center gap-2"
       >
         {presets.map((bps) => {
           const active = !showCustom && value === bps;

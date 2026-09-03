@@ -92,4 +92,4 @@ selected symbol when set; height ≥40 (`h-10`). Dialog: Radix focus trap
 `role="combobox"`, `aria-autocomplete="list"`, `aria-expanded`,
 `aria-controls` / `aria-activedescendant`. ArrowUp/Down/Home/End skip
 disabled options; Enter selects. Options expose `aria-selected` /
-`aria-disabled`.
+`aria-disabled`. Hit area: trigger `h-10` (≥40) · rows `py-2`.

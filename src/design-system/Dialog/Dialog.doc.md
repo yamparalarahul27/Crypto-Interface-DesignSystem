@@ -1,7 +1,7 @@
 # Dialog
 
 Status: stable
-Version: 1.0.0
+Version: 1.0.1
 Centered modal: Sheet's desktop-centered sibling. Behavior is Radix Dialog; the title prop is required because a dialog must name itself.
 
 ## Usage
@@ -59,4 +59,5 @@ fade-in-0 + zoom-in-95 presets on open, reverse on close; reduced-motion collaps
 
 - Radix Dialog: focus trap, Escape, overlay dismiss, focus restore to the opener.
 - Required `title` = accessible name; `description` wired to `aria-describedby` (suppressed cleanly when absent).
+- Panel padding `p-6` (24px sheet recipe); close control `h-10 w-10` (≥40).
 - Use for destructive confirmations (CLAUDE.md: destructive actions require an explicit step).

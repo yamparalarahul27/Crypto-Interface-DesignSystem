@@ -50,4 +50,4 @@ Border transition 150ms.
 
 - `inputMode="decimal"` for the right mobile keyboard; sanitization never blocks paste (it filters).
 - Labelled by default from the symbol; `aria-invalid` on error with `errorMessage` linked via `aria-describedby`.
-- Max control is ≥40×40.
+- Max control is `h-10` / `min-w-10` (≥40 hit area).

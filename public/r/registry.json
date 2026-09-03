@@ -151,7 +151,7 @@
       "name": "dialog",
       "type": "registry:ui",
       "title": "Dialog",
-      "description": "CIDS Dialog v1.0.0 (stable): docs ship with the code (Dialog.doc.md)."
+      "description": "CIDS Dialog v1.0.1 (stable): docs ship with the code (Dialog.doc.md)."
     },
     {
       "name": "divider",

@@ -39,12 +39,12 @@ export function Dialog({
           aria-describedby={description ? descId : ""}
           className={cn(
             "fixed left-1/2 top-1/2 z-[var(--z-modal)] w-[min(92vw,26rem)] -translate-x-1/2 -translate-y-1/2",
-            "rounded-sheet border border-outline-variant bg-surface p-5 shadow-overlay",
+            "rounded-sheet border border-outline-variant bg-surface p-6 shadow-overlay",
             "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95",
             className,
           )}
         >
-          <div className="mb-3 flex items-start justify-between gap-3">
+          <div className="mb-4 flex items-start justify-between gap-3">
             <div className="min-w-0">
               <RadixDialog.Title className="text-sm font-semibold text-fg">
                 {title}
@@ -57,14 +57,14 @@ export function Dialog({
             </div>
             <RadixDialog.Close
               aria-label="Close"
-              className="-mr-1 -mt-1 inline-flex h-7 w-7 flex-none items-center justify-center rounded-control text-fg-muted transition-colors hover:bg-surface-container-high hover:text-fg"
+              className="-mr-2 -mt-2 inline-flex h-10 w-10 flex-none items-center justify-center rounded-control text-fg-muted transition-colors hover:bg-surface-container-high hover:text-fg"
             >
               <IconClose size={14} weight="bold" aria-hidden="true" />
             </RadixDialog.Close>
           </div>
           {children && <div className="text-sm text-fg">{children}</div>}
           {footer && (
-            <div className="mt-5 flex items-center justify-end gap-2">
+            <div className="mt-6 flex items-center justify-end gap-2">
               {footer}
             </div>
           )}

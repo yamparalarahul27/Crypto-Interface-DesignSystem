@@ -139,7 +139,7 @@ export function TokenSelect({
         }
         onClick={openPicker}
         className={cn(
-          "inline-flex h-10 items-center gap-2 rounded-control border border-outline-variant bg-surface-container px-2.5 text-sm font-medium text-fg",
+          "inline-flex h-10 items-center gap-2 rounded-control border border-outline-variant bg-surface-container px-3 text-sm font-medium text-fg",
           "transition-[background-color,border-color,transform] duration-150",
           "hover:bg-surface-container-high active:scale-[0.96]",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40",

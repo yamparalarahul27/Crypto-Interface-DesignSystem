@@ -40,6 +40,9 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Changed
 
+- **Accordion** → `stable @ 1.0.0`: includes `defaultValue` (uncontrolled
+  initially-open) from #115. API frozen (additive props only).
+
 - **WalletButton** + **GasFee** → `stable @ 1.0.0`: ticket atoms after
   P0 harden (connected-without-address guard; fee `loading`/`error`).
   API frozen (additive props only). Docs + colocated tests already met

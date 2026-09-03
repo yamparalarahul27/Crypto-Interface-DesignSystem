@@ -240,3 +240,4 @@ also PR docs when merged). Steal contracts; reimplement CIDS-native
 | 2026-09-01 | Promotion cohort → stable @ 1.0.0: LoadingButton, HoldToConfirm, OTPInput, InlineValidation, WizardSteps, ContextMenu, TokenSelect, SlippageControl, AccountMenu, ActivityRow. |
 | 2026-09-01 | Batch 1 → stable @ 1.0.0: Alert, Card, RadioGroup, Textarea, Progress (Accordion deferred to #115). |
 | 2026-09-01 | Batch 2 → stable @ 1.0.0: AppBar, BottomNav, Combobox, Popover, Drawer, Breadcrumbs, Pagination. |
+| 2026-09-01 | Accordion `defaultValue` + promote → stable @ 1.0.0 (#115 / #126). |

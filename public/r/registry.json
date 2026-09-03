@@ -67,7 +67,7 @@
       "name": "app-bar",
       "type": "registry:ui",
       "title": "AppBar",
-      "description": "CIDS AppBar v0.9.0 (draft): docs ship with the code (AppBar.doc.md)."
+      "description": "CIDS AppBar v1.0.0 (stable): docs ship with the code (AppBar.doc.md)."
     },
     {
       "name": "avatar",
@@ -91,13 +91,13 @@
       "name": "bottom-nav",
       "type": "registry:ui",
       "title": "BottomNav",
-      "description": "CIDS BottomNav v0.9.0 (draft): docs ship with the code (BottomNav.doc.md)."
+      "description": "CIDS BottomNav v1.0.0 (stable): docs ship with the code (BottomNav.doc.md)."
     },
     {
       "name": "breadcrumbs",
       "type": "registry:ui",
       "title": "Breadcrumbs",
-      "description": "CIDS Breadcrumbs v0.9.0 (draft): docs ship with the code (Breadcrumbs.doc.md)."
+      "description": "CIDS Breadcrumbs v1.0.0 (stable): docs ship with the code (Breadcrumbs.doc.md)."
     },
     {
       "name": "button",
@@ -127,7 +127,7 @@
       "name": "combobox",
       "type": "registry:ui",
       "title": "Combobox",
-      "description": "CIDS Combobox v0.9.0 (draft): docs ship with the code (Combobox.doc.md)."
+      "description": "CIDS Combobox v1.0.0 (stable): docs ship with the code (Combobox.doc.md)."
     },
     {
       "name": "comment-thread",
@@ -163,7 +163,7 @@
       "name": "drawer",
       "type": "registry:ui",
       "title": "Drawer",
-      "description": "CIDS Drawer v0.9.0 (draft): docs ship with the code (Drawer.doc.md)."
+      "description": "CIDS Drawer v1.0.0 (stable): docs ship with the code (Drawer.doc.md)."
     },
     {
       "name": "empty-state",
@@ -271,7 +271,7 @@
       "name": "pagination",
       "type": "registry:ui",
       "title": "Pagination",
-      "description": "CIDS Pagination v0.9.0 (draft): docs ship with the code (Pagination.doc.md)."
+      "description": "CIDS Pagination v1.0.0 (stable): docs ship with the code (Pagination.doc.md)."
     },
     {
       "name": "peg-badge",
@@ -283,7 +283,7 @@
       "name": "popover",
       "type": "registry:ui",
       "title": "Popover",
-      "description": "CIDS Popover v0.9.0 (draft): docs ship with the code (Popover.doc.md)."
+      "description": "CIDS Popover v1.0.0 (stable): docs ship with the code (Popover.doc.md)."
     },
     {
       "name": "post-card",

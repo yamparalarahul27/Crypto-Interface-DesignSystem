@@ -40,6 +40,11 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Changed
 
+- **Batch 2 → stable @ 1.0.0**: navigation & overlays cohort —
+  **AppBar**, **BottomNav**, **Combobox**, **Popover**, **Drawer**,
+  **Breadcrumbs**, **Pagination**. ContextMenu already stable via the
+  Interior/Batch-5 promotion.
+
 - **Batch 1 → stable @ 1.0.0**: containment & forms cohort after bake —
   **Alert**, **Card**, **RadioGroup**, **Textarea**, **Progress**.
   Accordion stays draft pending `defaultValue` (#115); CommentThread /

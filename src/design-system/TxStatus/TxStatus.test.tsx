@@ -33,4 +33,25 @@ describe("TxStatus", () => {
     render(<TxStatus state="signing" detail="5D3k…Wq" />);
     expect(screen.getByText("5D3k…Wq").className).toContain("font-mono");
   });
+
+  it("detailHref turns detail into an explorer link", () => {
+    render(
+      <TxStatus
+        state="pending"
+        detail="5D3k…Wq"
+        detailHref="https://solscan.io/tx/5D3k"
+      />,
+    );
+    const link = screen.getByRole("link", { name: "5D3k…Wq" });
+    expect(link.getAttribute("href")).toContain("solscan");
+    expect(link.getAttribute("rel")).toContain("noopener");
+  });
+
+  it("action slot renders beside the status", () => {
+    render(
+      <TxStatus state="failed" detail="User rejected" action={<button type="button">Retry</button>} />,
+    );
+    expect(screen.getByRole("button", { name: "Retry" })).toBeTruthy();
+    expect(screen.getByRole("status").textContent).toContain("Failed");
+  });
 });

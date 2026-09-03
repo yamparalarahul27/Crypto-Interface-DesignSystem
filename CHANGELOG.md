@@ -43,6 +43,55 @@ bullets under the release's buckets, prefixed with the component name.
 - **Accordion** → `stable @ 1.0.0`: includes `defaultValue` (uncontrolled
   initially-open) from #115. API frozen (additive props only).
 
+- **WalletButton** + **GasFee** → `stable @ 1.0.0`: ticket atoms after
+  P0 harden (connected-without-address guard; fee `loading`/`error`).
+  API frozen (additive props only). Docs + colocated tests already met
+  the CONVENTIONS ladder.
+
+- **Pattern frames exercise harden APIs:** P2 Tx flow + P5 Swap/receive
+  canvas demos now use AmountInput `errorMessage`/`maxDecimals`, GasFee
+  `loading`/`error`, TxStatus `detailHref`/`action`, NetworkBadge `tone`.
+  Inspector chips: `PatternTxFlow` · `PatternSwapReceive`.
+
+- **Production harden P2:**
+  - **TxStatus** `1.1.0` — `detailHref` explorer link + `action` slot (Retry)
+  - **NetworkBadge** `1.1.0` — `tone` warning/error for wrong-network
+
+- **Production harden P1 (swap ticket):**
+  - **TokenSelect** `1.1.0` — Combobox ARIA on search, skip-disabled
+    arrows, `loading` / `catalogEmptyText`, trigger ≥40
+  - **SlippageControl** `1.0.1` — preset/custom chips `h-10` (≥40)
+  - **AccountMenu** `1.0.1` — clipboard failure label, trigger ≥40
+
+- **Production harden P0 (swap ticket):**
+  - **AmountInput** `1.1.0` — `errorMessage` + `aria-describedby`,
+    `maxDecimals`, Max ≥40×40
+  - **AddressChip** `1.0.1` — copy/explorer ≥40×40, clipboard failure
+    label, `rel="noopener noreferrer"`
+  - **WalletButton** `0.9.1` → promoted `1.0.0` (see above)
+  - Ladder recorded in `docs/cids-component-gaps.md` (public prod →
+    harden → promote → finish)
+
+- **Production harden P1 (swap ticket):**
+  - **TokenSelect** `1.1.0` — Combobox ARIA on search, skip-disabled
+    arrows, `loading` / `catalogEmptyText`, trigger ≥40
+  - **SlippageControl** `1.0.1` — preset/custom chips `h-10` (≥40)
+  - **AccountMenu** `1.0.1` — clipboard failure label, trigger ≥40
+
+- **Production harden P2:**
+  - **TxStatus** `1.1.0` — `detailHref` explorer link + `action` slot (Retry)
+  - **NetworkBadge** `1.1.0` — `tone` warning/error for wrong-network
+
+- **Batch 2 → stable @ 1.0.0**: navigation & overlays cohort —
+  **AppBar**, **BottomNav**, **Combobox**, **Popover**, **Drawer**,
+  **Breadcrumbs**, **Pagination**. ContextMenu already stable via the
+  Interior/Batch-5 promotion.
+
+- **Batch 1 → stable @ 1.0.0**: containment & forms cohort after bake —
+  **Alert**, **Card**, **RadioGroup**, **Textarea**, **Progress**.
+  Accordion stays draft pending `defaultValue` (#115); CommentThread /
+  Onboarding remain draft by design.
+
 - **Promotion cohort → stable @ 1.0.0**: ten bake-ready drafts after
   Interior + Batch 5 + ContextMenu landed. API frozen (additive props
   only from here). Docs, colocated tests, and dark/mono poses already
@@ -54,6 +103,9 @@ bullets under the release's buckets, prefixed with the component name.
   - Overlay: **ContextMenu**
 
 ### Added
+
+- **GasFee `loading` / `error`**: async faces for fee quotes (`Fetching…`,
+  alert on failure) so tickets aren't stuck with a silent stale amount.
 
 - **Accordion `defaultValue`**: uncontrolled initially-open panel(s)
   (`string` for single, `string[]` for multiple). Component pages open

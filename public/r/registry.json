@@ -43,7 +43,7 @@
       "name": "address-chip",
       "type": "registry:ui",
       "title": "AddressChip",
-      "description": "CIDS AddressChip v1.0.0 (stable): docs ship with the code (AddressChip.doc.md)."
+      "description": "CIDS AddressChip v1.0.1 (stable): docs ship with the code (AddressChip.doc.md)."
     },
     {
       "name": "alert",
@@ -61,7 +61,7 @@
       "name": "amount-input",
       "type": "registry:ui",
       "title": "AmountInput",
-      "description": "CIDS AmountInput v1.0.0 (stable): docs ship with the code (AmountInput.doc.md)."
+      "description": "CIDS AmountInput v1.1.0 (stable): docs ship with the code (AmountInput.doc.md)."
     },
     {
       "name": "app-bar",
@@ -181,7 +181,7 @@
       "name": "gas-fee",
       "type": "registry:ui",
       "title": "GasFee",
-      "description": "CIDS GasFee v0.9.0 (draft): docs ship with the code (GasFee.doc.md)."
+      "description": "CIDS GasFee v0.9.1 (draft): docs ship with the code (GasFee.doc.md)."
     },
     {
       "name": "hold-to-confirm",
@@ -433,7 +433,7 @@
       "name": "wallet-button",
       "type": "registry:ui",
       "title": "WalletButton",
-      "description": "CIDS WalletButton v0.9.0 (draft): docs ship with the code (WalletButton.doc.md)."
+      "description": "CIDS WalletButton v0.9.1 (draft): docs ship with the code (WalletButton.doc.md)."
     },
     {
       "name": "wizard-steps",

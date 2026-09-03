@@ -45,6 +45,16 @@ bullets under the release's buckets, prefixed with the component name.
   `loading`/`error`, TxStatus `detailHref`/`action`, NetworkBadge `tone`.
   Inspector chips: `PatternTxFlow` · `PatternSwapReceive`.
 
+- **Production harden P2:**
+  - **TxStatus** `1.1.0` — `detailHref` explorer link + `action` slot (Retry)
+  - **NetworkBadge** `1.1.0` — `tone` warning/error for wrong-network
+
+- **Production harden P1 (swap ticket):**
+  - **TokenSelect** `1.1.0` — Combobox ARIA on search, skip-disabled
+    arrows, `loading` / `catalogEmptyText`, trigger ≥40
+  - **SlippageControl** `1.0.1` — preset/custom chips `h-10` (≥40)
+  - **AccountMenu** `1.0.1` — clipboard failure label, trigger ≥40
+
 - **Production harden P0 (swap ticket):**
   - **AmountInput** `1.1.0` — `errorMessage` + `aria-describedby`,
     `maxDecimals`, Max ≥40×40
@@ -65,6 +75,16 @@ bullets under the release's buckets, prefixed with the component name.
   - **TxStatus** `1.1.0` — `detailHref` explorer link + `action` slot (Retry)
   - **NetworkBadge** `1.1.0` — `tone` warning/error for wrong-network
 
+- **Batch 2 → stable @ 1.0.0**: navigation & overlays cohort —
+  **AppBar**, **BottomNav**, **Combobox**, **Popover**, **Drawer**,
+  **Breadcrumbs**, **Pagination**. ContextMenu already stable via the
+  Interior/Batch-5 promotion.
+
+- **Batch 1 → stable @ 1.0.0**: containment & forms cohort after bake —
+  **Alert**, **Card**, **RadioGroup**, **Textarea**, **Progress**.
+  Accordion stays draft pending `defaultValue` (#115); CommentThread /
+  Onboarding remain draft by design.
+
 - **Promotion cohort → stable @ 1.0.0**: ten bake-ready drafts after
   Interior + Batch 5 + ContextMenu landed. API frozen (additive props
   only from here). Docs, colocated tests, and dark/mono poses already
@@ -79,6 +99,10 @@ bullets under the release's buckets, prefixed with the component name.
 
 - **GasFee `loading` / `error`**: async faces for fee quotes (`Fetching…`,
   alert on failure) so tickets aren't stuck with a silent stale amount.
+
+- **Accordion `defaultValue`**: uncontrolled initially-open panel(s)
+  (`string` for single, `string[]` for multiple). Component pages open
+  **Props** by default so the primary read isn't buried collapsed.
 
 - **Canvas state switcher**: selecting a demo that opts into
   `DEMO_STATE_OPTIONS` shows Inspector chips (default / disabled /

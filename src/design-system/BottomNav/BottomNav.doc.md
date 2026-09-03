@@ -1,7 +1,7 @@
 # BottomNav
 
-Status: draft
-Version: 0.9.0
+Status: stable
+Version: 1.0.0
 Mobile tab bar: 3–5 top-level destinations, labels always visible.
 
 ## Usage

@@ -51,6 +51,11 @@ bullets under the release's buckets, prefixed with the component name.
 
 ### Changed
 
+- **Typography mix**: replace Geist / Geist Mono with a versatile three-role
+  stack — **Satoshi** (UI sans, self-hosted Fontshare), **Space Grotesk**
+  (`font-display` for brand/hero), **JetBrains Mono** (`font-mono`). Geist
+  Pixel Square stays for financial `.data-*`. See DESIGN.md → Typography.
+
 - **LoadingButton** `1.1.0` — `type` prop (`button` \| `submit` \| `reset`)
   for form tickets.
 

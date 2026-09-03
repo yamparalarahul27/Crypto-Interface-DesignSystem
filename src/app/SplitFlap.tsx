@@ -160,7 +160,7 @@ export function SplitFlap({
                 className="animate-flap font-semibold leading-none text-fg"
                 style={{
                   animationDelay: `${i * STAGGER_MS}ms`,
-                  fontFamily: "var(--font-geist-mono), monospace",
+                  fontFamily: "var(--font-mono)",
                   // ≈70% of tile height at every width: the board reads
                   // as letters on flaps, not letters floating in boxes.
                   fontSize: "clamp(0.6rem, 4vw, 2.9rem)",

@@ -1,5 +1,28 @@
 @import "tailwindcss";
 
+/* UI sans: Satoshi (Fontshare). No separate 600 file — map semibold → bold. */
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi/satoshi-400.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi/satoshi-500.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi/satoshi-700.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600 700;
+  font-display: swap;
+}
+
 @font-face {
   font-family: "GeistPixelSquare";
   src: url("/fonts/GeistPixelSquare.woff2") format("woff2");
@@ -413,8 +436,11 @@
   --color-id-slate-fill: var(--id-slate-fill);
   --color-id-glyph: var(--id-glyph);
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Mix stack: Satoshi UI · Space Grotesk display · JetBrains Mono */
+  --font-sans: "Satoshi", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --font-display: var(--font-space-grotesk), "Satoshi", ui-sans-serif, system-ui,
+    sans-serif;
 
   /* Shape utilities: rounded-control / rounded-chip / rounded-card /
      rounded-sheet (+ side variants like rounded-t-sheet) */
@@ -450,7 +476,7 @@
 body {
   background: var(--surface-page);
   color: var(--fg);
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-sans);
 }
 
 html {

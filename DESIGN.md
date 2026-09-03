@@ -212,8 +212,9 @@ What is actually loaded (nothing else may be referenced):
 
 | Family | Source | Token / class | Role |
 |---|---|---|---|
-| **Geist** | `next/font/google` (`layout.tsx`) | `--font-sans` → `font-sans` | All UI text: labels, buttons, body |
-| **Geist Mono** | `next/font/google` (`layout.tsx`) | `--font-mono` → `font-mono` | Code, addresses, handles |
+| **Satoshi** | Self-hosted `/fonts/satoshi/*.woff2` (`@font-face` in globals) | `--font-sans` → `font-sans` | All UI text: labels, buttons, body |
+| **Space Grotesk** | `next/font/google` (`layout.tsx`) | `--font-display` → `font-display` | Brand / hero / display moments |
+| **JetBrains Mono** | `next/font/google` (`layout.tsx`) | `--font-mono` → `font-mono` | Code, addresses, handles |
 | **GeistPixelSquare** | Self-hosted `/fonts/GeistPixelSquare.woff2` (`@font-face` in globals) | `.data-lg/md/sm` | Financial data (prices, %, PnL) |
 | IBM Plex Mono | *not loaded*: CSS fallback only | inside `.data-*` stacks | Fallback if pixel font fails |
 
@@ -223,9 +224,10 @@ What is actually loaded (nothing else may be referenced):
 
 | Class / Level | Font | Weight | Size | Use |
 |---|---|---|---|---|
-| Page title | Geist | 600–700 | 1.25–1.5rem | Page/section headings |
-| Section label | Geist | 600 | 0.6875rem, sentence case, `text-fg-subtle` | Section dividers (pattern, not a CSS class: see `SectionLabel` in `design/page.tsx`) |
-| Body | Geist | 400–500 | 0.875rem | Descriptions, general UI |
+| Brand / hero display | Space Grotesk | 600–700 | 1.25–2rem+ | Landing wordmark, hero titles |
+| Page title | Satoshi | 600–700 | 1.25–1.5rem | Page/section headings |
+| Section label | Satoshi | 600 | 0.6875rem, sentence case, `text-fg-subtle` | Section dividers (pattern, not a CSS class: see `SectionLabel` in `design/page.tsx`) |
+| Body | Satoshi | 400–500 | 0.875rem | Descriptions, general UI |
 | `.data-lg` | GeistPixelSquare | 400 | `--text-data-lg-size` 1.125rem (1.875 ≥768px) | Hero financial figures |
 | `.data-md` | GeistPixelSquare | 400 | `--text-data-md-size` 0.875rem | Table values, prices |
 | `.data-sm` | GeistPixelSquare | 400 | `--text-data-sm-size` 0.75rem | Secondary data, timestamps |
@@ -243,6 +245,7 @@ classes and the `text-data-lg/md/sm` utilities (pair those with
   once the capitals go it only loosens the word. (Changed 2026-08-26; the
   system was previously all-caps at 0.08–0.14em.)
 - Never use serif fonts anywhere in the UI.
+- Use `font-display` only for brand/hero moments — not for body or dense UI.
 
 ---
 
@@ -628,13 +631,21 @@ Buttons or links with no visible text label require an **`aria-label`** describi
 
 ```tsx
 // src/app/layout.tsx: next/font (self-hosted by Next, no external <link>)
-import { Geist, Geist_Mono } from "next/font/google";
-// exposed as --font-geist-sans / --font-geist-mono,
-// mapped to --font-sans / --font-mono in globals @theme
+import { JetBrains_Mono, Space_Grotesk } from "next/font/google";
+// exposed as --font-jetbrains / --font-space-grotesk,
+// mapped to --font-mono / --font-display in globals @theme
 ```
 
 ```css
-/* src/app/globals.css: the pixel data font */
+/* src/app/globals.css: UI sans + pixel data font */
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi/satoshi-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+/* + 500 and 600–700 faces from the same folder */
+
 @font-face {
   font-family: "GeistPixelSquare";
   src: url("/fonts/GeistPixelSquare.woff2") format("woff2");
@@ -699,10 +710,13 @@ import { IconClose, IconCheck } from "../icons";          /* inside DS  */
 .data-lg  .data-md  .data-sm      /* GeistPixelSquare ramp */
 
 /* UI / labels / body */
-font-sans                          /* Geist */
+font-sans                          /* Satoshi */
+
+/* Brand / hero display */
+font-display                       /* Space Grotesk */
 
 /* Code, addresses, handles */
-font-mono                          /* Geist Mono */
+font-mono                          /* JetBrains Mono */
 
 /* Section labels (pattern) */
 font-sans font-semibold text-[0.6875rem] text-fg-subtle

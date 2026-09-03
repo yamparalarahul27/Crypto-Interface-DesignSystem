@@ -102,8 +102,7 @@ export default function Home() {
         <div className="mx-auto flex h-14 max-w-6xl items-center gap-4 px-5 sm:px-8">
           <Link
             href="/"
-            className="text-lg font-bold tracking-tight"
-            style={{ fontFamily: "var(--font-geist-mono), monospace" }}
+            className="font-display text-lg font-bold tracking-tight"
           >
             cids <span className="text-brand">~</span>
           </Link>

@@ -10,7 +10,7 @@ import {
   IconArrowUp,
 } from "@/design-system";
 import { cn } from "@/lib/utils";
-import { filterCanvasItems, type SearchableItem } from "./canvasSearch";
+import { filterCanvasItems, type SearchableItem } from "./canvasSearchUtils";
 
 export function CanvasSearch({
   open,

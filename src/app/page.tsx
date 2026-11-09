@@ -41,6 +41,13 @@ const QUICKSTARTS: {
   beta?: boolean;
 }[] = [
   {
+    title: "Asset anatomy",
+    body: "Take USDT apart, layer by layer. A scroll-driven visual story about the code, reserves, and trust behind a token.",
+    href: "/stablecoin/usdt",
+    cta: "Look inside USDT",
+    beta: true,
+  },
+  {
     title: "Canvas",
     body: "Pan and zoom the whole system on one surface, then select any component to read the doc it ships with.",
     href: "/design/canvas",
@@ -70,6 +77,7 @@ const QUICKSTARTS: {
 ];
 
 const NAV = [
+  { href: "/stablecoin/usdt", label: "Asset anatomy" },
   { href: "/design/canvas", label: "Canvas" },
   { href: "/design", label: "Gallery" },
   { href: "/design/feed", label: "Feed" },

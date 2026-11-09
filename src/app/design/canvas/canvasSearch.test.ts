@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { filterCanvasItems, searchableItems } from "./canvasSearch";
+import { filterCanvasItems, searchableItems } from "./canvasSearchUtils";
 import { CANVAS_ITEMS } from "./items";
 
 describe("filterCanvasItems", () => {
